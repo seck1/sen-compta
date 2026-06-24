@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 300" width="1040" height="300" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <!-- Fond navy dégradé -->
+    <linearGradient id="navyBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1b2540"/>
+      <stop offset="50%" stop-color="#131b30"/>
+      <stop offset="100%" stop-color="#0d1322"/>
+    </linearGradient>
+
+    <!-- Métal argenté -->
+    <linearGradient id="silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="20%"  stop-color="#dfe3e8"/>
+      <stop offset="45%"  stop-color="#aab2bb"/>
+      <stop offset="58%"  stop-color="#7c858f"/>
+      <stop offset="72%"  stop-color="#b3bac2"/>
+      <stop offset="100%" stop-color="#5e6670"/>
+    </linearGradient>
+    <linearGradient id="silverText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="38%"  stop-color="#ccd1d7"/>
+      <stop offset="62%"  stop-color="#98a0aa"/>
+      <stop offset="100%" stop-color="#6b737d"/>
+    </linearGradient>
+
+    <!-- Or -->
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#f6e08a"/>
+      <stop offset="45%"  stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#8a6c12"/>
+    </linearGradient>
+
+    <filter id="drop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="300" fill="url(#navyBg)"/>
+
+  <!-- ===== CARRÉ DORÉ ===== -->
+  <g filter="url(#goldGlow)">
+    <rect x="30" y="48" width="204" height="204" rx="46" ry="46"
+          fill="none" stroke="url(#gold)" stroke-width="6"/>
+    <rect x="38" y="56" width="188" height="188" rx="40" ry="40"
+          fill="none" stroke="#8a6c12" stroke-width="1.5" opacity="0.55"/>
+  </g>
+
+  <!-- ===== MONOGRAMME SC (lisible, métal) ===== -->
+  <!-- centré dans le carré : centre x=132 y=150 -->
+  <g filter="url(#drop)">
+    <!-- S -->
+    <text x="103" y="186" font-size="120" font-weight="700"
+          fill="url(#silver)" stroke="#3f464f" stroke-width="1.5"
+          text-anchor="middle">S</text>
+    <!-- C légèrement chevauchant -->
+    <text x="170" y="186" font-size="120" font-weight="700"
+          fill="url(#silver)" stroke="#3f464f" stroke-width="1.5"
+          text-anchor="middle">C</text>
+  </g>
+
+  <!-- ===== WORDMARK ===== -->
+  <text x="280" y="195" font-size="120" font-weight="700"
+        fill="url(#silverText)" filter="url(#drop)" letter-spacing="-2">SenCompta</text>
+</svg>

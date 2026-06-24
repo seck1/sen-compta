@@ -1,0 +1,29 @@
+# Environnement — ne jamais committer
+.env
+
+# Données sensibles et générées
+backups/
+archives/
+log/
+public/uploads/*
+!public/uploads/.htaccess
+
+# Ancienne entrée conservée pour compatibilité
+uploads/
+logs/
+
+# Exports temporaires
+*.xlsx
+*.tmp
+
+# Vendor (trop lourd)
+vendor/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/

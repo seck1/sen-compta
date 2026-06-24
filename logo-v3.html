@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SenCompta — Logo V3</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f4f4f0;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 30px;
+    font-weight: 400;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    width: 100%;
+    background: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    gap: 50px;
+  }
+
+  .logo-main {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .logo-badge {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #0d1b2a;
+    border: 2.5px solid #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .logo-badge::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,162,39,0.2);
+  }
+
+  .logo-badge span {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #c9a227;
+    letter-spacing: 2px;
+  }
+
+  .logo-divider {
+    width: 1px;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, #c9a227, transparent);
+    opacity: 0.5;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .logo-text .pre {
+    font-size: 11px;
+    font-weight: 600;
+    color: #c9a227;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+
+  .logo-text .main-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+
+  .logo-text .tagline {
+    font-size: 10px;
+    font-weight: 300;
+    color: #6b7f90;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    border-top: 1px solid rgba(201,162,39,0.25);
+    padding-top: 8px;
+  }
+
+  /* ─── FOND BLANC ─── */
+  .white-section {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+
+  .logo-main-light .logo-badge {
+    background: #fff;
+    border-color: #c9a227;
+  }
+
+  .logo-main-light .logo-text .main-name {
+    color: #0d1b2a;
+  }
+
+  .logo-main-light .logo-text .tagline {
+    color: #aaa;
+  }
+
+  /* ─── VARIANTES TAILLES ─── */
+  .sizes-section {
+    width: 100%;
+    background: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+
+  .sizes-row {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Taille L */
+  .logo-L { display: flex; align-items: center; gap: 16px; }
+  .logo-L .badge { width: 64px; height: 64px; border-radius: 50%; background: #0d1b2a; border: 2px solid #c9a227; display: flex; align-items: center; justify-content: center; }
+  .logo-L .badge span { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #c9a227; letter-spacing: 1px; }
+  .logo-L .div { width: 1px; height: 44px; background: linear-gradient(to bottom, transparent, rgba(201,162,39,0.5), transparent); }
+  .logo-L .txt .pre { font-size: 9px; font-weight: 600; color: #c9a227; letter-spacing: 5px; }
+  .logo-L .txt .name { font-family: 'Playfair Display', serif; font-size: 32px; color: white; font-weight: 700; line-height:1; }
+
+  /* Taille M navbar */
+  .logo-M { display: flex; align-items: center; gap: 12px; }
+  .logo-M .badge { width: 44px; height: 44px; border-radius: 50%; background: #0d1b2a; border: 2px solid #c9a227; display: flex; align-items: center; justify-content: center; }
+  .logo-M .badge span { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #c9a227; }
+  .logo-M .name { font-family: 'Playfair Display', serif; font-size: 22px; color: white; font-weight: 700; }
+  .logo-M .name em { color: #c9a227; font-style: normal; }
+
+  /* Taille S -->
+  .logo-S .badge { width: 32px; height: 32px; border-radius: 50%; background: #c9a227; display: flex; align-items: center; justify-content: center; }
+  .logo-S .badge span { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: #0d1b2a; }
+
+  /* Favicon -->
+  .favicon { width: 24px; height: 24px; border-radius: 6px; background: #c9a227; display: flex; align-items: center; justify-content: center; }
+  .favicon span { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 700; color: #0d1b2a; }
+
+  /* ─── PALETTE ─── */
+  .palette-section {
+    width: 100%;
+    background: #f4f4f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px;
+    gap: 30px;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .swatch-color {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  .swatch-hex {
+    font-size: 11px;
+    color: #555;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .swatch-name {
+    font-size: 10px;
+    color: #999;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGO PRINCIPAL — FOND SOMBRE ═══ -->
+<div class="hero">
+  <p class="section-title" style="color:#444;">Logo principal — fond sombre</p>
+
+  <div class="logo-main">
+    <div class="logo-badge">
+      <span>SC</span>
+    </div>
+    <div class="logo-divider"></div>
+    <div class="logo-text">
+      <span class="pre">Sen</span>
+      <span class="main-name">Compta</span>
+      <span class="tagline">Le SaaS comptable du Sénégal</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LOGO — FOND BLANC ═══ -->
+<div class="white-section">
+  <p class="section-title">Logo — fond blanc</p>
+
+  <div class="logo-main logo-main-light">
+    <div class="logo-badge" style="background:white;">
+      <span style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#c9a227;letter-spacing:2px;">SC</span>
+    </div>
+    <div class="logo-divider" style="background:linear-gradient(to bottom, transparent, #c9a227, transparent);"></div>
+    <div class="logo-text">
+      <span class="pre">Sen</span>
+      <span class="main-name" style="color:#0d1b2a;">Compta</span>
+      <span class="tagline">Le SaaS comptable du Sénégal</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DÉCLINAISONS TAILLES ═══ -->
+<div class="sizes-section">
+  <p class="section-title" style="color:#444;">Déclinaisons — toutes tailles</p>
+
+  <div class="sizes-row">
+
+    <!-- Grande version -->
+    <div class="logo-L">
+      <div class="badge"><span>SC</span></div>
+      <div class="div"></div>
+      <div class="txt">
+        <div class="pre">Sen</div>
+        <div class="name">Compta</div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="logo-M">
+      <div class="badge"><span>SC</span></div>
+      <div class="name">Sen<em>Compta</em></div>
+    </div>
+
+    <!-- Petite -->
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:32px;height:32px;border-radius:50%;background:#c9a227;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0d1b2a;">SC</span>
+      </div>
+      <span style="font-family:'Playfair Display',serif;font-size:16px;color:white;font-weight:700;">SenCompta</span>
+    </div>
+
+    <!-- Favicon -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:40px;height:40px;border-radius:10px;background:#c9a227;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#0d1b2a;">SC</span>
+      </div>
+      <span style="font-size:9px;color:#444;letter-spacing:2px;">FAVICON</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PALETTE ═══ -->
+<div class="palette-section">
+  <p class="section-title">Palette officielle SenCompta</p>
+  <div class="palette-row">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0d1b2a;"></div>
+      <div class="swatch-hex">#0d1b2a</div>
+      <div class="swatch-name">Navy</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#c9a227;"></div>
+      <div class="swatch-hex">#c9a227</div>
+      <div class="swatch-name">Or</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#e8c96a;"></div>
+      <div class="swatch-hex">#e8c96a</div>
+      <div class="swatch-name">Or clair</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ffffff;border:1px solid #ddd;"></div>
+      <div class="swatch-hex">#ffffff</div>
+      <div class="swatch-name">Blanc</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#6b7f90;"></div>
+      <div class="swatch-hex">#6b7f90</div>
+      <div class="swatch-name">Gris bleu</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

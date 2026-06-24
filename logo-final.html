@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SenCompta — Logo Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #10101a;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 60px;
+    padding: 60px 20px;
+  }
+  h2 {
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    max-width: 900px;
+  }
+  .block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .tag {
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .divider {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, #c9a227, transparent);
+  }
+</style>
+</head>
+<body>
+
+<h2>SenCompta — Logo Final</h2>
+
+<div class="showcase">
+
+  <!-- LOGO PRINCIPAL sur fond sombre -->
+  <div class="block">
+    <div class="tag">Logo principal — fond sombre</div>
+    <svg width="340" height="100" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8c96a"/>
+          <stop offset="60%" stop-color="#c9a227"/>
+          <stop offset="100%" stop-color="#a07c10"/>
+        </linearGradient>
+        <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8c96a" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="softglow">
+          <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Halo extérieur subtil -->
+      <circle cx="50" cy="50" r="42" fill="url(#glowGrad)" opacity="0.6"/>
+
+      <!-- Anneau extérieur fin -->
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a227" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- Cercle principal avec dégradé -->
+      <circle cx="50" cy="50" r="34" fill="#0d1b2a"/>
+      <circle cx="50" cy="50" r="34" fill="none" stroke="url(#circleGrad)" stroke-width="2"/>
+
+      <!-- Arc décoratif haut-gauche -->
+      <path d="M 20 30 A 34 34 0 0 1 80 30" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.25"/>
+
+      <!-- Initiales SC -->
+      <text x="50" y="58"
+            font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="28"
+            font-weight="700"
+            fill="url(#circleGrad)"
+            text-anchor="middle"
+            filter="url(#glow)"
+            letter-spacing="2">SC</text>
+
+      <!-- Ligne verticale séparatrice -->
+      <line x1="96" y1="22" x2="96" y2="78" stroke="#c9a227" stroke-width="0.8" opacity="0.5"/>
+
+      <!-- Micro-ornement haut et bas de la ligne -->
+      <circle cx="96" cy="22" r="1.5" fill="#c9a227" opacity="0.6"/>
+      <circle cx="96" cy="78" r="1.5" fill="#c9a227" opacity="0.6"/>
+
+      <!-- SenCompta -->
+      <text x="112" y="44"
+            font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="14"
+            font-weight="400"
+            fill="#c9a227"
+            letter-spacing="5">SEN</text>
+
+      <text x="111" y="68"
+            font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="28"
+            font-weight="600"
+            fill="#ffffff"
+            letter-spacing="1">Compta</text>
+
+      <!-- Ligne dorée sous tagline -->
+      <line x1="112" y1="78" x2="310" y2="78" stroke="#c9a227" stroke-width="0.6" opacity="0.4"/>
+
+      <!-- Tagline -->
+      <text x="112" y="92"
+            font-family="'DM Sans', Arial, sans-serif"
+            font-size="8"
+            font-weight="300"
+            fill="#5a6a7a"
+            letter-spacing="3">LE SAAS COMPTABLE DU SÉNÉGAL</text>
+
+    </svg>
+  </div>
+
+  <!-- LOGO SUR FOND BLANC -->
+  <div class="block">
+    <div class="tag">Logo — fond blanc</div>
+    <svg width="340" height="100" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg" style="background:white; border-radius:12px; padding:10px;">
+      <defs>
+        <linearGradient id="circleGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8c96a"/>
+          <stop offset="60%" stop-color="#c9a227"/>
+          <stop offset="100%" stop-color="#a07c10"/>
+        </linearGradient>
+        <filter id="glow2">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#e8d98a" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="50" cy="50" r="34" fill="#0d1b2a"/>
+      <circle cx="50" cy="50" r="34" fill="none" stroke="url(#circleGrad2)" stroke-width="2"/>
+      <path d="M 20 30 A 34 34 0 0 1 80 30" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.3"/>
+
+      <text x="50" y="58"
+            font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="28" font-weight="700"
+            fill="url(#circleGrad2)"
+            text-anchor="middle"
+            filter="url(#glow2)"
+            letter-spacing="2">SC</text>
+
+      <line x1="96" y1="22" x2="96" y2="78" stroke="#c9a227" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="96" cy="22" r="1.5" fill="#c9a227" opacity="0.5"/>
+      <circle cx="96" cy="78" r="1.5" fill="#c9a227" opacity="0.5"/>
+
+      <text x="112" y="44"
+            font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="14" font-weight="400"
+            fill="#c9a227" letter-spacing="5">SEN</text>
+
+      <text x="111" y="68"
+            font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="28" font-weight="600"
+            fill="#0d1b2a" letter-spacing="1">Compta</text>
+
+      <line x1="112" y1="78" x2="310" y2="78" stroke="#c9a227" stroke-width="0.6" opacity="0.3"/>
+
+      <text x="112" y="92"
+            font-family="'DM Sans', Arial, sans-serif"
+            font-size="8" font-weight="300"
+            fill="#999" letter-spacing="3">LE SAAS COMPTABLE DU SÉNÉGAL</text>
+    </svg>
+  </div>
+
+  <!-- ICÔNE SEULE (favicon / app icon) -->
+  <div class="block">
+    <div class="tag">Icône seule — favicon & app</div>
+    <div style="display:flex; gap:30px; align-items:center;">
+
+      <!-- Grande -->
+      <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ig1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8c96a"/>
+            <stop offset="100%" stop-color="#a07c10"/>
+          </linearGradient>
+          <filter id="iglow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#c9a227" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="50" cy="50" r="42" fill="#0d1b2a"/>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="url(#ig1)" stroke-width="2.5"/>
+        <path d="M 14 34 A 42 42 0 0 1 86 34" fill="none" stroke="#c9a227" stroke-width="1.2" opacity="0.2"/>
+        <text x="50" y="62" font-family="'Cormorant Garamond', Georgia, serif"
+              font-size="34" font-weight="700" fill="url(#ig1)"
+              text-anchor="middle" filter="url(#iglow)" letter-spacing="2">SC</text>
+      </svg>
+
+      <!-- Moyenne -->
+      <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ig2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8c96a"/>
+            <stop offset="100%" stop-color="#a07c10"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="42" fill="#0d1b2a"/>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="url(#ig2)" stroke-width="2.5"/>
+        <text x="50" y="62" font-family="'Cormorant Garamond', Georgia, serif"
+              font-size="34" font-weight="700" fill="url(#ig2)"
+              text-anchor="middle" letter-spacing="2">SC</text>
+      </svg>
+
+      <!-- Petite favicon -->
+      <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ig3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8c96a"/>
+            <stop offset="100%" stop-color="#a07c10"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="48" fill="#0d1b2a"/>
+        <circle cx="50" cy="50" r="44" fill="none" stroke="url(#ig3)" stroke-width="4"/>
+        <text x="50" y="64" font-family="Georgia, serif"
+              font-size="38" font-weight="700" fill="#c9a227"
+              text-anchor="middle" letter-spacing="2">SC</text>
+      </svg>
+
+    </div>
+  </div>
+
+  <!-- VERSION HORIZONTALE COMPACTE (navbar) -->
+  <div class="block">
+    <div class="tag">Version navbar compacte</div>
+    <svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ng1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8c96a"/>
+          <stop offset="100%" stop-color="#c9a227"/>
+        </linearGradient>
+      </defs>
+      <circle cx="25" cy="25" r="21" fill="#0d1b2a"/>
+      <circle cx="25" cy="25" r="21" fill="none" stroke="url(#ng1)" stroke-width="1.5"/>
+      <text x="25" y="31" font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="16" font-weight="700" fill="#c9a227"
+            text-anchor="middle" letter-spacing="1">SC</text>
+      <line x1="52" y1="10" x2="52" y2="40" stroke="#c9a227" stroke-width="0.7" opacity="0.4"/>
+      <text x="62" y="22" font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="8" font-weight="400" fill="#c9a227" letter-spacing="3">SEN</text>
+      <text x="61" y="38" font-family="'Cormorant Garamond', Georgia, serif"
+            font-size="18" font-weight="600" fill="white" letter-spacing="0.5">Compta</text>
+    </svg>
+  </div>
+
+</div>
+
+<!-- Palette couleurs -->
+<div style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:20px;">
+  <div style="font-size:10px; color:#444; letter-spacing:3px; text-transform:uppercase;">Palette officielle</div>
+  <div style="display:flex; gap:16px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#0d1b2a;border:1px solid #333;"></div>
+      <span style="color:#555;font-size:9px;">#0d1b2a</span>
+      <span style="color:#444;font-size:9px;">Navy</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#c9a227;"></div>
+      <span style="color:#555;font-size:9px;">#c9a227</span>
+      <span style="color:#444;font-size:9px;">Or</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#e8c96a;"></div>
+      <span style="color:#555;font-size:9px;">#e8c96a</span>
+      <span style="color:#444;font-size:9px;">Or clair</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#ffffff;border:1px solid #222;"></div>
+      <span style="color:#555;font-size:9px;">#ffffff</span>
+      <span style="color:#444;font-size:9px;">Blanc</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#5a6a7a;"></div>
+      <span style="color:#555;font-size:9px;">#5a6a7a</span>
+      <span style="color:#444;font-size:9px;">Gris</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Caddyfile — reverse proxy + HTTPS automatique (Let's Encrypt)
+# Remplace "votre-domaine.com" par ton vrai domaine avant de demarrer.
+# Caddy obtient et renouvelle le certificat SSL tout seul.
+
+sen-compta.com, www.sen-compta.com {
+    reverse_proxy app:80
+
+    encode gzip
+
+    # En-tetes de securite
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+}

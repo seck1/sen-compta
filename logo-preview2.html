@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SenCompta — Logo Preview 2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;700&display=swap');
+  body { background: #e8e8e8; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 60px 20px; }
+  .row { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+  .card { background: white; border-radius: 20px; padding: 40px 50px; box-shadow: 0 6px 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; gap: 14px; min-width: 300px; }
+  .card.dark { background: #0d1b2a; }
+  .card.green { background: #064e3b; }
+  .card.grad { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .label { font-size: 11px; color: #999; letter-spacing: 2px; text-transform: uppercase; font-family: sans-serif; }
+  .label.light { color: #666; }
+  h2 { color: #444; letter-spacing: 3px; font-family: sans-serif; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<h2>SENCOMPTA — NOUVELLES VARIANTES</h2>
+
+<div class="row">
+
+  <!-- V5 : Hexagone tech -->
+  <div class="card">
+    <div class="label">V5 — Tech Hexagone</div>
+    <svg width="260" height="75" viewBox="0 0 260 75" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00c9a7"/>
+          <stop offset="100%" stop-color="#0057b8"/>
+        </linearGradient>
+      </defs>
+      <!-- Hexagone -->
+      <polygon points="35,5 58,18 58,44 35,57 12,44 12,18" fill="url(#g1)"/>
+      <!-- S intérieur -->
+      <text x="35" y="40" font-family="'Space Grotesk', Arial, sans-serif" font-size="26" font-weight="700" fill="white" text-anchor="middle">S</text>
+      <!-- Texte -->
+      <text x="72" y="32" font-family="'Space Grotesk', Arial, sans-serif" font-size="20" font-weight="700" fill="#0d1b2a">Sen</text>
+      <text x="107" y="32" font-family="'Space Grotesk', Arial, sans-serif" font-size="20" font-weight="300" fill="#00c9a7">Compta</text>
+      <text x="72" y="50" font-family="Arial, sans-serif" font-size="8" fill="#aaa" letter-spacing="2.5">SAAS · COMPTABILITÉ · SÉNÉGAL</text>
+    </svg>
+  </div>
+
+  <!-- V6 : Bouclier comptable -->
+  <div class="card dark">
+    <div class="label light">V6 — Bouclier Premium</div>
+    <svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#f6d365"/>
+          <stop offset="100%" stop-color="#fda085"/>
+        </linearGradient>
+      </defs>
+      <!-- Bouclier -->
+      <path d="M33 8 L55 16 L55 40 Q55 58 33 66 Q11 58 11 40 L11 16 Z" fill="url(#g2)"/>
+      <!-- Check intérieur -->
+      <polyline points="22,37 30,46 46,28" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Texte -->
+      <text x="70" y="38" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="700" fill="#f6d365">Sen</text>
+      <text x="114" y="38" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="400" fill="white">Compta</text>
+      <text x="70" y="56" font-family="Arial, sans-serif" font-size="8" fill="#888" letter-spacing="2">EXPERT-COMPTABLE DIGITAL</text>
+    </svg>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <!-- V7 : Courbe croissance + typographie bold -->
+  <div class="card">
+    <div class="label">V7 — Croissance Épurée</div>
+    <svg width="280" height="80" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g3" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#11998e"/>
+          <stop offset="100%" stop-color="#38ef7d"/>
+        </linearGradient>
+      </defs>
+      <!-- Courbe croissance -->
+      <path d="M8 55 Q20 50 30 40 Q40 30 55 20 L55 60 Z" fill="url(#g3)" opacity="0.15"/>
+      <path d="M8 55 Q20 50 30 40 Q40 30 55 20" fill="none" stroke="url(#g3)" stroke-width="3" stroke-linecap="round"/>
+      <!-- Point final -->
+      <circle cx="55" cy="20" r="5" fill="#11998e"/>
+      <!-- Texte principal -->
+      <text x="70" y="38" font-family="'Poppins', Arial, sans-serif" font-size="26" font-weight="800" fill="#1a1a2e">SEN</text>
+      <text x="120" y="38" font-family="'Poppins', Arial, sans-serif" font-size="26" font-weight="300" fill="#11998e">COMPTA</text>
+      <!-- Ligne séparatrice -->
+      <rect x="70" y="44" width="185" height="1" fill="#e0e0e0"/>
+      <text x="70" y="56" font-family="Arial, sans-serif" font-size="8" fill="#bbb" letter-spacing="3">VOTRE PARTENAIRE COMPTABLE</text>
+    </svg>
+  </div>
+
+  <!-- V8 : Rond bicolore initiales -->
+  <div class="card grad">
+    <div class="label light">V8 — Initiales Bicolore</div>
+    <svg width="260" height="75" viewBox="0 0 260 75" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cercle split -->
+      <path d="M35 8 A27 27 0 0 1 35 62" fill="#00b09b"/>
+      <path d="M35 8 A27 27 0 0 0 35 62" fill="#96c93d"/>
+      <!-- SC -->
+      <text x="35" y="44" font-family="'Space Grotesk', Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">SC</text>
+      <!-- Texte -->
+      <text x="74" y="35" font-family="'Space Grotesk', Arial, sans-serif" font-size="22" font-weight="700" fill="white">SenCompta</text>
+      <text x="74" y="53" font-family="Arial, sans-serif" font-size="8.5" fill="#96c93d" letter-spacing="1.5">Comptabilité · RH · Fiscalité</text>
+    </svg>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <!-- V9 : Lettre S fleche -->
+  <div class="card">
+    <div class="label">V9 — Flèche & Chiffres</div>
+    <svg width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#667eea"/>
+          <stop offset="100%" stop-color="#764ba2"/>
+        </linearGradient>
+      </defs>
+      <!-- Carré arrondi fond -->
+      <rect x="4" y="8" width="56" height="56" rx="14" fill="url(#g4)"/>
+      <!-- Graphe barres mini -->
+      <rect x="14" y="44" width="8" height="14" rx="2" fill="rgba(255,255,255,0.4)"/>
+      <rect x="26" y="34" width="8" height="24" rx="2" fill="rgba(255,255,255,0.7)"/>
+      <rect x="38" y="22" width="8" height="36" rx="2" fill="white"/>
+      <!-- Flèche montante -->
+      <polyline points="14,44 30,30 46,18" fill="none" stroke="#f9ca24" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="46,18 40,22 50,26" fill="#f9ca24"/>
+      <!-- Texte -->
+      <text x="72" y="38" font-family="'Poppins', Arial, sans-serif" font-size="24" font-weight="700" fill="#667eea">Sen</text>
+      <text x="116" y="38" font-family="'Poppins', Arial, sans-serif" font-size="24" font-weight="600" fill="#1a1a2e">Compta</text>
+      <text x="72" y="56" font-family="Arial, sans-serif" font-size="8" fill="#aaa" letter-spacing="2">GESTION FINANCIÈRE INTELLIGENTE</text>
+    </svg>
+  </div>
+
+  <!-- V10 : Typographie pure sans icone -->
+  <div class="card green">
+    <div class="label light">V10 — Typographie Pure</div>
+    <svg width="260" height="75" viewBox="0 0 260 75" xmlns="http://www.w3.org/2000/svg">
+      <!-- Point vert accent -->
+      <circle cx="12" cy="38" r="8" fill="#34d399"/>
+      <circle cx="12" cy="38" r="4" fill="#064e3b"/>
+      <!-- Sen bold -->
+      <text x="28" y="48" font-family="'Space Grotesk', Arial, sans-serif" font-size="32" font-weight="700" fill="white">Sen</text>
+      <!-- Compta light -->
+      <text x="94" y="48" font-family="'Space Grotesk', Arial, sans-serif" font-size="32" font-weight="300" fill="#34d399">Compta</text>
+      <!-- Underline partiel -->
+      <rect x="28" y="54" width="60" height="2" rx="1" fill="white"/>
+    </svg>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <!-- V11 : Empreinte Afrique -->
+  <div class="card">
+    <div class="label">V11 — Afrique Stylisée</div>
+    <svg width="280" height="85" viewBox="0 0 280 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Silhouette Afrique simplifiée -->
+      <path d="M30 10 Q42 8 48 16 Q54 24 52 34 Q58 40 56 50 Q52 62 44 68 Q36 74 28 68 Q16 58 14 46 Q10 32 16 20 Q20 12 30 10Z"
+            fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+      <!-- Point Sénégal -->
+      <circle cx="22" cy="28" r="4" fill="#2e7d32"/>
+      <circle cx="22" cy="28" r="2" fill="#a5d6a7"/>
+      <!-- Texte -->
+      <text x="72" y="36" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="800" fill="#1b5e20">Sen</text>
+      <text x="116" y="36" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="400" fill="#2e7d32">Compta</text>
+      <!-- Tagline -->
+      <text x="72" y="54" font-family="Arial, sans-serif" font-size="9" fill="#888" letter-spacing="1.5">Le SaaS comptable made in Sénégal</text>
+      <!-- Ligne déco -->
+      <rect x="72" y="60" width="180" height="1.5" rx="1" fill="#a5d6a7"/>
+    </svg>
+  </div>
+
+  <!-- V12 : Monogramme luxe -->
+  <div class="card dark">
+    <div class="label light">V12 — Monogramme Luxe</div>
+    <svg width="260" height="85" viewBox="0 0 260 85" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f6d365"/>
+          <stop offset="100%" stop-color="#c9a227"/>
+        </linearGradient>
+      </defs>
+      <!-- Losange -->
+      <polygon points="35,6 60,35 35,64 10,35" fill="none" stroke="url(#g5)" stroke-width="2"/>
+      <polygon points="35,14 52,35 35,56 18,35" fill="url(#g5)" opacity="0.12"/>
+      <!-- SC -->
+      <text x="35" y="43" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="700" fill="#f6d365" text-anchor="middle">SC</text>
+      <!-- Ligne or verticale -->
+      <rect x="74" y="14" width="1.5" height="50" fill="#f6d365" opacity="0.5"/>
+      <!-- Texte -->
+      <text x="86" y="32" font-family="'Playfair Display', Georgia, serif" font-size="12" font-weight="400" fill="#f6d365" letter-spacing="4">SEN</text>
+      <text x="86" y="50" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="white">Compta</text>
+      <text x="86" y="65" font-family="Arial, sans-serif" font-size="7.5" fill="#888" letter-spacing="2.5">EXPERTISE · DIGITAL · FIABILITÉ</text>
+    </svg>
+  </div>
+
+</div>
+
+</body>
+</html>

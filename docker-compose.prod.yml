@@ -1,0 +1,51 @@
+# docker-compose.prod.yml — SenCompta en production (VPS IONOS)
+# Lancement :  docker compose -f docker-compose.prod.yml up -d --build
+#
+# Pile : app PHP/Apache + MySQL 8 + Caddy (reverse proxy + HTTPS auto Let's Encrypt)
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - db
+    volumes:
+      - ./backups:/var/www/html/backups
+      - ./archives:/var/www/html/archives
+      - ./public/uploads:/var/www/html/public/uploads
+      - ./public/logos:/var/www/html/public/logos
+    # pas de ports exposes : seul Caddy parle a l'app, en interne
+    expose:
+      - "80"
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    # MySQL n'est PAS expose a l'exterieur (securite) : seul le reseau docker interne y accede
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  db_data:
+  caddy_data:
+  caddy_config:

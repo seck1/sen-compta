@@ -1,0 +1,22 @@
+# Securite : empeche l'execution de tout script dans le dossier d'uploads.
+# Defense en profondeur contre l'upload de webshell (RCE).
+
+# Desactive le moteur PHP (Apache mod_php)
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Retire les handlers susceptibles d'executer du code
+RemoveHandler .php .phtml .phar .php3 .php4 .php5 .php7 .pht
+RemoveType .php .phtml .phar .php3 .php4 .php5 .php7 .pht
+
+# Bloque l'acces direct a tout fichier de type script
+<FilesMatch "\.(php|phtml|phar|php3|php4|php5|php7|pht|cgi|pl|py|sh|asp|aspx)$">
+    Require all denied
+</FilesMatch>

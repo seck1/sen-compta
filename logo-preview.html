@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SenCompta — Logo Preview</title>
+<style>
+  body { background: #f0f0f0; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 60px 20px; }
+  .card { background: white; border-radius: 16px; padding: 40px 60px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .label { font-size: 13px; color: #888; letter-spacing: 1px; text-transform: uppercase; }
+  .dark { background: #0f1f3d; }
+  .dark .label { color: #aaa; }
+</style>
+</head>
+<body>
+
+<h2 style="color:#333; letter-spacing:2px;">SenCompta — Variantes Logo</h2>
+
+<!-- VARIANTE 1 : Moderne avec icône graphe -->
+<div class="card">
+  <div class="label">Variante 1 — Moderne & Finance</div>
+  <svg width="280" height="70" viewBox="0 0 280 70" xmlns="http://www.w3.org/2000/svg">
+    <!-- Icône : graphe montant stylisé -->
+    <rect x="8" y="38" width="10" height="22" rx="2" fill="#00b894"/>
+    <rect x="22" y="28" width="10" height="32" rx="2" fill="#00b894"/>
+    <rect x="36" y="16" width="10" height="44" rx="2" fill="#00b894"/>
+    <!-- Ligne de tendance -->
+    <polyline points="13,38 27,28 41,16" fill="none" stroke="#00cec9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Texte -->
+    <text x="62" y="44" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#0f3460">Sen</text>
+    <text x="106" y="44" font-family="Georgia, serif" font-size="28" font-weight="300" fill="#00b894">Compta</text>
+    <!-- Tagline -->
+    <text x="63" y="58" font-family="Arial, sans-serif" font-size="9" fill="#888" letter-spacing="2">GESTION · COMPTABILITÉ · SÉNÉGAL</text>
+  </svg>
+</div>
+
+<!-- VARIANTE 2 : Élégant vert & or -->
+<div class="card">
+  <div class="label">Variante 2 — Élégant Vert & Or</div>
+  <svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+    <!-- Cercle avec initiales -->
+    <circle cx="35" cy="38" r="30" fill="#1a5276"/>
+    <text x="35" y="46" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#f0c040" text-anchor="middle">SC</text>
+    <!-- Barre décorative or -->
+    <rect x="72" y="20" width="3" height="36" rx="1.5" fill="#f0c040"/>
+    <!-- Texte principal -->
+    <text x="84" y="36" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#1a5276">SenCompta</text>
+    <!-- Tagline -->
+    <text x="84" y="52" font-family="Arial, sans-serif" font-size="9" fill="#888" letter-spacing="1.5">Votre cabinet comptable digital</text>
+    <!-- Ligne or sous tagline -->
+    <rect x="84" y="58" width="140" height="1.5" rx="1" fill="#f0c040"/>
+  </svg>
+</div>
+
+<!-- VARIANTE 3 : Minimaliste moderne -->
+<div class="card">
+  <div class="label">Variante 3 — Minimaliste</div>
+  <svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+    <!-- S stylisé avec courbe comptable -->
+    <path d="M10 42 Q10 18 30 18 Q50 18 50 30 Q50 42 30 42 Q10 42 10 54 Q10 66 30 54"
+          fill="none" stroke="#2ecc71" stroke-width="4" stroke-linecap="round"/>
+    <!-- Texte bold -->
+    <text x="65" y="40" font-family="'Arial Black', sans-serif" font-size="26" font-weight="900" fill="#1a1a2e" letter-spacing="-1">Sen<tspan fill="#2ecc71">Compta</tspan></text>
+    <!-- Point vert sous le texte -->
+    <circle cx="68" cy="50" r="3" fill="#2ecc71"/>
+    <text x="76" y="53" font-family="Arial, sans-serif" font-size="8" fill="#999" letter-spacing="2">SAAS COMPTABLE</text>
+  </svg>
+</div>
+
+<!-- VARIANTE 4 : Drapeau Sénégal + Finance -->
+<div class="card">
+  <div class="label">Variante 4 — Couleurs Sénégal</div>
+  <svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+    <!-- Bandes drapeau vertical -->
+    <rect x="0" y="10" width="14" height="50" rx="3" fill="#009a44"/>
+    <rect x="16" y="10" width="14" height="50" rx="3" fill="#ffd700"/>
+    <rect x="32" y="10" width="14" height="50" rx="3" fill="#e31b23"/>
+    <!-- Étoile sur le jaune -->
+    <polygon points="23,25 24.5,30 29,30 25.5,33 27,38 23,35 19,38 20.5,33 17,30 21.5,30" fill="#009a44" transform="scale(0.75) translate(8,8)"/>
+    <!-- Texte -->
+    <text x="58" y="42" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#009a44">Sen</text>
+    <text x="104" y="42" font-family="Georgia, serif" font-size="26" font-weight="400" fill="#1a1a2e">Compta</text>
+    <text x="58" y="56" font-family="Arial, sans-serif" font-size="8.5" fill="#888" letter-spacing="1.5">COMPTABILITÉ DIGITALE</text>
+  </svg>
+</div>
+
+<!-- Sur fond sombre -->
+<div class="card dark">
+  <div class="label">Variante 2 sur fond sombre</div>
+  <svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="35" cy="38" r="30" fill="#f0c040"/>
+    <text x="35" y="46" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#0f1f3d" text-anchor="middle">SC</text>
+    <rect x="72" y="20" width="3" height="36" rx="1.5" fill="#f0c040"/>
+    <text x="84" y="36" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#ffffff">SenCompta</text>
+    <text x="84" y="52" font-family="Arial, sans-serif" font-size="9" fill="#aaa" letter-spacing="1.5">Votre cabinet comptable digital</text>
+    <rect x="84" y="58" width="140" height="1.5" rx="1" fill="#f0c040"/>
+  </svg>
+</div>
+
+</body>
+</html>

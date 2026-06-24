@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    env_file: .env
+    depends_on:
+      - db
+    volumes:
+      - ./backups:/var/www/html/backups
+      - ./archives:/var/www/html/archives
+      - ./public/uploads:/var/www/html/public/uploads
+
+  db:
+    image: mysql:8.0
+    env_file: .env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+
+volumes:
+  db_data:
