@@ -310,6 +310,7 @@ $modules = [
     ['bg'=>'rgba(234,88,12,0.1)','stroke'=>'#ea580c','svg'=>'<circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/>','title'=>'Droits & Collaborateurs','desc'=>'Rôles Admin / Superviseur / Collab.'],
     ['bg'=>'rgba(220,38,38,0.09)','stroke'=>'#dc2626','svg'=>'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>','title'=>'Déclarations Fiscales','desc'=>'TVA, IS, retenues à la source'],
     ['bg'=>'rgba(13,148,136,0.1)','stroke'=>'#0d9488','svg'=>'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M6 15h.01M10 15h4"/>','title'=>'Gestion de Paie','desc'=>'Bulletins, IPRES/CSS, salaires'],
+    ['bg'=>'rgba(30,58,95,0.1)','stroke'=>'#1e3a5f','svg'=>'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/>','title'=>'Portail Client','desc'=>'Vos clients consultent leur dossier'],
 ];
 foreach ($modules as $m): ?>
             <div class="mod-card">
