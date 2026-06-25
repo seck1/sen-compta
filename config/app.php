@@ -1,4 +1,19 @@
 <?php
+// ── Gestion des erreurs selon l'environnement ────────────────────────────────
+// En production : ne JAMAIS afficher les erreurs/warnings a l'ecran (cela casse
+// les en-tetes HTTP et expose des infos). On les enregistre dans le log PHP.
+$__host = $_SERVER['HTTP_HOST'] ?? '';
+$__isProd = ($__host !== '' && $__host !== 'localhost' && !str_contains($__host, '127.0.0.1'));
+if ($__isProd) {
+    ini_set('display_errors', '0');
+    ini_set('display_startup_errors', '0');
+    ini_set('log_errors', '1');
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_WARNING);
+} else {
+    ini_set('display_errors', '1');
+    error_reporting(E_ALL);
+}
+
 // ── Chargement des variables d'environnement depuis .env ─────────────────────
 function loadEnv(string $envFile): void {
     if (!file_exists($envFile)) {
