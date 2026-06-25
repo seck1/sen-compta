@@ -31,8 +31,8 @@
     --info: #3b82f6;
 }
 
-html { font-size: 19px; }
-body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 19px; line-height: 1.5; }
+html { font-size: 19px; overflow-x: hidden; }
+body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 19px; line-height: 1.5; overflow-x: hidden; max-width: 100%; }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
@@ -734,8 +734,10 @@ tbody td {
 
     .main-wrap { margin-left: 0; }
 
-    .topbar { padding: 0 16px; }
+    .topbar { padding: 8px 16px; height: auto; min-height: var(--header-h); flex-wrap: wrap; gap: 8px; }
     .topbar-date { display: none; }
+    .topbar-actions { flex-wrap: wrap; gap: 8px; }
+    .notif-dropdown { width: calc(100vw - 32px); right: -8px; max-width: 380px; }
 
     /* Bouton hamburger */
     .hamburger {
@@ -754,17 +756,27 @@ tbody td {
     .page-content { padding: 16px; }
     .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .kpi-value { font-size: 28px; }
-    .page-header { flex-direction: column; gap: 12px; }
-    .page-header .btn { width: 100%; justify-content: center; }
+    .page-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .page-header .btn,
+    .page-header-actions .btn { width: 100%; justify-content: center; }
+    .page-header-actions { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
     .form-grid { grid-template-columns: 1fr; }
-    .table-wrap { overflow-x: auto; }
-    table { min-width: 600px; }
+    .table-wrap, .table-responsive { overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+    .table-wrap table, .table-responsive table { min-width: 600px; }
 }
 
+/* Grille graphiques dashboard : 2 colonnes -> 1 colonne sur tablette/mobile */
+.dash-charts { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 28px; }
+@media (max-width: 900px) { .dash-charts { grid-template-columns: 1fr; } }
+
 @media (max-width: 480px) {
+    html, body { overflow-x: hidden; }
     .kpi-grid { grid-template-columns: 1fr; }
-    .topbar-breadcrumb .sep { display: none; }
-    .topbar-breadcrumb a { display: none; }
+    .btn { padding: 9px 14px; font-size: 14px; }
+    .topbar-breadcrumb .sep,
+    .topbar-left .sep { display: none; }
+    .topbar-breadcrumb a,
+    .topbar-left a:not(.current) { display: none; }
 }
 </style>
 </head>

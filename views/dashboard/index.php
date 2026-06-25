@@ -166,7 +166,7 @@ $repartition = $db->query("SELECT LEFT(c.numero,2) as poste, SUM(l.debit-l.credi
 $repartLabels = array_map(fn($r)=>'Classe '.$r['poste'], $repartition);
 $repartData   = array_map(fn($r)=>max(0,(float)$r['total']), $repartition);
 ?>
-<div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:28px">
+<div class="dash-charts">
     <!-- Graphique CA vs Charges -->
     <div class="card" style="padding:24px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">

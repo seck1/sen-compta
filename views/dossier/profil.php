@@ -73,7 +73,12 @@ $score_color = $score >= 80 ? '#22c55e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 .profil-hero-meta span { display:flex; align-items:center; gap:5px; }
 .regime-badge-lg { display:inline-flex; align-items:center; gap:6px; padding:6px 15px; border-radius:20px; font-size:14px; font-weight:700; letter-spacing:.5px; margin-top:8px; }
 
-@media(max-width:800px) { .section-body { grid-template-columns:1fr; } }
+@media(max-width:800px) {
+    .section-body, .section-body.cols3, .section-body.cols1 { grid-template-columns:1fr; }
+}
+@media(max-width:700px) {
+    .activite-r2-row { grid-template-columns:1fr !important; }
+}
 </style>
 
 <!-- Bouton conformité -->

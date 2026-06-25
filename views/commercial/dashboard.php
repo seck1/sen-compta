@@ -22,6 +22,7 @@ $moisLabels = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','No
 .com-header {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 32px;
+    flex-wrap: wrap; gap: 16px;
 }
 .com-header-left h1 {
     font-family: 'Playfair Display', serif;
@@ -30,7 +31,11 @@ $moisLabels = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','No
     letter-spacing: -0.5px;
 }
 .com-header-left p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
-.com-header-actions { display: flex; gap: 10px; }
+.com-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 640px) {
+    .com-header-actions { width: 100%; }
+    .com-header-actions .btn { flex: 1; justify-content: center; }
+}
 
 /* KPI Cards */
 .kpi-grid {

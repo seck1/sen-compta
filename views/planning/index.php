@@ -3,7 +3,7 @@
         <h1 class="page-title">Planning des missions</h1>
         <p class="page-subtitle"><?= count($missions) ?> mission<?= count($missions)>1?'s':'' ?> · <?= date('Y') ?></p>
     </div>
-    <div style="display:flex;gap:10px">
+    <div class="page-header-actions" style="display:flex;gap:10px">
         <a href="<?= APP_URL ?>/planning/creer" class="btn btn-gold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
             Nouvelle mission
