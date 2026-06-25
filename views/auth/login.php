@@ -276,10 +276,10 @@ a:focus-visible, button:focus-visible, input:focus-visible {
         <div class="divider">Pas encore de compte ?</div>
         <a href="<?= APP_URL ?>/inscription" class="btn-outline">Créer un espace cabinet</a>
 
-        <p style="text-align:center;font-size:13px;color:var(--muted);margin-top:16px">
-            Vous êtes client d'un cabinet ?
-            <a href="<?= APP_URL ?>/portail" style="color:var(--green);font-weight:600;text-decoration:none">Accéder à votre espace</a>
-        </p>
+        <a href="<?= APP_URL ?>/portail" style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:16px;padding:14px;border-radius:12px;background:rgba(30,58,95,0.06);border:1.5px solid rgba(30,58,95,0.18);color:var(--navy);font-weight:700;font-size:14px;text-decoration:none;transition:all .15s" onmouseover="this.style.background='rgba(30,58,95,0.12)';this.style.borderColor='rgba(30,58,95,0.35)'" onmouseout="this.style.background='rgba(30,58,95,0.06)';this.style.borderColor='rgba(30,58,95,0.18)'">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:19px;height:19px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3M9 9v.01M9 12v.01M9 15v.01M9 18v.01" /></svg>
+            Vous êtes client ? Accéder à votre espace
+        </a>
 
         <div class="trust">
             <span>
