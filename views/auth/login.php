@@ -32,18 +32,24 @@ html, body {
 
 .shell {
     min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center;
-    padding: 48px 20px 32px;
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    align-items: start;
+    gap: 48px;
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 56px 32px 40px;
 }
+.col-left { position: sticky; top: 56px; }
+.col-right { padding-top: 4px; }
 
-/* ============ CARTE DE CONNEXION CENTRALE ============ */
+/* ============ CARTE DE CONNEXION ============ */
 .card {
-    width: 100%; max-width: 460px;
+    width: 100%;
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: 18px;
-    padding: 44px 44px 40px;
+    padding: 40px 40px 36px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 12px 34px -22px rgba(27,42,35,0.3);
     animation: rise .5s ease both;
 }
@@ -117,10 +123,10 @@ html, body {
 .trust span { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-weight: 500; }
 .trust svg { width: 14px; height: 14px; color: var(--green); }
 
-/* ============ MODULES (sous la carte) ============ */
-.modules-section { width: 100%; max-width: 920px; margin-top: 56px; }
-.modules-title { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
-.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+/* ============ MODULES (colonne droite) ============ */
+.modules-section { width: 100%; }
+.modules-title { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+.modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .mod-card {
     display: flex; align-items: center; gap: 13px;
     padding: 15px 16px;
@@ -134,13 +140,18 @@ html, body {
 .mod-desc  { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
 .mod-badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; text-transform: uppercase; background: rgba(47,125,91,0.1); color: var(--green); border: 1px solid rgba(47,125,91,0.22); }
 
-.foot { margin-top: 40px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+.foot { grid-column: 1 / -1; margin-top: 32px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
 .foot a, .foot span { font-size: 13px; color: var(--muted); text-decoration: none; }
 .foot a:hover { color: var(--green); text-decoration: underline; }
 
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-@media (max-width: 760px) { .modules-grid { grid-template-columns: 1fr 1fr; } }
+/* Tablette / mobile : la carte repasse au-dessus, modules en dessous */
+@media (max-width: 980px) {
+    .shell { grid-template-columns: 1fr; max-width: 560px; gap: 40px; }
+    .col-left { position: static; }
+    .modules-title { text-align: center; }
+}
 @media (max-width: 520px) {
     .shell { padding: 28px 14px; }
     .card { padding: 32px 22px 28px; border-radius: 16px; }
@@ -154,7 +165,8 @@ html, body {
 
 <div class="shell">
 
-    <!-- ── Carte de connexion centrale ── -->
+  <!-- ── Colonne gauche : carte de connexion ── -->
+  <div class="col-left">
     <div class="card">
 
         <div class="card-logo">
@@ -219,8 +231,10 @@ html, body {
         </div>
 
     </div>
+  </div><!-- /col-left -->
 
-    <!-- ── Modules (sous la carte) ── -->
+  <!-- ── Colonne droite : modules ── -->
+  <div class="col-right">
     <div class="modules-section">
         <div class="modules-title">Tout votre cabinet, une seule plateforme</div>
         <div class="modules-grid">
@@ -250,6 +264,7 @@ foreach ($modules as $m): ?>
 <?php endforeach; ?>
         </div>
     </div>
+  </div><!-- /col-right -->
 
     <div class="foot">
         <span>© <?= date('Y') ?> SenCompta · Tous droits réservés</span>
