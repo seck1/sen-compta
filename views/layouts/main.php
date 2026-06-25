@@ -92,7 +92,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 }
 
 .nav-section-label {
-    font-size: 13px;
+    font-size: 9pt;
     text-transform: uppercase;
     letter-spacing: 2px;
     padding: 4px 12px;
@@ -124,7 +124,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     border-radius: 10px;
     color: rgba(255,255,255,0.95);
     text-decoration: none;
-    font-size: 17px;
+    font-size: 12pt;
     font-weight: 500;
     transition: all 0.2s ease;
     margin-bottom: 3px;
