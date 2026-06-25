@@ -119,13 +119,13 @@ function fmtMin(int $min): string {
     <table style="width:100%;border-collapse:collapse;font-size:16px">
         <thead>
             <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
-                <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Date</th>
-                <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Collaborateur</th>
-                <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Catégorie</th>
-                <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Description</th>
-                <th style="padding:10px 16px;text-align:right;font-size:14px;color:var(--text-muted);text-transform:uppercase">Durée</th>
-                <th style="padding:10px 16px;text-align:center;font-size:14px;color:var(--text-muted);text-transform:uppercase">Statut</th>
-                <th style="padding:10px 16px;text-align:center;font-size:14px;color:var(--text-muted);text-transform:uppercase">Actions</th>
+                <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Date</th>
+                <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Collaborateur</th>
+                <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Catégorie</th>
+                <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Description</th>
+                <th style="padding:10px 16px;text-align:right;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Durée</th>
+                <th style="padding:10px 16px;text-align:center;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Statut</th>
+                <th style="padding:10px 16px;text-align:center;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Actions</th>
             </tr>
         </thead>
         <tbody>

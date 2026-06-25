@@ -69,15 +69,15 @@ $statut_cfg = [
     <table style="width:100%;border-collapse:collapse;font-size:16px">
         <thead>
             <tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border)">
-                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Date</th>
-                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Catégorie</th>
-                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Libellé</th>
-                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Employé</th>
-                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Montant</th>
-                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Justificatif</th>
-                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Statut</th>
+                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Date</th>
+                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Catégorie</th>
+                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Libellé</th>
+                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Employé</th>
+                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Montant</th>
+                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Justificatif</th>
+                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Statut</th>
                 <?php if(isSuperviseur()): ?>
-                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Action</th>
+                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Action</th>
                 <?php endif; ?>
             </tr>
         </thead>

@@ -127,12 +127,12 @@ function fmtMin(int $min): string {
     <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead>
             <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
-                <th style="padding:10px 16px;text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase">Collaborateur</th>
-                <th style="padding:10px 16px;text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase">Dossier</th>
-                <th style="padding:10px 16px;text-align:right;font-size:11px;color:var(--text-muted);text-transform:uppercase">Total</th>
-                <th style="padding:10px 16px;text-align:right;font-size:11px;color:var(--text-muted);text-transform:uppercase">Facturable</th>
-                <th style="padding:10px 16px;text-align:right;font-size:11px;color:var(--text-muted);text-transform:uppercase">Facturé</th>
-                <th style="padding:10px 16px;text-align:center;font-size:11px;color:var(--text-muted);text-transform:uppercase">Saisies</th>
+                <th style="padding:10px 16px;text-align:left;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Collaborateur</th>
+                <th style="padding:10px 16px;text-align:left;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Dossier</th>
+                <th style="padding:10px 16px;text-align:right;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Total</th>
+                <th style="padding:10px 16px;text-align:right;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Facturable</th>
+                <th style="padding:10px 16px;text-align:right;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Facturé</th>
+                <th style="padding:10px 16px;text-align:center;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Saisies</th>
             </tr>
         </thead>
         <tbody>

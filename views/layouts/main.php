@@ -562,7 +562,8 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 .table-wrap {
     border-radius: 16px;
     border: 1px solid var(--border);
-    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     background: var(--bg-card);
 }
 

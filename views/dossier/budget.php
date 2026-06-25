@@ -107,11 +107,11 @@ new Chart(document.getElementById('budgetChart'), {
     <table style="width:100%;border-collapse:collapse;font-size:16px">
         <thead>
             <tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border)">
-                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Compte</th>
-                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Réalisé</th>
-                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Budget</th>
-                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Écart</th>
-                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">%</th>
+                <th style="padding:10px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Compte</th>
+                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Réalisé</th>
+                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Budget</th>
+                <th style="padding:10px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Écart</th>
+                <th style="padding:10px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">%</th>
             </tr>
         </thead>
         <tbody>

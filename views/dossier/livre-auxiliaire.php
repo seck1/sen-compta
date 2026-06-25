@@ -74,14 +74,14 @@ $solde_cumule = $solde_ouverture;
         <table style="width:100%;border-collapse:collapse;font-size:16px">
             <thead>
                 <tr style="border-bottom:2px solid var(--border);background:var(--bg-secondary)">
-                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Date</th>
-                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">N° Pièce</th>
-                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Journal</th>
-                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Libellé</th>
-                    <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Ltr</th>
-                    <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Débit</th>
-                    <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Crédit</th>
-                    <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Solde cumulé</th>
+                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Date</th>
+                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">N° Pièce</th>
+                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Journal</th>
+                    <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Libellé</th>
+                    <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Ltr</th>
+                    <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Débit</th>
+                    <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Crédit</th>
+                    <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Solde cumulé</th>
                 </tr>
                 <!-- Solde ouverture -->
                 <?php if($solde_ouverture != 0): ?>

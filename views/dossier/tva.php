@@ -246,14 +246,14 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
             <table style="width:100%;border-collapse:collapse;font-size:16px">
                 <thead>
                     <tr style="border-bottom:2px solid var(--border);background:var(--bg-secondary)">
-                        <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Période</th>
-                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">TVA collectée</th>
-                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">TVA déductible</th>
-                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">TVA nette</th>
-                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">À payer / Crédit</th>
-                        <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Statut</th>
-                        <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Date dépôt</th>
-                        <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Actions</th>
+                        <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Période</th>
+                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">TVA collectée</th>
+                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">TVA déductible</th>
+                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">TVA nette</th>
+                        <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">À payer / Crédit</th>
+                        <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Statut</th>
+                        <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Date dépôt</th>
+                        <th style="padding:11px 16px;text-align:center;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Actions</th>
                     </tr>
                 </thead>
                 <tbody>

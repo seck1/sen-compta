@@ -93,9 +93,9 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
     <table style="width:100%;border-collapse:collapse">
         <thead>
             <tr style="background:var(--bg)">
-                <th style="padding:10px 16px;text-align:left;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)">Obligation / Module</th>
-                <th style="padding:10px 16px;text-align:center;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)">Applicable</th>
-                <th style="padding:10px 16px;text-align:left;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)">Détails</th>
+                <th style="padding:10px 16px;text-align:left;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;background:#f1f5f9;color:#4a554f">Obligation / Module</th>
+                <th style="padding:10px 16px;text-align:center;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;background:#f1f5f9;color:#4a554f">Applicable</th>
+                <th style="padding:10px 16px;text-align:left;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;background:#f1f5f9;color:#4a554f">Détails</th>
             </tr>
         </thead>
         <tbody>

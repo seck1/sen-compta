@@ -69,12 +69,12 @@ $nb_crediteurs = count(array_filter($balance, fn($r) => $r['solde'] < 0));
         <table style="width:100%;border-collapse:collapse;font-size:16px">
             <thead>
                 <tr style="border-bottom:2px solid var(--border);background:var(--bg-secondary)">
-                    <th style="padding:11px 16px;text-align:left;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Tiers</th>
-                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Débit</th>
-                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Crédit</th>
-                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Solde débiteur</th>
-                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Solde créditeur</th>
-                    <th style="padding:11px 16px;text-align:center;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Détail</th>
+                    <th style="padding:11px 16px;text-align:left;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Tiers</th>
+                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Débit</th>
+                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Crédit</th>
+                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Solde débiteur</th>
+                    <th style="padding:11px 16px;text-align:right;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Solde créditeur</th>
+                    <th style="padding:11px 16px;text-align:center;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:#f1f5f9;color:#4a554f">Détail</th>
                 </tr>
             </thead>
             <tbody>

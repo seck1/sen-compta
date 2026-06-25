@@ -91,12 +91,12 @@ $id = $entreprise['id'];
         <table style="width:100%;border-collapse:collapse;font-size:16px">
             <thead>
                 <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
-                    <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Employé</th>
-                    <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Type</th>
-                    <th style="padding:10px 16px;text-align:left;font-size:14px;color:var(--text-muted);text-transform:uppercase">Période</th>
-                    <th style="padding:10px 16px;text-align:center;font-size:14px;color:var(--text-muted);text-transform:uppercase">Jours</th>
-                    <th style="padding:10px 16px;text-align:center;font-size:14px;color:var(--text-muted);text-transform:uppercase">Statut</th>
-                    <th style="padding:10px 16px;text-align:center;font-size:14px;color:var(--text-muted);text-transform:uppercase">Actions</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Employé</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Type</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Période</th>
+                    <th style="padding:10px 16px;text-align:center;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Jours</th>
+                    <th style="padding:10px 16px;text-align:center;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Statut</th>
+                    <th style="padding:10px 16px;text-align:center;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Actions</th>
                 </tr>
             </thead>
             <tbody>

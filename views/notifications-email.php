@@ -117,10 +117,10 @@ $anneePrec  = date('n') == 1 ? (int)date('Y') - 1 : (int)date('Y');
     </div>
     <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead><tr style="background:var(--bg-secondary)">
-            <th style="padding:10px 16px;text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase">Dossier</th>
-            <th style="padding:10px 16px;text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase">Échéance</th>
-            <th style="padding:10px 16px;text-align:center;font-size:11px;color:var(--text-muted);text-transform:uppercase">Date</th>
-            <th style="padding:10px 16px;text-align:center;font-size:11px;color:var(--text-muted);text-transform:uppercase">Jours restants</th>
+            <th style="padding:10px 16px;text-align:left;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Dossier</th>
+            <th style="padding:10px 16px;text-align:left;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Échéance</th>
+            <th style="padding:10px 16px;text-align:center;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Date</th>
+            <th style="padding:10px 16px;text-align:center;font-size:11px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Jours restants</th>
         </tr></thead>
         <tbody>
         <?php foreach($echeances_proches as $ech):

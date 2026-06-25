@@ -38,12 +38,12 @@ $id = $entreprise['id'];
     <table style="width:100%;border-collapse:collapse;font-size:17px">
         <thead>
             <tr style="background:var(--bg)">
-                <th style="padding:11px 22px;text-align:left;font-weight:600;font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Année</th>
-                <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Période</th>
-                <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Statut</th>
-                <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Écritures</th>
-                <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Validées</th>
-                <th style="padding:11px 22px;text-align:right;font-weight:600;font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Actions</th>
+                <th style="padding:11px 22px;text-align:left;font-weight:600;font-size:15px;background:#f1f5f9;color:#4a554f;text-transform:uppercase;letter-spacing:.04em">Année</th>
+                <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;background:#f1f5f9;color:#4a554f;text-transform:uppercase;letter-spacing:.04em">Période</th>
+                <th style="padding:11px 16px;text-align:left;font-weight:600;font-size:15px;background:#f1f5f9;color:#4a554f;text-transform:uppercase;letter-spacing:.04em">Statut</th>
+                <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;background:#f1f5f9;color:#4a554f;text-transform:uppercase;letter-spacing:.04em">Écritures</th>
+                <th style="padding:11px 16px;text-align:right;font-weight:600;font-size:15px;background:#f1f5f9;color:#4a554f;text-transform:uppercase;letter-spacing:.04em">Validées</th>
+                <th style="padding:11px 22px;text-align:right;font-weight:600;font-size:15px;background:#f1f5f9;color:#4a554f;text-transform:uppercase;letter-spacing:.04em">Actions</th>
             </tr>
         </thead>
         <tbody>

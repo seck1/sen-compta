@@ -279,7 +279,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .kpi-icon svg { width: 20px; height: 20px; }
 
 /* Table */
-.table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: hidden; background: var(--bg-card); }
+.table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--bg-card); }
 .table-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); }
 .table-title { font-size: 18px; font-weight: 600; color: var(--navy-dark); }
 table { width: 100%; border-collapse: collapse; }

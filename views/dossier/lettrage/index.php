@@ -345,12 +345,12 @@ $cntIA = count($suggestions);
                 <table style="width:100%;border-collapse:collapse">
                     <thead>
                         <tr style="background:#edf0f5">
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);text-align:left">Tiers</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);text-align:left">Compte</th>
+                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:left">Tiers</th>
+                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:left">Compte</th>
                             <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--danger);text-align:right">Solde Débit</th>
                             <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1f6e4e;text-align:right">Solde Crédit</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);text-align:right">Solde net</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);text-align:center">Statut</th>
+                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:right">Solde net</th>
+                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:center">Statut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -508,12 +508,12 @@ $cntIA = count($suggestions);
             <table style="width:100%;border-collapse:collapse;background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:20px">
                 <thead>
                     <tr style="background:#f1f5f9;border-bottom:1px solid #e5e7eb">
-                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);text-align:left">Tiers</th>
-                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);text-align:left">Compte</th>
+                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:#f1f5f9;color:#4a554f;text-align:left">Tiers</th>
+                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:#f1f5f9;color:#4a554f;text-align:left">Compte</th>
                         <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--danger);text-align:right">Solde Débit</th>
                         <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#1f6e4e;text-align:right">Solde Crédit</th>
-                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);text-align:right">Solde</th>
-                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);text-align:center">Statut</th>
+                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:#f1f5f9;color:#4a554f;text-align:right">Solde</th>
+                        <th style="padding:8px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:#f1f5f9;color:#4a554f;text-align:center">Statut</th>
                     </tr>
                 </thead>
                 <tbody>

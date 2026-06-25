@@ -45,12 +45,12 @@ ob_start();
     <table style="width:100%;border-collapse:collapse;font-size:13px;">
       <thead>
         <tr style="background:var(--bg);">
-          <th style="padding:12px 16px;text-align:left;color:var(--text-muted);font-weight:500;">Cabinet</th>
-          <th style="padding:12px 16px;text-align:left;color:var(--text-muted);font-weight:500;">Plan</th>
-          <th style="padding:12px 16px;text-align:center;color:var(--text-muted);font-weight:500;">Entreprises</th>
-          <th style="padding:12px 16px;text-align:center;color:var(--text-muted);font-weight:500;">Users</th>
-          <th style="padding:12px 16px;text-align:left;color:var(--text-muted);font-weight:500;">Statut</th>
-          <th style="padding:12px 16px;text-align:left;color:var(--text-muted);font-weight:500;">Inscrit le</th>
+          <th style="padding:12px 16px;text-align:left;background:#f1f5f9;color:#4a554f;font-weight:500;">Cabinet</th>
+          <th style="padding:12px 16px;text-align:left;background:#f1f5f9;color:#4a554f;font-weight:500;">Plan</th>
+          <th style="padding:12px 16px;text-align:center;background:#f1f5f9;color:#4a554f;font-weight:500;">Entreprises</th>
+          <th style="padding:12px 16px;text-align:center;background:#f1f5f9;color:#4a554f;font-weight:500;">Users</th>
+          <th style="padding:12px 16px;text-align:left;background:#f1f5f9;color:#4a554f;font-weight:500;">Statut</th>
+          <th style="padding:12px 16px;text-align:left;background:#f1f5f9;color:#4a554f;font-weight:500;">Inscrit le</th>
         </tr>
       </thead>
       <tbody>

@@ -43,11 +43,11 @@ $niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formel
     <table style="width:100%;border-collapse:collapse;font-size:16px">
         <thead>
             <tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border)">
-                <th style="padding:11px 16px;text-align:left;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Client</th>
-                <th style="padding:11px 16px;text-align:right;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Solde dû</th>
-                <th style="padding:11px 16px;text-align:center;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Retard</th>
-                <th style="padding:11px 16px;text-align:center;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Niveau relance</th>
-                <th style="padding:11px 16px;text-align:center;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Actions</th>
+                <th style="padding:11px 16px;text-align:left;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f">Client</th>
+                <th style="padding:11px 16px;text-align:right;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f">Solde dû</th>
+                <th style="padding:11px 16px;text-align:center;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f">Retard</th>
+                <th style="padding:11px 16px;text-align:center;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f">Niveau relance</th>
+                <th style="padding:11px 16px;text-align:center;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -106,12 +106,12 @@ $niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formel
     <table style="width:100%;border-collapse:collapse;font-size:16px">
         <thead>
             <tr style="background:var(--bg-secondary);border-bottom:1px solid var(--border)">
-                <th style="padding:9px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Date</th>
-                <th style="padding:9px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Client</th>
-                <th style="padding:9px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Montant</th>
-                <th style="padding:9px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Niveau</th>
-                <th style="padding:9px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Statut</th>
-                <th style="padding:9px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;color:var(--text-muted)">Par</th>
+                <th style="padding:9px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Date</th>
+                <th style="padding:9px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Client</th>
+                <th style="padding:9px 16px;text-align:right;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Montant</th>
+                <th style="padding:9px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Niveau</th>
+                <th style="padding:9px 16px;text-align:center;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Statut</th>
+                <th style="padding:9px 16px;text-align:left;font-size:17px;font-weight:600;text-transform:uppercase;background:#f1f5f9;color:#4a554f">Par</th>
             </tr>
         </thead>
         <tbody>

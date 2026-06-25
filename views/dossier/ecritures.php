@@ -252,16 +252,16 @@ $filtreStatut = $_GET['statut'] ?? '';
         <!-- Ligne de détail accordéon -->
         <tr id="detail-<?= $ec['id'] ?>" style="display:none;background:#f8fafc">
             <td colspan="14" style="padding:0">
-                <div style="padding:12px 16px 16px 48px">
-                    <table style="width:100%;border-collapse:collapse;font-size:15px">
+                <div style="padding:12px 16px 16px 48px;overflow-x:auto">
+                    <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:15px">
                         <thead>
                             <tr style="background:#f1f5f9">
-                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">N° Compte</th>
-                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Intitulé</th>
-                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Libellé ligne</th>
-                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Débit</th>
-                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Crédit</th>
-                                <th style="padding:6px 10px;text-align:center;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Lettrage</th>
+                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">N° Compte</th>
+                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">Intitulé</th>
+                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">Libellé ligne</th>
+                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">Débit</th>
+                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">Crédit</th>
+                                <th style="padding:6px 10px;text-align:center;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">Lettrage</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -698,8 +698,8 @@ function scanRenderPreview(e){
     +'<div style="background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden">'
     +'<table style="width:100%;border-collapse:collapse">'
     +'<thead><tr style="background:#f8fafc;border-bottom:1px solid #e5e7eb">'
-    +'<th style="padding:8px 14px;text-align:left;font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px">Compte</th>'
-    +'<th style="padding:8px 14px;text-align:left;font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px">Intitulé</th>'
+    +'<th style="padding:8px 14px;text-align:left;font-size:13px;background:#f8fafc;background:#f8fafc;color:#6b7280;text-transform:uppercase;letter-spacing:.5px">Compte</th>'
+    +'<th style="padding:8px 14px;text-align:left;font-size:13px;background:#f8fafc;background:#f8fafc;color:#6b7280;text-transform:uppercase;letter-spacing:.5px">Intitulé</th>'
     +'<th style="padding:8px 14px;text-align:right;font-size:13px;color:#059669;text-transform:uppercase;letter-spacing:.5px">Débit</th>'
     +'<th style="padding:8px 14px;text-align:right;font-size:13px;color:#dc2626;text-transform:uppercase;letter-spacing:.5px">Crédit</th>'
     +'</tr></thead>'
