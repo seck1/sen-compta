@@ -256,12 +256,12 @@ $filtreStatut = $_GET['statut'] ?? '';
                     <table style="width:100%;border-collapse:collapse;font-size:15px">
                         <thead>
                             <tr style="background:#f1f5f9">
-                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:1px solid #e2e8f0">N° Compte</th>
-                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Intitulé</th>
-                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Libellé ligne</th>
-                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Débit</th>
-                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Crédit</th>
-                                <th style="padding:6px 10px;text-align:center;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Lettrage</th>
+                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">N° Compte</th>
+                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Intitulé</th>
+                                <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Libellé ligne</th>
+                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Débit</th>
+                                <th style="padding:6px 10px;text-align:right;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Crédit</th>
+                                <th style="padding:6px 10px;text-align:center;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;color:var(--text-muted);border-bottom:1px solid #e2e8f0">Lettrage</th>
                             </tr>
                         </thead>
                         <tbody>
