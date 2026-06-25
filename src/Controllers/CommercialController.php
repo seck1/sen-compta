@@ -583,8 +583,9 @@ class CommercialController {
         $this->requireCabinet();
         $db = getDB();
         $id = (int)($_GET['id'] ?? 0);
-        $stmt = $db->prepare("SELECT f.*, p.raison_sociale AS prospect_nom, p.adresse, p.ville AS prospect_ville, p.telephone, p.email, p.ninea AS prospect_ninea, p.contact_nom, p.contact_prenom, p.forme_juridique AS prospect_forme FROM factures_commercial f JOIN prospects p ON p.id=f.prospect_id WHERE f.id=?");
-        $stmt->execute([$id]); $facture = $stmt->fetch();
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
+        $stmt = $db->prepare("SELECT f.*, p.raison_sociale AS prospect_nom, p.adresse, p.ville AS prospect_ville, p.telephone, p.email, p.ninea AS prospect_ninea, p.contact_nom, p.contact_prenom, p.forme_juridique AS prospect_forme FROM factures_commercial f JOIN prospects p ON p.id=f.prospect_id WHERE f.id=? AND p.cabinet_id=?");
+        $stmt->execute([$id, $cabinetId]); $facture = $stmt->fetch();
         if (!$facture) { http_response_code(404); echo "Facture introuvable"; exit; }
 
         $lstmt = $db->prepare("SELECT * FROM factures_commercial_lignes WHERE facture_id=? ORDER BY ordre");
@@ -607,6 +608,12 @@ class CommercialController {
         $db = getDB();
         $factureId = (int)($_POST['facture_id'] ?? 0);
         $montant   = (float)($_POST['montant'] ?? 0);
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
+
+        // Securite : la facture doit appartenir au cabinet courant (anti-IDOR)
+        $chk = $db->prepare("SELECT COUNT(*) FROM factures_commercial f JOIN prospects p ON p.id=f.prospect_id WHERE f.id=? AND p.cabinet_id=?");
+        $chk->execute([$factureId, $cabinetId]);
+        if (!$chk->fetchColumn()) { http_response_code(403); echo "Accès refusé"; exit; }
 
         $db->prepare("INSERT INTO paiements_commercial (facture_id, date_paiement, montant, moyen, reference, notes) VALUES (?,?,?,?,?,?)")
            ->execute([$factureId, $_POST['date_paiement'] ?? date('Y-m-d'), $montant, $_POST['moyen'] ?? 'virement', trim($_POST['reference'] ?? ''), trim($_POST['notes'] ?? '')]);
@@ -628,8 +635,9 @@ class CommercialController {
         $this->requireCabinet();
         $db = getDB();
         $id = (int)($_GET['id'] ?? 0);
-        $stmt = $db->prepare("SELECT f.*, p.raison_sociale AS prospect_nom, p.adresse, p.ville AS prospect_ville, p.telephone, p.email, p.ninea AS prospect_ninea, p.contact_nom, p.contact_prenom, p.forme_juridique AS prospect_forme FROM factures_commercial f JOIN prospects p ON p.id=f.prospect_id WHERE f.id=?");
-        $stmt->execute([$id]); $facture = $stmt->fetch();
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
+        $stmt = $db->prepare("SELECT f.*, p.raison_sociale AS prospect_nom, p.adresse, p.ville AS prospect_ville, p.telephone, p.email, p.ninea AS prospect_ninea, p.contact_nom, p.contact_prenom, p.forme_juridique AS prospect_forme FROM factures_commercial f JOIN prospects p ON p.id=f.prospect_id WHERE f.id=? AND p.cabinet_id=?");
+        $stmt->execute([$id, $cabinetId]); $facture = $stmt->fetch();
         if (!$facture) { http_response_code(404); exit; }
         $lstmt = $db->prepare("SELECT * FROM factures_commercial_lignes WHERE facture_id=? ORDER BY ordre");
         $lstmt->execute([$id]); $lignes = $lstmt->fetchAll();
@@ -640,8 +648,9 @@ class CommercialController {
         $this->requireCabinet();
         $db = getDB();
         $id = (int)($_GET['id'] ?? 0);
-        $stmt = $db->prepare("SELECT d.*, p.raison_sociale AS prospect_nom, p.adresse, p.ville AS prospect_ville, p.telephone, p.email, p.ninea, p.contact_nom, p.contact_prenom, p.forme_juridique AS prospect_forme FROM devis d JOIN prospects p ON p.id=d.prospect_id WHERE d.id=?");
-        $stmt->execute([$id]); $devis = $stmt->fetch();
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
+        $stmt = $db->prepare("SELECT d.*, p.raison_sociale AS prospect_nom, p.adresse, p.ville AS prospect_ville, p.telephone, p.email, p.ninea, p.contact_nom, p.contact_prenom, p.forme_juridique AS prospect_forme FROM devis d JOIN prospects p ON p.id=d.prospect_id WHERE d.id=? AND p.cabinet_id=?");
+        $stmt->execute([$id, $cabinetId]); $devis = $stmt->fetch();
         if (!$devis) { http_response_code(404); exit; }
         $lstmt = $db->prepare("SELECT * FROM devis_lignes WHERE devis_id=? ORDER BY ordre");
         $lstmt->execute([$id]); $lignes = $lstmt->fetchAll();

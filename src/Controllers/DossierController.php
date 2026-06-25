@@ -1103,6 +1103,13 @@ class DossierController {
         $ecritureId = (int)($_POST['ecriture_id'] ?? 0);
         $action     = $_POST['action'] ?? 'valider'; // valider | invalider | valider_tout | rejeter | en_brouillon
         $entId      = (int)($_POST['entreprise_id'] ?? 0);
+        // Securite : l'utilisateur doit avoir acces a cette entreprise (anti-IDOR cross-cabinet)
+        if (!userHasAccess($entId)) {
+            http_response_code(403);
+            header('Content-Type: application/json');
+            echo json_encode(['ok'=>false,'error'=>'Accès refusé']);
+            return;
+        }
         $db = getDB();
 
         // Vérifications de droits
@@ -1135,8 +1142,8 @@ class DossierController {
             $stmt = $db->prepare("UPDATE ecritures SET statut='validee' WHERE entreprise_id=? AND statut='brouillon' AND exercice=?");
             $stmt->execute([$entId, $exercice]);
         } elseif ($action === 'invalider') {
-            $stmt = $db->prepare("UPDATE ecritures SET statut='brouillon' WHERE id=? AND statut='validee'");
-            $stmt->execute([$ecritureId]);
+            $stmt = $db->prepare("UPDATE ecritures SET statut='brouillon' WHERE id=? AND entreprise_id=? AND statut='validee'");
+            $stmt->execute([$ecritureId, $entId]);
         } elseif ($action === 'rejeter') {
             $motif = trim($_POST['motif'] ?? 'Rejeté');
             $stmt = $db->prepare("UPDATE ecritures SET statut='rejetee', motif_rejet=? WHERE id=? AND entreprise_id=? AND statut='brouillon'");
@@ -1155,8 +1162,8 @@ class DossierController {
             echo json_encode(['ok' => true, 'statut' => 'brouillon']);
             return;
         } else {
-            $stmt = $db->prepare("UPDATE ecritures SET statut='validee' WHERE id=? AND statut='brouillon'");
-            $stmt->execute([$ecritureId]);
+            $stmt = $db->prepare("UPDATE ecritures SET statut='validee' WHERE id=? AND entreprise_id=? AND statut='brouillon'");
+            $stmt->execute([$ecritureId, $entId]);
         }
 
         require_once APP_ROOT . '/src/Services/NotificationService.php';
@@ -1170,6 +1177,13 @@ class DossierController {
         requireAuth();
         $ecritureId = (int)($_POST['ecriture_id'] ?? 0);
         $entId      = (int)($_POST['entreprise_id'] ?? 0);
+        // Securite : acces a l'entreprise obligatoire (anti-IDOR cross-cabinet)
+        if (!userHasAccess($entId)) {
+            http_response_code(403);
+            header('Content-Type: application/json');
+            echo json_encode(['ok'=>false,'error'=>'Accès refusé']);
+            return;
+        }
         $db = getDB();
 
         $stmt = $db->prepare("SELECT e.statut, j.code as journal_code FROM ecritures e LEFT JOIN journaux j ON j.id=e.journal_id WHERE e.id=? AND e.entreprise_id=?");

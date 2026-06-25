@@ -91,11 +91,14 @@ class BackupController {
 
     // Appelé par le cron automatique (script CLI ou endpoint protégé)
     public function auto(): void {
-        // Vérifie token secret ou CLI
-        $token = $_GET['token'] ?? '';
-        $secret = defined('BACKUP_TOKEN') ? BACKUP_TOKEN : 'smc_backup_secret_2026';
-        if (PHP_SAPI !== 'cli' && $token !== $secret) {
-            http_response_code(403); echo "Accès refusé"; exit;
+        // Sécurité : en CLI on autorise ; sinon il FAUT un token non vide ET egal au secret.
+        // Un BACKUP_TOKEN vide/absent => endpoint desactive (jamais accessible via le web).
+        if (PHP_SAPI !== 'cli') {
+            $token  = $_GET['token'] ?? '';
+            $secret = defined('BACKUP_TOKEN') ? BACKUP_TOKEN : '';
+            if ($secret === '' || $token === '' || !hash_equals($secret, $token)) {
+                http_response_code(403); echo "Accès refusé"; exit;
+            }
         }
 
         $filename = 'backup_' . DB_NAME . '_' . date('Y-m-d_His') . '_auto.sql';

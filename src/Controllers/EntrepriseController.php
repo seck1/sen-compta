@@ -267,6 +267,8 @@ class EntrepriseController {
         requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/entreprises');
         $id = (int)($_POST['id'] ?? 0);
+        // Securite : l'entreprise doit appartenir au cabinet de l'admin (anti-IDOR)
+        if (!userHasAccess($id)) { http_response_code(403); echo "Accès refusé"; exit; }
 
         $db = getDB();
 
@@ -327,7 +329,11 @@ class EntrepriseController {
 
     public function delete(): void {
         requireAdmin();
-        $id = (int)($_GET['id'] ?? 0);
+        // Securite : POST + CSRF obligatoires (un GET serait vulnerable au CSRF), + acces cabinet
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/entreprises');
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $id = (int)($_POST['id'] ?? 0);
+        if (!userHasAccess($id)) { http_response_code(403); echo "Accès refusé"; exit; }
         $db = getDB();
         $db->prepare("UPDATE entreprises SET statut = 'archive' WHERE id = ?")->execute([$id]);
         redirect('/entreprises');

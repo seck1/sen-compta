@@ -78,8 +78,9 @@ class UserController {
         requireAdmin();
         $id   = (int)($_GET['id'] ?? 0);
         $db   = getDB();
-        $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->execute([$id]);
+        // Securite : seul un user du meme cabinet est consultable (anti-IDOR)
+        $stmt = $db->prepare("SELECT * FROM users WHERE id = ? AND cabinet_id = ?");
+        $stmt->execute([$id, (int)(auth()['cabinet_id'] ?? 0)]);
         $user = $stmt->fetch();
         if (!$user) redirect('/users');
 
@@ -141,10 +142,19 @@ class UserController {
         require_once APP_ROOT . '/views/layouts/main.php';
     }
 
+    // Securite : verifie que l'utilisateur cible appartient au cabinet de l'admin connecte.
+    private function assertSameCabinet(int $targetUserId): void {
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
+        $chk = getDB()->prepare("SELECT COUNT(*) FROM users WHERE id=? AND cabinet_id=?");
+        $chk->execute([$targetUserId, $cabinetId]);
+        if (!$chk->fetchColumn()) { http_response_code(403); echo "Accès refusé"; exit; }
+    }
+
     public function update(): void {
         requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/users');
         $id = (int)($_POST['id'] ?? 0);
+        $this->assertSameCabinet($id);
 
         $allowedRoles = ['admin', 'superviseur', 'collaborateur'];
         $role = $_POST['role'] ?? '';
@@ -182,6 +192,7 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/users');
         verifyCsrfToken($_POST['csrf_token'] ?? '');
         $id = (int)($_POST['id'] ?? 0);
+        $this->assertSameCabinet($id);
         getDB()->prepare("UPDATE users SET actif = 0 WHERE id = ?")->execute([$id]);
         redirect('/users');
     }
@@ -192,6 +203,9 @@ class UserController {
         $userId       = (int)($_POST['user_id'] ?? 0);
         $entrepriseId = (int)($_POST['entreprise_id'] ?? 0);
         $role         = $_POST['role'] ?? 'saisie';
+        // Securite : le user cible ET l'entreprise doivent etre du cabinet de l'admin
+        $this->assertSameCabinet($userId);
+        if (!userHasAccess($entrepriseId)) { http_response_code(403); echo "Accès refusé"; exit; }
 
         $db   = getDB();
         $stmt = $db->prepare("INSERT INTO user_entreprises (user_id, entreprise_id, role) VALUES (?,?,?) ON DUPLICATE KEY UPDATE role=?, actif=1");

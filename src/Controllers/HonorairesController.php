@@ -152,9 +152,10 @@ class HonorairesController {
         $id = (int)($_GET['id'] ?? 0);
         $db = getDB();
 
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
         $stmt = $db->prepare("SELECT h.*, e.raison_sociale, e.adresse, e.telephone, e.email, e.ninea, e.rccm
-                               FROM honoraires h JOIN entreprises e ON e.id = h.entreprise_id WHERE h.id = ?");
-        $stmt->execute([$id]);
+                               FROM honoraires h JOIN entreprises e ON e.id = h.entreprise_id WHERE h.id = ? AND e.cabinet_id = ?");
+        $stmt->execute([$id, $cabinetId]);
         $honoraire = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$honoraire) { http_response_code(404); echo "Facture introuvable"; exit; }
 
@@ -174,9 +175,10 @@ class HonorairesController {
         $id = (int)($_GET['id'] ?? 0);
         $db = getDB();
 
+        $cabinetId = (int)(auth()['cabinet_id'] ?? 0);
         $stmt = $db->prepare("SELECT h.*, e.raison_sociale, e.adresse, e.telephone, e.email, e.ninea, e.rccm, e.forme_juridique
-                               FROM honoraires h JOIN entreprises e ON e.id = h.entreprise_id WHERE h.id = ?");
-        $stmt->execute([$id]);
+                               FROM honoraires h JOIN entreprises e ON e.id = h.entreprise_id WHERE h.id = ? AND e.cabinet_id = ?");
+        $stmt->execute([$id, $cabinetId]);
         $honoraire = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$honoraire) { http_response_code(404); echo "Facture introuvable"; exit; }
 
