@@ -3,6 +3,17 @@ require_once APP_ROOT . '/config/app.php';
 
 class DossierController {
 
+    // Valide une date au format YYYY-MM-DD ; renvoie $fallback si invalide (anti-XSS sur les filtres GET).
+    private function sanitizeDate(?string $value, string $fallback): string {
+        if ($value && preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+            $d = date_create($value);
+            if ($d && $d->format('Y-m-d') === $value) {
+                return $value;
+            }
+        }
+        return $fallback;
+    }
+
     private function genererNumeroPiece(int $entrepriseId, int $journalId, string $date): string {
         $db   = getDB();
         $stmt = $db->prepare("SELECT code FROM journaux WHERE id = ?");
@@ -917,7 +928,7 @@ class DossierController {
         // Vérifier équilibre débit/crédit
         $totalD = array_sum(array_map('floatval', $debits));
         $totalC = array_sum(array_map('floatval', $credits));
-        if (round($totalD, 2) !== round($totalC, 2)) {
+        if (abs($totalD - $totalC) > 0.005) {
             $_SESSION['form_error'] = "L'écriture n'est pas équilibrée (Débit: " . number_format($totalD,0,',',' ') . " ≠ Crédit: " . number_format($totalC,0,',',' ') . ")";
             redirect('/dossier/nouvelle-ecriture?id=' . $entId);
         }
@@ -1040,7 +1051,7 @@ class DossierController {
 
         $totalD = array_sum(array_map('floatval', $debits));
         $totalC = array_sum(array_map('floatval', $credits));
-        if (round($totalD, 2) !== round($totalC, 2)) {
+        if (abs($totalD - $totalC) > 0.005) {
             $_SESSION['form_error'] = "L'écriture n'est pas équilibrée (Débit: " . number_format($totalD,0,',',' ') . " ≠ Crédit: " . number_format($totalC,0,',',' ') . ")";
             redirect('/dossier/modifier-ecriture?id=' . $ecritureId . '&ent=' . $entId);
         }
@@ -1273,13 +1284,26 @@ class DossierController {
             $lines = preg_split('/\r\n|\r|\n/', trim($content));
             if ($skip_header && count($lines) > 0) array_shift($lines);
 
-            // Vérifier/créer journal
+            // Vérifier/créer journal et récupérer son id
             $stmtJ = $db->prepare("SELECT id FROM journaux WHERE entreprise_id=? AND code=?");
             $stmtJ->execute([$id, $journal_code]);
-            if (!$stmtJ->fetch()) {
+            $journal_id = $stmtJ->fetchColumn();
+            if (!$journal_id) {
                 $db->prepare("INSERT INTO journaux (entreprise_id, code, libelle, type) VALUES (?,?,?,?)")
                    ->execute([$id, $journal_code, 'Import CSV', 'banque']);
+                $journal_id = (int)$db->lastInsertId();
             }
+            $journal_id = (int)$journal_id;
+
+            // Resoudre les numeros de compte (contrepartie + tiers) en compte_id
+            $resolveCompte = function(string $numero) use ($db, $id): ?int {
+                $s = $db->prepare("SELECT id FROM comptes WHERE entreprise_id=? AND numero=?");
+                $s->execute([$id, $numero]);
+                $cid = $s->fetchColumn();
+                return $cid ? (int)$cid : null;
+            };
+            $compte_contrepartie_id = $resolveCompte($compte_contrepartie);
+            $compte_tiers_id        = $resolveCompte($compte_tiers);
 
             $importees = 0;
             $erreurs   = [];
@@ -1323,20 +1347,27 @@ class DossierController {
                     continue;
                 }
 
-                // Créer écriture brouillon
+                // Comptes introuvables -> on ne cree pas une ecriture desequilibree
+                if ($compte_contrepartie_id === null || $compte_tiers_id === null) {
+                    $manquant = $compte_contrepartie_id === null ? $compte_contrepartie : $compte_tiers;
+                    $erreurs[] = "Ligne " . ($i+1) . " : compte $manquant introuvable dans le plan comptable";
+                    continue;
+                }
+
+                // Créer écriture brouillon (colonnes reelles : journal_id, user_id, compte_id)
                 $db->beginTransaction();
                 try {
-                    $db->prepare("INSERT INTO ecritures (entreprise_id, journal_code, date_ecriture, libelle, exercice, statut, source, created_by) VALUES (?,?,?,?,?,'brouillon','import',?)")
-                       ->execute([$id, $journal_code, $date, $libelle, $exercice, auth()['id']]);
+                    $db->prepare("INSERT INTO ecritures (entreprise_id, journal_id, date_ecriture, libelle, exercice, statut, source, user_id) VALUES (?,?,?,?,?,'brouillon','import',?)")
+                       ->execute([$id, $journal_id, $date, $libelle, $exercice, auth()['id']]);
                     $ecritureId = (int)$db->lastInsertId();
 
                     // Ligne 1 : compte de trésorerie (512/571)
-                    $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_num, libelle, debit, credit) VALUES (?,?,?,?,?)")
-                       ->execute([$ecritureId, $compte_contrepartie, $libelle, $debit, $credit]);
+                    $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)")
+                       ->execute([$ecritureId, $compte_contrepartie_id, $libelle, $debit, $credit]);
 
                     // Ligne 2 : contrepartie tiers
-                    $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_num, libelle, debit, credit) VALUES (?,?,?,?,?)")
-                       ->execute([$ecritureId, $compte_tiers, $libelle, $credit, $debit]);
+                    $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)")
+                       ->execute([$ecritureId, $compte_tiers_id, $libelle, $credit, $debit]);
 
                     $db->commit();
                     $importees++;
@@ -1347,7 +1378,7 @@ class DossierController {
             }
 
             require_once APP_ROOT . '/src/Services/NotificationService.php';
-            NotificationService::log(auth()['id'], 'import_csv', "Import CSV : $importees écritures créées pour " . $entreprise['nom']);
+            NotificationService::log(auth()['id'], 'import_csv', $id, 'ecritures', null, "Import CSV : $importees écritures créées pour " . $entreprise['raison_sociale']);
 
             $_SESSION['flash_success'] = "$importees écriture(s) importée(s) avec succès en brouillon.";
             if ($erreurs) $_SESSION['flash_warning'] = count($erreurs) . " ligne(s) ignorée(s).";
@@ -1857,11 +1888,12 @@ class DossierController {
         $entreprise = $this->getEntreprise($id);
         $db         = getDB();
 
-        $type       = $_GET['type'] ?? 'client';   // client | fournisseur
+        // Assainissement des entrees GET (anti-XSS) : type en liste blanche, dates validees
+        $type       = in_array($_GET['type'] ?? '', ['client','fournisseur'], true) ? $_GET['type'] : 'client';
         $tiers_id   = (int)($_GET['tiers_id'] ?? 0);
         $ex         = $entreprise['exercice_courant'];
-        $date_debut = $_GET['date_debut'] ?? "$ex-01-01";
-        $date_fin   = $_GET['date_fin']   ?? "$ex-12-31";
+        $date_debut = $this->sanitizeDate($_GET['date_debut'] ?? null, "$ex-01-01");
+        $date_fin   = $this->sanitizeDate($_GET['date_fin']   ?? null, "$ex-12-31");
 
         $compte_prefix = $type === 'client' ? '411' : '401';
 
@@ -1921,10 +1953,11 @@ class DossierController {
         $entreprise = $this->getEntreprise($id);
         $db         = getDB();
 
-        $type       = $_GET['type'] ?? 'client';
+        // Assainissement des entrees GET (anti-XSS)
+        $type       = in_array($_GET['type'] ?? '', ['client','fournisseur'], true) ? $_GET['type'] : 'client';
         $ex         = $entreprise['exercice_courant'];
-        $date_debut = $_GET['date_debut'] ?? "$ex-01-01";
-        $date_fin   = $_GET['date_fin']   ?? "$ex-12-31";
+        $date_debut = $this->sanitizeDate($_GET['date_debut'] ?? null, "$ex-01-01");
+        $date_fin   = $this->sanitizeDate($_GET['date_fin']   ?? null, "$ex-12-31");
 
         $compte_prefix = $type === 'client' ? '411' : '401';
 
@@ -2091,7 +2124,7 @@ class DossierController {
 
             $db->commit();
             require_once APP_ROOT . '/src/Services/NotificationService.php';
-            NotificationService::log(auth()['id'], 'report_an', "Report à nouveau exercice $exercice créé pour " . $entreprise['raison_sociale']);
+            NotificationService::log(auth()['id'], 'report_an', $id, 'ecritures', null, "Report à nouveau exercice $exercice créé pour " . $entreprise['raison_sociale']);
             $_SESSION['flash_success'] = "Report à nouveau exercice $exercice créé avec $nbLignes lignes.";
         } catch (\Exception $e) {
             $db->rollBack();

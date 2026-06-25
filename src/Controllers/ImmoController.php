@@ -123,8 +123,21 @@ class ImmoController {
             };
 
             $compte_charge = $immo['type'] === 'incorporelle' ? '6812' : '6811';
-            $compte_amort  = '28' . substr($immo['compte_numero'], 1);
+            // Compte d'amortissement SYSCOHADA : 28 + racine du compte d'immo (classe 2x -> 28x).
+            // Ex. 2441 (materiel) -> 2844 ; 2181 -> 2818 ; 213 -> 2813.
+            // On prend "28" + tout le numero d'immo SAUF le premier chiffre (le "2" de la classe).
+            $racine = preg_replace('/^2/', '', $immo['compte_numero']); // "2441" -> "441"
+            // racine SYSCOHADA = 2 chiffres significatifs apres le 2 (compte d'amort a 4 chiffres : 28xx)
+            $compte_amort  = '28' . substr($racine, 0, 2);              // "441" -> "2844"
             $libelle = "Dotation amort. $exercice : " . $immo['designation'];
+
+            // Resoudre les comptes AVANT d'inserer : si l'un manque, on n'ecrit rien (anti-desequilibre)
+            $cid_charge = $getCompte($compte_charge);
+            $cid_amort  = $getCompte($compte_amort);
+            if (!$cid_charge || !$cid_amort) {
+                error_log("Immo: compte amortissement manquant (charge=$compte_charge, amort=$compte_amort) — ecriture de dotation non generee pour immo " . $immo['id']);
+                return;
+            }
 
             $user_id = auth()['id'];
             $eStmt = $db->prepare("INSERT INTO ecritures
@@ -134,13 +147,8 @@ class ImmoController {
             $ecriture_id = (int)$db->lastInsertId();
 
             $lStmt = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)");
-
-            if ($c = $getCompte($compte_charge)) {
-                $lStmt->execute([$ecriture_id, $c, $libelle, $dotation, 0]);
-            }
-            if ($c = $getCompte($compte_amort)) {
-                $lStmt->execute([$ecriture_id, $c, $libelle, 0, $dotation]);
-            }
+            $lStmt->execute([$ecriture_id, $cid_charge, $libelle, $dotation, 0]);   // debit 6811/6812
+            $lStmt->execute([$ecriture_id, $cid_amort,  $libelle, 0, $dotation]);   // credit 28xx
         } catch (\Exception $e) {
             // Ne pas bloquer le calcul des amortissements
         }
