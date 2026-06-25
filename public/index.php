@@ -22,6 +22,14 @@ $routes = [
     'inscription'      => ['SaasController', 'inscriptionPage'],
     'inscription/post' => ['SaasController', 'inscriptionPost'],
 
+    // Portail client — espace dedie (session separee du cabinet)
+    'portail'          => ['PortailClientController', 'dashboard'],
+    'portail/login'    => ['PortailClientController', 'login'],
+    'portail/auth'     => ['PortailClientController', 'authentifier'],
+    'portail/logout'   => ['PortailClientController', 'logout'],
+    'portail/deposer'  => ['PortailClientController', 'deposer'],
+    'portail/etat'     => ['PortailClientController', 'etat'],
+
     // SaaS — Espace cabinet
     'mon-compte'            => ['SaasController', 'monCompte'],
     'mon-compte/upgrade'    => ['SaasController', 'demandeUpgrade'],
