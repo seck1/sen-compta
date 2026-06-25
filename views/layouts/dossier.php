@@ -132,7 +132,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .sidebar-nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
 .nav-section { margin-bottom: 24px; }
 .nav-section-label {
-    font-size: 9pt;
+    font-size: 8pt;
     text-transform: uppercase; letter-spacing: 2px;
     padding: 4px 12px; margin-bottom: 6px; font-weight: 700;
     display: flex; align-items: center; gap: 7px;
@@ -160,7 +160,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
     display: flex; align-items: center; gap: 12px;
     padding: 13px 16px; border-radius: 10px;
     color: rgba(255,255,255,0.95);
-    text-decoration: none; font-size: 12pt; font-weight: 500;
+    text-decoration: none; font-size: 11pt; font-weight: 500;
     transition: all 0.2s; margin-bottom: 3px; position: relative;
 }
 .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
