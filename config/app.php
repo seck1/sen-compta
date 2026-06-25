@@ -54,8 +54,9 @@ define('CABINET_TEL',      getenv('CABINET_TEL')      ?: '');
 define('CABINET_EMAIL',    getenv('CABINET_EMAIL')    ?: '');
 
 // Avertissement si NINEA non renseigné hors localhost (CGI Art. 358 bis + Loi 2004-06)
+// error_log au lieu de trigger_error : ne JAMAIS produire d'output ici (casse les en-tetes HTTP).
 if (!CABINET_NINEA && !in_array($_SERVER['HTTP_HOST'] ?? '', ['localhost', '127.0.0.1', ''])) {
-    trigger_error('CABINET_NINEA non renseigné — factures non conformes DGID (CGI Art. 358 bis)', E_USER_WARNING);
+    error_log('CABINET_NINEA non renseigné — factures non conformes DGID (CGI Art. 358 bis)');
 }
 
 // Détection automatique de l'URL selon l'environnement
@@ -78,7 +79,7 @@ define('SESSION_LIFETIME', (int)(getenv('SESSION_LIFETIME') ?: 7200));
 if (!defined('BACKUP_TOKEN')) {
     $backupToken = getenv('BACKUP_TOKEN');
     if (!$backupToken) {
-        trigger_error('BACKUP_TOKEN non défini dans .env — endpoint backup désactivé', E_USER_WARNING);
+        error_log('BACKUP_TOKEN non défini dans .env — endpoint backup désactivé');
         $backupToken = '';
     }
     define('BACKUP_TOKEN', $backupToken);
