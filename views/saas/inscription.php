@@ -79,6 +79,10 @@ input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 
   .page{grid-template-columns:1fr;}
   .left{display:none;}
 }
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr;}
+}
+html,body{overflow-x:hidden;max-width:100%;}
 </style>
 </head>
 <body>

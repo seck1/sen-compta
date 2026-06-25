@@ -352,21 +352,22 @@ html, body {
     .hero-tagline { font-size: 28px; }
 }
 @media (max-width: 768px) {
-    .page { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; overflow: visible; }
+    .page { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; overflow-x: hidden; }
     .sep  { display: none; }
-    .left { height: auto; min-height: auto; padding: 32px 24px; overflow: visible; }
-    .right { height: auto; overflow: visible; padding: 32px 24px 40px; border-left: none; border-top: 1px solid rgba(255,255,255,0.08); justify-content: flex-start; }
+    .left { height: auto; min-height: auto; padding: 32px 24px; overflow-x: hidden; }
+    .right { height: auto; overflow-x: hidden; padding: 32px 24px 40px; border-left: none; border-top: 1px solid rgba(255,255,255,0.08); justify-content: flex-start; }
     .hero-tagline { font-size: 26px; }
     .modules-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .form-title { font-size: 26px; }
     .form-box { max-width: 100%; }
-    body { overflow-y: auto !important; height: auto !important; }
+    body { overflow-y: auto !important; height: auto !important; overflow-x: hidden; }
 }
 @media (max-width: 480px) {
     .left { padding: 24px 16px; }
     .right { padding: 24px 16px 32px; }
     .hero-tagline { font-size: 22px; }
-    .modules-grid { grid-template-columns: 1fr 1fr; }
+    /* 1 seule colonne : les cartes a 2 colonnes debordaient sur petit mobile */
+    .modules-grid { grid-template-columns: 1fr; }
     .form-title { font-size: 22px; }
     .brand-mark img { width: 48px; height: 48px; }
 }
