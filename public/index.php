@@ -103,6 +103,12 @@ $routes = [
     'dossier/relances/email'       => ['RelanceController', 'envoyerEmail'],
     'dossier/relances/reglee'      => ['RelanceController', 'marquerReglee'],
 
+    // Portail client (cote cabinet : gestion des acces)
+    'dossier/portail'              => ['PortailAdminController', 'index'],
+    'dossier/portail/creer'        => ['PortailAdminController', 'creer'],
+    'dossier/portail/update'       => ['PortailAdminController', 'update'],
+    'dossier/portail/depot'        => ['PortailAdminController', 'traiterDepot'],
+
     // Budget vs Realise
     'dossier/budget'               => ['BudgetController', 'index'],
     'dossier/budget/store'         => ['BudgetController', 'store'],
