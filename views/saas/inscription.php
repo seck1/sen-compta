@@ -4,154 +4,215 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SenCompta — Créer votre espace cabinet</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
 :root{
-  --navy:#1e3a5f;--gold:#c9a96e;--gold-l:#e2c99a;
-  --green:#059669;--red:#ef4444;--gray:#6b7280;
-  --bg:#f9fafb;--white:#fff;--border:#e5e7eb;
+    --green:      #1f6e4e;
+    --green-dark: #18583f;
+    --green-light:#2a8a63;
+    --navy:       #1e3a5f;
+    --gold:       #b8923f;
+    --gold-light: #d9b876;
+    --ink:        #18241f;
+    --muted:      #4a554f;
+    --line:       #d9dcdb;
+    --bg:         #eef1f0;
+    --white:      #ffffff;
+    --red:        #c0392b;
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;}
 
-/* ── HEADER ── */
-.header{background:var(--navy);padding:16px 40px;display:flex;align-items:center;gap:14px;}
-.logo-badge{width:40px;height:40px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;}
-.logo-badge span{font-size:14px;font-weight:700;color:var(--gold);}
-.logo-name{font-size:20px;font-weight:700;color:#fff;}
-.header-tagline{margin-left:auto;font-size:12px;color:rgba(255,255,255,0.4);}
-
-/* ── LAYOUT ── */
-.page{display:grid;grid-template-columns:1fr 480px;min-height:calc(100vh - 72px);}
-
-/* ── LEFT ── */
-.left{background:var(--navy);padding:60px 50px;display:flex;flex-direction:column;justify-content:center;gap:40px;}
-.left h1{font-size:36px;font-weight:800;color:#fff;line-height:1.2;}
-.left h1 em{color:var(--gold);font-style:normal;}
-.left p{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;}
-.plans-preview{display:flex;flex-direction:column;gap:12px;}
-.plan-row{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
-.plan-row.featured{border-color:var(--gold);background:rgba(201,162,39,0.08);}
-.plan-name{font-size:14px;font-weight:600;color:#fff;}
-.plan-detail{font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;}
-.plan-price{font-size:16px;font-weight:700;color:var(--gold);text-align:right;}
-.plan-price small{display:block;font-size:10px;color:rgba(255,255,255,0.3);font-weight:400;}
-.badge-essai{background:var(--green);color:#fff;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.5px;}
-
-/* ── RIGHT (formulaire) ── */
-.right{background:var(--white);padding:50px 40px;display:flex;flex-direction:column;justify-content:center;gap:28px;overflow-y:auto;}
-.form-title{font-size:22px;font-weight:700;color:var(--navy);}
-.form-title span{color:var(--gold);}
-.form-sub{font-size:13px;color:var(--gray);}
-
-.alert{padding:12px 16px;border-radius:10px;font-size:13px;font-weight:500;}
-.alert-error{background:#fef2f2;border:1px solid #fecaca;color:var(--red);}
-.alert-success{background:#f0fdf4;border:1px solid #bbf7d0;color:var(--green);}
-
-.form-group{display:flex;flex-direction:column;gap:6px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-label{font-size:12px;font-weight:600;color:var(--navy);letter-spacing:.3px;text-transform:uppercase;}
-input,select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;color:var(--navy);transition:border .2s;}
-input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,0.1);}
-
-/* Sélecteur de plan */
-.plan-selector{display:flex;flex-direction:column;gap:8px;}
-.plan-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;}
-.plan-option:hover{border-color:var(--gold);}
-.plan-option input[type=radio]{display:none;}
-.plan-option.selected{border-color:var(--gold);background:rgba(201,162,39,0.04);}
-.plan-option-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .2s;}
-.plan-option.selected .plan-option-dot{border-color:var(--gold);background:var(--gold);}
-.plan-option-info{flex:1;}
-.plan-option-name{font-size:13px;font-weight:600;color:var(--navy);}
-.plan-option-desc{font-size:11px;color:var(--gray);margin-top:1px;}
-.plan-option-price{font-size:13px;font-weight:700;color:var(--gold);}
-
-.btn-submit{background:var(--navy);color:#fff;border:none;padding:14px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;width:100%;font-family:'Inter',sans-serif;transition:background .2s;}
-.btn-submit:hover{background:#162840;}
-
-.form-footer{text-align:center;font-size:13px;color:var(--gray);}
-.form-footer a{color:var(--gold);text-decoration:none;font-weight:500;}
-
-.divider{height:1px;background:var(--border);}
-
-@media(max-width:900px){
-  .page{grid-template-columns:1fr;}
-  .left{display:none;}
+html,body{
+    min-height:100%;
+    font-family:'DM Sans',-apple-system,sans-serif;
+    color:var(--ink);
+    background:
+        radial-gradient(1200px 600px at 80% -5%, rgba(31,110,78,0.06), transparent 60%),
+        radial-gradient(900px 500px at 0% 100%, rgba(30,58,95,0.05), transparent 55%),
+        var(--bg);
+    overflow-x:hidden; max-width:100%;
+    -webkit-font-smoothing:antialiased;
 }
-@media(max-width:600px){
-  .form-row{grid-template-columns:1fr;}
+
+.shell{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1fr 480px;
+    align-items:start;
+    gap:48px;
+    max-width:1340px; margin:0 auto;
+    padding:48px 32px 40px;
 }
-html,body{overflow-x:hidden;max-width:100%;}
+.col-left{ position:sticky; top:48px; }
+
+/* ============ COLONNE GAUCHE : presentation + plans ============ */
+.brand{ display:flex; align-items:center; gap:14px; margin-bottom:34px; }
+.brand img{ width:52px; height:52px; object-fit:contain; padding:7px; border-radius:14px; background:linear-gradient(160deg,#f2f7f4,#e9f1ec); box-shadow:inset 0 0 0 1px rgba(31,110,78,0.12); }
+.brand .name{ font-size:20px; font-weight:700; color:var(--navy); letter-spacing:-0.2px; }
+.brand .sub{ font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-top:3px; font-weight:700; }
+
+.intro h1{ font-size:clamp(30px,3.4vw,42px); font-weight:800; line-height:1.12; color:var(--ink); letter-spacing:-0.8px; }
+.intro h1 em{ color:var(--green); font-style:normal; }
+.intro p{ margin-top:16px; font-size:16px; line-height:1.7; color:var(--muted); max-width:560px; }
+
+.plans-head{ display:flex; align-items:center; justify-content:space-between; margin:34px 0 16px; }
+.plans-head .lbl{ font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--navy); }
+.badge-essai{ background:var(--green); color:#fff; font-size:11px; font-weight:700; padding:4px 11px; border-radius:20px; letter-spacing:.4px; }
+
+.plans-preview{ display:flex; flex-direction:column; gap:12px; }
+.plan-row{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; transition:transform .2s, box-shadow .2s, border-color .2s; }
+.plan-row:hover{ transform:translateY(-2px); box-shadow:0 10px 22px -14px rgba(24,36,31,0.2); }
+.plan-row.featured{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold); }
+.plan-name{ font-size:15px; font-weight:700; color:var(--ink); }
+.plan-detail{ font-size:12.5px; color:var(--muted); margin-top:3px; }
+.plan-price{ font-size:16px; font-weight:800; color:var(--green); text-align:right; }
+.plan-price small{ display:block; font-size:10px; color:var(--muted); font-weight:500; }
+
+/* ============ COLONNE DROITE : carte formulaire ============ */
+.card{
+    position:relative; overflow:hidden;
+    background:var(--white); border:1px solid var(--line); border-radius:22px;
+    padding:38px 38px 32px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 30px 60px -28px rgba(24,36,31,0.42);
+    animation:rise .5s ease both;
+}
+.card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold)); }
+
+.form-title{ font-size:26px; font-weight:800; color:var(--ink); letter-spacing:-0.5px; }
+.form-title span{ color:var(--green); }
+.form-sub{ font-size:14px; color:var(--muted); margin-top:8px; margin-bottom:24px; }
+
+.alert{ padding:12px 15px; border-radius:10px; font-size:14px; font-weight:500; margin-bottom:18px; }
+.alert-error{ background:#fdecec; border:1px solid #f5c2c2; color:var(--red); }
+.alert-success{ background:#eaf6ef; border:1px solid #b7e0c7; color:var(--green-dark); }
+
+.form-group{ display:flex; flex-direction:column; gap:7px; margin-bottom:14px; }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+label{ font-size:12px; font-weight:700; color:var(--ink); letter-spacing:.3px; text-transform:uppercase; }
+input,select{
+    width:100%; padding:13px 15px;
+    border:1.5px solid var(--line); border-radius:10px;
+    font-size:14.5px; font-family:inherit; color:var(--ink);
+    background:var(--white); transition:border .15s, box-shadow .15s;
+}
+input::placeholder{ color:#6b7570; }
+input:focus,select:focus{ outline:none; border-color:var(--green); box-shadow:0 0 0 3px rgba(31,110,78,0.16); }
+
+.divider{ height:1px; background:var(--line); margin:18px 0; }
+
+/* Selecteur de plan */
+.plan-selector{ display:flex; flex-direction:column; gap:9px; }
+.plan-option{ display:flex; align-items:center; gap:12px; padding:13px 16px; border:1.5px solid var(--line); border-radius:12px; cursor:pointer; transition:all .15s; }
+.plan-option:hover{ border-color:var(--green); }
+.plan-option input[type=radio]{ display:none; }
+.plan-option.selected{ border-color:var(--green); background:rgba(31,110,78,0.04); }
+.plan-option-dot{ width:18px; height:18px; border-radius:50%; border:2px solid var(--line); flex-shrink:0; transition:all .15s; }
+.plan-option.selected .plan-option-dot{ border-color:var(--green); background:var(--green); box-shadow:inset 0 0 0 3px #fff; }
+.plan-option-info{ flex:1; }
+.plan-option-name{ font-size:13.5px; font-weight:700; color:var(--ink); }
+.plan-option-desc{ font-size:11.5px; color:var(--muted); margin-top:1px; }
+.plan-option-price{ font-size:13px; font-weight:800; color:var(--green); }
+
+.btn-submit{
+    width:100%; padding:15px; margin-top:6px;
+    font-family:inherit; font-size:16px; font-weight:700; color:#fff;
+    background:linear-gradient(180deg,var(--green-light),var(--green));
+    border:none; border-radius:999px; cursor:pointer;
+    box-shadow:0 10px 24px -10px rgba(31,110,78,0.55);
+    transition:box-shadow .18s, filter .15s, transform .15s;
+}
+.btn-submit:hover{ box-shadow:0 14px 28px -10px rgba(31,110,78,0.65); filter:brightness(1.05); }
+.btn-submit:active{ transform:translateY(1px); }
+
+.form-footer{ text-align:center; font-size:13.5px; color:var(--muted); margin-top:18px; }
+.form-footer a{ color:var(--green); text-decoration:none; font-weight:700; }
+.form-footer a:hover{ text-decoration:underline; }
+
+a:focus-visible, button:focus-visible, input:focus-visible{ outline:3px solid rgba(31,110,78,0.45); outline-offset:2px; }
+
+@keyframes rise{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+
+@media(max-width:980px){
+    .shell{ grid-template-columns:1fr; max-width:560px; gap:36px; }
+    .col-left{ position:static; }
+}
+@media(max-width:520px){
+    .shell{ padding:28px 14px; }
+    .card{ padding:30px 20px 26px; border-radius:16px; }
+    .form-row{ grid-template-columns:1fr; }
+    .intro h1{ font-size:28px; }
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="logo-badge"><span>SC</span></div>
-  <div class="logo-name">SenCompta</div>
-  <div class="header-tagline">Le SaaS comptable du Sénégal</div>
-</div>
+<div class="shell">
 
-<div class="page">
+  <!-- ── Colonne gauche : presentation + plans ── -->
+  <div class="col-left">
 
-  <!-- ── Gauche ── -->
-  <div class="left">
-    <div>
-      <h1>Gérez tous vos dossiers<br>depuis <em>une seule plateforme</em></h1>
-      <p>SenCompta est le SaaS comptable conçu pour les cabinets sénégalais. Comptabilité, paie, facturation et fiscalité — tout en un.</p>
+    <div class="brand">
+      <img src="<?= APP_URL ?>/logo/sencompta-icon.svg" alt="SenCompta">
+      <div>
+        <div class="name">SenCompta</div>
+        <div class="sub">Le SaaS Comptable du Sénégal</div>
+      </div>
     </div>
 
-    <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-        <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;">Nos formules</span>
-        <span class="badge-essai">14 jours gratuits</span>
-      </div>
-      <div class="plans-preview">
-        <?php foreach ($plans as $p): ?>
-        <div class="plan-row <?= $p['code'] === 'pro' ? 'featured' : '' ?>">
-          <div>
-            <div class="plan-name"><?= e($p['nom']) ?></div>
-            <div class="plan-detail">
-              <?= $p['max_entreprises'] == -1 ? 'Illimité' : $p['max_entreprises'] ?> entreprise<?= $p['max_entreprises'] > 1 || $p['max_entreprises'] == -1 ? 's' : '' ?> ·
-              <?= $p['max_users'] == -1 ? 'Illimité' : $p['max_users'] ?> utilisateur<?= $p['max_users'] > 1 || $p['max_users'] == -1 ? 's' : '' ?>
-            </div>
-          </div>
-          <div class="plan-price">
-            <?php if ($p['prix_mois'] > 0): ?>
-              <?= number_format($p['prix_mois'], 0, ',', ' ') ?> FCFA
-              <small>/mois</small>
-            <?php else: ?>
-              Sur devis
-            <?php endif; ?>
+    <div class="intro">
+      <h1>Gérez tous vos dossiers depuis <em>une seule plateforme</em></h1>
+      <p>SenCompta est le SaaS comptable conçu pour les cabinets sénégalais. Comptabilité SYSCOHADA, paie, facturation et fiscalité — tout en un, conforme OHADA.</p>
+    </div>
+
+    <div class="plans-head">
+      <span class="lbl">Nos formules</span>
+      <span class="badge-essai">14 jours gratuits</span>
+    </div>
+    <div class="plans-preview">
+      <?php foreach ($plans as $p): ?>
+      <div class="plan-row <?= $p['code'] === 'pro' ? 'featured' : '' ?>">
+        <div>
+          <div class="plan-name"><?= e($p['nom']) ?></div>
+          <div class="plan-detail">
+            <?= $p['max_entreprises'] == -1 ? 'Illimité' : $p['max_entreprises'] ?> entreprise<?= $p['max_entreprises'] > 1 || $p['max_entreprises'] == -1 ? 's' : '' ?> ·
+            <?= $p['max_users'] == -1 ? 'Illimité' : $p['max_users'] ?> utilisateur<?= $p['max_users'] > 1 || $p['max_users'] == -1 ? 's' : '' ?>
           </div>
         </div>
-        <?php endforeach; ?>
+        <div class="plan-price">
+          <?php if ($p['prix_mois'] > 0): ?>
+            <?= number_format($p['prix_mois'], 0, ',', ' ') ?> FCFA
+            <small>/mois</small>
+          <?php else: ?>
+            Sur devis
+          <?php endif; ?>
+        </div>
       </div>
+      <?php endforeach; ?>
     </div>
   </div>
 
-  <!-- ── Droite (formulaire) ── -->
-  <div class="right">
-    <div>
+  <!-- ── Colonne droite : formulaire ── -->
+  <div class="col-right">
+    <div class="card">
+
       <div class="form-title">Créer votre espace <span>cabinet</span></div>
-      <div class="form-sub">Essai gratuit 14 jours · Aucune carte requise</div>
-    </div>
+      <div class="form-sub">Essai gratuit 14 jours · Aucune carte bancaire requise</div>
 
-    <?php if ($error): ?>
-      <div class="alert alert-error"><?= e($error) ?></div>
-    <?php endif; ?>
-    <?php if ($success): ?>
-      <div class="alert alert-success"><?= e($success) ?></div>
-    <?php endif; ?>
+      <?php if ($error): ?>
+        <div class="alert alert-error" role="alert"><?= e($error) ?></div>
+      <?php endif; ?>
+      <?php if ($success): ?>
+        <div class="alert alert-success" role="alert"><?= e($success) ?></div>
+      <?php endif; ?>
 
-    <form method="POST" action="<?= APP_URL ?>/inscription/post">
-      <?= csrfField() ?>
+      <form method="POST" action="<?= APP_URL ?>/inscription/post">
+        <?= csrfField() ?>
 
-      <div style="display:flex;flex-direction:column;gap:16px;">
         <div class="form-group">
           <label>Nom du cabinet *</label>
-          <input type="text" name="nom_cabinet" placeholder="Ex: Cabinet Diallo & Associés" required>
+          <input type="text" name="nom_cabinet" placeholder="Ex: Cabinet Diallo & Associés" required autofocus>
         </div>
 
         <div class="form-row">
@@ -167,17 +228,17 @@ html,body{overflow-x:hidden;max-width:100%;}
 
         <div class="form-group">
           <label>Email professionnel *</label>
-          <input type="email" name="email" placeholder="contact@votre-cabinet.sn" required>
+          <input type="email" name="email" placeholder="contact@votre-cabinet.sn" required autocomplete="email">
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label>Mot de passe *</label>
-            <input type="password" name="password" placeholder="Min. 8 caractères" required>
+            <input type="password" name="password" placeholder="Min. 8 caractères" required autocomplete="new-password">
           </div>
           <div class="form-group">
             <label>Confirmer *</label>
-            <input type="password" name="password2" placeholder="Répéter" required>
+            <input type="password" name="password2" placeholder="Répéter" required autocomplete="new-password">
           </div>
         </div>
 
@@ -207,8 +268,9 @@ html,body{overflow-x:hidden;max-width:100%;}
         <div class="form-footer">
           Déjà un compte ? <a href="<?= APP_URL ?>/login">Se connecter</a>
         </div>
-      </div>
-    </form>
+      </form>
+
+    </div>
   </div>
 
 </div>
