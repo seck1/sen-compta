@@ -170,7 +170,7 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
     <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;background:<?= $bgColor ?>;border-radius:10px;border-left:4px solid <?= $borderColor ?>">
         <div style="text-align:center;min-width:56px">
             <div style="font-size:18px;font-weight:700;font-family:'Cormorant Garamond',serif;color:<?= $isPast ? '#9ca3af' : 'var(--navy-dark)' ?>"><?= date('d', strtotime($ech['date'])) ?></div>
-            <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)"><?= strftime('%b %Y', strtotime($ech['date'])) ?></div>
+            <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)"><?= moisFr(strtotime($ech['date'])) ?></div>
         </div>
         <div style="flex:1">
             <div style="font-size:16px;font-weight:500;color:<?= $isPast ? 'var(--text-muted)' : 'var(--text)' ?>"><?= e($ech['libelle']) ?></div>

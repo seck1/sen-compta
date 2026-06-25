@@ -11,7 +11,12 @@ $routes = [
     'login'        => ['AuthController', 'loginPage'],
     'login/post'   => ['AuthController', 'login'],
     'login/verify' => ['AuthController', 'verify2fa'],
+    'login/2fa'    => ['AuthController', 'verify2fa'],   // alias (lien vue)
     'logout'       => ['AuthController', 'logout'],
+
+    // Mot de passe oublie
+    'mot-de-passe-oublie'      => ['AuthController', 'forgotPage'],
+    'mot-de-passe-oublie/post' => ['AuthController', 'forgotPost'],
 
     // SaaS — Inscription
     'inscription'      => ['SaasController', 'inscriptionPage'],
@@ -55,6 +60,10 @@ $routes = [
     'profil/2fa'      => ['ProfilController', 'setup2fa'],
     'profil/2fa/confirm'  => ['ProfilController', 'confirm2fa'],
     'profil/2fa/disable'  => ['ProfilController', 'disable2fa'],
+    // Alias kebab-case utilises par les vues profil
+    'profil/setup-2fa'    => ['ProfilController', 'setup2fa'],
+    'profil/confirm-2fa'  => ['ProfilController', 'confirm2fa'],
+    'profil/disable-2fa'  => ['ProfilController', 'disable2fa'],
 
     // Tableau de bord dossier
     'dossier'           => ['DossierController', 'index'],
@@ -87,6 +96,16 @@ $routes = [
     'dossier/grand-livre'        => ['DossierController', 'grandLivre'],
     'dossier/livre-auxiliaire'   => ['DossierController', 'livreAuxiliaire'],
     'dossier/balance-auxiliaire' => ['DossierController', 'balanceAuxiliaire'],
+
+    // Relances clients
+    'dossier/relances'             => ['RelanceController', 'index'],
+    'dossier/relances/enregistrer' => ['RelanceController', 'enregistrer'],
+    'dossier/relances/email'       => ['RelanceController', 'envoyerEmail'],
+    'dossier/relances/reglee'      => ['RelanceController', 'marquerReglee'],
+
+    // Budget vs Realise
+    'dossier/budget'               => ['BudgetController', 'index'],
+    'dossier/budget/store'         => ['BudgetController', 'store'],
 
     // Plan comptable
     'dossier/plan-comptable'       => ['DossierController', 'planComptable'],

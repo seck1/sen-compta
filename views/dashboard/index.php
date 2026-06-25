@@ -38,7 +38,7 @@
     <div style="padding:14px 18px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.18);border-radius:12px">
         <div style="font-size:13px;font-weight:600;color:#7f1d1d;margin-bottom:8px">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-            Bulletins de paie en retard — <?= date('F Y') ?>
+            Bulletins de paie en retard — <?= moisFr() ?>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
         <?php foreach ($bulletinsRetard as $br): ?>
@@ -66,7 +66,7 @@
     <?php if (!empty($tva_retard)): ?>
     <div style="padding:14px 18px;background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.18);border-radius:12px">
         <div style="font-size:13px;font-weight:600;color:#7f1d1d;margin-bottom:8px">
-            ⚠️ Déclaration TVA manquante — <?= date('F', mktime(0,0,0,$mois_tva,1,$annee_tva)) ?> <?= $annee_tva ?>
+            ⚠️ Déclaration TVA manquante — <?= moisFr(null, (int)$mois_tva, (int)$annee_tva) ?>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
         <?php foreach ($tva_retard as $t): ?>
@@ -120,7 +120,7 @@
         </div>
         <div class="kpi-label">Honoraires du mois</div>
         <div class="kpi-value" style="font-size:20px"><?= number_format($honMois, 0, ',', ' ') ?></div>
-        <div class="kpi-trend">FCFA · <?= date('F Y') ?></div>
+        <div class="kpi-trend">FCFA · <?= moisFr() ?></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-icon orange">

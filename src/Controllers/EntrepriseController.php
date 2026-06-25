@@ -130,13 +130,29 @@ class EntrepriseController {
             redirect('/entreprises/create');
         }
 
+        $db        = getDB();
+        $user      = auth();
+        $cabinetId = $user['cabinet_id'] ?? null;
+
+        // Quota SaaS : verifier max_entreprises du plan du cabinet (-1 = illimite)
+        if ($cabinetId) {
+            $q = $db->prepare("SELECT p.max_entreprises FROM cabinets c JOIN plans p ON p.id=c.plan_id WHERE c.id=?");
+            $q->execute([$cabinetId]);
+            $maxEnt = $q->fetchColumn();
+            if ($maxEnt !== false && (int)$maxEnt >= 0) {
+                $cnt = $db->prepare("SELECT COUNT(*) FROM entreprises WHERE cabinet_id=? AND statut != 'archive'");
+                $cnt->execute([$cabinetId]);
+                if ((int)$cnt->fetchColumn() >= (int)$maxEnt) {
+                    $_SESSION['form_error'] = "Votre formule est limitée à {$maxEnt} dossier(s). Passez à une formule supérieure pour en créer davantage.";
+                    redirect('/entreprises/create');
+                }
+            }
+        }
+
         // Upload logo (validé : allowlist ext+MIME, taille, nom aléatoire)
         $logo = $this->handleLogoUpload($_FILES['logo'] ?? []);
 
         try {
-            $db        = getDB();
-            $user      = auth();
-            $cabinetId = $user['cabinet_id'] ?? null;
             $stmt = $db->prepare("INSERT INTO entreprises (cabinet_id, code_dossier, raison_sociale, forme_juridique, ninea, rccm, secteur_activite, adresse, telephone, email, exercice_courant, regime_fiscal, couleur, ca_annuel_estime, secteur_activite_detail, numero_contribuable, numero_registre_commerce, regime_tva, date_debut_exoneration, date_fin_exoneration, logo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $stmt->execute([$cabinetId, ...array_values($data), $logo]);
             $new_id = (int)$db->lastInsertId();

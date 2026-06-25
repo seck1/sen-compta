@@ -8,7 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --navy:#0d1b2a;--gold:#c9a227;--gold-l:#e8c96a;
+  --navy:#1e3a5f;--gold:#c9a96e;--gold-l:#e2c99a;
   --green:#059669;--red:#ef4444;--gray:#6b7280;
   --bg:#f9fafb;--white:#fff;--border:#e5e7eb;
 }

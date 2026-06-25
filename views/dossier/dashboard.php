@@ -37,14 +37,14 @@
 <?php if ($alerteBulletins): ?>
 <div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;font-size:16px;color:#92400e">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:#f59e0b;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-    <strong>Alerte paie :</strong> <?= $bulletinsMois ?>/<?= $nbEmployes ?> bulletins générés pour <?= date('F Y') ?>.
+    <strong>Alerte paie :</strong> <?= $bulletinsMois ?>/<?= $nbEmployes ?> bulletins générés pour <?= moisFr() ?>.
     <a href="<?= APP_URL ?>/dossier/rh/bulletins?id=<?= $entreprise['id'] ?>" style="color:#d97706;font-weight:600;text-decoration:underline">Générer les bulletins</a>
 </div>
 <?php endif; ?>
 <?php if ($alerteTVA): ?>
 <div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;font-size:16px;color:#7f1d1d">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:#ef4444;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-    <strong>Alerte TVA :</strong> Aucune déclaration TVA pour <?= date('F Y') ?>.
+    <strong>Alerte TVA :</strong> Aucune déclaration TVA pour <?= moisFr() ?>.
     <a href="<?= APP_URL ?>/dossier/tva?id=<?= $entreprise['id'] ?>" style="color:#dc2626;font-weight:600;text-decoration:underline">Déclarer la TVA</a>
 </div>
 <?php endif; ?>
@@ -91,7 +91,7 @@
         <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg></div>
         <div class="kpi-label">Bulletins du mois</div>
         <div class="kpi-value"><?= $bulletinsMois ?></div>
-        <div class="kpi-sub">sur <?= $nbEmployes ?> employé(s) · <?= date('F Y') ?></div>
+        <div class="kpi-sub">sur <?= $nbEmployes ?> employé(s) · <?= moisFr() ?></div>
     </div>
 </div>
 

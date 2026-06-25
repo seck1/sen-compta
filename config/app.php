@@ -270,3 +270,16 @@ function verifyCsrfToken(string $token): void {
 function csrfField(): string {
     return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars(generateCsrfToken(), ENT_QUOTES) . '">';
 }
+
+/**
+ * Formate une date en francais : moisFr() = mois courant + annee,
+ * moisFr($timestamp) ou moisFr(null, $mois, $annee). Remplace date('F Y') (anglais).
+ */
+function moisFr(?int $timestamp = null, ?int $mois = null, ?int $annee = null): string {
+    $noms = [1=>'Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    if ($mois !== null && $annee !== null) {
+        return ($noms[$mois] ?? '') . ' ' . $annee;
+    }
+    $ts = $timestamp ?? time();
+    return ($noms[(int)date('n', $ts)] ?? '') . ' ' . date('Y', $ts);
+}
