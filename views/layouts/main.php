@@ -784,6 +784,35 @@ tbody td {
     </a>
 
     <nav class="sidebar-nav">
+        <?php if (isSuperAdmin()): ?>
+        <!-- ===== MENU SUPER-ADMIN (proprietaire plateforme SenCompta) ===== -->
+        <div class="nav-section">
+            <div class="nav-section-label label-admin">Supervision plateforme</div>
+            <a href="<?= APP_URL ?>/superadmin" class="nav-item <?= ($activePage ?? '') === 'superadmin' ? 'active' : '' ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+                Tableau de bord
+            </a>
+            <a href="<?= APP_URL ?>/superadmin/cabinets" class="nav-item <?= ($activePage ?? '') === 'superadmin-cabinets' ? 'active' : '' ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21" /></svg>
+                Cabinets
+            </a>
+            <a href="<?= APP_URL ?>/superadmin/paiements" class="nav-item <?= ($activePage ?? '') === 'superadmin-paiements' ? 'active' : '' ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                Suivi des paiements
+            </a>
+            <a href="<?= APP_URL ?>/superadmin/demandes" class="nav-item <?= ($activePage ?? '') === 'superadmin-demandes' ? 'active' : '' ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                Demandes d'upgrade
+            </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-label label-compte">Mon compte</div>
+            <a href="<?= APP_URL ?>/profil" class="nav-item <?= ($activePage ?? '') === 'profil' ? 'active' : '' ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                Profil
+            </a>
+        </div>
+        <?php else: ?>
         <div class="nav-section">
             <div class="nav-section-label label-principal">Principal</div>
             <a href="<?= APP_URL ?>/dashboard" class="nav-item <?= ($activePage ?? '') === 'dashboard' ? 'active' : '' ?>">
@@ -892,6 +921,7 @@ tbody td {
                 Échéances fiscales
             </a>
         </div>
+        <?php endif; ?>
     </nav>
 
     <div class="sidebar-footer">

@@ -1,5 +1,5 @@
 <?php
-$activePage = 'superadmin';
+$activePage = 'superadmin-paiements';
 $pageTitle  = 'Suivi des paiements';
 ob_start();
 ?>

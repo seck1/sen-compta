@@ -1,5 +1,5 @@
 <?php
-$activePage = 'superadmin';
+$activePage = 'superadmin-cabinets';
 $pageTitle  = 'Gestion des cabinets';
 ob_start();
 ?>

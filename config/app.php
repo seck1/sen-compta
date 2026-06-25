@@ -130,6 +130,11 @@ function isSuperviseur(): bool {
     return in_array(auth()['role'] ?? '', ['admin', 'superviseur']);
 }
 
+// Super-admin de la plateforme SaaS (proprietaire SenCompta), distinct d'un admin de cabinet.
+function isSuperAdmin(): bool {
+    return (auth()['role_saas'] ?? '') === 'super_admin';
+}
+
 function isCollaborateur(): bool {
     return (auth()['role'] ?? '') === 'collaborateur';
 }
