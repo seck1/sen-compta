@@ -23,7 +23,7 @@ class CloturController {
             SELECT COALESCE(SUM(l.debit),0) as total_debit, COALESCE(SUM(l.credit),0) as total_credit
             FROM lignes_ecritures l
             JOIN ecritures e ON e.id = l.ecriture_id
-            WHERE e.entreprise_id = ? AND e.exercice = ?
+            WHERE e.entreprise_id = ? AND e.exercice = ? AND e.statut IN ('validee','cloturee')
         ");
         $stmt->execute([$id, $exercice]);
         $balance = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -181,7 +181,7 @@ class CloturController {
             SELECT COALESCE(SUM(l.debit),0) as td, COALESCE(SUM(l.credit),0) as tc
             FROM lignes_ecritures l
             JOIN ecritures e ON e.id = l.ecriture_id
-            WHERE e.entreprise_id = ? AND e.exercice = ?
+            WHERE e.entreprise_id = ? AND e.exercice = ? AND e.statut IN ('validee','cloturee')
         ");
         $stmt->execute([$id, $exercice]);
         $bal = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -198,7 +198,7 @@ class CloturController {
                 FROM lignes_ecritures l
                 JOIN comptes c ON c.id = l.compte_id
                 JOIN ecritures e ON e.id = l.ecriture_id
-                WHERE e.entreprise_id = ? AND e.exercice = ?
+                WHERE e.entreprise_id = ? AND e.exercice = ? AND e.statut IN ('validee','cloturee')
             ");
             $stmt->execute([$id, $exercice]);
             $resultat = (float)$stmt->fetchColumn();
@@ -236,7 +236,7 @@ class CloturController {
                 FROM comptes c
                 JOIN lignes_ecritures l ON l.compte_id = c.id
                 JOIN ecritures e ON e.id = l.ecriture_id
-                WHERE e.entreprise_id = ? AND e.exercice = ?
+                WHERE e.entreprise_id = ? AND e.exercice = ? AND e.statut IN ('validee','cloturee')
                 AND (c.numero LIKE '1%' OR c.numero LIKE '2%' OR c.numero LIKE '3%'
                      OR c.numero LIKE '4%' OR c.numero LIKE '5%')
                 GROUP BY c.id, c.numero
@@ -256,6 +256,38 @@ class CloturController {
                                "RAN " . $compte['numero'], $debit, $credit]);
             }
 
+            // ── Report du RESULTAT de l'exercice au passif (SYSCOHADA) ──
+            // Sans cette ligne, le bilan d'ouverture N+1 est desequilibre (Actif != Passif).
+            // Benefice (resultat > 0) -> compte 131 au credit. Perte -> compte 139 au debit.
+            if (abs($resultat) > 0.005) {
+                $compte_resultat_num = $resultat > 0 ? '131' : '139';
+                // Resoudre (ou creer) le compte de resultat dans le plan comptable du dossier
+                $cr = $db->prepare("SELECT id FROM comptes WHERE entreprise_id=? AND numero=? LIMIT 1");
+                $cr->execute([$id, $compte_resultat_num]);
+                $compte_resultat_id = $cr->fetchColumn();
+                if (!$compte_resultat_id) {
+                    $libelleCpt = $resultat > 0 ? 'Résultat net : Bénéfice' : 'Résultat net : Perte';
+                    $db->prepare("INSERT INTO comptes (entreprise_id, numero, intitule, type_compte, classe) VALUES (?,?,?,'passif',1)")
+                       ->execute([$id, $compte_resultat_num, $libelleCpt]);
+                    $compte_resultat_id = $db->lastInsertId();
+                }
+                $debitR  = $resultat < 0 ? abs($resultat) : 0;   // perte -> debit
+                $creditR = $resultat > 0 ? $resultat : 0;        // benefice -> credit
+                $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)")
+                   ->execute([$ecriture_id, $compte_resultat_id,
+                              "RAN résultat exercice $exercice", $debitR, $creditR]);
+            }
+
+            // Controle : le RAN genere doit etre equilibre (Σdebit = Σcredit), sinon on annule.
+            $ctrl = $db->prepare("SELECT COALESCE(SUM(debit),0) AS d, COALESCE(SUM(credit),0) AS c FROM lignes_ecritures WHERE ecriture_id=?");
+            $ctrl->execute([$ecriture_id]);
+            $ran = $ctrl->fetch(PDO::FETCH_ASSOC);
+            if (abs((float)$ran['d'] - (float)$ran['c']) > 0.01) {
+                $db->rollBack();
+                redirect("/dossier/cloture?id=$id&error=ran_desequilibre");
+                return;
+            }
+
             // Update entreprise exercice_courant
             $stmt = $db->prepare("UPDATE entreprises SET exercice_courant = ? WHERE id = ?");
             $stmt->execute([$nouvel_exercice, $id]);
@@ -272,9 +304,10 @@ class CloturController {
         NotificationService::log(
             auth()['id'],
             'CLOTURE_EXERCICE',
-            "Clôture exercice $exercice → $nouvel_exercice pour dossier #$id",
+            $id,
             'clotures',
-            $id
+            null,
+            "Clôture exercice $exercice → $nouvel_exercice pour dossier #$id"
         );
 
         redirect("/dossier/cloture?id=$id&message=cloture_ok&new_exercice=$nouvel_exercice");
