@@ -26,4 +26,12 @@ WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader --no-interaction || true
 
 RUN chown -R www-data:www-data /var/www/html
+
+# Entrypoint : corrige les permissions des volumes montes (logos/uploads) AU DEMARRAGE.
+# Les volumes Docker ecrasent les permissions de l'image ; il faut donc le faire au runtime.
+RUN printf '#!/bin/sh\nchown -R www-data:www-data /var/www/html/public/logos /var/www/html/public/uploads 2>/dev/null || true\nchmod -R 775 /var/www/html/public/logos /var/www/html/public/uploads 2>/dev/null || true\nexec "$@"\n' > /usr/local/bin/fix-perms.sh \
+    && chmod +x /usr/local/bin/fix-perms.sh
+
+ENTRYPOINT ["/usr/local/bin/fix-perms.sh"]
+CMD ["apache2-foreground"]
 EXPOSE 80
