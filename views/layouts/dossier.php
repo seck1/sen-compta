@@ -376,8 +376,6 @@ tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-ali
 </head>
 <body>
 
-<div class="ent-colorbar"></div>
-
 <!-- Overlay mobile -->
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
@@ -696,6 +694,7 @@ tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-ali
 
 <!-- MAIN -->
 <div class="main-wrap">
+    <div class="ent-colorbar"></div>
     <header class="topbar">
         <button class="hamburger-btn" id="hamburger" onclick="toggleSidebar()" style="display:none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
