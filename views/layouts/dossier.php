@@ -20,7 +20,7 @@
     --debit: #c0392b; --credit: #1f6e4e;
     --ent-color: <?= e($entreprise['couleur'] ?? '#1f6e4e') ?>;
 }
-html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 12pt; overflow-x: hidden; max-width: 100%; }
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 11pt; overflow-x: hidden; max-width: 100%; }
 
 /* SIDEBAR */
 .sidebar {
@@ -283,11 +283,11 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .table-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); }
 .table-title { font-size: 18px; font-weight: 600; color: var(--navy-dark); }
 table { width: 100%; border-collapse: collapse; }
-thead th { padding: 14px 20px; text-align: left; font-size: 10pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; background: var(--green); border-bottom: 1px solid var(--green-dark); }
+thead th { padding: 11px 16px; text-align: left; font-size: 9pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; background: var(--green); border-bottom: 1px solid var(--green-dark); }
 tbody tr { border-bottom: 1px solid rgba(228,233,240,0.6); transition: background 0.15s; }
 tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--green-soft); }
-tbody td { padding: 15px 20px; font-size: 12pt; color: var(--text); vertical-align: middle; }
+tbody td { padding: 11px 16px; font-size: 11pt; color: var(--text); vertical-align: middle; }
 
 /* Badges */
 .badge { display: inline-flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 20px; font-size: 15px; font-weight: 500; }

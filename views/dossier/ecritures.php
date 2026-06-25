@@ -5,13 +5,13 @@
     </div>
     <div style="display:flex;gap:10px;align-items:center">
         <?php if (count($exercicesDispos) > 1): ?>
-        <select onchange="location.href='<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>&exercice='+this.value" style="padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit;cursor:pointer">
+        <select onchange="location.href='<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>&exercice='+this.value" style="padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;cursor:pointer">
             <?php foreach ($exercicesDispos as $ex): ?>
             <option value="<?= $ex ?>" <?= $ex==$exercice?'selected':'' ?>>Exercice <?= $ex ?></option>
             <?php endforeach; ?>
         </select>
         <?php endif; ?>
-        <a href="<?= APP_URL ?>/dossier/ecriture-scan?id=<?= $entreprise['id'] ?>" style="display:flex;align-items:center;gap:9px;padding:10px 20px;background:linear-gradient(135deg,#0f6fba,#0891b2);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(15,111,186,0.35);letter-spacing:.3px;transition:all .2s;text-decoration:none" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 25px rgba(15,111,186,0.45)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(15,111,186,0.35)'">
+        <a href="<?= APP_URL ?>/dossier/ecriture-scan?id=<?= $entreprise['id'] ?>" style="display:flex;align-items:center;gap:9px;padding:10px 20px;background:linear-gradient(135deg,#0f6fba,#0891b2);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(15,111,186,0.35);letter-spacing:.3px;transition:all .2s;text-decoration:none" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 25px rgba(15,111,186,0.45)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(15,111,186,0.35)'">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
             <span>Scan <span style="background:rgba(255,255,255,0.2);padding:1px 7px;border-radius:20px;font-size:14px;letter-spacing:.5px">IA</span></span>
         </a>
@@ -33,12 +33,12 @@
 <div id="modal-an" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">
     <div style="background:white;border-radius:16px;padding:28px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
         <h3 style="margin:0 0 16px;font-size:19px;color:var(--navy-dark)">Générer les reports à nouveau</h3>
-        <p style="font-size:16px;color:var(--text-muted);margin-bottom:20px">Reporte les soldes de clôture de l'exercice précédent en début d'exercice.</p>
+        <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Reporte les soldes de clôture de l'exercice précédent en début d'exercice.</p>
         <form method="POST" action="<?= APP_URL ?>/dossier/report-an">
             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
             <div style="margin-bottom:14px">
-                <label style="display:block;font-size:15px;font-weight:600;margin-bottom:6px;color:var(--text-muted)">EXERCICE À OUVRIR</label>
-                <select name="exercice" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:17px">
+                <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text-muted)">EXERCICE À OUVRIR</label>
+                <select name="exercice" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
                     <?php foreach ($exercicesDispos as $ex): ?>
                     <option value="<?= $ex ?>" <?= $ex==$exercice?'selected':'' ?>><?= $ex ?></option>
                     <?php endforeach; ?>
@@ -78,8 +78,8 @@ $filtreStatut = $_GET['statut'] ?? '';
 <?php if ($nbBrouillons > 0): ?>
 <div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);border-radius:12px;margin-bottom:16px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f59e0b" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-    <span style="font-size:16px;color:#92400e;font-weight:500"><?= $nbBrouillons ?> écriture<?= $nbBrouillons>1?'s':'' ?> en brouillon</span>
-    <button onclick="validerTout()" style="padding:6px 14px;background:#f59e0b;color:white;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-left:auto">
+    <span style="font-size:14px;color:#92400e;font-weight:500"><?= $nbBrouillons ?> écriture<?= $nbBrouillons>1?'s':'' ?> en brouillon</span>
+    <button onclick="validerTout()" style="padding:6px 14px;background:#f59e0b;color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin-left:auto">
         ✓ Valider tout (<?= $nbBrouillons ?>)
     </button>
 </div>
@@ -98,7 +98,7 @@ $filtreStatut = $_GET['statut'] ?? '';
     <div style="position:relative;max-width:400px">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text-muted);pointer-events:none"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0015.803 15.803z" /></svg>
         <input type="text" id="search-ecritures" placeholder="Rechercher libellé, tiers, N° pièce..." oninput="filtrerEcritures(this.value)"
-            style="width:100%;padding:8px 12px 8px 36px;border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:inherit;outline:none;transition:border .2s"
+            style="width:100%;padding:8px 12px 8px 36px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:border .2s"
             onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'">
     </div>
 </div>
@@ -106,7 +106,7 @@ $filtreStatut = $_GET['statut'] ?? '';
 <div class="table-wrap">
     <div class="table-header">
         <div class="table-title">Liste des écritures</div>
-        <span style="font-size:15px;color:var(--text-muted)" id="count-ecritures"><?= count($ecritures) ?> écriture<?= count($ecritures)>1?'s':'' ?></span>
+        <span style="font-size:13px;color:var(--text-muted)" id="count-ecritures"><?= count($ecritures) ?> écriture<?= count($ecritures)>1?'s':'' ?></span>
     </div>
     <?php if (empty($ecritures)): ?>
     <div class="empty-state">
@@ -131,7 +131,7 @@ $filtreStatut = $_GET['statut'] ?? '';
             <td style="text-align:center;width:32px;padding:0 8px" onclick="toggleLignes(<?= $ec['id'] ?>, event)">
                 <span id="arrow-<?= $ec['id'] ?>" style="display:inline-block;transition:transform .2s;font-size:13px;color:var(--text-muted)">▶</span>
             </td>
-            <td style="font-size:16px;white-space:nowrap"><?= date('d/m/Y', strtotime($ec['date_ecriture'])) ?></td>
+            <td style="font-size:14px;white-space:nowrap"><?= date('d/m/Y', strtotime($ec['date_ecriture'])) ?></td>
             <td style="font-size:14px;font-family:monospace;color:var(--text-muted)"><?= e($ec['numero_piece'] ?? '—') ?></td>
             <td style="font-size:14px;font-family:monospace;color:var(--text-muted);white-space:nowrap"><?= e($ec['numero_facture'] ?? '—') ?></td>
             <td>
@@ -153,7 +153,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                 <div style="margin-top:2px;font-size:13px;color:#dc2626;font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($ec['motif_rejet']) ?>">✗ <?= e($ec['motif_rejet']) ?></div>
                 <?php endif; ?>
             </td>
-            <td style="font-size:15px;white-space:nowrap;color:var(--text-muted)">
+            <td style="font-size:13px;white-space:nowrap;color:var(--text-muted)">
                 <?php if (!empty($ec['nom_tiers'])): ?>
                 <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(30,58,95,.06);border:1px solid rgba(30,58,95,.12);border-radius:20px;padding:2px 9px;font-size:14px;color:var(--navy);font-weight:500">
                     <?= e($ec['nom_tiers']) ?>
@@ -162,7 +162,7 @@ $filtreStatut = $_GET['statut'] ?? '';
             </td>
             <td class="montant-debit" style="text-align:right;white-space:nowrap"><?= number_format($ec['total_debit'],0,',',' ') ?></td>
             <td class="montant-credit" style="text-align:right;white-space:nowrap"><?= number_format($ec['total_credit'],0,',',' ') ?></td>
-            <td style="text-align:center;color:var(--text-muted);font-size:16px"><?= $ec['nb_lignes'] ?></td>
+            <td style="text-align:center;color:var(--text-muted);font-size:14px"><?= $ec['nb_lignes'] ?></td>
             <td style="text-align:center">
                 <?php if (!empty($ec['piece_jointe'])): ?>
                 <?php
@@ -189,7 +189,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                     <?php endif; ?>
                 </div>
                 <?php else: ?>
-                <span style="color:var(--border);font-size:15px">—</span>
+                <span style="color:var(--border);font-size:13px">—</span>
                 <?php endif; ?>
             </td>
             <td>
@@ -201,7 +201,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                 <span class="badge badge-warning" id="badge-<?= $ec['id'] ?>">⏳ Brouillon</span>
                 <?php endif; ?>
             </td>
-            <td style="font-size:15px;color:var(--text-muted)"><?= e($ec['prenom'].' '.$ec['nom']) ?></td>
+            <td style="font-size:13px;color:var(--text-muted)"><?= e($ec['prenom'].' '.$ec['nom']) ?></td>
             <td>
                 <div style="display:flex;gap:5px;flex-wrap:wrap">
                     <a href="<?= APP_URL ?>/dossier/modifier-ecriture?id=<?= $ec['id'] ?>&ent=<?= $entreprise['id'] ?>" title="Modifier" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(30,58,95,0.07);color:var(--navy);border:1px solid rgba(30,58,95,0.18);border-radius:6px;font-size:14px;font-weight:600;text-decoration:none">
@@ -253,7 +253,7 @@ $filtreStatut = $_GET['statut'] ?? '';
         <tr id="detail-<?= $ec['id'] ?>" style="display:none;background:#f8fafc">
             <td colspan="14" style="padding:0">
                 <div style="padding:12px 16px 16px 48px;overflow-x:auto">
-                    <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:15px">
+                    <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:13px">
                         <thead>
                             <tr style="background:#f1f5f9">
                                 <th style="padding:6px 10px;text-align:left;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#f1f5f9;color:#4a554f;background:#f1f5f9;color:#4a554f;border-bottom:1px solid #e2e8f0">N° Compte</th>
@@ -267,7 +267,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                         <tbody>
                         <?php foreach ($lignesEc as $lg): ?>
                         <tr style="border-bottom:1px solid #f1f5f9">
-                            <td style="padding:7px 10px;font-weight:700;color:var(--navy);font-family:monospace;font-size:15px"><?= e($lg['compte_numero']) ?></td>
+                            <td style="padding:7px 10px;font-weight:700;color:var(--navy);font-family:monospace;font-size:13px"><?= e($lg['compte_numero']) ?></td>
                             <td style="padding:7px 10px;color:#374151"><?= e($lg['compte_intitule']) ?></td>
                             <td style="padding:7px 10px;color:var(--text-muted)"><?= e($lg['libelle']) ?></td>
                             <td style="padding:7px 10px;text-align:right;font-weight:600;color:<?= $lg['debit'] > 0 ? '#dc2626' : 'var(--text-muted)' ?>">
@@ -302,7 +302,7 @@ $filtreStatut = $_GET['statut'] ?? '';
         </tbody>
         <tfoot>
             <tr style="background:var(--bg);font-weight:600">
-                <td colspan="6" style="padding:12px 18px;font-size:16px;color:var(--navy-dark)">TOTAL</td>
+                <td colspan="6" style="padding:12px 18px;font-size:14px;color:var(--navy-dark)">TOTAL</td>
                 <td class="montant-debit" style="padding:12px 18px;text-align:right;white-space:nowrap"><?= number_format(array_sum(array_column($ecritures,'total_debit')),0,',',' ') ?></td>
                 <td class="montant-credit" style="padding:12px 18px;text-align:right;white-space:nowrap"><?= number_format(array_sum(array_column($ecritures,'total_credit')),0,',',' ') ?></td>
                 <td colspan="5"></td>
@@ -317,19 +317,19 @@ $filtreStatut = $_GET['statut'] ?? '';
     <div style="background:#fff;border-radius:16px;padding:28px 32px;width:480px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.2)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
             <div>
-                <h3 style="margin:0;font-size:17px;font-weight:700;color:var(--navy-dark)">💳 Enregistrer un règlement</h3>
-                <p style="margin:4px 0 0;font-size:15px;color:var(--text-muted)">Crée l'écriture de paiement et lettre automatiquement</p>
+                <h3 style="margin:0;font-size:14px;font-weight:700;color:var(--navy-dark)">💳 Enregistrer un règlement</h3>
+                <p style="margin:4px 0 0;font-size:13px;color:var(--text-muted)">Crée l'écriture de paiement et lettre automatiquement</p>
             </div>
             <button onclick="fermerRegler()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-muted)">×</button>
         </div>
 
         <!-- Onglets -->
         <div style="display:flex;gap:6px;margin-bottom:18px">
-            <button type="button" id="regl-tab-infos" onclick="reglTab('infos')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:15px;font-weight:700;background:var(--navy);color:#fff;border:2px solid var(--navy);border-radius:8px;cursor:pointer;transition:all .15s;letter-spacing:.3px">
+            <button type="button" id="regl-tab-infos" onclick="reglTab('infos')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:13px;font-weight:700;background:var(--navy);color:#fff;border:2px solid var(--navy);border-radius:8px;cursor:pointer;transition:all .15s;letter-spacing:.3px">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                 Informations
             </button>
-            <button type="button" id="regl-tab-pj" onclick="reglTab('pj')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:15px;font-weight:700;background:#fff;color:var(--text-muted);border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;letter-spacing:.3px">
+            <button type="button" id="regl-tab-pj" onclick="reglTab('pj')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:13px;font-weight:700;background:#fff;color:var(--text-muted);border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;letter-spacing:.3px">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
                 Justificatif
                 <span id="regl-pj-badge" style="display:none;background:#1f6e4e;color:#fff;font-size:13px;padding:1px 6px;border-radius:10px;font-weight:700">1</span>
@@ -341,22 +341,22 @@ $filtreStatut = $_GET['statut'] ?? '';
 
             <!-- Panneau Informations -->
             <div id="regl-panel-infos">
-            <div id="regl-solde-banner" style="display:none;margin-bottom:12px;padding:10px 14px;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px;font-size:15px;color:#92400e">
+            <div id="regl-solde-banner" style="display:none;margin-bottom:12px;padding:10px 14px;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px;font-size:13px;color:#92400e">
                 ⚠️ Règlement partiel — Solde restant dû : <strong id="regl-solde-val"></strong> FCFA
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
                 <div>
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Montant (FCFA)</label>
-                    <input type="number" id="regl-montant" step="1" min="1" required style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:17px;font-weight:600;box-sizing:border-box" oninput="verifierMontantRegl()">
+                    <input type="number" id="regl-montant" step="1" min="1" required style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:600;box-sizing:border-box" oninput="verifierMontantRegl()">
                     <div id="regl-montant-err" style="display:none;margin-top:4px;font-size:14px;color:#dc2626;font-weight:600"></div>
                 </div>
                 <div>
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Date règlement</label>
-                    <input type="date" id="regl-date" required style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;box-sizing:border-box">
+                    <input type="date" id="regl-date" required style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;box-sizing:border-box">
                 </div>
                 <div>
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Moyen de paiement</label>
-                    <select id="regl-mode" onchange="reglAutoCompte()" style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;box-sizing:border-box">
+                    <select id="regl-mode" onchange="reglAutoCompte()" style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;box-sizing:border-box">
                         <option value="virement">Virement bancaire</option>
                         <option value="cheque">Chèque</option>
                         <option value="especes">Espèces</option>
@@ -369,7 +369,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                 </div>
                 <div>
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Compte de règlement</label>
-                    <select id="regl-compte" style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;box-sizing:border-box">
+                    <select id="regl-compte" style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;box-sizing:border-box">
                         <?php
                         // Charger tous les comptes 52x et 57x du dossier
                         $dbTmp = getDB();
@@ -384,10 +384,10 @@ $filtreStatut = $_GET['statut'] ?? '';
                 </div>
                 <div style="grid-column:1/-1">
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Libellé</label>
-                    <input type="text" id="regl-libelle" required style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;box-sizing:border-box">
+                    <input type="text" id="regl-libelle" required style="width:100%;margin-top:5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;box-sizing:border-box">
                 </div>
             </div>
-            <div style="margin-top:10px;padding:10px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;font-size:15px;color:#1e40af">
+            <div style="margin-top:10px;padding:10px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;font-size:13px;color:#1e40af">
                 ℹ️ L'écriture de règlement sera créée et les lignes 401/411 seront lettrées automatiquement.
             </div>
             </div>
@@ -396,21 +396,21 @@ $filtreStatut = $_GET['statut'] ?? '';
             <div id="regl-panel-pj" style="display:none">
                 <div id="regl-dropzone" onclick="document.getElementById('regl-file').click()" ondragover="event.preventDefault();this.style.borderColor='var(--navy)'" ondragleave="this.style.borderColor='#d1d5db'" ondrop="reglDrop(event)" style="border:2px dashed #d1d5db;border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s;background:#fafafa">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:36px;height:36px;color:#9ca3af;margin:0 auto 10px;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
-                    <p style="margin:0;font-size:16px;font-weight:600;color:#374151">Cliquez ou glissez un fichier</p>
+                    <p style="margin:0;font-size:14px;font-weight:600;color:#374151">Cliquez ou glissez un fichier</p>
                     <p style="margin:6px 0 0;font-size:14px;color:#9ca3af">PDF, JPEG, PNG, WEBP · max 5 Mo</p>
                 </div>
                 <input type="file" id="regl-file" name="justificatif" accept="image/jpeg,image/png,image/webp,application/pdf" style="display:none" onchange="reglFileSelected(this)">
                 <div id="regl-file-preview" style="display:none;margin-top:12px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;display:none;align-items:center;gap:10px">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1f6e4e" style="width:20px;height:20px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
-                    <span id="regl-file-name" style="font-size:16px;font-weight:600;color:#18583f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+                    <span id="regl-file-name" style="font-size:14px;font-weight:600;color:#18583f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
                     <button type="button" onclick="reglRemoveFile()" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:19px;padding:0">×</button>
                 </div>
                 <p style="margin:12px 0 0;font-size:14px;color:#9ca3af;text-align:center">Le fichier sera attaché comme justificatif à l'écriture de règlement.</p>
             </div>
 
             <div style="display:flex;gap:10px;margin-top:18px">
-                <button type="button" onclick="fermerRegler()" style="flex:1;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:16px;cursor:pointer">Annuler</button>
-                <button type="submit" id="regl-btn" style="flex:2;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer">Enregistrer le règlement</button>
+                <button type="button" onclick="fermerRegler()" style="flex:1;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:14px;cursor:pointer">Annuler</button>
+                <button type="submit" id="regl-btn" style="flex:2;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Enregistrer le règlement</button>
             </div>
         </form>
     </div>
@@ -524,7 +524,7 @@ function enBrouillon(id) {
           <div style="width:32px;height:32px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px">✨</div>
           <div style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.2px">Nouvelle écriture par scan</div>
         </div>
-        <div style="font-size:15px;color:rgba(255,255,255,.6);padding-left:42px">Analysée par Claude AI · OHADA SYSCOHADA Révisé · Sénégal</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);padding-left:42px">Analysée par Claude AI · OHADA SYSCOHADA Révisé · Sénégal</div>
       </div>
       <button onclick="closeScanIA()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);cursor:pointer;color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">✕</button>
     </div>
@@ -534,8 +534,8 @@ function enBrouillon(id) {
   <div style="display:flex;align-items:center;padding:18px 28px;gap:4px;border-bottom:1px solid #f3f4f6" id="scan-steps">
     <?php foreach(['Import','Analyse IA','Prévisualisation','Validation'] as $si=>$sl): ?>
     <div style="display:flex;align-items:center;gap:8px;<?= $si<3?'flex:1':'' ?>">
-      <div id="sc<?= $si+1 ?>" style="width:30px;height:30px;border-radius:50%;background:<?= $si===0?'linear-gradient(135deg,#0f6fba,#0891b2)':'#f3f4f6' ?>;color:<?= $si===0?'#fff':'#9ca3af' ?>;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;transition:all .3s;box-shadow:<?= $si===0?'0 4px 10px rgba(15,111,186,0.35)':'' ?>"><?= $si+1 ?></div>
-      <span id="sl<?= $si+1 ?>" style="font-size:15px;color:<?= $si===0?'#0f6fba':'#9ca3af' ?>;font-weight:<?= $si===0?'700':'400' ?>;white-space:nowrap"><?= $sl ?></span>
+      <div id="sc<?= $si+1 ?>" style="width:30px;height:30px;border-radius:50%;background:<?= $si===0?'linear-gradient(135deg,#0f6fba,#0891b2)':'#f3f4f6' ?>;color:<?= $si===0?'#fff':'#9ca3af' ?>;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:all .3s;box-shadow:<?= $si===0?'0 4px 10px rgba(15,111,186,0.35)':'' ?>"><?= $si+1 ?></div>
+      <span id="sl<?= $si+1 ?>" style="font-size:13px;color:<?= $si===0?'#0f6fba':'#9ca3af' ?>;font-weight:<?= $si===0?'700':'400' ?>;white-space:nowrap"><?= $sl ?></span>
       <?php if($si<3): ?><div id="sline<?= $si+1 ?>" style="flex:1;height:2px;background:linear-gradient(90deg,<?= $si===0?'#0f6fba,#e5e7eb':'#e5e7eb,#e5e7eb' ?>);margin:0 6px;border-radius:2px;transition:all .3s"></div><?php endif; ?>
     </div>
     <?php endforeach; ?>
@@ -555,7 +555,7 @@ function enBrouillon(id) {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0f6fba" style="width:36px;height:36px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
         </div>
         <div style="font-size:19px;font-weight:700;color:#0c2340;margin-bottom:6px">Glissez votre facture ici</div>
-        <div style="font-size:16px;color:#6b7280;margin-bottom:20px">ou <span style="color:#0f6fba;font-weight:600;text-decoration:underline">cliquez pour sélectionner</span> un fichier</div>
+        <div style="font-size:14px;color:#6b7280;margin-bottom:20px">ou <span style="color:#0f6fba;font-weight:600;text-decoration:underline">cliquez pour sélectionner</span> un fichier</div>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
           <span style="background:#eff8ff;padding:5px 14px;border-radius:20px;font-size:14px;font-weight:700;color:#0f6fba;border:1px solid #7dd3fc">JPEG</span>
           <span style="background:#eff8ff;padding:5px 14px;border-radius:20px;font-size:14px;font-weight:700;color:#0f6fba;border:1px solid #7dd3fc">PNG</span>
@@ -567,8 +567,8 @@ function enBrouillon(id) {
       <div id="sprev" style="display:none;margin-top:14px;padding:14px;background:#f8fafc;border-radius:12px;align-items:center;gap:14px">
         <img id="sprevimg" src="" style="width:68px;height:68px;object-fit:cover;border-radius:10px;border:1px solid #e5e7eb;flex-shrink:0">
         <div style="flex:1">
-          <div id="sprevname" style="font-weight:600;font-size:17px;color:#1f2937"></div>
-          <div id="sprevsize" style="font-size:15px;color:#9ca3af;margin-top:2px"></div>
+          <div id="sprevname" style="font-weight:600;font-size:14px;color:#1f2937"></div>
+          <div id="sprevsize" style="font-size:13px;color:#9ca3af;margin-top:2px"></div>
         </div>
         <button onclick="scanReset()" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:18px">✕</button>
       </div>
@@ -583,7 +583,7 @@ function enBrouillon(id) {
     <div id="sp2" style="display:none;text-align:center;padding:52px 0">
       <div style="width:64px;height:64px;border:4px solid #eff8ff;border-top-color:#0f6fba;border-radius:50%;margin:0 auto 20px;animation:spspin 1s linear infinite"></div>
       <div style="font-size:19px;font-weight:600;color:#1f2937;margin-bottom:8px">Claude analyse votre document...</div>
-      <div style="font-size:16px;color:#9ca3af">Extraction · Sélection comptes OHADA · Vérification équilibre</div>
+      <div style="font-size:14px;color:#9ca3af">Extraction · Sélection comptes OHADA · Vérification équilibre</div>
       <style>@keyframes spspin{to{transform:rotate(360deg)}}</style>
     </div>
 
@@ -591,7 +591,7 @@ function enBrouillon(id) {
     <div id="sp3" style="display:none">
       <div id="spresult"></div>
       <div style="display:flex;gap:10px;margin-top:18px">
-        <button onclick="scanGoStep(1)" style="flex:1;padding:12px;background:#f3f4f6;border:none;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;color:#374151">← Retour</button>
+        <button onclick="scanGoStep(1)" style="flex:1;padding:12px;background:#f3f4f6;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;color:#374151">← Retour</button>
         <button onclick="scanValider()" id="svbtn" style="flex:2;padding:12px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer">✓ Valider et enregistrer</button>
       </div>
     </div>
@@ -600,7 +600,7 @@ function enBrouillon(id) {
     <div id="sp4" style="display:none;text-align:center;padding:52px 0">
       <div style="width:72px;height:72px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px">✓</div>
       <div style="font-size:18px;font-weight:700;color:#1f2937;margin-bottom:8px">Écriture enregistrée !</div>
-      <div style="font-size:16px;color:#6b7280;margin-bottom:24px">Créée en brouillon · Vérifiez avant validation finale</div>
+      <div style="font-size:14px;color:#6b7280;margin-bottom:24px">Créée en brouillon · Vérifiez avant validation finale</div>
       <div style="display:flex;gap:10px;justify-content:center">
         <button onclick="closeScanIA();location.reload()" style="padding:12px 24px;background:#1e3a5f;color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer">Voir les écritures</button>
         <button onclick="scanGoStep(1);scanReset()" style="padding:12px 24px;background:#f3f4f6;border:none;border-radius:10px;font-weight:600;cursor:pointer;color:#374151">Nouveau scan</button>
@@ -679,16 +679,16 @@ function scanRenderPreview(e){
   var confColors={'haute':'background:#dcfce7;color:#1f6e4e','moyenne':'background:#fef9c3;color:#ca8a04','faible':'background:#fee2e2;color:#dc2626'};
   var conf=confColors[e.confiance]||confColors['moyenne'];
   var lignesRows=(e.lignes||[]).map(function(l){
-    return '<tr style="border-bottom:1px solid #f3f4f6"><td style="padding:9px 14px;font-family:monospace;font-size:15px;color:#0f6fba;font-weight:700">'+l.compte+'</td><td style="padding:9px 14px;font-size:16px;color:#374151">'+l.intitule+'</td><td style="padding:9px 14px;text-align:right;font-size:16px;color:#059669">'+( l.debit>0?scanFmt(l.debit):'' )+'</td><td style="padding:9px 14px;text-align:right;font-size:16px;color:#dc2626">'+( l.credit>0?scanFmt(l.credit):'' )+'</td></tr>';
+    return '<tr style="border-bottom:1px solid #f3f4f6"><td style="padding:9px 14px;font-family:monospace;font-size:13px;color:#0f6fba;font-weight:700">'+l.compte+'</td><td style="padding:9px 14px;font-size:14px;color:#374151">'+l.intitule+'</td><td style="padding:9px 14px;text-align:right;font-size:14px;color:#059669">'+( l.debit>0?scanFmt(l.debit):'' )+'</td><td style="padding:9px 14px;text-align:right;font-size:14px;color:#dc2626">'+( l.credit>0?scanFmt(l.credit):'' )+'</td></tr>';
   }).join('');
   var equil=e.equilibre
-    ? '<div style="margin-top:10px;padding:8px 14px;background:#dcfce7;border-radius:8px;font-size:15px;color:#1f6e4e;font-weight:600">✓ Écriture équilibrée — Débit = Crédit = '+scanFmt(e.total_debit)+'</div>'
-    : '<div style="margin-top:10px;padding:8px 14px;background:#fee2e2;border-radius:8px;font-size:15px;color:#dc2626;font-weight:600">⚠ Attention : écriture non équilibrée</div>';
-  var notes=e.notes?'<div style="margin-top:10px;padding:10px 14px;background:#fef9c3;border-radius:8px;font-size:15px;color:#92400e">💡 '+e.notes+'</div>':'';
+    ? '<div style="margin-top:10px;padding:8px 14px;background:#dcfce7;border-radius:8px;font-size:13px;color:#1f6e4e;font-weight:600">✓ Écriture équilibrée — Débit = Crédit = '+scanFmt(e.total_debit)+'</div>'
+    : '<div style="margin-top:10px;padding:8px 14px;background:#fee2e2;border-radius:8px;font-size:13px;color:#dc2626;font-weight:600">⚠ Attention : écriture non équilibrée</div>';
+  var notes=e.notes?'<div style="margin-top:10px;padding:10px 14px;background:#fef9c3;border-radius:8px;font-size:13px;color:#92400e">💡 '+e.notes+'</div>':'';
   var html='<div style="background:#f8fafc;border-radius:14px;padding:18px">'
     +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">'
     +'<div><div style="font-size:19px;font-weight:700;color:#1f2937">'+e.libelle+'</div>'
-    +'<div style="font-size:15px;color:#9ca3af;margin-top:3px">'+e.fournisseur_client+' · '+e.date+' · Réf: '+(e.reference||'—')+'</div></div>'
+    +'<div style="font-size:13px;color:#9ca3af;margin-top:3px">'+e.fournisseur_client+' · '+e.date+' · Réf: '+(e.reference||'—')+'</div></div>'
     +'<span style="'+conf+';padding:4px 12px;border-radius:20px;font-size:14px;font-weight:700">Confiance '+e.confiance+'</span></div>'
     +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">'
     +'<div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e5e7eb"><div style="font-size:13px;color:#9ca3af;text-transform:uppercase">HT</div><div style="font-size:19px;font-weight:700;color:#1f2937;margin-top:4px">'+scanFmt(e.montant_ht)+'</div></div>'
@@ -705,9 +705,9 @@ function scanRenderPreview(e){
     +'</tr></thead>'
     +'<tbody>'+lignesRows+'</tbody>'
     +'<tfoot><tr style="background:#f8fafc;border-top:2px solid #e5e7eb">'
-    +'<td colspan="2" style="padding:10px 14px;font-weight:700;font-size:16px">TOTAL</td>'
-    +'<td style="padding:10px 14px;text-align:right;font-weight:700;font-size:16px;color:#059669">'+scanFmt(e.total_debit)+'</td>'
-    +'<td style="padding:10px 14px;text-align:right;font-weight:700;font-size:16px;color:#dc2626">'+scanFmt(e.total_credit)+'</td>'
+    +'<td colspan="2" style="padding:10px 14px;font-weight:700;font-size:14px">TOTAL</td>'
+    +'<td style="padding:10px 14px;text-align:right;font-weight:700;font-size:14px;color:#059669">'+scanFmt(e.total_debit)+'</td>'
+    +'<td style="padding:10px 14px;text-align:right;font-weight:700;font-size:14px;color:#dc2626">'+scanFmt(e.total_credit)+'</td>'
     +'</tr></tfoot></table></div>'
     +equil+notes+'</div>';
   document.getElementById('spresult').innerHTML=html;
@@ -867,7 +867,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fermerRegler();
             const msg = '✅ Règlement enregistré (' + j.numero_piece + ')' + (j.lettre ? ' · Lettré ' + j.lettre : '');
             const flash = document.createElement('div');
-            flash.style = 'position:fixed;top:20px;right:20px;z-index:9999;background:#1f6e4e;color:#fff;padding:12px 20px;border-radius:10px;font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+            flash.style = 'position:fixed;top:20px;right:20px;z-index:9999;background:#1f6e4e;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2)';
             flash.textContent = msg;
             document.body.appendChild(flash);
             setTimeout(() => { flash.remove(); location.reload(); }, 2500);
