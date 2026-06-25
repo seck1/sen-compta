@@ -78,6 +78,9 @@ $routes = [
     'profil/setup-2fa'    => ['ProfilController', 'setup2fa'],
     'profil/confirm-2fa'  => ['ProfilController', 'confirm2fa'],
     'profil/disable-2fa'  => ['ProfilController', 'disable2fa'],
+    // RGPD — droits des personnes
+    'profil/exporter-donnees'    => ['ProfilController', 'exporterDonnees'],
+    'profil/demander-suppression'=> ['ProfilController', 'demanderSuppression'],
 
     // Tableau de bord dossier
     'dossier'           => ['DossierController', 'index'],

@@ -10,6 +10,11 @@
     ✓ Profil mis à jour <?= isset($_GET['2fa']) ? '— Authentification 2FA activée !' : '' ?>
 </div>
 <?php endif; ?>
+<?php if (($_GET['rgpd'] ?? '') === 'demande'): ?>
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:14px;color:#166534">
+    ✓ Votre demande de suppression a bien été enregistrée. Notre équipe la traitera dans les meilleurs délais et vous tiendra informé.
+</div>
+<?php endif; ?>
 <?php if (isset($_GET['error']) && $_GET['error'] === 'password'): ?>
 <div style="background:rgba(220,53,69,0.08);border:1px solid rgba(220,53,69,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:14px;color:#dc3545">
     ✗ Mot de passe invalide : 8 caractères minimum, une majuscule et un chiffre requis.
@@ -76,5 +81,46 @@
                 <div><strong>Dernière connexion :</strong> <?= $user['derniere_connexion'] ? date('d/m/Y H:i', strtotime($user['derniere_connexion'])) : 'N/A' ?></div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- ===== Mes données personnelles (RGPD) ===== -->
+<div class="card" style="margin-top:24px">
+    <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:9px">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+        Mes données personnelles
+    </h2>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Conformément à la réglementation (RGPD &amp; loi sénégalaise 2008-12), vous pouvez exercer vos droits sur vos données.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <!-- Export / portabilite -->
+        <div style="border:1px solid var(--border);border-radius:12px;padding:18px">
+            <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Exporter mes données</div>
+            <p style="font-size:12.5px;color:var(--text-muted);margin-bottom:14px">Téléchargez une copie de vos données personnelles au format JSON (droit d'accès et de portabilité).</p>
+            <a href="<?= APP_URL ?>/profil/exporter-donnees" class="btn btn-outline" style="width:100%;justify-content:center">⬇ Télécharger (JSON)</a>
+        </div>
+
+        <!-- Suppression / droit a l'oubli -->
+        <div style="border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:18px;background:rgba(239,68,68,0.02)">
+            <div style="font-size:14px;font-weight:700;color:#b91c1c;margin-bottom:6px">Supprimer mon compte</div>
+            <p style="font-size:12.5px;color:var(--text-muted);margin-bottom:14px">Demandez la suppression de votre compte et de vos données personnelles (droit à l'oubli). Les données comptables légalement obligatoires seront conservées le temps requis par la loi.</p>
+            <button type="button" class="btn btn-danger" style="width:100%;justify-content:center" onclick="document.getElementById('rgpd-suppr-modal').style.display='flex'">Demander la suppression</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal demande de suppression -->
+<div id="rgpd-suppr-modal" style="display:none;position:fixed;inset:0;background:rgba(18,36,31,.45);z-index:200;align-items:center;justify-content:center;padding:20px">
+    <div style="background:#fff;border-radius:16px;max-width:460px;width:100%;padding:28px">
+        <h3 style="font-size:17px;font-weight:700;color:#b91c1c;margin-bottom:8px">Demander la suppression du compte</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:18px">Cette demande sera transmise à notre équipe. Vous serez recontacté avant toute suppression définitive. Vous pouvez préciser votre demande ci-dessous.</p>
+        <form method="post" action="<?= APP_URL ?>/profil/demander-suppression">
+            <?= csrfField() ?>
+            <textarea name="message" rows="3" placeholder="Précision (optionnel)" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;margin-bottom:16px;resize:vertical"></textarea>
+            <div style="display:flex;gap:10px;justify-content:flex-end">
+                <button type="button" class="btn btn-outline" onclick="document.getElementById('rgpd-suppr-modal').style.display='none'">Annuler</button>
+                <button type="submit" class="btn btn-danger">Confirmer la demande</button>
+            </div>
+        </form>
     </div>
 </div>
