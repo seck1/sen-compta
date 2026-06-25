@@ -30,7 +30,7 @@
     --text: #18241f;
     --text-muted: #4a554f;
     --border: #d9dcdb;
-    --sidebar-w: 290px;
+    --sidebar-w: 248px;
     --header-h: 68px;
     --success: #1f6e4e;
     --warning: #f59e0b;

@@ -15,7 +15,7 @@
     --gold: #b8923f; --gold-light: #d9b876; --gold-dark: #a8843f;
     --white: #fff; --bg: #eef1f0; --bg-card: #fff;
     --text: #18241f; --text-muted: #4a554f; --border: #d9dcdb;
-    --sidebar-w: 290px; --header-h: 64px;
+    --sidebar-w: 248px; --header-h: 64px;
     --success: #1f6e4e; --warning: #f59e0b; --danger: #ef4444; --info: #1f6e4e;
     --debit: #c0392b; --credit: #1f6e4e;
     --ent-color: <?= e($entreprise['couleur'] ?? '#1f6e4e') ?>;
