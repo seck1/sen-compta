@@ -17,6 +17,12 @@ class SaasController {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/inscription');
         verifyCsrfToken($_POST['csrf_token'] ?? '');
 
+        // RGPD : consentement CGU + confidentialite obligatoire
+        if (empty($_POST['accept_cgu'])) {
+            $_SESSION['inscription_error'] = "Vous devez accepter les CGU et la politique de confidentialité.";
+            redirect('/inscription');
+        }
+
         $nom         = trim($_POST['nom_cabinet'] ?? '');
         $email       = trim($_POST['email'] ?? '');
         $telephone   = trim($_POST['telephone'] ?? '');

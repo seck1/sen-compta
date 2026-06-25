@@ -362,5 +362,6 @@ foreach ($modules as $m): ?>
   if (e && e.value && p) p.focus();
 })();
 </script>
+<?php require APP_ROOT . '/views/partials/cookie-banner.php'; ?>
 </body>
 </html>

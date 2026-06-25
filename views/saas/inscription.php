@@ -252,6 +252,11 @@ a:focus-visible, button:focus-visible, input:focus-visible{ outline:3px solid rg
           </div>
         </div>
 
+        <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;cursor:pointer;font-size:12.5px;color:var(--muted);line-height:1.5">
+          <input type="checkbox" name="accept_cgu" value="1" required style="margin-top:2px;width:17px;height:17px;accent-color:var(--green);flex-shrink:0">
+          <span>J'accepte les <a href="<?= APP_URL ?>/cgu" target="_blank" style="color:var(--green);font-weight:600">conditions générales d'utilisation</a> et la <a href="<?= APP_URL ?>/confidentialite" target="_blank" style="color:var(--green);font-weight:600">politique de confidentialité</a>, et je consens au traitement de mes données conformément à la réglementation.</span>
+        </label>
+
         <button type="submit" class="btn-submit">Créer mon espace gratuitement →</button>
 
         <div class="form-footer">
@@ -271,5 +276,6 @@ function selectPlan(el, code) {
   el.querySelector('input[type=radio]').checked = true;
 }
 </script>
+<?php require APP_ROOT . '/views/partials/cookie-banner.php'; ?>
 </body>
 </html>

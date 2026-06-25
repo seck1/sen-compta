@@ -50,5 +50,6 @@ html,body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg)
   <a href="<?= APP_URL ?>/cookies">Cookies</a>
   <div style="margin-top:10px">© <?= date('Y') ?> SenCompta · Tous droits réservés</div>
 </div>
+<?php require APP_ROOT . '/views/partials/cookie-banner.php'; ?>
 </body>
 </html>

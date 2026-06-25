@@ -52,5 +52,6 @@ input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(31,
 
   <div class="foot">Cabinet comptable ? <a href="<?= APP_URL ?>/login">Accès cabinet</a></div>
 </div>
+<?php require APP_ROOT . '/views/partials/cookie-banner.php'; ?>
 </body>
 </html>
