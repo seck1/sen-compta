@@ -400,9 +400,9 @@ tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-ali
     ?>
     <div class="dossier-header">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-            <div class="dossier-avatar" style="<?= !empty($entreprise['logo']) ? 'background:#fff;padding:2px;' : '' ?>">
+            <div class="dossier-avatar" style="<?= !empty($entreprise['logo']) ? 'background:#fff;padding:0;width:56px;height:56px;' : '' ?>">
                 <?php if(!empty($entreprise['logo'])): ?>
-                    <img src="<?= APP_URL ?>/logos/<?= e($entreprise['logo']) ?>" alt="" style="width:100%;height:100%;object-fit:contain;border-radius:10px;padding:2px;box-sizing:border-box;background:#fff">
+                    <img src="<?= APP_URL ?>/logos/<?= e($entreprise['logo']) ?>" alt="" style="width:100%;height:100%;object-fit:contain;border-radius:12px;background:#fff;display:block">
                 <?php else: ?>
                     <?= strtoupper(substr($entreprise['raison_sociale'], 0, 2)) ?>
                 <?php endif; ?>
