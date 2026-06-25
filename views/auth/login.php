@@ -33,15 +33,16 @@ html, body {
 .shell {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 460px 1fr;
+    grid-template-columns: 1fr 460px;
     align-items: start;
     gap: 48px;
     max-width: 1340px;
     margin: 0 auto;
     padding: 56px 32px 40px;
 }
-.col-left { position: sticky; top: 56px; }
-.col-right { padding-top: 4px; }
+/* carte de connexion a DROITE, modules a GAUCHE */
+.col-left  { order: 2; position: sticky; top: 56px; }
+.col-right { order: 1; padding-top: 4px; }
 
 /* ============ CARTE DE CONNEXION ============ */
 .card {
@@ -140,7 +141,7 @@ html, body {
 .mod-desc  { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
 .mod-badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; text-transform: uppercase; background: rgba(47,125,91,0.1); color: var(--green); border: 1px solid rgba(47,125,91,0.22); }
 
-.foot { grid-column: 1 / -1; margin-top: 32px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+.foot { grid-column: 1 / -1; order: 3; margin-top: 32px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
 .foot a, .foot span { font-size: 13px; color: var(--muted); text-decoration: none; }
 .foot a:hover { color: var(--green); text-decoration: underline; }
 
@@ -149,7 +150,8 @@ html, body {
 /* Tablette / mobile : la carte repasse au-dessus, modules en dessous */
 @media (max-width: 980px) {
     .shell { grid-template-columns: 1fr; max-width: 560px; gap: 40px; }
-    .col-left { position: static; }
+    .col-left { position: static; order: 1; }   /* carte au-dessus sur mobile */
+    .col-right { order: 2; }
     .modules-title { text-align: center; }
 }
 @media (max-width: 520px) {
