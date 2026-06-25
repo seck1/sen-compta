@@ -22,6 +22,12 @@ $routes = [
     'inscription'      => ['SaasController', 'inscriptionPage'],
     'inscription/post' => ['SaasController', 'inscriptionPost'],
 
+    // Pages legales (publiques — RGPD / CDP Senegal)
+    'confidentialite'  => ['LegalController', 'confidentialite'],
+    'mentions-legales' => ['LegalController', 'mentions'],
+    'cgu'              => ['LegalController', 'cgu'],
+    'cookies'          => ['LegalController', 'cookies'],
+
     // Portail client — espace dedie (session separee du cabinet)
     'portail'          => ['PortailClientController', 'dashboard'],
     'portail/login'    => ['PortailClientController', 'login'],

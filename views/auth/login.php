@@ -335,7 +335,12 @@ foreach ($modules as $m): ?>
 
     <div class="foot">
         <span>© <?= date('Y') ?> SenCompta · Tous droits réservés</span>
-        <span>Propulsé par SENGESTION ERP</span>
+        <span style="display:flex;gap:14px;flex-wrap:wrap">
+            <a href="<?= APP_URL ?>/confidentialite" style="color:inherit;text-decoration:none">Confidentialité</a>
+            <a href="<?= APP_URL ?>/mentions-legales" style="color:inherit;text-decoration:none">Mentions légales</a>
+            <a href="<?= APP_URL ?>/cgu" style="color:inherit;text-decoration:none">CGU</a>
+            <a href="<?= APP_URL ?>/cookies" style="color:inherit;text-decoration:none">Cookies</a>
+        </span>
     </div>
 
 </div>
