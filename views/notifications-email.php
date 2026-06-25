@@ -21,7 +21,7 @@ $anneePrec  = date('n') == 1 ? (int)date('Y') - 1 : (int)date('Y');
 <div class="card" style="margin-bottom:20px;overflow:hidden">
     <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
         <div>
-            <div style="font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px">
+            <div style="font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px">
                 <span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700">TVA</span>
                 Déclarations TVA en retard — <?= $moisLabels[$moisPrec] ?> <?= $anneePrec ?>
             </div>
@@ -63,7 +63,7 @@ $anneePrec  = date('n') == 1 ? (int)date('Y') - 1 : (int)date('Y');
 <?php if(!empty($brouillons)): ?>
 <div class="card" style="margin-bottom:20px;overflow:hidden">
     <div style="padding:16px 20px;border-bottom:1px solid var(--border)">
-        <div style="font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px">
+        <div style="font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px">
             <span style="background:#fed7aa;color:#9a3412;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700">BROUILLON</span>
             Écritures en brouillon à valider
         </div>
@@ -103,7 +103,7 @@ $anneePrec  = date('n') == 1 ? (int)date('Y') - 1 : (int)date('Y');
 <?php if(empty($alertes_tva) && empty($brouillons)): ?>
 <div class="card" style="padding:60px;text-align:center;color:var(--text-muted)">
     <div style="font-size:40px;margin-bottom:16px">✅</div>
-    <div style="font-size:16px;font-weight:600;margin-bottom:8px">Tout est à jour !</div>
+    <div style="font-size:14px;font-weight:600;margin-bottom:8px">Tout est à jour !</div>
     <div style="font-size:13px">Aucune alerte à envoyer pour le moment.</div>
 </div>
 <?php endif; ?>
@@ -111,7 +111,7 @@ $anneePrec  = date('n') == 1 ? (int)date('Y') - 1 : (int)date('Y');
 <!-- Échéances proches -->
 <?php if(!empty($echeances_proches)): ?>
 <div class="card" style="margin-top:20px;overflow:hidden">
-    <div style="padding:16px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px">
         <span style="background:#fee2e2;color:#991b1b;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700">URGENT</span>
         Échéances fiscales dans les 15 jours
     </div>

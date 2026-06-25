@@ -20,12 +20,12 @@ function fmtMin(int $min): string {
     <div style="display:flex;gap:10px;align-items:center">
         <form method="get" style="display:flex;gap:8px;align-items:center">
             <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
-            <select name="mois" onchange="this.form.submit()" style="padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:16px">
+            <select name="mois" onchange="this.form.submit()" style="padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:14px">
                 <?php for($m=1;$m<=12;$m++): ?>
                 <option value="<?= $m ?>" <?= $m==$mois?'selected':'' ?>><?= $mois_labels[$m] ?></option>
                 <?php endfor; ?>
             </select>
-            <select name="annee" onchange="this.form.submit()" style="padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:16px">
+            <select name="annee" onchange="this.form.submit()" style="padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:14px">
                 <?php for($y=date('Y');$y>=date('Y')-3;$y--): ?>
                 <option value="<?= $y ?>" <?= $y==$annee?'selected':'' ?>><?= $y ?></option>
                 <?php endfor; ?>
@@ -46,12 +46,12 @@ function fmtMin(int $min): string {
     <div class="card" style="padding:16px 20px">
         <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Total ce mois</div>
         <div style="font-size:24px;font-weight:700;color:var(--navy-dark);font-family:monospace"><?= fmtMin($total_minutes) ?></div>
-        <div style="font-size:15px;color:var(--text-muted);margin-top:3px"><?= count($saisies) ?> saisie(s)</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:3px"><?= count($saisies) ?> saisie(s)</div>
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Facturable</div>
         <div style="font-size:24px;font-weight:700;color:#1f6e4e;font-family:monospace"><?= fmtMin($total_fact_min) ?></div>
-        <div style="font-size:15px;color:var(--text-muted);margin-top:3px"><?= $total_minutes > 0 ? round($total_fact_min/$total_minutes*100) : 0 ?>% du total</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:3px"><?= $total_minutes > 0 ? round($total_fact_min/$total_minutes*100) : 0 ?>% du total</div>
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Non facturable</div>
@@ -67,13 +67,13 @@ function fmtMin(int $min): string {
     <!-- Par collaborateur -->
     <?php if(!empty($par_collab)): ?>
     <div class="card" style="padding:0;overflow:hidden">
-        <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:17px">Par collaborateur</div>
-        <table style="width:100%;border-collapse:collapse;font-size:16px">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px">Par collaborateur</div>
+        <table style="width:100%;border-collapse:collapse;font-size:14px">
             <?php foreach($par_collab as $pc): ?>
             <tr style="border-bottom:1px solid var(--border)">
                 <td style="padding:10px 18px;font-weight:600"><?= e($pc['prenom'].' '.$pc['nom']) ?></td>
                 <td style="padding:10px 18px;text-align:right;font-family:monospace;font-weight:700"><?= fmtMin((int)$pc['total_min']) ?></td>
-                <td style="padding:10px 18px;text-align:right;font-size:15px;color:#1f6e4e"><?= fmtMin((int)$pc['fact_min']) ?> fact.</td>
+                <td style="padding:10px 18px;text-align:right;font-size:13px;color:#1f6e4e"><?= fmtMin((int)$pc['fact_min']) ?> fact.</td>
             </tr>
             <?php endforeach; ?>
         </table>
@@ -83,7 +83,7 @@ function fmtMin(int $min): string {
     <!-- Par catégorie -->
     <?php if(!empty($par_categorie)): ?>
     <div class="card" style="padding:0;overflow:hidden">
-        <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:17px">Par catégorie</div>
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px">Par catégorie</div>
         <div style="padding:14px 18px;display:flex;flex-direction:column;gap:10px">
             <?php foreach($par_categorie as $pc):
                 $cat = $cats[$pc['categorie']] ?? ['label'=>$pc['categorie'],'color'=>'#6b7280'];
@@ -91,8 +91,8 @@ function fmtMin(int $min): string {
             ?>
             <div>
                 <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-                    <span style="font-size:15px;font-weight:600;color:<?= $cat['color'] ?>"><?= $cat['label'] ?></span>
-                    <span style="font-size:15px;font-family:monospace"><?= fmtMin((int)$pc['total_min']) ?> (<?= $pct ?>%)</span>
+                    <span style="font-size:13px;font-weight:600;color:<?= $cat['color'] ?>"><?= $cat['label'] ?></span>
+                    <span style="font-size:13px;font-family:monospace"><?= fmtMin((int)$pc['total_min']) ?> (<?= $pct ?>%)</span>
                 </div>
                 <div style="height:6px;background:#f0f3f8;border-radius:3px">
                     <div style="height:6px;width:<?= $pct ?>%;background:<?= $cat['color'] ?>;border-radius:3px"></div>
@@ -106,17 +106,17 @@ function fmtMin(int $min): string {
 
 <!-- Liste des saisies -->
 <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:17px">
+    <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px">
         Détail des saisies — <?= $mois_labels[$mois] ?> <?= $annee ?>
     </div>
     <?php if(empty($saisies)): ?>
     <div style="text-align:center;padding:48px;color:var(--text-muted)">
         <div style="font-size:32px;margin-bottom:12px">⏱</div>
         <div style="font-weight:600;margin-bottom:6px">Aucune saisie ce mois</div>
-        <div style="font-size:16px">Cliquez sur "Saisir du temps" pour commencer</div>
+        <div style="font-size:14px">Cliquez sur "Saisir du temps" pour commencer</div>
     </div>
     <?php else: ?>
-    <table style="width:100%;border-collapse:collapse;font-size:16px">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
         <thead>
             <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
                 <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Date</th>
@@ -136,10 +136,10 @@ function fmtMin(int $min): string {
             <td style="padding:11px 16px;font-family:monospace;color:var(--text-muted)"><?= date('d/m/Y', strtotime($s['date_travail'])) ?></td>
             <td style="padding:11px 16px;font-weight:600"><?= e($s['prenom'].' '.$s['user_nom']) ?></td>
             <td style="padding:11px 16px">
-                <span style="background:<?= $cat['color'] ?>18;color:<?= $cat['color'] ?>;padding:2px 8px;border-radius:10px;font-size:15px;font-weight:600"><?= $cat['label'] ?></span>
+                <span style="background:<?= $cat['color'] ?>18;color:<?= $cat['color'] ?>;padding:2px 8px;border-radius:10px;font-size:13px;font-weight:600"><?= $cat['label'] ?></span>
             </td>
-            <td style="padding:11px 16px;color:var(--text-muted);font-size:15px;max-width:200px"><?= e($s['description'] ?? '') ?></td>
-            <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;font-size:17px"><?= fmtMin((int)$s['duree_minutes']) ?></td>
+            <td style="padding:11px 16px;color:var(--text-muted);font-size:13px;max-width:200px"><?= e($s['description'] ?? '') ?></td>
+            <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;font-size:14px"><?= fmtMin((int)$s['duree_minutes']) ?></td>
             <td style="padding:11px 16px;text-align:center">
                 <?php if($s['facture']): ?>
                 <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-size:14px;font-weight:700">Facturé</span>
@@ -163,7 +163,7 @@ function fmtMin(int $min): string {
         <tfoot>
             <tr style="background:var(--navy-dark);color:#fff">
                 <td colspan="4" style="padding:11px 16px;font-weight:700">TOTAL</td>
-                <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;font-size:18px"><?= fmtMin($total_minutes) ?></td>
+                <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;font-size:13px"><?= fmtMin($total_minutes) ?></td>
                 <td colspan="2"></td>
             </tr>
         </tfoot>
@@ -174,7 +174,7 @@ function fmtMin(int $min): string {
 <!-- Modal saisie -->
 <div id="modal-saisie" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center">
     <div style="background:#fff;border-radius:16px;padding:28px;width:480px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="font-size:17px;font-weight:700;margin-bottom:20px;color:var(--navy-dark)">Saisir du temps</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:20px;color:var(--navy-dark)">Saisir du temps</div>
         <form method="post" action="<?= APP_URL ?>/dossier/temps/store">
             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 
@@ -216,7 +216,7 @@ function fmtMin(int $min): string {
             <div style="margin-bottom:20px">
                 <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
                     <input type="checkbox" name="facturable" checked style="width:16px;height:16px;accent-color:var(--navy-dark)">
-                    <span style="font-size:16px;font-weight:500">Temps facturable</span>
+                    <span style="font-size:14px;font-weight:500">Temps facturable</span>
                 </label>
             </div>
 

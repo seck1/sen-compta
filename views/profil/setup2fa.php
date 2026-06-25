@@ -31,7 +31,7 @@
         });
         </script>
         <div style="margin-top:12px;font-size:12px;color:var(--text-muted)">Clé manuelle :</div>
-        <div style="font-family:monospace;font-size:16px;font-weight:600;letter-spacing:3px;color:var(--navy);margin-top:4px"><?= e(chunk_split($_SESSION['totp_pending'] ?? '', 4, ' ')) ?></div>
+        <div style="font-family:monospace;font-size:14px;font-weight:600;letter-spacing:3px;color:var(--navy);margin-top:4px"><?= e(chunk_split($_SESSION['totp_pending'] ?? '', 4, ' ')) ?></div>
     </div>
 
     <form method="post" action="<?= APP_URL ?>/profil/confirm-2fa">

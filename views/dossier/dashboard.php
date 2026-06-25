@@ -7,7 +7,7 @@
         <!-- Switcher exercice -->
         <div style="position:relative">
             <select onchange="window.location='<?= APP_URL ?>/dossier?id=<?= $entreprise['id'] ?>&exercice='+this.value"
-                    style="padding:9px 36px 9px 14px;border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:'DM Sans',sans-serif;background:white;color:var(--text);cursor:pointer;appearance:none;font-weight:500">
+                    style="padding:9px 36px 9px 14px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:white;color:var(--text);cursor:pointer;appearance:none;font-weight:500">
                 <?php foreach ($exercicesDispos as $ex): ?>
                 <option value="<?= $ex ?>" <?= $ex==$exercice?'selected':'' ?>>Exercice <?= $ex ?></option>
                 <?php endforeach; ?>
@@ -20,7 +20,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-muted)"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
         </div>
         <?php if ($nbBrouillons > 0): ?>
-        <a href="<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>&statut=brouillon" style="display:flex;align-items:center;gap:7px;padding:9px 14px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;font-size:16px;font-weight:600;color:#92400e;text-decoration:none">
+        <a href="<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>&statut=brouillon" style="display:flex;align-items:center;gap:7px;padding:9px 14px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;font-size:14px;font-weight:600;color:#92400e;text-decoration:none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
             <?= $nbBrouillons ?> brouillon<?= $nbBrouillons>1?'s':'' ?> à valider
         </a>
@@ -35,14 +35,14 @@
 <?php if ($alerteBulletins || $alerteTVA): ?>
 <div style="margin-bottom:18px;display:flex;flex-direction:column;gap:8px">
 <?php if ($alerteBulletins): ?>
-<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;font-size:16px;color:#92400e">
+<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;font-size:14px;color:#92400e">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:#f59e0b;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
     <strong>Alerte paie :</strong> <?= $bulletinsMois ?>/<?= $nbEmployes ?> bulletins générés pour <?= moisFr() ?>.
     <a href="<?= APP_URL ?>/dossier/rh/bulletins?id=<?= $entreprise['id'] ?>" style="color:#d97706;font-weight:600;text-decoration:underline">Générer les bulletins</a>
 </div>
 <?php endif; ?>
 <?php if ($alerteTVA): ?>
-<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;font-size:16px;color:#7f1d1d">
+<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;font-size:14px;color:#7f1d1d">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:#ef4444;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
     <strong>Alerte TVA :</strong> Aucune déclaration TVA pour <?= moisFr() ?>.
     <a href="<?= APP_URL ?>/dossier/tva?id=<?= $entreprise['id'] ?>" style="color:#dc2626;font-weight:600;text-decoration:underline">Déclarer la TVA</a>
@@ -101,7 +101,7 @@
     <div class="card" style="padding:22px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
             <div>
-                <div style="font-size:17px;font-weight:600;color:var(--navy-dark)">Produits vs Charges — 6 mois</div>
+                <div style="font-size:14px;font-weight:600;color:var(--navy-dark)">Produits vs Charges — 6 mois</div>
                 <div style="font-size:14px;color:var(--text-muted);margin-top:2px">Exercice <?= $exercice ?></div>
             </div>
             <div style="display:flex;gap:14px;font-size:14px;color:var(--text-muted)">
@@ -113,15 +113,15 @@
     </div>
     <!-- Top charges -->
     <div class="card" style="padding:22px">
-        <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Top charges</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Top charges</div>
         <div style="font-size:14px;color:var(--text-muted);margin-bottom:16px">Exercice <?= $exercice ?></div>
         <?php if (empty($topCharges)): ?>
-        <div style="text-align:center;padding:30px;font-size:16px;color:var(--text-muted)">Aucune charge enregistrée</div>
+        <div style="text-align:center;padding:30px;font-size:14px;color:var(--text-muted)">Aucune charge enregistrée</div>
         <?php else: ?>
         <?php $maxCharge = max(array_column($topCharges, 'total')); ?>
         <?php foreach ($topCharges as $tc): ?>
         <div style="margin-bottom:12px">
-            <div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:4px">
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
                 <span style="color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:160px"><?= e($tc['numero']) ?> <?= e($tc['intitule']) ?></span>
                 <span style="font-family:monospace;font-size:14px;color:var(--text-muted);flex-shrink:0;margin-left:8px"><?= number_format($tc['total'],0,',',' ') ?></span>
             </div>
@@ -177,7 +177,7 @@ new Chart(document.getElementById('chartDossierCA'), {
             <tbody>
             <?php foreach ($dernieres as $ec): ?>
             <tr>
-                <td style="font-size:16px"><?= date('d/m/Y', strtotime($ec['date_ecriture'])) ?></td>
+                <td style="font-size:14px"><?= date('d/m/Y', strtotime($ec['date_ecriture'])) ?></td>
                 <td><span class="badge badge-navy"><?= e($ec['journal_code']) ?></span></td>
                 <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= e($ec['libelle']) ?></td>
                 <td class="montant-debit"><?= number_format($ec['total_debit'], 0, ',', ' ') ?> F</td>
@@ -194,16 +194,16 @@ new Chart(document.getElementById('chartDossierCA'), {
 
         <!-- Prochaines échéances -->
         <div class="card" style="padding:0;overflow:hidden">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-size:16px;font-weight:600;color:var(--navy-dark)">
+            <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;color:var(--navy-dark)">
                 Prochaines échéances fiscales
             </div>
             <?php if (empty($prochainesEcheances)): ?>
-            <div style="padding:20px;text-align:center;font-size:16px;color:var(--text-muted)">Aucune échéance à venir</div>
+            <div style="padding:20px;text-align:center;font-size:14px;color:var(--text-muted)">Aucune échéance à venir</div>
             <?php else: ?>
             <?php foreach ($prochainesEcheances as $ech): ?>
             <div style="padding:12px 18px;border-bottom:1px solid rgba(228,233,240,0.5);display:flex;justify-content:space-between;align-items:center">
                 <div>
-                    <div style="font-size:16px;font-weight:500;color:var(--text)"><?= e($ech['libelle'] ?? $ech['type'] ?? 'Échéance') ?></div>
+                    <div style="font-size:14px;font-weight:500;color:var(--text)"><?= e($ech['libelle'] ?? $ech['type'] ?? 'Échéance') ?></div>
                     <div style="font-size:14px;color:var(--text-muted)"><?= date('d/m/Y', strtotime($ech['date_echeance'])) ?></div>
                 </div>
                 <?php $diff = (new DateTime($ech['date_echeance']))->diff(new DateTime())->days; ?>
@@ -215,14 +215,14 @@ new Chart(document.getElementById('chartDossierCA'), {
 
         <!-- Journaux -->
         <div class="card" style="padding:0;overflow:hidden">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-size:16px;font-weight:600;color:var(--navy-dark)">Journaux</div>
+            <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;color:var(--navy-dark)">Journaux</div>
             <?php foreach ($journaux as $j): ?>
             <a href="<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>&journal=<?= e($j['code']) ?>"
                style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(228,233,240,0.4);text-decoration:none;transition:background 0.15s"
                onmouseenter="this.style.background='var(--bg)'" onmouseleave="this.style.background=''">
                 <div style="display:flex;align-items:center;gap:9px">
                     <div style="width:28px;height:28px;border-radius:7px;background:var(--ent-color);opacity:0.85;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white"><?= e($j['code']) ?></div>
-                    <div style="font-size:15px;color:var(--text)"><?= e($j['libelle']) ?></div>
+                    <div style="font-size:13px;color:var(--text)"><?= e($j['libelle']) ?></div>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:13px;height:13px;color:var(--text-muted)"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
             </a>

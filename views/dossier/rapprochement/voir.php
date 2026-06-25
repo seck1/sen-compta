@@ -56,17 +56,17 @@ $errorMsg = match($_GET['error'] ?? '') {
 </div>
 
 <?php if ($errorMsg): ?>
-<div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#dc2626;font-size:16px">⚠ <?= $errorMsg ?></div>
+<div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#dc2626;font-size:14px">⚠ <?= $errorMsg ?></div>
 <?php endif; ?>
 
 <?php if ($imported !== null): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#1f6e4e;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#1f6e4e;font-size:14px">
     ✓ <?= $imported ?> ligne(s) importée(s) depuis le relevé CSV.
 </div>
 <?php endif; ?>
 
 <?php if ($autoMatched !== null): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#2563eb;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#2563eb;font-size:14px">
     ✓ Lettrage automatique : <strong><?= $autoMatched ?> correspondance(s)</strong> trouvée(s) (montant exact ± date 3 jours).
 </div>
 <?php endif; ?>
@@ -75,12 +75,12 @@ $errorMsg = match($_GET['error'] ?? '') {
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
     <div class="kpi-card">
         <div class="kpi-label">Solde relevé</div>
-        <div class="kpi-value" style="font-size:18px"><?= $fmt($solde_releve) ?></div>
+        <div class="kpi-value" style="font-size:13px"><?= $fmt($solde_releve) ?></div>
         <div class="kpi-sub">Document bancaire</div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">Solde comptable</div>
-        <div class="kpi-value" style="font-size:18px"><?= $fmt($solde_comptable) ?></div>
+        <div class="kpi-value" style="font-size:13px"><?= $fmt($solde_comptable) ?></div>
         <div class="kpi-sub"><?= $nbRapproche ?> ligne(s) rapprochée(s)</div>
     </div>
     <div class="kpi-card" style="border:2px solid <?= $ecartOk ? 'rgba(31,110,78,0.4)' : 'rgba(239,68,68,0.4)' ?>">
@@ -102,7 +102,7 @@ $errorMsg = match($_GET['error'] ?? '') {
 </div>
 
 <?php if ($ecartOk && $rapprochement['statut'] === 'rapproche'): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;color:#1f6e4e;font-size:16px;display:flex;align-items:center;gap:10px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;color:#1f6e4e;font-size:14px;display:flex;align-items:center;gap:10px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     <strong>Rapprochement équilibré</strong> — tous les mouvements concordent parfaitement.
 </div>
@@ -117,7 +117,7 @@ $errorMsg = match($_GET['error'] ?? '') {
             <div class="table-header" style="display:flex;align-items:center;justify-content:space-between">
                 <div>
                     <div class="table-title">Relevé bancaire</div>
-                    <div style="font-size:15px;color:var(--text-muted);margin-top:2px"><?= $nbReleve ?> ligne(s) · <?= $nbRapproche ?> rapprochée(s)</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:2px"><?= $nbReleve ?> ligne(s) · <?= $nbRapproche ?> rapprochée(s)</div>
                 </div>
                 <?php if ($nbReleve > 0): ?>
                 <span style="font-size:14px;padding:3px 10px;border-radius:20px;background:<?= $nbNonRapproche>0?'rgba(245,158,11,0.1)':'rgba(31,110,78,0.1)' ?>;color:<?= $nbNonRapproche>0?'#d97706':'#1f6e4e' ?>;font-weight:600">
@@ -129,8 +129,8 @@ $errorMsg = match($_GET['error'] ?? '') {
             <?php if (empty($releveLignes)): ?>
             <div style="padding:40px 20px;text-align:center;color:var(--text-muted)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" style="width:40px;height:40px;margin:0 auto 12px;display:block;opacity:.3"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                <div style="font-size:17px;font-weight:500;margin-bottom:6px">Aucun relevé importé</div>
-                <div style="font-size:15px">Importez votre relevé bancaire CSV pour commencer</div>
+                <div style="font-size:14px;font-weight:500;margin-bottom:6px">Aucun relevé importé</div>
+                <div style="font-size:13px">Importez votre relevé bancaire CSV pour commencer</div>
                 <button onclick="document.getElementById('modal-csv').style.display='flex'" class="btn btn-ent btn-sm" style="margin-top:14px">Importer CSV</button>
             </div>
             <?php else: ?>
@@ -147,10 +147,10 @@ $errorMsg = match($_GET['error'] ?? '') {
                 <tbody>
                 <?php foreach ($releveLignes as $rl): ?>
                 <tr style="<?= $rl['rapproche'] ? 'background:rgba(31,110,78,0.05)' : '' ?>;opacity:<?= $rl['rapproche'] ? '.7' : '1' ?>">
-                    <td style="font-size:15px;white-space:nowrap"><?= date('d/m/Y', strtotime($rl['date_operation'])) ?></td>
-                    <td style="font-size:15px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($rl['libelle']) ?>"><?= e($rl['libelle']) ?></td>
-                    <td style="text-align:right;font-size:15px;color:#1f6e4e;font-weight:500"><?= $rl['debit'] > 0 ? $fmt($rl['debit']) : '' ?></td>
-                    <td style="text-align:right;font-size:15px;color:#dc2626;font-weight:500"><?= $rl['credit'] > 0 ? $fmt($rl['credit']) : '' ?></td>
+                    <td style="font-size:13px;white-space:nowrap"><?= date('d/m/Y', strtotime($rl['date_operation'])) ?></td>
+                    <td style="font-size:13px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($rl['libelle']) ?>"><?= e($rl['libelle']) ?></td>
+                    <td style="text-align:right;font-size:13px;color:#1f6e4e;font-weight:500"><?= $rl['debit'] > 0 ? $fmt($rl['debit']) : '' ?></td>
+                    <td style="text-align:right;font-size:13px;color:#dc2626;font-weight:500"><?= $rl['credit'] > 0 ? $fmt($rl['credit']) : '' ?></td>
                     <td style="text-align:center">
                         <?php if ($rl['rapproche']): ?>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#1f6e4e" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
@@ -171,13 +171,13 @@ $errorMsg = match($_GET['error'] ?? '') {
         <div class="table-wrap">
             <div class="table-header">
                 <div class="table-title">Écritures comptables</div>
-                <div style="font-size:15px;color:var(--text-muted);margin-top:2px">Compte <?= e($rapprochement['compte_banque']) ?> · <?= e($periode) ?></div>
+                <div style="font-size:13px;color:var(--text-muted);margin-top:2px">Compte <?= e($rapprochement['compte_banque']) ?> · <?= e($periode) ?></div>
             </div>
 
             <?php if (empty($lignes)): ?>
             <div style="padding:40px 20px;text-align:center;color:var(--text-muted)">
-                <div style="font-size:17px;font-weight:500">Aucune écriture sur ce compte</div>
-                <div style="font-size:15px;margin-top:4px">pour la période sélectionnée</div>
+                <div style="font-size:14px;font-weight:500">Aucune écriture sur ce compte</div>
+                <div style="font-size:13px;margin-top:4px">pour la période sélectionnée</div>
             </div>
             <?php else: ?>
             <table>
@@ -209,10 +209,10 @@ $errorMsg = match($_GET['error'] ?? '') {
                             </button>
                         </form>
                     </td>
-                    <td style="font-size:15px;white-space:nowrap"><?= date('d/m/Y', strtotime($l['date_ecriture'])) ?></td>
-                    <td style="font-size:15px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($l['ecriture_libelle'] ?: $l['ligne_libelle']) ?>"><?= e($l['ecriture_libelle'] ?: $l['ligne_libelle']) ?></td>
-                    <td style="text-align:right;font-size:15px;color:#1f6e4e"><?= $l['debit'] > 0 ? $fmt($l['debit']) : '' ?></td>
-                    <td style="text-align:right;font-size:15px;color:#dc2626"><?= $l['credit'] > 0 ? $fmt($l['credit']) : '' ?></td>
+                    <td style="font-size:13px;white-space:nowrap"><?= date('d/m/Y', strtotime($l['date_ecriture'])) ?></td>
+                    <td style="font-size:13px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($l['ecriture_libelle'] ?: $l['ligne_libelle']) ?>"><?= e($l['ecriture_libelle'] ?: $l['ligne_libelle']) ?></td>
+                    <td style="text-align:right;font-size:13px;color:#1f6e4e"><?= $l['debit'] > 0 ? $fmt($l['debit']) : '' ?></td>
+                    <td style="text-align:right;font-size:13px;color:#dc2626"><?= $l['credit'] > 0 ? $fmt($l['credit']) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -226,11 +226,11 @@ $errorMsg = match($_GET['error'] ?? '') {
 <div id="modal-csv" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);align-items:center;justify-content:center">
     <div style="background:var(--bg-card);border-radius:16px;padding:32px;width:500px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-            <h3 style="font-size:17px;font-weight:700;color:var(--text)">Importer un relevé bancaire CSV</h3>
+            <h3 style="font-size:14px;font-weight:700;color:var(--text)">Importer un relevé bancaire CSV</h3>
             <button onclick="document.getElementById('modal-csv').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:20px;line-height:1">×</button>
         </div>
 
-        <div style="background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:15px;color:var(--text-muted);line-height:1.7">
+        <div style="background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:var(--text-muted);line-height:1.7">
             <strong style="color:var(--text);display:block;margin-bottom:6px">Format CSV accepté :</strong>
             <div>• Séparateur <code style="background:var(--bg);padding:1px 5px;border-radius:4px">;</code> ou <code style="background:var(--bg);padding:1px 5px;border-radius:4px">,</code></div>
             <div>• Colonnes : <code style="background:var(--bg);padding:1px 5px;border-radius:4px">Date ; Libellé ; Débit ; Crédit</code></div>
@@ -249,8 +249,8 @@ $errorMsg = match($_GET['error'] ?? '') {
                  ondragleave="this.style.borderColor='rgba(201,169,110,0.3)'"
                  ondrop="event.preventDefault();this.style.borderColor='rgba(201,169,110,0.3)';handleDrop(event)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c9a96e" style="width:36px;height:36px;margin:0 auto 10px;display:block;opacity:.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                <div style="font-size:17px;color:var(--text);font-weight:500" id="drop-label">Glisser le fichier CSV ici</div>
-                <div style="font-size:15px;color:var(--text-muted);margin-top:4px">ou cliquer pour sélectionner</div>
+                <div style="font-size:14px;color:var(--text);font-weight:500" id="drop-label">Glisser le fichier CSV ici</div>
+                <div style="font-size:13px;color:var(--text-muted);margin-top:4px">ou cliquer pour sélectionner</div>
             </div>
             <input type="file" id="csv-input" name="csv_file" accept=".csv,.txt" style="display:none" onchange="document.getElementById('drop-label').textContent=this.files[0]?.name||'Glisser le fichier CSV ici'">
 

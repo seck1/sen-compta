@@ -7,10 +7,10 @@ $p = $bilan['passif'];
 <style>
 .ef-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px; }
 .ef-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; color:var(--navy-dark); }
-.ef-subtitle { font-size:16px; color:var(--text-muted); margin-top:4px; }
+.ef-subtitle { font-size:14px; color:var(--text-muted); margin-top:4px; }
 .equilibre-badge {
     display:inline-flex; align-items:center; gap:8px;
-    padding:8px 18px; border-radius:30px; font-size:16px; font-weight:600;
+    padding:8px 18px; border-radius:30px; font-size:14px; font-weight:600;
 }
 .equilibre-ok { background:rgba(31,110,78,0.1); color:#1f6e4e; border:1px solid rgba(31,110,78,0.25); }
 .equilibre-ko { background:rgba(239,68,68,0.1); color:#dc2626; border:1px solid rgba(239,68,68,0.25); }
@@ -18,7 +18,7 @@ $p = $bilan['passif'];
 .bilan-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .bilan-col { background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
 .bilan-col-header {
-    padding:14px 20px; font-size:16px; font-weight:700;
+    padding:14px 20px; font-size:14px; font-weight:700;
     text-transform:uppercase; letter-spacing:1.5px;
     border-bottom:2px solid var(--border);
 }
@@ -34,12 +34,12 @@ $p = $bilan['passif'];
 .bilan-row {
     display:grid; grid-template-columns:1fr auto auto auto auto;
     padding:9px 20px; border-bottom:1px solid rgba(228,233,240,0.4);
-    font-size:16px; align-items:center; gap:12px;
+    font-size:14px; align-items:center; gap:12px;
 }
 .bilan-row:last-child { border-bottom:none; }
-.bilan-row.sub { padding-left:32px; color:var(--text-muted); font-size:15px; }
+.bilan-row.sub { padding-left:32px; color:var(--text-muted); font-size:13px; }
 .bilan-row.subtotal { background:rgba(240,243,248,0.6); font-weight:600; }
-.bilan-row.total-row { background:var(--navy-dark); color:white; font-weight:700; font-size:17px; }
+.bilan-row.total-row { background:var(--navy-dark); color:white; font-weight:700; font-size:14px; }
 .col-head { font-size:13px; color:var(--text-muted); text-align:right; font-weight:600; text-transform:uppercase; }
 .num { font-family:monospace; text-align:right; }
 .num-debit { color:var(--text-muted); }
@@ -71,7 +71,7 @@ $p = $bilan['passif'];
 </div>
 
 <?php if ($premierExercice ?? false): ?>
-<div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:11px 18px;margin-bottom:16px;font-size:16px;color:#1d4ed8;display:flex;align-items:center;gap:10px">
+<div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:11px 18px;margin-bottom:16px;font-size:14px;color:#1d4ed8;display:flex;align-items:center;gap:10px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
     Premier exercice — aucune comparaison N-1 disponible.
 </div>
@@ -106,7 +106,7 @@ function evolPct($n, $n1): string {
     ?>
     <div class="card" style="padding:16px">
         <div style="font-size:14px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px"><?= $label ?></div>
-        <div style="font-size:18px;font-weight:700;color:<?= $color ?>;font-family:monospace"><?= $prefix . number_format(abs($vN),0,',',' ') ?></div>
+        <div style="font-size:13px;font-weight:700;color:<?= $color ?>;font-family:monospace"><?= $prefix . number_format(abs($vN),0,',',' ') ?></div>
         <div style="font-size:14px;color:var(--text-muted);margin-top:4px">
             N-1 : <?= number_format($vN1,0,',',' ') ?>
             <?= evolPct($vN, $vN1) ?>

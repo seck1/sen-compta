@@ -18,14 +18,14 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy)}
 .totaux{background:#f8fafc;border-radius:10px;padding:16px;margin-top:12px;display:flex;justify-content:flex-end}
 .totaux-table{min-width:280px}
 .totaux-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px}
-.totaux-row.total{font-size:16px;font-weight:700;color:var(--navy-dark);border-top:2px solid var(--border);margin-top:6px;padding-top:10px}
+.totaux-row.total{font-size:14px;font-weight:700;color:var(--navy-dark);border-top:2px solid var(--border);margin-top:6px;padding-top:10px}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s}
 .btn-gold{background:var(--gold);color:var(--navy-dark)}
 .btn-gold:hover{background:var(--gold-dark);color:#fff}
 .btn-outline{background:transparent;color:var(--text-muted);border:1.5px solid var(--border)}
 .btn-add-ligne{display:flex;align-items:center;gap:6px;padding:8px 14px;border:2px dashed var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-muted);background:none;cursor:pointer;width:100%;justify-content:center;transition:all 0.2s}
 .btn-add-ligne:hover{border-color:var(--navy);color:var(--navy)}
-.btn-del{background:none;border:none;cursor:pointer;color:#ef4444;padding:4px 8px;border-radius:5px;font-size:18px;line-height:1}
+.btn-del{background:none;border:none;cursor:pointer;color:#ef4444;padding:4px 8px;border-radius:5px;font-size:13px;line-height:1}
 .btn-del:hover{background:#fee2e2}
 .prestation-select{width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;cursor:pointer;background:#fff;margin-bottom:14px}
 </style>

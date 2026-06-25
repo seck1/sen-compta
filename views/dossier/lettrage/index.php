@@ -110,7 +110,7 @@ $cntIA = count($suggestions);
 ?>
 <style>
 .type-tab-nav { display:flex; gap:4px; margin-bottom:20px; }
-.type-tab-btn { padding:9px 20px; border-radius:9px; font-size:16px; font-weight:500; text-decoration:none; color:var(--text-muted); border:2px solid transparent; transition:all 0.2s; }
+.type-tab-btn { padding:9px 20px; border-radius:9px; font-size:14px; font-weight:500; text-decoration:none; color:var(--text-muted); border:2px solid transparent; transition:all 0.2s; }
 .type-tab-btn.tab-clients        { border-color:#2563eb22; color:#2563eb; }
 .type-tab-btn.tab-clients.active { border-color:#2563eb; color:#2563eb; background:#eff6ff; }
 .type-tab-btn.tab-clients:hover:not(.active) { border-color:#2563eb66; background:#eff6ff88; }
@@ -212,8 +212,8 @@ $cntIA = count($suggestions);
 .lettrage-table tbody tr:hover { background: #f8fafc; }
 .lettrage-table tbody tr:last-child td { border-bottom: none; }
 
-.badge-nonlettre { display:inline-flex;align-items:center;gap:4px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:20px;padding:2px 10px;font-size:17px;font-weight:600; }
-.badge-lettre { display:inline-flex;align-items:center;gap:4px;background:rgba(201,169,110,0.15);color:var(--gold-dark);border:1px solid rgba(201,169,110,0.3);border-radius:20px;padding:2px 10px;font-size:17px;font-weight:600;font-family:monospace; }
+.badge-nonlettre { display:inline-flex;align-items:center;gap:4px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:20px;padding:2px 10px;font-size:14px;font-weight:600; }
+.badge-lettre { display:inline-flex;align-items:center;gap:4px;background:rgba(201,169,110,0.15);color:var(--gold-dark);border:1px solid rgba(201,169,110,0.3);border-radius:20px;padding:2px 10px;font-size:14px;font-weight:600;font-family:monospace; }
 
 .lettre-group { border-top: 1px solid #e5e7eb; }
 .lettre-group:first-child { border-top: none; }
@@ -245,15 +245,15 @@ $cntIA = count($suggestions);
 </div>
 
 <?php if(isset($_GET['lettre'])): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#1f6e4e;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#1f6e4e;font-size:14px">
     Lettrage <strong><?= e($_GET['lettre']) ?></strong> effectué avec succès.
 </div>
 <?php elseif(isset($_GET['delettre'])): ?>
-<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#92400e;font-size:16px">
+<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#92400e;font-size:14px">
     Lettrage <strong><?= e($_GET['delettre']) ?></strong> supprimé.
 </div>
 <?php elseif(isset($_GET['error'])): ?>
-<div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#dc2626;font-size:16px">
+<div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#dc2626;font-size:14px">
     <?= e($error_msgs[$_GET['error']] ?? 'Erreur.') ?>
 </div>
 <?php endif; ?>
@@ -307,14 +307,14 @@ $cntIA = count($suggestions);
                 <div style="position:relative;flex:1;min-width:200px;max-width:280px">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                     <input type="text" id="search-tiers" oninput="applyFilters()" placeholder="Rechercher un tiers…"
-                        style="width:100%;padding:7px 30px 7px 32px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;outline:none;background:#fff;color:var(--text);transition:border-color .15s"
+                        style="width:100%;padding:7px 30px 7px 32px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;background:#fff;color:var(--text);transition:border-color .15s"
                         onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='#e2e8f0'">
-                    <button type="button" id="clear-search" onclick="document.getElementById('search-tiers').value='';applyFilters()" style="display:none;position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:15px;padding:0">&#215;</button>
+                    <button type="button" id="clear-search" onclick="document.getElementById('search-tiers').value='';applyFilters()" style="display:none;position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:13px;padding:0">&#215;</button>
                 </div>
                 <!-- Filtre compte -->
                 <?php $comptesList = array_unique(array_column($allNonLettrees, 'compte_numero')); sort($comptesList); ?>
                 <?php if (count($comptesList) > 1): ?>
-                <select id="filter-compte" onchange="applyFilters()" style="padding:7px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;outline:none;background:#fff;color:var(--text);cursor:pointer;transition:border-color .15s" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='#e2e8f0'">
+                <select id="filter-compte" onchange="applyFilters()" style="padding:7px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;background:#fff;color:var(--text);cursor:pointer;transition:border-color .15s" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='#e2e8f0'">
                     <option value="">Tous les comptes</option>
                     <?php foreach ($comptesList as $cn): ?>
                     <option value="<?= e($cn) ?>"><?= e($cn) ?></option>
@@ -324,15 +324,15 @@ $cntIA = count($suggestions);
                 <!-- Filtre journal -->
                 <?php $journauxList = array_unique(array_column($allNonLettrees, 'journal_code')); sort($journauxList); ?>
                 <?php if (count($journauxList) > 1): ?>
-                <select id="filter-journal" onchange="applyFilters()" style="padding:7px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;outline:none;background:#fff;color:var(--text);cursor:pointer;transition:border-color .15s" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='#e2e8f0'">
+                <select id="filter-journal" onchange="applyFilters()" style="padding:7px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;background:#fff;color:var(--text);cursor:pointer;transition:border-color .15s" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='#e2e8f0'">
                     <option value="">Tous les journaux</option>
                     <?php foreach ($journauxList as $jc): ?>
                     <option value="<?= e($jc) ?>"><?= e($jc) ?></option>
                     <?php endforeach; ?>
                 </select>
                 <?php endif; ?>
-                <div id="search-info" style="font-size:15px;color:var(--text-muted);display:none;margin-left:4px"></div>
-                <button type="button" id="btn-reset-filters" onclick="resetFilters()" style="display:none;padding:6px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;background:#fff;color:var(--text-muted);cursor:pointer">&#215; Réinitialiser</button>
+                <div id="search-info" style="font-size:13px;color:var(--text-muted);display:none;margin-left:4px"></div>
+                <button type="button" id="btn-reset-filters" onclick="resetFilters()" style="display:none;padding:6px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;background:#fff;color:var(--text-muted);cursor:pointer">&#215; Réinitialiser</button>
             </div>
 
             <!-- Soldes par tiers EN HAUT -->
@@ -345,12 +345,12 @@ $cntIA = count($suggestions);
                 <table style="width:100%;border-collapse:collapse">
                     <thead>
                         <tr style="background:#edf0f5">
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:left">Tiers</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:left">Compte</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--danger);text-align:right">Solde Débit</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1f6e4e;text-align:right">Solde Crédit</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:right">Solde net</th>
-                            <th style="padding:7px 16px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:center">Statut</th>
+                            <th style="padding:7px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:left">Tiers</th>
+                            <th style="padding:7px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:left">Compte</th>
+                            <th style="padding:7px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--danger);text-align:right">Solde Débit</th>
+                            <th style="padding:7px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1f6e4e;text-align:right">Solde Crédit</th>
+                            <th style="padding:7px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:right">Solde net</th>
+                            <th style="padding:7px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#f1f5f9;color:#4a554f;text-align:center">Statut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -361,20 +361,20 @@ $cntIA = count($suggestions);
                             $nomDisplay = $t['nom'];
                         ?>
                         <tr class="tiers-top-row" data-tiers-name="<?= strtolower(e($nomDisplay)) ?>" data-tiers-raw="<?= e($nomDisplay) ?>" onclick="selectByTiersRow(this)" title="Cliquer pour sélectionner toutes les lignes de ce tiers" style="border-top:1px solid #e5e7eb;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#e9eef5'" onmouseout="this.style.background=''">
-                            <td style="padding:8px 16px;font-size:15px;font-weight:500;color:var(--navy-dark)">
+                            <td style="padding:8px 16px;font-size:13px;font-weight:500;color:var(--navy-dark)">
                                 <?php if ($nomDisplay !== '(sans tiers)'): ?>
                                 <span style="display:inline-flex;align-items:center;gap:5px">
                                     <span style="width:6px;height:6px;border-radius:50%;background:#94a3b8;display:inline-block"></span>
                                     <?= e($nomDisplay) ?>
                                 </span>
                                 <?php else: ?>
-                                <span style="color:var(--text-muted);font-style:italic;font-size:15px">(sans tiers)</span>
+                                <span style="color:var(--text-muted);font-style:italic;font-size:13px">(sans tiers)</span>
                                 <?php endif; ?>
                             </td>
                             <td style="padding:8px 16px"><span class="compte-chip"><?= e($t['compte'] ?? '—') ?></span></td>
-                            <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:16px;font-weight:600;color:var(--danger)"><?= $t['debit'] > 0 ? number_format($t['debit'],0,',',' ') : '—' ?></td>
-                            <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:16px;font-weight:600;color:#1f6e4e"><?= $t['credit'] > 0 ? number_format($t['credit'],0,',',' ') : '—' ?></td>
-                            <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:16px;font-weight:700;color:<?= $isSolde ? '#1f6e4e' : ($isDebit ? 'var(--danger)' : '#2563eb') ?>">
+                            <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:14px;font-weight:600;color:var(--danger)"><?= $t['debit'] > 0 ? number_format($t['debit'],0,',',' ') : '—' ?></td>
+                            <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:14px;font-weight:600;color:#1f6e4e"><?= $t['credit'] > 0 ? number_format($t['credit'],0,',',' ') : '—' ?></td>
+                            <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:14px;font-weight:700;color:<?= $isSolde ? '#1f6e4e' : ($isDebit ? 'var(--danger)' : '#2563eb') ?>">
                                 <?= $isSolde ? '0' : number_format(abs($solde),0,',',' ') ?>
                             </td>
                             <td style="padding:8px 16px;text-align:center">
@@ -397,10 +397,10 @@ $cntIA = count($suggestions);
             <div class="lettrage-action-bar">
                 <div class="sel-counter">
                     <strong id="sel-count">0</strong> ligne(s) sélectionnée(s)
-                    <span id="sel-balance-info" style="margin-left:12px;display:none;font-size:15px"></span>
+                    <span id="sel-balance-info" style="margin-left:12px;display:none;font-size:13px"></span>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px">
-                    <label style="display:flex;align-items:center;gap:6px;font-size:15px;color:var(--text-muted);cursor:pointer">
+                    <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted);cursor:pointer">
                         <input type="checkbox" id="chk-all" onchange="toggleAll(this)" style="accent-color:var(--navy)"> Tout sélectionner
                     </label>
                     <button type="submit" class="btn btn-primary btn-sm" id="btn-lettrer" disabled>
@@ -442,18 +442,18 @@ $cntIA = count($suggestions);
                         data-date="<?= e($l['date_ecriture']) ?>">
                         <td style="text-align:center"><input type="checkbox" name="lignes[]" value="<?= $l['id'] ?>" class="ligne-chk" onchange="updateCounter()" style="width:16px;height:16px;cursor:pointer;accent-color:var(--navy)"></td>
                         <td><span class="badge-nonlettre">● Non lettré</span></td>
-                        <td style="font-size:15px;white-space:nowrap;color:var(--text-muted)"><?= e(date('d/m/Y', strtotime($l['date_ecriture']))) ?></td>
+                        <td style="font-size:13px;white-space:nowrap;color:var(--text-muted)"><?= e(date('d/m/Y', strtotime($l['date_ecriture']))) ?></td>
                         <td><span class="compte-chip"><?= e($l['compte_numero']) ?></span></td>
-                        <td style="font-size:15px;font-family:monospace;color:var(--text-muted)"><?= !empty($l['numero_facture']) ? e($l['numero_facture']) : '<span style="color:#cbd5e1">—</span>' ?></td>
-                        <td style="font-size:16px"><?= e($l['libelle'] ?: $l['ecriture_libelle']) ?></td>
-                        <td style="font-size:15px">
+                        <td style="font-size:13px;font-family:monospace;color:var(--text-muted)"><?= !empty($l['numero_facture']) ? e($l['numero_facture']) : '<span style="color:#cbd5e1">—</span>' ?></td>
+                        <td style="font-size:14px"><?= e($l['libelle'] ?: $l['ecriture_libelle']) ?></td>
+                        <td style="font-size:13px">
                             <?php if (!empty($l['nom_tiers'])): ?>
                             <span class="tiers-chip" data-tiers-raw="<?= e($l['nom_tiers']) ?>" onclick="selectByTiersRow(this)" title="Cliquer pour sélectionner toutes les lignes de ce tiers" style="display:inline-flex;align-items:center;background:rgba(30,58,95,.06);border:1px solid rgba(30,58,95,.12);border-radius:20px;padding:2px 9px;font-size:14px;color:var(--navy);font-weight:500;cursor:pointer;transition:all .15s"><?= e($l['nom_tiers']) ?></span>
                             <?php else: ?>—<?php endif; ?>
                         </td>
                         <td><span class="badge badge-navy" style="font-size:14px"><?= e($l['journal_code']) ?></span></td>
-                        <td style="text-align:right;font-family:monospace;font-size:16px;color:var(--danger)"><?= $l['debit'] > 0 ? number_format($l['debit'],0,',',' ') : '—' ?></td>
-                        <td style="text-align:right;font-family:monospace;font-size:16px;color:#1f6e4e"><?= $l['credit'] > 0 ? number_format($l['credit'],0,',',' ') : '—' ?></td>
+                        <td style="text-align:right;font-family:monospace;font-size:14px;color:var(--danger)"><?= $l['debit'] > 0 ? number_format($l['debit'],0,',',' ') : '—' ?></td>
+                        <td style="text-align:right;font-family:monospace;font-size:14px;color:#1f6e4e"><?= $l['credit'] > 0 ? number_format($l['credit'],0,',',' ') : '—' ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -476,11 +476,11 @@ $cntIA = count($suggestions);
             <div style="position:relative;max-width:320px">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                 <input type="text" id="search-tiers-l" oninput="filterTiersLettrees(this.value)" placeholder="Rechercher un tiers…"
-                    style="width:100%;padding:7px 34px 7px 34px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;outline:none;background:#fff;color:var(--text);transition:border-color .15s"
+                    style="width:100%;padding:7px 34px 7px 34px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;background:#fff;color:var(--text);transition:border-color .15s"
                     onfocus="this.style.borderColor='#1f6e4e'" onblur="this.style.borderColor='#e2e8f0'">
-                <button type="button" id="clear-search-l" onclick="clearSearchLettrees()" style="display:none;position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:16px;line-height:1;padding:0">&#215;</button>
+                <button type="button" id="clear-search-l" onclick="clearSearchLettrees()" style="display:none;position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:14px;line-height:1;padding:0">&#215;</button>
             </div>
-            <div id="search-info-l" style="font-size:15px;color:var(--text-muted);padding:4px 2px 8px;display:none"></div>
+            <div id="search-info-l" style="font-size:13px;color:var(--text-muted);padding:4px 2px 8px;display:none"></div>
         </div>
         <?php
         // Calcul soldes par tiers (toutes lignes lettrées)
@@ -501,7 +501,7 @@ $cntIA = count($suggestions);
         ?>
         <!-- Résumé soldes par tiers -->
         <div style="padding:16px 20px 0">
-            <div style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:8px">
+            <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:8px">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 Soldes par tiers
             </div>
@@ -523,24 +523,24 @@ $cntIA = count($suggestions);
                         $isDebit = $solde > 0.01;
                     ?>
                     <tr class="tiers-solde-row" data-tiers="<?= strtolower(e($row['nom'])) ?>" style="border-bottom:1px solid #f1f5f9">
-                        <td style="padding:9px 14px;font-size:16px;font-weight:500;color:var(--navy-dark)">
+                        <td style="padding:9px 14px;font-size:14px;font-weight:500;color:var(--navy-dark)">
                             <?php if ($row['nom'] !== '(sans tiers)'): ?>
                             <span style="display:inline-flex;align-items:center;gap:5px">
                                 <span style="width:7px;height:7px;border-radius:50%;background:#94a3b8;display:inline-block"></span>
                                 <?= e($row['nom']) ?>
                             </span>
                             <?php else: ?>
-                            <span style="color:var(--text-muted);font-style:italic;font-size:15px">(sans tiers)</span>
+                            <span style="color:var(--text-muted);font-style:italic;font-size:13px">(sans tiers)</span>
                             <?php endif; ?>
                         </td>
                         <td style="padding:9px 14px"><span class="compte-chip"><?= e($row['compte']) ?></span></td>
-                        <td style="padding:9px 14px;text-align:right;font-family:monospace;font-size:16px;color:var(--danger);font-weight:500">
+                        <td style="padding:9px 14px;text-align:right;font-family:monospace;font-size:14px;color:var(--danger);font-weight:500">
                             <?= $row['debit'] > 0 ? number_format($row['debit'],0,',',' ') : '—' ?>
                         </td>
-                        <td style="padding:9px 14px;text-align:right;font-family:monospace;font-size:16px;color:#1f6e4e;font-weight:500">
+                        <td style="padding:9px 14px;text-align:right;font-family:monospace;font-size:14px;color:#1f6e4e;font-weight:500">
                             <?= $row['credit'] > 0 ? number_format($row['credit'],0,',',' ') : '—' ?>
                         </td>
-                        <td style="padding:9px 14px;text-align:right;font-family:monospace;font-size:16px;font-weight:700;color:<?= $isSolde ? '#1f6e4e' : ($isDebit ? 'var(--danger)' : '#2563eb') ?>">
+                        <td style="padding:9px 14px;text-align:right;font-family:monospace;font-size:14px;font-weight:700;color:<?= $isSolde ? '#1f6e4e' : ($isDebit ? 'var(--danger)' : '#2563eb') ?>">
                             <?= $isSolde ? '0' : number_format(abs($solde),0,',',' ') ?>
                         </td>
                         <td style="padding:9px 14px;text-align:center">
@@ -564,7 +564,7 @@ $cntIA = count($suggestions);
             </table>
         </div>
         <!-- Séparateur -->
-        <div style="padding:0 20px 12px;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);display:flex;align-items:center;gap:8px">
+        <div style="padding:0 20px 12px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);display:flex;align-items:center;gap:8px">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/></svg>
             Groupes de lettrage
         </div>
@@ -583,8 +583,8 @@ $cntIA = count($suggestions);
             <div class="lettre-group-header" onclick="toggleGroup('<?= $grpId ?>')">
                 <span style="display:flex;align-items:center;gap:10px">
                     <span id="arr-<?= $grpId ?>" style="font-size:9px;color:#1f6e4e;transition:transform .18s">&#9658;</span>
-                    <span class="badge-lettre" style="font-size:16px;padding:3px 13px"><?= e($code) ?></span>
-                    <span style="font-size:15px;color:var(--text-muted)"><?= count($g['lignes']) ?> écriture<?= count($g['lignes'])>1?'s':'' ?> · compte <span class="compte-chip" style="font-size:14px"><?= e($g['compte']) ?></span></span>
+                    <span class="badge-lettre" style="font-size:14px;padding:3px 13px"><?= e($code) ?></span>
+                    <span style="font-size:13px;color:var(--text-muted)"><?= count($g['lignes']) ?> écriture<?= count($g['lignes'])>1?'s':'' ?> · compte <span class="compte-chip" style="font-size:14px"><?= e($g['compte']) ?></span></span>
                     <?php if ($gEquil): ?>
                     <span style="font-size:14px;background:#dcfce7;color:#1f6e4e;border:1px solid #bbf7d0;border-radius:6px;padding:1px 8px;font-weight:600">&#10003; Équilibré</span>
                     <?php else: ?>
@@ -592,8 +592,8 @@ $cntIA = count($suggestions);
                     <?php endif; ?>
                 </span>
                 <span style="display:flex;gap:14px;align-items:center">
-                    <?php if ($gDebit > 0): ?><span style="font-size:15px;font-family:monospace;color:var(--danger)"><?= number_format($gDebit,0,',',' ') ?></span><?php endif; ?>
-                    <?php if ($gCredit > 0): ?><span style="font-size:15px;font-family:monospace;color:#1f6e4e"><?= number_format($gCredit,0,',',' ') ?></span><?php endif; ?>
+                    <?php if ($gDebit > 0): ?><span style="font-size:13px;font-family:monospace;color:var(--danger)"><?= number_format($gDebit,0,',',' ') ?></span><?php endif; ?>
+                    <?php if ($gCredit > 0): ?><span style="font-size:13px;font-family:monospace;color:#1f6e4e"><?= number_format($gCredit,0,',',' ') ?></span><?php endif; ?>
                     <form method="POST" action="<?= APP_URL ?>/dossier/lettrage/delettrer" style="display:inline" onsubmit="return confirm('Supprimer le lettrage <?= e(addslashes($code)) ?> ?')">
                         <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
                         <input type="hidden" name="id" value="<?= (int)$entreprise['id'] ?>">
@@ -614,17 +614,17 @@ $cntIA = count($suggestions);
                     <tbody>
                         <?php foreach ($g['lignes'] as $l): ?>
                         <tr>
-                            <td style="font-size:15px;white-space:nowrap;color:var(--text-muted)"><?= e(date('d/m/Y', strtotime($l['date_ecriture']))) ?></td>
+                            <td style="font-size:13px;white-space:nowrap;color:var(--text-muted)"><?= e(date('d/m/Y', strtotime($l['date_ecriture']))) ?></td>
                             <td><span class="compte-chip"><?= e($l['compte_numero']) ?></span></td>
-                            <td style="font-size:16px"><?= e($l['libelle'] ?: $l['ecriture_libelle']) ?></td>
-                            <td style="font-size:15px">
+                            <td style="font-size:14px"><?= e($l['libelle'] ?: $l['ecriture_libelle']) ?></td>
+                            <td style="font-size:13px">
                                 <?php if (!empty($l['nom_tiers'])): ?>
                                 <span style="display:inline-flex;align-items:center;background:rgba(30,58,95,.06);border:1px solid rgba(30,58,95,.12);border-radius:20px;padding:2px 9px;font-size:14px;color:var(--navy);font-weight:500"><?= e($l['nom_tiers']) ?></span>
                                 <?php else: ?>--<?php endif; ?>
                             </td>
                             <td><span class="badge badge-navy" style="font-size:14px"><?= e($l['journal_code']) ?></span></td>
-                            <td style="text-align:right;font-family:monospace;font-size:16px;color:var(--danger)"><?= $l['debit'] > 0 ? number_format($l['debit'],0,',',' ') : '--' ?></td>
-                            <td style="text-align:right;font-family:monospace;font-size:16px;color:#1f6e4e"><?= $l['credit'] > 0 ? number_format($l['credit'],0,',',' ') : '--' ?></td>
+                            <td style="text-align:right;font-family:monospace;font-size:14px;color:var(--danger)"><?= $l['debit'] > 0 ? number_format($l['debit'],0,',',' ') : '--' ?></td>
+                            <td style="text-align:right;font-family:monospace;font-size:14px;color:#1f6e4e"><?= $l['credit'] > 0 ? number_format($l['credit'],0,',',' ') : '--' ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -640,8 +640,8 @@ $cntIA = count($suggestions);
     <?php if (empty($suggestions)): ?>
     <div style="padding:60px 20px;text-align:center;color:var(--text-muted)">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d9b876" stroke-width="1.5" style="display:block;margin:0 auto 16px;opacity:.5"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2"/><path d="M9 12l2 2 4-4"/></svg>
-        <div style="font-size:17px;font-weight:600;color:#b8923f;margin-bottom:6px">Aucune suggestion trouvée</div>
-        <div style="font-size:16px;max-width:340px;margin:0 auto;line-height:1.6">
+        <div style="font-size:14px;font-weight:600;color:#b8923f;margin-bottom:6px">Aucune suggestion trouvée</div>
+        <div style="font-size:14px;max-width:340px;margin:0 auto;line-height:1.6">
             <?php if (empty($allNonLettrees)): ?>
             Toutes les lignes sont déjà lettrées. 🎉
             <?php else: ?>
@@ -657,11 +657,11 @@ $cntIA = count($suggestions);
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2"/><path d="M9 12l2 2 4-4"/></svg>
             </div>
             <div>
-                <div style="font-size:16px;font-weight:700;color:#5b21b6"><?= $cntIA ?> suggestion<?= $cntIA>1?'s':'' ?> de lettrage</div>
-                <div style="font-size:17px;color:#b8923f;margin-top:1px">Correspondances détectées automatiquement — vérifiez avant de valider</div>
+                <div style="font-size:14px;font-weight:700;color:#5b21b6"><?= $cntIA ?> suggestion<?= $cntIA>1?'s':'' ?> de lettrage</div>
+                <div style="font-size:14px;color:#b8923f;margin-top:1px">Correspondances détectées automatiquement — vérifiez avant de valider</div>
             </div>
         </div>
-        <button type="button" onclick="applyAllSuggestions()" style="padding:7px 16px;background:#b8923f;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">
+        <button type="button" onclick="applyAllSuggestions()" style="padding:7px 16px;background:#b8923f;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
             Tout lettrer
         </button>
@@ -683,7 +683,7 @@ $cntIA = count($suggestions);
         <!-- En-tête suggestion -->
         <div style="padding:12px 20px;background:#faf5ff;display:flex;align-items:center;justify-content:space-between;gap:12px">
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                <span style="font-size:15px;font-weight:700;color:#5b21b6">Suggestion #<?= $si+1 ?></span>
+                <span style="font-size:13px;font-weight:700;color:#5b21b6">Suggestion #<?= $si+1 ?></span>
                 <!-- Score -->
                 <span style="display:inline-flex;align-items:center;gap:5px;background:<?= $scoreBg ?>;border:1px solid <?= $scoreBorder ?>;border-radius:20px;padding:2px 10px;font-size:14px;font-weight:700;color:<?= $scoreColor ?>">
                     <?= $scoreLabel ?> — <?= $score ?>%
@@ -702,47 +702,47 @@ $cntIA = count($suggestions);
                 <span style="font-size:14px;background:#dcfce7;color:#1f6e4e;border:1px solid #bbf7d0;border-radius:6px;padding:2px 8px;font-weight:600">✓ Équilibré</span>
                 <?php endif; ?>
                 <!-- Montant -->
-                <span style="font-size:15px;font-family:monospace;font-weight:600;color:var(--navy-dark)"><?= number_format($totalC ?: $totalD, 0, ',', ' ') ?> FCFA</span>
+                <span style="font-size:13px;font-family:monospace;font-weight:600;color:var(--navy-dark)"><?= number_format($totalC ?: $totalD, 0, ',', ' ') ?> FCFA</span>
             </div>
             <div style="display:flex;gap:8px;align-items:center">
                 <button type="button" onclick="applySuggestion(<?= $si ?>, <?= htmlspecialchars($ids_json) ?>)"
-                    style="padding:6px 14px;background:#b8923f;color:#fff;border:none;border-radius:7px;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px">
+                    style="padding:6px 14px;background:#b8923f;color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/></svg>
                     Lettrer
                 </button>
                 <button type="button" onclick="dismissSuggestion(<?= $si ?>)"
-                    style="padding:6px 10px;background:#fff;color:#94a3b8;border:1px solid #e5e7eb;border-radius:7px;font-size:15px;cursor:pointer" title="Ignorer">✕</button>
+                    style="padding:6px 10px;background:#fff;color:#94a3b8;border:1px solid #e5e7eb;border-radius:7px;font-size:13px;cursor:pointer" title="Ignorer">✕</button>
             </div>
         </div>
         <!-- Lignes de la suggestion -->
         <table style="width:100%;border-collapse:collapse">
             <thead>
                 <tr style="background:#f5f3ff">
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Date</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Compte</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">N° Pièce</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Libellé</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Tiers</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Journal</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--danger);text-align:right">Débit</th>
-                    <th style="padding:6px 14px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1f6e4e;text-align:right">Crédit</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Date</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Compte</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">N° Pièce</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Libellé</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Tiers</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#b8923f;text-align:left">Journal</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--danger);text-align:right">Débit</th>
+                    <th style="padding:6px 14px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1f6e4e;text-align:right">Crédit</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($sug['lignes'] as $l): ?>
                 <tr style="border-top:1px solid #f3e8ff">
-                    <td style="padding:8px 14px;font-size:15px;color:var(--text-muted);white-space:nowrap"><?= e(date('d/m/Y', strtotime($l['date_ecriture']))) ?></td>
+                    <td style="padding:8px 14px;font-size:13px;color:var(--text-muted);white-space:nowrap"><?= e(date('d/m/Y', strtotime($l['date_ecriture']))) ?></td>
                     <td style="padding:8px 14px"><span class="compte-chip"><?= e($l['compte_numero']) ?></span></td>
-                    <td style="padding:8px 14px;font-size:15px;font-family:monospace;color:var(--text-muted)"><?= !empty($l['numero_facture']) ? e($l['numero_facture']) : '—' ?></td>
-                    <td style="padding:8px 14px;font-size:16px"><?= e($l['libelle'] ?: $l['ecriture_libelle']) ?></td>
-                    <td style="padding:8px 14px;font-size:15px">
+                    <td style="padding:8px 14px;font-size:13px;font-family:monospace;color:var(--text-muted)"><?= !empty($l['numero_facture']) ? e($l['numero_facture']) : '—' ?></td>
+                    <td style="padding:8px 14px;font-size:14px"><?= e($l['libelle'] ?: $l['ecriture_libelle']) ?></td>
+                    <td style="padding:8px 14px;font-size:13px">
                         <?php if (!empty($l['nom_tiers'])): ?>
                         <span style="display:inline-flex;align-items:center;background:rgba(184,146,63,.06);border:1px solid rgba(184,146,63,.15);border-radius:20px;padding:2px 9px;font-size:14px;color:#b8923f;font-weight:500"><?= e($l['nom_tiers']) ?></span>
                         <?php else: ?>—<?php endif; ?>
                     </td>
                     <td style="padding:8px 14px"><span class="badge badge-navy" style="font-size:14px"><?= e($l['journal_code']) ?></span></td>
-                    <td style="padding:8px 14px;text-align:right;font-family:monospace;font-size:16px;font-weight:600;color:var(--danger)"><?= $l['debit'] > 0 ? number_format($l['debit'],0,',',' ') : '—' ?></td>
-                    <td style="padding:8px 14px;text-align:right;font-family:monospace;font-size:16px;font-weight:600;color:#1f6e4e"><?= $l['credit'] > 0 ? number_format($l['credit'],0,',',' ') : '—' ?></td>
+                    <td style="padding:8px 14px;text-align:right;font-family:monospace;font-size:14px;font-weight:600;color:var(--danger)"><?= $l['debit'] > 0 ? number_format($l['debit'],0,',',' ') : '—' ?></td>
+                    <td style="padding:8px 14px;text-align:right;font-family:monospace;font-size:14px;font-weight:600;color:#1f6e4e"><?= $l['credit'] > 0 ? number_format($l['credit'],0,',',' ') : '—' ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -761,7 +761,7 @@ $cntIA = count($suggestions);
 
 <?php endif; ?>
 <style>
-.sort-icon { font-size:16px; color:#cbd5e1; margin-left:2px; }
+.sort-icon { font-size:14px; color:#cbd5e1; margin-left:2px; }
 .sortable:hover .sort-icon { color:#94a3b8; }
 .tiers-chip:hover { background:rgba(30,58,95,.12) !important; border-color:rgba(30,58,95,.3) !important; }
 .tiers-top-row:hover td { background:#e9eef5; }

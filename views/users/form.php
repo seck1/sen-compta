@@ -27,7 +27,7 @@
             <?php endif; ?>
 
             <div style="margin-bottom:24px">
-                <h3 style="font-size:15px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Informations personnelles</h3>
+                <h3 style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Informations personnelles</h3>
             </div>
 
             <div class="form-grid" style="margin-bottom:24px">
@@ -229,7 +229,7 @@
     <!-- Assignation dossiers -->
     <div class="card" style="margin:0">
         <div style="margin-bottom:20px">
-            <h3 style="font-size:15px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Dossiers assignés</h3>
+            <h3 style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Dossiers assignés</h3>
             <p style="font-size:13px;color:var(--text-muted)">Accès aux entreprises clientes</p>
         </div>
 
@@ -246,7 +246,7 @@
                     <div style="font-size:11px;color:var(--text-muted)"><?= ucfirst($a['role']) ?></div>
                 </div>
                 <a href="<?= APP_URL ?>/users/assign?remove=<?= $a['id'] ?>&user_id=<?= $user['id'] ?>"
-                   style="color:var(--danger);font-size:18px;text-decoration:none;line-height:1;flex-shrink:0"
+                   style="color:var(--danger);font-size:13px;text-decoration:none;line-height:1;flex-shrink:0"
                    title="Retirer">&times;</a>
             </div>
             <?php endforeach; ?>

@@ -16,14 +16,14 @@ $r = $cr['resultats'];
 
 .cr-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .cr-col { background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
-.cr-col-header { padding:14px 20px; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:2px solid var(--border); }
+.cr-col-header { padding:14px 20px; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:2px solid var(--border); }
 .cr-col.charges .cr-col-header { background:rgba(239,68,68,0.05); color:#dc2626; }
 .cr-col.produits .cr-col-header { background:rgba(31,110,78,0.05); color:#1f6e4e; }
 .cr-section-title { padding:9px 20px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; background:var(--bg); color:var(--text-muted); border-bottom:1px solid var(--border); }
-.cr-row { display:flex; justify-content:space-between; align-items:center; padding:9px 20px; border-bottom:1px solid rgba(228,233,240,0.4); font-size:16px; gap:12px; }
-.cr-row.sub { padding-left:32px; color:var(--text-muted); font-size:15px; }
+.cr-row { display:flex; justify-content:space-between; align-items:center; padding:9px 20px; border-bottom:1px solid rgba(228,233,240,0.4); font-size:14px; gap:12px; }
+.cr-row.sub { padding-left:32px; color:var(--text-muted); font-size:13px; }
 .cr-row.subtotal { background:rgba(240,243,248,0.6); font-weight:600; }
-.cr-row.total-row { background:var(--navy-dark); color:white; font-weight:700; font-size:17px; }
+.cr-row.total-row { background:var(--navy-dark); color:white; font-weight:700; font-size:14px; }
 .cr-num { font-family:monospace; text-align:right; min-width:100px; }
 .cr-num-n1 { font-family:monospace; text-align:right; min-width:90px; color:var(--text-muted); font-size:14px; }
 </style>
@@ -33,7 +33,7 @@ $r = $cr['resultats'];
         <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--navy-dark)">
             Compte de résultat — Exercice <?= e($exercice) ?>
         </div>
-        <div style="font-size:16px;color:var(--text-muted);margin-top:4px"><?= e($entreprise['raison_sociale']) ?> · SYSCOHADA Révisé</div>
+        <div style="font-size:14px;color:var(--text-muted);margin-top:4px"><?= e($entreprise['raison_sociale']) ?> · SYSCOHADA Révisé</div>
     </div>
     <a href="<?= APP_URL ?>/dossier/export/compte-resultat?id=<?= $entreprise['id'] ?>&exercice=<?= $exercice ?>" target="_blank" class="btn btn-primary btn-sm">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" /></svg>
@@ -132,7 +132,7 @@ $r = $cr['resultats'];
         <div class="cr-row total-row">
             <span>TOTAL CHARGES</span>
             <span style="display:flex;gap:16px;align-items:center">
-                <span style="font-family:monospace;text-align:right;min-width:90px;opacity:.6;font-size:15px"><?= number_format($cN1['total']??0,0,',',' ') ?></span>
+                <span style="font-family:monospace;text-align:right;min-width:90px;opacity:.6;font-size:13px"><?= number_format($cN1['total']??0,0,',',' ') ?></span>
                 <span class="cr-num"><?= number_format($c['total'],0,',',' ') ?></span>
             </span>
         </div>
@@ -190,7 +190,7 @@ $r = $cr['resultats'];
         <div class="cr-row total-row">
             <span>TOTAL PRODUITS</span>
             <span style="display:flex;gap:16px;align-items:center">
-                <span style="font-family:monospace;text-align:right;min-width:90px;opacity:.6;font-size:15px"><?= number_format($pN1['total']??0,0,',',' ') ?></span>
+                <span style="font-family:monospace;text-align:right;min-width:90px;opacity:.6;font-size:13px"><?= number_format($pN1['total']??0,0,',',' ') ?></span>
                 <span class="cr-num"><?= number_format($p['total'],0,',',' ') ?></span>
             </span>
         </div>

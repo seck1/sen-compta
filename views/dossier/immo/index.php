@@ -10,7 +10,7 @@ $total_net   = $total_net ?? 0;
 ?>
 
 <?php if ($amort_calcule): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:14px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Amortissements recalculés pour l'exercice <?= $exercice ?>.
 </div>
@@ -79,7 +79,7 @@ $g_net   = array_sum(array_column($items, 'valeur_nette'));
 <div class="table-wrap" style="margin-bottom:20px">
     <div class="table-header">
         <div class="table-title"><?= $typeLabels[$type] ?? ucfirst($type) ?></div>
-        <div style="font-size:16px;color:var(--text-muted)">
+        <div style="font-size:14px;color:var(--text-muted)">
             Brut: <strong><?= $fmt($g_brut) ?></strong> | Amort: <strong><?= $fmt($g_amort) ?></strong> | VNC: <strong style="color:var(--navy)"><?= $fmt($g_net) ?></strong>
         </div>
     </div>
@@ -105,7 +105,7 @@ $g_net   = array_sum(array_column($items, 'valeur_nette'));
                 <?php if ($immo['categorie']): ?><div style="font-size:14px;color:var(--text-muted)"><?= e($immo['categorie']) ?></div><?php endif; ?>
             </td>
             <td><span class="badge badge-navy"><?= e($immo['compte_numero']) ?></span></td>
-            <td style="font-size:16px"><?= date('d/m/Y', strtotime($immo['date_acquisition'])) ?></td>
+            <td style="font-size:14px"><?= date('d/m/Y', strtotime($immo['date_acquisition'])) ?></td>
             <td style="text-align:right"><?= $fmt($immo['valeur_brute']) ?></td>
             <td style="text-align:right;color:#dc2626"><?= $fmt($immo['amort_cumule']) ?></td>
             <td style="text-align:right;font-weight:600;color:var(--navy)"><?= $fmt($immo['valeur_nette']) ?></td>

@@ -167,7 +167,7 @@ function fmtMin(int $min): string {
         <tfoot>
             <tr style="background:var(--navy-dark);color:#fff">
                 <td colspan="2" style="padding:11px 16px;font-weight:700">TOTAL CABINET</td>
-                <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;font-size:15px"><?= fmtMin((int)$total_min_global) ?></td>
+                <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;font-size:13px"><?= fmtMin((int)$total_min_global) ?></td>
                 <td style="padding:11px 16px;text-align:right;font-family:monospace"><?= fmtMin((int)$total_fact_global) ?></td>
                 <td colspan="2"></td>
             </tr>

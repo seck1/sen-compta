@@ -18,14 +18,14 @@ $journauxJson = json_encode(array_map(fn($j) => [
 
 /* ── Titre page ── */
 .ec-page-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; color:var(--navy-dark); letter-spacing:-.3px; }
-.ec-page-sub   { font-size:16px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px; }
-.ec-badge { display:inline-flex; align-items:center; gap:5px; background:rgba(30,58,95,.07); border:1px solid rgba(30,58,95,.15); border-radius:20px; padding:2px 10px; font-size:15px; color:var(--navy); font-weight:500; }
+.ec-page-sub   { font-size:14px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px; }
+.ec-badge { display:inline-flex; align-items:center; gap:5px; background:rgba(30,58,95,.07); border:1px solid rgba(30,58,95,.15); border-radius:20px; padding:2px 10px; font-size:13px; color:var(--navy); font-weight:500; }
 
 /* ── Cards ── */
 .ec-card { background:#fff; border:1px solid var(--border); border-radius:14px; margin-bottom:14px; overflow:hidden; }
 .ec-card-head { display:flex; align-items:center; gap:10px; padding:13px 20px; border-bottom:1px solid var(--border); background:var(--bg); }
-.ec-card-head-icon { font-size:19px; line-height:1; }
-.ec-card-head-title { font-size:16px; font-weight:700; color:var(--navy-dark); text-transform:uppercase; letter-spacing:.7px; }
+.ec-card-head-icon { font-size:13px; line-height:1; }
+.ec-card-head-title { font-size:14px; font-weight:700; color:var(--navy-dark); text-transform:uppercase; letter-spacing:.7px; }
 .ec-card-body { padding:18px 20px; }
 
 /* ── Steps ── */
@@ -33,7 +33,7 @@ $journauxJson = json_encode(array_map(fn($j) => [
 .step {
     display:flex; align-items:center; gap:10px;
     padding:12px 20px; border-radius:10px;
-    font-size:17px; font-weight:500; color:var(--text-muted);
+    font-size:14px; font-weight:500; color:var(--text-muted);
     flex:1; position:relative;
 }
 .step.active { background:var(--navy); color:#fff; }
@@ -41,12 +41,12 @@ $journauxJson = json_encode(array_map(fn($j) => [
 .step-num {
     width:26px; height:26px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
-    font-size:15px; font-weight:700; flex-shrink:0;
+    font-size:13px; font-weight:700; flex-shrink:0;
     background:rgba(0,0,0,.1);
 }
 .step.active .step-num { background:rgba(255,255,255,.2); color:#fff; }
 .step.done   .step-num { background:#1f6e4e; color:#fff; }
-.step-arrow { color:var(--border); font-size:18px; flex-shrink:0; }
+.step-arrow { color:var(--border); font-size:13px; flex-shrink:0; }
 
 /* ── Upload zone ── */
 .upload-zone {
@@ -57,20 +57,20 @@ $journauxJson = json_encode(array_map(fn($j) => [
 .upload-zone:hover, .upload-zone.drag { border-color:#1f6e4e; background:rgba(31,110,78,.04); }
 .upload-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
 .upload-icon { font-size:48px; display:block; margin-bottom:14px; }
-.upload-title { font-size:19px; font-weight:600; color:var(--navy-dark); margin-bottom:6px; }
-.upload-sub   { font-size:16px; color:var(--text-muted); }
+.upload-title { font-size:13px; font-weight:600; color:var(--navy-dark); margin-bottom:6px; }
+.upload-sub   { font-size:14px; color:var(--text-muted); }
 .upload-preview { display:none; align-items:center; gap:16px; padding:16px; background:rgba(31,110,78,.05); border-radius:12px; border:1px solid rgba(31,110,78,.2); }
 .upload-preview img { width:80px; height:80px; object-fit:cover; border-radius:8px; border:1px solid var(--border); }
 .upload-preview-info { flex:1; text-align:left; }
-.upload-preview-name { font-size:17px; font-weight:600; color:var(--navy-dark); }
-.upload-preview-size { font-size:15px; color:var(--text-muted); margin-top:2px; }
+.upload-preview-name { font-size:14px; font-weight:600; color:var(--navy-dark); }
+.upload-preview-size { font-size:13px; color:var(--text-muted); margin-top:2px; }
 
 /* ── Bouton analyser ── */
 .btn-scan {
     width:100%; padding:16px; margin-top:16px;
     background:linear-gradient(135deg,#0f6fba,#0891b2);
     color:#fff; border:none; border-radius:12px;
-    font-size:19px; font-weight:700; font-family:'DM Sans',sans-serif;
+    font-size:13px; font-weight:700; font-family:'DM Sans',sans-serif;
     cursor:pointer; transition:all .2s;
     display:flex; align-items:center; justify-content:center; gap:10px;
     box-shadow:0 4px 15px rgba(15,111,186,.3);
@@ -89,7 +89,7 @@ $journauxJson = json_encode(array_map(fn($j) => [
 }
 .ia-badge-confiance {
     display:inline-flex; align-items:center; gap:5px;
-    padding:4px 12px; border-radius:20px; font-size:15px; font-weight:600;
+    padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600;
 }
 .confiance-haute   { background:rgba(31,110,78,.12); color:#1f6e4e; }
 .confiance-moyenne { background:rgba(245,158,11,.12); color:#d97706; }
@@ -101,10 +101,10 @@ $journauxJson = json_encode(array_map(fn($j) => [
 }
 .ia-info-item { display:flex; flex-direction:column; gap:3px; }
 .ia-info-label { font-size:14px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:.6px; }
-.ia-info-val   { font-size:17px; font-weight:500; color:var(--navy-dark); }
+.ia-info-val   { font-size:14px; font-weight:500; color:var(--navy-dark); }
 
 /* ── Table résultat ── */
-.ec-table { width:100%; border-collapse:collapse; font-size:17px; }
+.ec-table { width:100%; border-collapse:collapse; font-size:14px; }
 .ec-table thead th {
     padding:9px 12px; background:var(--bg);
     font-size:14px; font-weight:700;
@@ -114,10 +114,10 @@ $journauxJson = json_encode(array_map(fn($j) => [
 .ec-table thead th:nth-child(3),
 .ec-table thead th:nth-child(4) { text-align:right; }
 .ec-table tbody tr:nth-child(even) { background:rgba(0,0,0,.018); }
-.ec-table td { padding:10px 12px; vertical-align:middle; font-size:17px; }
+.ec-table td { padding:10px 12px; vertical-align:middle; font-size:14px; }
 .ec-field {
     width:100%; padding:8px 11px; border:1px solid var(--border); border-radius:8px;
-    font-size:17px; font-family:'DM Sans',sans-serif; background:#fff; color:inherit;
+    font-size:14px; font-family:'DM Sans',sans-serif; background:#fff; color:inherit;
     box-sizing:border-box; transition:border-color .15s;
 }
 .ec-field:focus { outline:none; border-color:#1f6e4e; box-shadow:0 0 0 3px rgba(31,110,78,.15); }
@@ -131,7 +131,7 @@ input[type=number] { -moz-appearance:textfield; }
 .montant-credit { color:var(--success); font-weight:600; font-family:Arial, sans-serif; }
 
 /* ── Form label ── */
-.form-label { display:block; font-size:15px; font-weight:600; color:var(--text-muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:.6px; }
+.form-label { display:block; font-size:13px; font-weight:600; color:var(--text-muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:.6px; }
 .form-label .req { color:var(--danger); margin-left:2px; }
 
 /* ── Loading ── */
@@ -146,8 +146,8 @@ input[type=number] { -moz-appearance:textfield; }
     animation:spin .8s linear infinite;
 }
 @keyframes spin { to { transform:rotate(360deg); } }
-.ia-loading-text { font-size:18px; color:var(--text-muted); font-weight:500; }
-.ia-loading-sub  { font-size:16px; color:var(--text-muted); opacity:.6; }
+.ia-loading-text { font-size:13px; color:var(--text-muted); font-weight:500; }
+.ia-loading-sub  { font-size:14px; color:var(--text-muted); opacity:.6; }
 
 /* ── Barre de statut ── */
 #status-bar {
@@ -163,11 +163,11 @@ input[type=number] { -moz-appearance:textfield; }
     padding:0 24px; border-right:1px solid rgba(255,255,255,.08); height:100%;
 }
 .sb-label { font-size:14px; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.8px; font-weight:500; }
-.sb-val   { font-family:Arial, sans-serif; font-weight:700; font-size:18px; color:#fff; }
+.sb-val   { font-family:Arial, sans-serif; font-weight:700; font-size:13px; color:#fff; }
 .sb-divider { width:1px; background:rgba(255,255,255,.08); height:100%; }
 .sb-status { display:flex; align-items:center; gap:10px; padding:0 28px; flex:1; justify-content:center; }
-.sb-ok { color:#4ade80; font-weight:700; font-size:17px; }
-.sb-ko { color:#f87171; font-weight:700; font-size:17px; }
+.sb-ok { color:#4ade80; font-weight:700; font-size:14px; }
+.sb-ko { color:#f87171; font-weight:700; font-size:14px; }
 #btn-valider-scan { flex-shrink:0; }
 #btn-valider-scan:disabled { opacity:.4; cursor:not-allowed; }
 </style>
@@ -253,8 +253,8 @@ input[type=number] { -moz-appearance:textfield; }
             <div class="ia-result-header">
                 <div style="font-size:22px">🤖</div>
                 <div style="flex:1">
-                    <div style="font-size:18px;font-weight:700;color:var(--navy-dark)">Analyse IA terminée</div>
-                    <div style="font-size:16px;color:var(--text-muted);margin-top:2px" id="ia-notes-text"></div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy-dark)">Analyse IA terminée</div>
+                    <div style="font-size:14px;color:var(--text-muted);margin-top:2px" id="ia-notes-text"></div>
                 </div>
                 <span class="ia-badge-confiance" id="ia-confiance-badge"></span>
             </div>
@@ -269,15 +269,15 @@ input[type=number] { -moz-appearance:textfield; }
                         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:2px">
                             <span class="ia-info-val" id="ia-tiers"></span>
                             <div id="ia-tiers-link" style="display:none;align-items:center;gap:8px">
-                                <select id="tiers-select" style="padding:5px 10px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:'DM Sans',sans-serif;color:var(--navy-dark);min-width:200px;outline:none">
+                                <select id="tiers-select" style="padding:5px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--navy-dark);min-width:200px;outline:none">
                                     <option value="">— Lier à un tiers existant —</option>
                                 </select>
-                                <span style="font-size:15px;color:var(--text-muted)">ou</span>
-                                <a id="btn-creer-tiers" href="#" target="_blank" style="font-size:15px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px">
+                                <span style="font-size:13px;color:var(--text-muted)">ou</span>
+                                <a id="btn-creer-tiers" href="#" target="_blank" style="font-size:13px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                                     Créer ce tiers
                                 </a>
-                                <span id="tiers-linked-badge" style="display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:15px;color:#1f6e4e;font-weight:600">
+                                <span id="tiers-linked-badge" style="display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:13px;color:#1f6e4e;font-weight:600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
                                     Lié
                                 </span>
@@ -335,7 +335,7 @@ input[type=number] { -moz-appearance:textfield; }
                     </div>
                     <div>
                         <label class="form-label">🕐 Date de saisie</label>
-                        <div style="padding:9px 12px;background:rgba(30,58,95,.04);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-muted)">
+                        <div style="padding:9px 12px;background:rgba(30,58,95,.04);border:1px solid var(--border);border-radius:8px;font-size:14px;color:var(--text-muted)">
                             <strong><?= date('d/m/Y H:i') ?></strong>
                         </div>
                     </div>
@@ -368,8 +368,8 @@ input[type=number] { -moz-appearance:textfield; }
                         <tfoot>
                             <tr style="background:var(--bg)">
                                 <td colspan="2" style="padding:10px 20px;font-size:14px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px">Totaux</td>
-                                <td style="text-align:right;padding:10px 12px;font-family:monospace;font-weight:700;font-size:18px" id="ia-total-debit">0,00</td>
-                                <td style="text-align:right;padding:10px 12px;font-family:monospace;font-weight:700;font-size:18px" id="ia-total-credit">0,00</td>
+                                <td style="text-align:right;padding:10px 12px;font-family:monospace;font-weight:700;font-size:13px" id="ia-total-debit">0,00</td>
+                                <td style="text-align:right;padding:10px 12px;font-family:monospace;font-weight:700;font-size:13px" id="ia-total-credit">0,00</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -385,7 +385,7 @@ input[type=number] { -moz-appearance:textfield; }
             <div class="ec-card-body" style="text-align:center;padding:56px 32px">
                 <div style="font-size:56px;margin-bottom:16px">✅</div>
                 <div style="font-size:22px;font-weight:700;color:var(--navy-dark);margin-bottom:8px">Écriture enregistrée !</div>
-                <div style="font-size:17px;color:var(--text-muted);margin-bottom:28px">L'écriture a été créée en brouillon. Vous pouvez la valider depuis la liste des écritures.</div>
+                <div style="font-size:14px;color:var(--text-muted);margin-bottom:28px">L'écriture a été créée en brouillon. Vous pouvez la valider depuis la liste des écritures.</div>
                 <div style="display:flex;justify-content:center;gap:12px">
                     <a href="<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>" class="btn btn-primary">Voir les écritures</a>
                     <button type="button" onclick="resetAll()" class="btn btn-outline">🔄 Nouveau scan</button>
@@ -741,7 +741,7 @@ function showError(msg) {
     document.getElementById('section-loading').style.display = 'none';
     setStep(1);
     const div = document.createElement('div');
-    div.style.cssText = 'background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;color:var(--danger);margin-bottom:14px;font-size:17px;display:flex;align-items:center;gap:8px';
+    div.style.cssText = 'background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;color:var(--danger);margin-bottom:14px;font-size:14px;display:flex;align-items:center;gap:8px';
     div.textContent = '⚠️ ' + msg;
     document.getElementById('scan-wrap').prepend(div);
     setTimeout(() => div.remove(), 6000);

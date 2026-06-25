@@ -231,7 +231,7 @@ input[type=number] { -moz-appearance: textfield; }
 </div>
 
 <?php if ($error ?? null): ?>
-<div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;color:var(--danger);margin-bottom:16px;font-size:17px;display:flex;align-items:center;gap:8px">
+<div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;color:var(--danger);margin-bottom:16px;font-size:14px;display:flex;align-items:center;gap:8px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:17px;height:17px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/></svg>
     <?= e($error) ?>
 </div>
@@ -553,24 +553,24 @@ function creerTiersRow(ncols, tiersId, tiersNom) {
 
     // Nom détecté (texte affiché)
     const nomDetecte = mkEl('span');
-    nomDetecte.style.cssText = 'font-size:17px;font-weight:600;color:var(--navy-dark);min-width:120px';
+    nomDetecte.style.cssText = 'font-size:14px;font-weight:600;color:var(--navy-dark);min-width:120px';
     nomDetecte.textContent = '—';
 
     // Select lier
     const sel = mkEl('select');
-    sel.style.cssText = 'padding:5px 10px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:"DM Sans",sans-serif;color:var(--navy-dark);min-width:220px;outline:none;background:#fff';
+    sel.style.cssText = 'padding:5px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:"DM Sans",sans-serif;color:var(--navy-dark);min-width:220px;outline:none;background:#fff';
     const optDefault = mkEl('option', {value:''});
     optDefault.textContent = '— Lier à un tiers existant —';
     sel.appendChild(optDefault);
 
     // Séparateur "ou"
     const ou = mkEl('span');
-    ou.style.cssText = 'font-size:15px;color:var(--text-muted)';
+    ou.style.cssText = 'font-size:13px;color:var(--text-muted)';
     ou.textContent = 'ou';
 
     // Lien créer
     const lienCreer = mkEl('a', {href:'#', target:'_blank'});
-    lienCreer.style.cssText = 'font-size:15px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
+    lienCreer.style.cssText = 'font-size:13px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
     const svgPlus = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgPlus.setAttribute('fill','none'); svgPlus.setAttribute('viewBox','0 0 24 24'); svgPlus.setAttribute('stroke-width','2'); svgPlus.setAttribute('stroke','currentColor'); svgPlus.style.cssText='width:13px;height:13px';
     const pathPlus = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -580,7 +580,7 @@ function creerTiersRow(ncols, tiersId, tiersNom) {
 
     // Badge lié
     const badge = mkEl('span');
-    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:15px;color:#1f6e4e;font-weight:600';
+    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:13px;color:#1f6e4e;font-weight:600';
     const svgCheck = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgCheck.setAttribute('fill','none'); svgCheck.setAttribute('viewBox','0 0 24 24'); svgCheck.setAttribute('stroke-width','2'); svgCheck.setAttribute('stroke','currentColor'); svgCheck.style.cssText='width:12px;height:12px';
     const pathCheck = document.createElementNS('http://www.w3.org/2000/svg','path');

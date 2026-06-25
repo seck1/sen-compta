@@ -13,7 +13,7 @@ h1{font-family:'Cormorant Garamond',serif;font-size:26px;color:#122540;margin-bo
 p{font-size:14px;color:#6b7a94;margin-bottom:28px}
 input[type=text]{width:100%;padding:16px;border:1px solid #e4e9f0;border-radius:12px;font-size:28px;text-align:center;letter-spacing:8px;font-family:monospace;outline:none;transition:border-color .2s}
 input[type=text]:focus{border-color:#1e3a5f;box-shadow:0 0 0 3px rgba(30,58,95,0.08)}
-button{width:100%;padding:14px;background:linear-gradient(135deg,#1e3a5f,#2a4f7c);color:white;border:none;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;margin-top:16px;transition:opacity .2s}
+button{width:100%;padding:14px;background:linear-gradient(135deg,#1e3a5f,#2a4f7c);color:white;border:none;border-radius:12px;font-size:13px;font-weight:500;cursor:pointer;margin-top:16px;transition:opacity .2s}
 button:hover{opacity:0.9}
 .error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#dc2626;border-radius:10px;padding:10px;margin-bottom:16px;font-size:13px}
 a{font-size:13px;color:#6b7a94;text-decoration:none;display:block;margin-top:20px}

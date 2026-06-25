@@ -18,7 +18,7 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
         <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 
         <div class="card" style="margin-bottom:20px">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
                 Sélection employé & période
             </div>
             <div class="form-grid">
@@ -61,8 +61,8 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
 
         <!-- Aperçu salaire de base -->
         <div id="salaire-preview" class="card" style="margin-bottom:20px;display:none;background:rgba(30,58,95,0.03)">
-            <div style="font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Rémunération de base</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;font-size:16px">
+            <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Rémunération de base</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;font-size:14px">
                 <div><span style="color:var(--text-muted)">Salaire base</span><br><strong id="prev-base">—</strong></div>
                 <div><span style="color:var(--text-muted)">Sursalaire</span><br><strong id="prev-surs">—</strong></div>
                 <div><span style="color:var(--text-muted)">Transport</span><br><strong id="prev-trans">—</strong></div>
@@ -71,7 +71,7 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
         </div>
 
         <div class="card" style="margin-bottom:24px">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
                 Éléments variables
             </div>
             <div class="form-grid">
@@ -96,7 +96,7 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
         <!-- Bloc absences détecté automatiquement -->
         <div id="absences-bloc" style="display:none;margin-bottom:20px"></div>
 
-        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px 18px;font-size:16px;color:#92400e;margin-bottom:20px">
+        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px 18px;font-size:14px;color:#92400e;margin-bottom:20px">
             <strong>Note :</strong> Les cotisations (IPRES, TRIMF, IR, IPM) sont calculées automatiquement selon le barème OHADA/SENEGAL en vigueur.
         </div>
 
@@ -176,7 +176,7 @@ function chargerAbsences() {
             var wrap = mkEl('div','border-radius:10px;overflow:hidden;border:1px solid #e0e0e0');
 
             // Header
-            var header = mkEl('div','background:#1e3a5f;color:#fff;padding:10px 16px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center');
+            var header = mkEl('div','background:#1e3a5f;color:#fff;padding:10px 16px;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center');
             header.appendChild(mkEl('span', null, '🗓 Absences détectées ce mois'));
             header.appendChild(mkEl('span','font-size:14px;opacity:.7','Appliquées automatiquement au bulletin'));
             wrap.appendChild(header);
@@ -187,11 +187,11 @@ function chargerAbsences() {
                 var tc = typeTextColors[c.type] || '#333';
                 var row = mkEl('div','padding:10px 16px;background:'+bg+';border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center');
                 var left = mkEl('div');
-                var typeSpan = mkEl('span','font-weight:700;color:'+tc+';font-size:16px', c.type_label);
+                var typeSpan = mkEl('span','font-weight:700;color:'+tc+';font-size:14px', c.type_label);
                 var dateSpan = mkEl('span','font-size:14px;color:#555;margin-left:8px', c.date_debut+' → '+c.date_fin);
                 left.appendChild(typeSpan);
                 left.appendChild(dateSpan);
-                var right = mkEl('div','font-weight:700;font-size:16px;color:'+tc, c.nb_jours+' jour(s)');
+                var right = mkEl('div','font-weight:700;font-size:14px;color:'+tc, c.nb_jours+' jour(s)');
                 if (c.type === 'sans_solde') {
                     right.appendChild(mkEl('span','font-size:14px;font-weight:400', ' — déduction : '+c.deduction+' FCFA'));
                 }
@@ -202,7 +202,7 @@ function chargerAbsences() {
 
             // Footer déduction
             if (d.deduction_totale && d.deduction_totale !== '0') {
-                var footer = mkEl('div','padding:10px 16px;background:#1e3a5f;color:#fff;display:flex;justify-content:space-between;font-weight:700;font-size:16px');
+                var footer = mkEl('div','padding:10px 16px;background:#1e3a5f;color:#fff;display:flex;justify-content:space-between;font-weight:700;font-size:14px');
                 footer.appendChild(mkEl('span', null, 'Déduction totale sans solde'));
                 footer.appendChild(mkEl('span', null, '- '+d.deduction_totale+' FCFA'));
                 wrap.appendChild(footer);

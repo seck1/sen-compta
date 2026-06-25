@@ -11,7 +11,7 @@ $statut_colors = ['brouillon'=>['#92400e','#fffbeb'],'valide'=>['#166534','#f0fd
         <form method="get" style="display:flex;gap:8px;align-items:center">
             <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
             <input type="hidden" name="employe_id" value="<?= $employe['id'] ?>">
-            <select name="annee" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:16px">
+            <select name="annee" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:14px">
                 <?php for($y=2022;$y<=2027;$y++): ?>
                 <option value="<?= $y ?>" <?= $y===$annee?'selected':'' ?>><?= $y ?></option>
                 <?php endfor; ?>
@@ -32,7 +32,7 @@ $statut_colors = ['brouillon'=>['#92400e','#fffbeb'],'valide'=>['#166534','#f0fd
         ['IR retenu', number_format($totaux['total_ir'],0,',',' ').' F', '#7c3aed', '#f5f3ff'],
     ] as [$label,$val,$col,$bg]): ?>
     <div class="card" style="padding:16px 20px;background:<?= $bg ?>;border:1px solid <?= $col ?>22">
-        <div style="font-size:18px;font-weight:800;color:<?= $col ?>"><?= $val ?></div>
+        <div style="font-size:13px;font-weight:800;color:<?= $col ?>"><?= $val ?></div>
         <div style="font-size:14px;color:#555;margin-top:2px"><?= $label ?></div>
     </div>
     <?php endforeach; ?>
@@ -46,7 +46,7 @@ $statut_colors = ['brouillon'=>['#92400e','#fffbeb'],'valide'=>['#166534','#f0fd
 </div>
 <?php else: ?>
 <div class="card" style="padding:0;overflow:hidden">
-    <table style="width:100%;border-collapse:collapse;font-size:16px">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
         <thead>
             <tr style="background:#1e3a5f;color:#fff">
                 <th style="padding:11px 16px;text-align:left;font-weight:600">Période</th>
@@ -71,12 +71,12 @@ $statut_colors = ['brouillon'=>['#92400e','#fffbeb'],'valide'=>['#166534','#f0fd
                 <td style="padding:10px 16px;text-align:right;color:#555;font-family:monospace"><?= number_format($b['trimf'],0,',',' ') ?></td>
                 <td style="padding:10px 16px;text-align:right;color:#7c3aed;font-family:monospace"><?= number_format($b['ir_salarie'],0,',',' ') ?></td>
                 <td style="padding:10px 16px;text-align:right;color:#b91c1c;font-family:monospace;font-weight:600"><?= number_format($b['total_retenues'],0,',',' ') ?></td>
-                <td style="padding:10px 16px;text-align:right;font-weight:800;color:#166534;font-family:monospace;font-size:17px"><?= number_format($b['net_a_payer'],0,',',' ') ?></td>
+                <td style="padding:10px 16px;text-align:right;font-weight:800;color:#166534;font-family:monospace;font-size:14px"><?= number_format($b['net_a_payer'],0,',',' ') ?></td>
                 <td style="padding:10px 16px;text-align:center">
                     <span style="display:inline-block;padding:2px 10px;border-radius:10px;font-size:14px;font-weight:700;background:<?= $bg ?>;color:<?= $tc ?>"><?= ucfirst($b['statut']) ?></span>
                 </td>
                 <td style="padding:10px 16px;text-align:center">
-                    <a href="<?= APP_URL ?>/dossier/rh/bulletin?id=<?= $entreprise['id'] ?>&bulletin_id=<?= $b['id'] ?>" target="_blank" style="font-size:15px;color:#1e3a5f;text-decoration:none;padding:4px 10px;border:1px solid #1e3a5f33;border-radius:5px">PDF</a>
+                    <a href="<?= APP_URL ?>/dossier/rh/bulletin?id=<?= $entreprise['id'] ?>&bulletin_id=<?= $b['id'] ?>" target="_blank" style="font-size:13px;color:#1e3a5f;text-decoration:none;padding:4px 10px;border:1px solid #1e3a5f33;border-radius:5px">PDF</a>
                 </td>
             </tr>
         <?php endforeach; ?>

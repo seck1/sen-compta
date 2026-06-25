@@ -27,7 +27,7 @@ $a3 = round($base_acomptes * 0.20);
 ?>
 
 <?php if ($saved): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:14px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Déclaration IS enregistrée avec succès.
 </div>
@@ -39,11 +39,11 @@ $a3 = round($base_acomptes * 0.20);
         <p class="page-subtitle">Calcul et déclaration IS — Exercice <?= $exercice ?></p>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
-        <span style="padding:5px 14px;border-radius:20px;font-size:15px;font-weight:600;color:#fff;background:<?= RegimeFiscalService::getBadgeColor($regime) ?>"><?= e($regime) ?></span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;color:#fff;background:<?= RegimeFiscalService::getBadgeColor($regime) ?>"><?= e($regime) ?></span>
         <!-- Exercice selector -->
         <form method="get" style="display:flex;align-items:center;gap:6px">
             <input type="hidden" name="id" value="<?= (int)$entreprise['id'] ?>">
-            <select name="exercice" onchange="this.form.submit()" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:16px;background:white;cursor:pointer">
+            <select name="exercice" onchange="this.form.submit()" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;background:white;cursor:pointer">
                 <?php for($y = date('Y'); $y >= date('Y')-5; $y--): ?>
                 <option value="<?= $y ?>" <?= $y == $exercice ? 'selected' : '' ?>><?= $y ?></option>
                 <?php endfor; ?>
@@ -57,7 +57,7 @@ $a3 = round($base_acomptes * 0.20);
 </div>
 
 <?php if ($isApplicable && $ca_ht == 0): ?>
-<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px 18px;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#92400e;font-size:16px">
+<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px 18px;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#92400e;font-size:14px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:17px;height:17px;flex-shrink:0;color:#d97706"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
     CA HT = 0 : le minimum IS de <strong>500 000 FCFA</strong> s'applique conformément au CGI (art. 206).
 </div>
@@ -67,7 +67,7 @@ $a3 = round($base_acomptes * 0.20);
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px;color:#d97706;flex-shrink:0;margin-top:1px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
     <div>
         <div style="font-weight:600;color:#d97706;margin-bottom:4px">IS non applicable</div>
-        <div style="font-size:16px;color:#92400e">Le régime <strong><?= e($regime) ?></strong> n'est pas soumis à l'Impôt sur les Sociétés. L'IS s'applique uniquement au régime réel normal (CGI).</div>
+        <div style="font-size:14px;color:#92400e">Le régime <strong><?= e($regime) ?></strong> n'est pas soumis à l'Impôt sur les Sociétés. L'IS s'applique uniquement au régime réel normal (CGI).</div>
     </div>
 </div>
 <?php endif; ?>
@@ -106,7 +106,7 @@ $a3 = round($base_acomptes * 0.20);
 
     <!-- Passage du résultat comptable au fiscal -->
     <div class="card">
-        <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:18px;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:18px;display:flex;align-items:center;gap:8px">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:var(--gold)"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z" /></svg>
             Passage comptable → fiscal
         </div>
@@ -127,18 +127,18 @@ $a3 = round($base_acomptes * 0.20);
             </div>
         </div>
         <div style="margin-top:16px;padding:14px;background:rgba(30,58,95,0.05);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
-            <span style="font-size:16px;font-weight:600;color:var(--navy)">Résultat fiscal</span>
-            <span id="rf_display" style="font-size:18px;font-weight:700;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= formatMontant($rf) ?></span>
+            <span style="font-size:14px;font-weight:600;color:var(--navy)">Résultat fiscal</span>
+            <span id="rf_display" style="font-size:13px;font-weight:700;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= formatMontant($rf) ?></span>
         </div>
     </div>
 
     <!-- Calcul IS -->
     <div class="card">
-        <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:18px;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:18px;display:flex;align-items:center;gap:8px">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:var(--gold)"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
             Calcul IS
         </div>
-        <table style="width:100%;font-size:16px">
+        <table style="width:100%;font-size:14px">
             <tbody>
                 <tr style="border-bottom:1px solid var(--border)">
                     <td style="padding:9px 0;color:var(--text-muted)">CA HT (base minimum)</td>
@@ -154,7 +154,7 @@ $a3 = round($base_acomptes * 0.20);
                 </tr>
                 <tr style="background:rgba(201,169,110,0.08)">
                     <td style="padding:11px 0;font-weight:700;color:var(--navy-dark)">IS dû</td>
-                    <td id="is_du" style="text-align:right;font-size:19px;font-weight:700;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= formatMontant($is_du_calc) ?></td>
+                    <td id="is_du" style="text-align:right;font-size:13px;font-weight:700;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= formatMontant($is_du_calc) ?></td>
                 </tr>
             </tbody>
         </table>
@@ -167,34 +167,34 @@ $a3 = round($base_acomptes * 0.20);
 
 <!-- Acomptes provisionnels -->
 <div class="card" style="margin-bottom:20px">
-    <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:6px;display:flex;align-items:center;gap:8px">
+    <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:6px;display:flex;align-items:center;gap:8px">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;color:var(--gold)"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
         Acomptes provisionnels — IS <?= $exercice - 1 ?> (base N-1)
     </div>
     <?php if ($base_acomptes <= 0): ?>
-    <div style="font-size:15px;color:var(--text-muted);margin-bottom:14px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid #e5e7eb">
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid #e5e7eb">
         Aucune déclaration IS enregistrée pour <?= $exercice - 1 ?> — les acomptes provisionnels ne peuvent pas être calculés automatiquement.
         Base de calcul : IS dû de l'exercice <?= $exercice - 1 ?> (à renseigner après dépôt de la déclaration N-1).
     </div>
     <?php else: ?>
-    <div style="font-size:15px;color:var(--text-muted);margin-bottom:14px">
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px">
         Basés sur l'IS dû <?= $exercice - 1 ?> : <strong style="color:var(--navy-dark)"><?= formatMontant($base_acomptes) ?></strong>
     </div>
     <?php endif; ?>
     <div style="display:grid;grid-template-columns:repeat(3,1fr) auto;gap:14px;align-items:start">
         <div style="padding:14px;background:var(--bg);border-radius:10px;border:1px solid var(--border)<?= $base_acomptes <= 0 ? ';opacity:0.5' : '' ?>">
             <div style="font-size:14px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">1er Acompte — 15 Avril</div>
-            <div style="font-size:19px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= $base_acomptes > 0 ? formatMontant($a1) : '— FCFA' ?></div>
+            <div style="font-size:13px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= $base_acomptes > 0 ? formatMontant($a1) : '— FCFA' ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:4px">40% IS <?= $exercice - 1 ?></div>
         </div>
         <div style="padding:14px;background:var(--bg);border-radius:10px;border:1px solid var(--border)<?= $base_acomptes <= 0 ? ';opacity:0.5' : '' ?>">
             <div style="font-size:14px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">2ème Acompte — 15 Juillet</div>
-            <div style="font-size:19px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= $base_acomptes > 0 ? formatMontant($a2) : '— FCFA' ?></div>
+            <div style="font-size:13px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= $base_acomptes > 0 ? formatMontant($a2) : '— FCFA' ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:4px">20% IS <?= $exercice - 1 ?></div>
         </div>
         <div style="padding:14px;background:var(--bg);border-radius:10px;border:1px solid var(--border)<?= $base_acomptes <= 0 ? ';opacity:0.5' : '' ?>">
             <div style="font-size:14px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">3ème Acompte — 15 Novembre</div>
-            <div style="font-size:19px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= $base_acomptes > 0 ? formatMontant($a3) : '— FCFA' ?></div>
+            <div style="font-size:13px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--navy-dark)"><?= $base_acomptes > 0 ? formatMontant($a3) : '— FCFA' ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:4px">20% IS <?= $exercice - 1 ?></div>
         </div>
         <div class="form-field" style="min-width:180px">

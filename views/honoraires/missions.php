@@ -32,7 +32,7 @@ $statut_styles = [
 <?php if(empty($missions)): ?>
 <div class="card" style="padding:48px;text-align:center;color:#aaa">
     <div style="font-size:40px;margin-bottom:12px">📋</div>
-    <div style="font-size:16px;font-weight:600;color:#555;margin-bottom:6px">Aucune mission</div>
+    <div style="font-size:14px;font-weight:600;color:#555;margin-bottom:6px">Aucune mission</div>
     <div style="font-size:13px">Créez une première mission pour commencer.</div>
     <a href="<?= APP_URL ?>/honoraires/mission/creer" class="btn btn-primary" style="margin-top:16px;display:inline-flex">+ Nouvelle mission</a>
 </div>
@@ -61,7 +61,7 @@ $statut_styles = [
                 <div style="font-size:11px;font-weight:700;color:<?= $tc['text'] ?>;background:<?= $tc['bg'] ?>;display:inline-block;padding:2px 8px;border-radius:8px;margin-bottom:6px">
                     <?= $tc['label'] ?>
                 </div>
-                <div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3"><?= e($m['libelle'] ?? $m['reference']) ?></div>
+                <div style="font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.3"><?= e($m['libelle'] ?? $m['reference']) ?></div>
                 <div style="font-size:12px;color:#888;margin-top:2px"><?= e($m['raison_sociale']) ?></div>
             </div>
             <span style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;background:<?= $ss['bg'] ?>;color:<?= $ss['text'] ?>;white-space:nowrap;flex-shrink:0">

@@ -171,7 +171,7 @@ $repartData   = array_map(fn($r)=>max(0,(float)$r['total']), $repartition);
     <div class="card" style="padding:24px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
             <div>
-                <div style="font-size:15px;font-weight:600;color:var(--navy-dark)">Produits vs Charges</div>
+                <div style="font-size:13px;font-weight:600;color:var(--navy-dark)">Produits vs Charges</div>
                 <div style="font-size:12px;color:var(--text-muted);margin-top:3px">6 derniers mois — toutes entreprises</div>
             </div>
             <div style="display:flex;gap:14px;font-size:12px">
@@ -184,7 +184,7 @@ $repartData   = array_map(fn($r)=>max(0,(float)$r['total']), $repartition);
 
     <!-- Répartition charges -->
     <div class="card" style="padding:24px">
-        <div style="font-size:15px;font-weight:600;color:var(--navy-dark);margin-bottom:5px">Répartition charges</div>
+        <div style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:5px">Répartition charges</div>
         <div style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Exercice <?= date('Y') ?></div>
         <?php if (!empty($repartition)): ?>
         <canvas id="chartRep" height="180"></canvas>

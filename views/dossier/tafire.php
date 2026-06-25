@@ -6,13 +6,13 @@ extract($tafire);
 .tf-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px; }
 .tf-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px; }
 .tf-col { background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
-.tf-col-header { padding:14px 20px; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:2px solid var(--border); }
+.tf-col-header { padding:14px 20px; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:2px solid var(--border); }
 .tf-col.emplois .tf-col-header { background:rgba(239,68,68,0.05); color:#dc2626; }
 .tf-col.ressources .tf-col-header { background:rgba(31,110,78,0.05); color:#1f6e4e; }
-.tf-row { display:flex; justify-content:space-between; padding:10px 20px; border-bottom:1px solid rgba(228,233,240,0.4); font-size:16px; gap:12px; }
-.tf-row.sub { padding-left:32px; color:var(--text-muted); font-size:15px; }
+.tf-row { display:flex; justify-content:space-between; padding:10px 20px; border-bottom:1px solid rgba(228,233,240,0.4); font-size:14px; gap:12px; }
+.tf-row.sub { padding-left:32px; color:var(--text-muted); font-size:13px; }
 .tf-row.subtotal { background:rgba(240,243,248,0.7); font-weight:600; }
-.tf-row.total-row { background:var(--navy-dark); color:white; font-weight:700; font-size:17px; }
+.tf-row.total-row { background:var(--navy-dark); color:white; font-weight:700; font-size:14px; }
 .tf-num { font-family:monospace; text-align:right; min-width:140px; }
 .tf-summary { background:#fff; border:1px solid var(--border); border-radius:14px; padding:24px; }
 .tf-summary h3 { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; margin-bottom:16px; color:var(--navy-dark); }
@@ -29,7 +29,7 @@ extract($tafire);
         <div style="font-family:'Cormorant Garamond',serif;font-size:31px;font-weight:400;color:var(--navy-dark)">
             TAFIRE — Exercice <?= e($exerciceN) ?>
         </div>
-        <div style="font-size:16px;color:var(--text-muted);margin-top:4px">
+        <div style="font-size:14px;color:var(--text-muted);margin-top:4px">
             Tableau de Financement des Ressources et Emplois · Comparaison N / N-1 (<?= $exerciceN1 ?>)
         </div>
     </div>
@@ -98,7 +98,7 @@ extract($tafire);
             <div class="tf-sum-val <?= $variation_frn >= 0 ? 'pos' : 'neg' ?>">
                 <?= $variation_frn >= 0 ? '+' : '' ?><?= number_format($variation_frn/1000,0,',',' ') ?> K
             </div>
-            <div style="font-size:15px;color:var(--text-muted);margin-top:4px"><?= formatMontant($variation_frn) ?></div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px"><?= formatMontant($variation_frn) ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:6px">= Ressources – Emplois</div>
         </div>
         <div class="tf-sum-item">
@@ -106,7 +106,7 @@ extract($tafire);
             <div class="tf-sum-val <?= $variation_bfr >= 0 ? 'neg' : 'pos' ?>">
                 <?= $variation_bfr >= 0 ? '+' : '' ?><?= number_format($variation_bfr/1000,0,',',' ') ?> K
             </div>
-            <div style="font-size:15px;color:var(--text-muted);margin-top:4px"><?= formatMontant($variation_bfr) ?></div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px"><?= formatMontant($variation_bfr) ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:6px">
                 ΔActif circ. <?= formatMontant($var_actif_circ) ?> — ΔPassif circ. <?= formatMontant($var_passif_circ) ?>
             </div>
@@ -116,12 +116,12 @@ extract($tafire);
             <div class="tf-sum-val <?= $variation_tresorerie >= 0 ? 'pos' : 'neg' ?>">
                 <?= $variation_tresorerie >= 0 ? '+' : '' ?><?= number_format($variation_tresorerie/1000,0,',',' ') ?> K
             </div>
-            <div style="font-size:15px;color:var(--text-muted);margin-top:4px"><?= formatMontant($variation_tresorerie) ?></div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px"><?= formatMontant($variation_tresorerie) ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:6px">Contrôle direct : <?= formatMontant($var_trezo_directe) ?></div>
         </div>
     </div>
 
-    <div style="margin-top:20px;padding:14px 18px;background:rgba(30,58,95,0.04);border-radius:10px;font-size:15px;color:var(--text-muted)">
+    <div style="margin-top:20px;padding:14px 18px;background:rgba(30,58,95,0.04);border-radius:10px;font-size:13px;color:var(--text-muted)">
         <strong style="color:var(--navy)">Lecture :</strong>
         <?php if($variation_tresorerie >= 0): ?>
             La trésorerie s'est améliorée de <?= formatMontant($variation_tresorerie) ?> sur l'exercice <?= $exerciceN ?>.

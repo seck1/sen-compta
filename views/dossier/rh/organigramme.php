@@ -31,8 +31,8 @@ $contrat_text   = ['CDI'=>'#1e3a5f','CDD'=>'#92400e','Stage'=>'#6b21a8','Consult
 <?php if(empty($par_dept)): ?>
 <div class="card" style="padding:40px;text-align:center;color:#888">
     <div style="font-size:40px;margin-bottom:10px">🏢</div>
-    <div style="font-size:18px;font-weight:600;margin-bottom:6px">Aucun employé actif</div>
-    <div style="font-size:16px">Ajoutez des employés pour visualiser l'organigramme.</div>
+    <div style="font-size:13px;font-weight:600;margin-bottom:6px">Aucun employé actif</div>
+    <div style="font-size:14px">Ajoutez des employés pour visualiser l'organigramme.</div>
 </div>
 <?php else: ?>
 
@@ -46,11 +46,11 @@ $contrat_text   = ['CDI'=>'#1e3a5f','CDD'=>'#92400e','Stage'=>'#6b21a8','Consult
         <!-- Département header -->
         <div style="background:<?= $color['bg'] ?>;color:<?= $color['text'] ?>;padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
             <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:36px;height:36px;border-radius:50%;background:<?= $color['accent'] ?>22;border:2px solid <?= $color['accent'] ?>;display:flex;align-items:center;justify-content:center;font-size:19px">
+                <div style="width:36px;height:36px;border-radius:50%;background:<?= $color['accent'] ?>22;border:2px solid <?= $color['accent'] ?>;display:flex;align-items:center;justify-content:center;font-size:13px">
                     🏢
                 </div>
                 <div>
-                    <div style="font-size:18px;font-weight:800;letter-spacing:.3px"><?= e($dept) ?></div>
+                    <div style="font-size:13px;font-weight:800;letter-spacing:.3px"><?= e($dept) ?></div>
                     <div style="font-size:14px;opacity:.7"><?= $nb ?> employé<?= $nb>1?'s':'' ?></div>
                 </div>
             </div>
@@ -68,11 +68,11 @@ $contrat_text   = ['CDI'=>'#1e3a5f','CDD'=>'#92400e','Stage'=>'#6b21a8','Consult
             <div style="padding:16px 18px;border-right:1px solid #eee;border-bottom:1px solid #eee;background:#fff;transition:background .15s"
                  onmouseover="this.style.background='#f0f4f8'" onmouseout="this.style.background='#fff'">
                 <div style="display:flex;align-items:flex-start;gap:12px">
-                    <div style="width:42px;height:42px;border-radius:50%;background:hsl(<?= $hue ?>,60%,88%);color:hsl(<?= $hue ?>,60%,30%);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;flex-shrink:0">
+                    <div style="width:42px;height:42px;border-radius:50%;background:hsl(<?= $hue ?>,60%,88%);color:hsl(<?= $hue ?>,60%,30%);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0">
                         <?= $initiales ?>
                     </div>
                     <div style="min-width:0">
-                        <div style="font-weight:700;font-size:16px;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                        <div style="font-weight:700;font-size:14px;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
                             <?= e($emp['prenom']) ?> <?= e($emp['nom']) ?>
                         </div>
                         <div style="font-size:14px;color:#666;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
@@ -103,7 +103,7 @@ $contrat_text   = ['CDI'=>'#1e3a5f','CDD'=>'#92400e','Stage'=>'#6b21a8','Consult
 </div>
 
 <!-- Légende -->
-<div style="margin-top:24px;padding:14px 18px;background:#f8f9fb;border-radius:8px;font-size:15px;color:#555">
+<div style="margin-top:24px;padding:14px 18px;background:#f8f9fb;border-radius:8px;font-size:13px;color:#555">
     <strong style="color:#1e3a5f">Légende contrats :</strong>&nbsp;
     <?php foreach($contrat_colors as $type => $bg): ?>
     <span style="display:inline-flex;align-items:center;gap:4px;margin-right:14px">

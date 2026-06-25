@@ -335,7 +335,7 @@ function fmt(float $v): string {
     <?php endif; ?>
         <tr>
             <td><span class="code-compte"><?= e($b['numero']) ?></span></td>
-            <td style="font-size:15px;font-family:inherit"><?= e($b['intitule']) ?></td>
+            <td style="font-size:13px;font-family:inherit"><?= e($b['intitule']) ?></td>
             <td class="col-an <?= $b['an_debit']  > 0 ? 'montant-debit' : 'montant-zero' ?>"><?= fmt($b['an_debit']) ?></td>
             <td class="col-an <?= $b['an_credit'] > 0 ? 'montant-credit' : 'montant-zero' ?>"><?= fmt($b['an_credit']) ?></td>
             <td class="<?= $b['mouvement_debit']  > 0 ? 'montant-debit' : 'montant-zero' ?>"><?= fmt($b['mouvement_debit']) ?></td>

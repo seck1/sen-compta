@@ -23,17 +23,17 @@ function pct(float $val): string { return number_format($val * 100, 2); }
 .params-card { background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
 .params-card-head { padding:16px 22px; background:var(--navy); color:#fff; display:flex; align-items:center; gap:10px; }
 .params-card-head svg { width:18px; height:18px; opacity:.8; }
-.params-card-head h3 { font-size:16px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; }
+.params-card-head h3 { font-size:14px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; }
 .params-card-body { padding:20px 22px; display:flex; flex-direction:column; gap:14px; }
 .param-row { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--border); }
 .param-row:last-child { border-bottom:none; padding-bottom:0; }
-.param-label { font-size:16px; color:var(--text); font-weight:500; }
+.param-label { font-size:14px; color:var(--text); font-weight:500; }
 .param-sub { font-size:14px; color:var(--text-muted); margin-top:2px; }
 .param-input-wrap { display:flex; align-items:center; gap:6px; }
-.param-input { width:90px; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:16px; font-family:'DM Sans',sans-serif; text-align:right; transition:border-color .15s; }
+.param-input { width:90px; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'DM Sans',sans-serif; text-align:right; transition:border-color .15s; }
 .param-input:focus { outline:none; border-color:var(--gold); }
-.param-unit { font-size:15px; color:var(--text-muted); font-weight:500; min-width:20px; }
-.param-input-text { width:160px; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:16px; font-family:'DM Sans',sans-serif; }
+.param-unit { font-size:13px; color:var(--text-muted); font-weight:500; min-width:20px; }
+.param-input-text { width:160px; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'DM Sans',sans-serif; }
 .param-input-text:focus { outline:none; border-color:var(--gold); }
 .official-badge { display:inline-flex; align-items:center; gap:4px; font-size:13px; background:#eff6ff; color:#1d4ed8; padding:2px 7px; border-radius:20px; font-weight:600; margin-top:3px; }
 .params-footer { display:flex; justify-content:flex-end; gap:12px; margin-top:24px; }
@@ -216,7 +216,7 @@ function pct(float $val): string { return number_format($val * 100, 2); }
         </div>
 
         <!-- Récapitulatif charges -->
-        <div style="margin:16px 22px;padding:14px;background:var(--bg);border-radius:10px;font-size:15px">
+        <div style="margin:16px 22px;padding:14px;background:var(--bg);border-radius:10px;font-size:13px">
             <div style="font-weight:600;color:var(--navy);margin-bottom:8px;font-size:14px;text-transform:uppercase;letter-spacing:.05em">Rappel — charges non paramétrables</div>
             <div style="color:var(--text-muted);display:flex;flex-direction:column;gap:4px">
                 <div>• <strong>TRIMF</strong> : barème progressif DGI Sénégal (fixe)</div>
@@ -267,7 +267,7 @@ function pct(float $val): string { return number_format($val * 100, 2); }
                 </div>
             </div>
         </div>
-        <div style="margin:0 22px 16px;padding:12px 14px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;font-size:15px;color:#92400e">
+        <div style="margin:0 22px 16px;padding:12px 14px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;font-size:13px;color:#92400e">
             <strong>Calcul :</strong> Taux horaire = Salaire brut ÷ (Jours/mois × 8h). Tranche 1 = taux horaire × 115% × heures. Tranche 2 = taux horaire × 140% × heures restantes.
         </div>
     </div>

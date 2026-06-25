@@ -27,7 +27,7 @@ $avatarGradients = [
 <?php if (empty($users)): ?>
 <div class="card" style="text-align:center;padding:60px 20px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" style="width:48px;height:48px;margin:0 auto 16px;color:var(--text-muted)"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
-    <h3 style="font-size:16px;color:var(--navy-dark);margin-bottom:8px">Aucun collaborateur</h3>
+    <h3 style="font-size:14px;color:var(--navy-dark);margin-bottom:8px">Aucun collaborateur</h3>
     <p style="font-size:14px;color:var(--text-muted)">Créez des comptes pour les membres de votre équipe</p>
 </div>
 
@@ -55,11 +55,11 @@ $avatarGradients = [
 
         <!-- Header : avatar + nom + badge rôle -->
         <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px">
-            <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,<?= $grad[0] ?>,<?= $grad[1] ?>);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:white;flex-shrink:0;letter-spacing:.5px">
+            <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,<?= $grad[0] ?>,<?= $grad[1] ?>);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white;flex-shrink:0;letter-spacing:.5px">
                 <?= $initials ?>
             </div>
             <div style="flex:1;min-width:0">
-                <div style="font-size:15px;font-weight:700;color:var(--navy-dark);margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <div style="font-size:13px;font-weight:700;color:var(--navy-dark);margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
                     <?= e($u['prenom'] . ' ' . $u['nom']) ?>
                 </div>
                 <div style="font-size:12.5px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">

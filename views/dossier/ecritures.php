@@ -32,7 +32,7 @@
 <!-- Modal Report AN -->
 <div id="modal-an" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">
     <div style="background:white;border-radius:16px;padding:28px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
-        <h3 style="margin:0 0 16px;font-size:19px;color:var(--navy-dark)">Générer les reports à nouveau</h3>
+        <h3 style="margin:0 0 16px;font-size:13px;color:var(--navy-dark)">Générer les reports à nouveau</h3>
         <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Reporte les soldes de clôture de l'exercice précédent en début d'exercice.</p>
         <form method="POST" action="<?= APP_URL ?>/dossier/report-an">
             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
@@ -403,7 +403,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                 <div id="regl-file-preview" style="display:none;margin-top:12px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;display:none;align-items:center;gap:10px">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1f6e4e" style="width:20px;height:20px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                     <span id="regl-file-name" style="font-size:14px;font-weight:600;color:#18583f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
-                    <button type="button" onclick="reglRemoveFile()" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:19px;padding:0">×</button>
+                    <button type="button" onclick="reglRemoveFile()" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:13px;padding:0">×</button>
                 </div>
                 <p style="margin:12px 0 0;font-size:14px;color:#9ca3af;text-align:center">Le fichier sera attaché comme justificatif à l'écriture de règlement.</p>
             </div>
@@ -521,12 +521,12 @@ function enBrouillon(id) {
     <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
       <div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
-          <div style="width:32px;height:32px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px">✨</div>
-          <div style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.2px">Nouvelle écriture par scan</div>
+          <div style="width:32px;height:32px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px">✨</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:-.2px">Nouvelle écriture par scan</div>
         </div>
         <div style="font-size:13px;color:rgba(255,255,255,.6);padding-left:42px">Analysée par Claude AI · OHADA SYSCOHADA Révisé · Sénégal</div>
       </div>
-      <button onclick="closeScanIA()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);cursor:pointer;color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">✕</button>
+      <button onclick="closeScanIA()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);cursor:pointer;color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">✕</button>
     </div>
   </div>
 
@@ -554,7 +554,7 @@ function enBrouillon(id) {
         <div style="width:72px;height:72px;background:linear-gradient(135deg,#eff8ff,#bfdbfe);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 4px 16px rgba(15,111,186,0.15)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0f6fba" style="width:36px;height:36px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
         </div>
-        <div style="font-size:19px;font-weight:700;color:#0c2340;margin-bottom:6px">Glissez votre facture ici</div>
+        <div style="font-size:13px;font-weight:700;color:#0c2340;margin-bottom:6px">Glissez votre facture ici</div>
         <div style="font-size:14px;color:#6b7280;margin-bottom:20px">ou <span style="color:#0f6fba;font-weight:600;text-decoration:underline">cliquez pour sélectionner</span> un fichier</div>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
           <span style="background:#eff8ff;padding:5px 14px;border-radius:20px;font-size:14px;font-weight:700;color:#0f6fba;border:1px solid #7dd3fc">JPEG</span>
@@ -570,10 +570,10 @@ function enBrouillon(id) {
           <div id="sprevname" style="font-weight:600;font-size:14px;color:#1f2937"></div>
           <div id="sprevsize" style="font-size:13px;color:#9ca3af;margin-top:2px"></div>
         </div>
-        <button onclick="scanReset()" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:18px">✕</button>
+        <button onclick="scanReset()" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:13px">✕</button>
       </div>
       <button id="sbtn" onclick="scanLancer()" disabled
-              style="width:100%;margin-top:16px;padding:15px;background:linear-gradient(135deg,#0f6fba,#0891b2);color:#fff;border:2px solid rgba(8,145,178,0.25);border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;opacity:.4;transition:all .25s;box-shadow:0 4px 20px rgba(15,111,186,0.25);letter-spacing:.2px;display:flex;align-items:center;justify-content:center;gap:10px">
+              style="width:100%;margin-top:16px;padding:15px;background:linear-gradient(135deg,#0f6fba,#0891b2);color:#fff;border:2px solid rgba(8,145,178,0.25);border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;opacity:.4;transition:all .25s;box-shadow:0 4px 20px rgba(15,111,186,0.25);letter-spacing:.2px;display:flex;align-items:center;justify-content:center;gap:10px">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
         Analyser avec Claude IA →
       </button>
@@ -582,7 +582,7 @@ function enBrouillon(id) {
     <!-- Step 2: Loading -->
     <div id="sp2" style="display:none;text-align:center;padding:52px 0">
       <div style="width:64px;height:64px;border:4px solid #eff8ff;border-top-color:#0f6fba;border-radius:50%;margin:0 auto 20px;animation:spspin 1s linear infinite"></div>
-      <div style="font-size:19px;font-weight:600;color:#1f2937;margin-bottom:8px">Claude analyse votre document...</div>
+      <div style="font-size:13px;font-weight:600;color:#1f2937;margin-bottom:8px">Claude analyse votre document...</div>
       <div style="font-size:14px;color:#9ca3af">Extraction · Sélection comptes OHADA · Vérification équilibre</div>
       <style>@keyframes spspin{to{transform:rotate(360deg)}}</style>
     </div>
@@ -592,14 +592,14 @@ function enBrouillon(id) {
       <div id="spresult"></div>
       <div style="display:flex;gap:10px;margin-top:18px">
         <button onclick="scanGoStep(1)" style="flex:1;padding:12px;background:#f3f4f6;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;color:#374151">← Retour</button>
-        <button onclick="scanValider()" id="svbtn" style="flex:2;padding:12px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer">✓ Valider et enregistrer</button>
+        <button onclick="scanValider()" id="svbtn" style="flex:2;padding:12px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer">✓ Valider et enregistrer</button>
       </div>
     </div>
 
     <!-- Step 4: Success -->
     <div id="sp4" style="display:none;text-align:center;padding:52px 0">
       <div style="width:72px;height:72px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px">✓</div>
-      <div style="font-size:18px;font-weight:700;color:#1f2937;margin-bottom:8px">Écriture enregistrée !</div>
+      <div style="font-size:13px;font-weight:700;color:#1f2937;margin-bottom:8px">Écriture enregistrée !</div>
       <div style="font-size:14px;color:#6b7280;margin-bottom:24px">Créée en brouillon · Vérifiez avant validation finale</div>
       <div style="display:flex;gap:10px;justify-content:center">
         <button onclick="closeScanIA();location.reload()" style="padding:12px 24px;background:#1e3a5f;color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer">Voir les écritures</button>
@@ -687,13 +687,13 @@ function scanRenderPreview(e){
   var notes=e.notes?'<div style="margin-top:10px;padding:10px 14px;background:#fef9c3;border-radius:8px;font-size:13px;color:#92400e">💡 '+e.notes+'</div>':'';
   var html='<div style="background:#f8fafc;border-radius:14px;padding:18px">'
     +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">'
-    +'<div><div style="font-size:19px;font-weight:700;color:#1f2937">'+e.libelle+'</div>'
+    +'<div><div style="font-size:13px;font-weight:700;color:#1f2937">'+e.libelle+'</div>'
     +'<div style="font-size:13px;color:#9ca3af;margin-top:3px">'+e.fournisseur_client+' · '+e.date+' · Réf: '+(e.reference||'—')+'</div></div>'
     +'<span style="'+conf+';padding:4px 12px;border-radius:20px;font-size:14px;font-weight:700">Confiance '+e.confiance+'</span></div>'
     +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">'
-    +'<div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e5e7eb"><div style="font-size:13px;color:#9ca3af;text-transform:uppercase">HT</div><div style="font-size:19px;font-weight:700;color:#1f2937;margin-top:4px">'+scanFmt(e.montant_ht)+'</div></div>'
-    +'<div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e5e7eb"><div style="font-size:13px;color:#9ca3af;text-transform:uppercase">TVA 18%</div><div style="font-size:19px;font-weight:700;color:#f59e0b;margin-top:4px">'+scanFmt(e.montant_tva)+'</div></div>'
-    +'<div style="background:#1e3a5f;border-radius:10px;padding:12px;text-align:center"><div style="font-size:13px;color:rgba(255,255,255,.6);text-transform:uppercase">TTC</div><div style="font-size:19px;font-weight:700;color:#fff;margin-top:4px">'+scanFmt(e.montant_ttc)+'</div></div>'
+    +'<div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e5e7eb"><div style="font-size:13px;color:#9ca3af;text-transform:uppercase">HT</div><div style="font-size:13px;font-weight:700;color:#1f2937;margin-top:4px">'+scanFmt(e.montant_ht)+'</div></div>'
+    +'<div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e5e7eb"><div style="font-size:13px;color:#9ca3af;text-transform:uppercase">TVA 18%</div><div style="font-size:13px;font-weight:700;color:#f59e0b;margin-top:4px">'+scanFmt(e.montant_tva)+'</div></div>'
+    +'<div style="background:#1e3a5f;border-radius:10px;padding:12px;text-align:center"><div style="font-size:13px;color:rgba(255,255,255,.6);text-transform:uppercase">TTC</div><div style="font-size:13px;font-weight:700;color:#fff;margin-top:4px">'+scanFmt(e.montant_ttc)+'</div></div>'
     +'</div>'
     +'<div style="background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden">'
     +'<table style="width:100%;border-collapse:collapse">'

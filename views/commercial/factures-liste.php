@@ -119,7 +119,7 @@ table.fac-table tbody tr:last-child td { border-bottom:none; }
     <?php if (empty($factures)): ?>
     <div class="empty-state">
         <div style="font-size:48px;margin-bottom:12px">🧾</div>
-        <div style="font-size:16px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Aucune facture</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Aucune facture</div>
         <div style="margin-bottom:20px">Créez votre première facture ou convertissez un devis accepté</div>
         <a href="<?= APP_URL ?>/commercial/factures/nouvelle" class="btn btn-gold">Nouvelle facture</a>
     </div>

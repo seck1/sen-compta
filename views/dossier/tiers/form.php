@@ -36,7 +36,7 @@ $titre   = $isEdit ? 'Modifier ' . $tc['label'] : 'Nouveau ' . $tc['label'];
         <?php if ($isEdit): ?>
         <!-- Édition : on peut changer le type -->
         <div style="margin-bottom:24px">
-            <label style="display:block;font-size:15px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Type de tiers <span style="color:var(--danger)">*</span></label>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Type de tiers <span style="color:var(--danger)">*</span></label>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
                 <?php foreach ($typeConfig as $val => $cfg): ?>
                 <label style="cursor:pointer">
@@ -44,8 +44,8 @@ $titre   = $isEdit ? 'Modifier ' . $tc['label'] : 'Nouveau ' . $tc['label'];
                     <div class="type-card" data-val="<?= $val ?>" data-col="<?= $cfg['col'] ?>" data-bg="<?= $cfg['bg'] ?>"
                          style="border:2px solid <?= $typeDefaut===$val ? $cfg['col'] : 'var(--border)' ?>;background:<?= $typeDefaut===$val ? $cfg['bg'] : '' ?>;border-radius:12px;padding:16px;text-align:center;transition:all .15s">
                         <div style="display:flex;justify-content:center;margin-bottom:6px"><?= $cfg['icon'] ?></div>
-                        <div style="font-size:17px;font-weight:700;color:var(--navy-dark)"><?= $cfg['label'] ?></div>
-                        <div style="font-size:15px;color:var(--text-muted);margin-top:2px"><?= $cfg['desc'] ?></div>
+                        <div style="font-size:14px;font-weight:700;color:var(--navy-dark)"><?= $cfg['label'] ?></div>
+                        <div style="font-size:13px;color:var(--text-muted);margin-top:2px"><?= $cfg['desc'] ?></div>
                     </div>
                 </label>
                 <?php endforeach; ?>
@@ -58,8 +58,8 @@ $titre   = $isEdit ? 'Modifier ' . $tc['label'] : 'Nouveau ' . $tc['label'];
             <div style="display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:12px;border:2px solid <?= $tc['col'] ?>;background:<?= $tc['bg'] ?>">
                 <span style="display:flex;align-items:center"><?= $tc['icon'] ?></span>
                 <div>
-                    <div style="font-size:18px;font-weight:700;color:var(--navy-dark)"><?= $tc['label'] ?></div>
-                    <div style="font-size:15px;color:var(--text-muted)"><?= $tc['desc'] ?></div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy-dark)"><?= $tc['label'] ?></div>
+                    <div style="font-size:13px;color:var(--text-muted)"><?= $tc['desc'] ?></div>
                 </div>
             </div>
         </div>

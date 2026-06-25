@@ -62,7 +62,7 @@ $sectionIconColors = [
 .export-status .es-icon { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .export-status.ok .es-icon  { background:#dcfce7; color:#1f6e4e; }
 .export-status.nok .es-icon { background:#fee2e2; color:#dc2626; }
-.export-status .es-title { font-size:16px; font-weight:700; }
+.export-status .es-title { font-size:14px; font-weight:700; }
 .export-status .es-sub { font-size:14px; color:var(--text-muted); margin-top:3px; line-height:1.4; }
 
 .sections-list { display:flex; flex-direction:column; gap:10px; }
@@ -70,7 +70,7 @@ $sectionIconColors = [
 .sec-row:hover { background:#f3f4f6; }
 .sec-icon-wrap { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .sec-info { flex:1; min-width:0; }
-.sec-label { font-size:16px; font-weight:600; color:var(--navy-dark); }
+.sec-label { font-size:14px; font-weight:600; color:var(--navy-dark); }
 .sec-sub { font-size:14px; color:var(--text-muted); margin-top:2px; }
 .sec-bar-wrap { width:120px; flex-shrink:0; }
 .sec-bar-bg { background:#e5e7eb; border-radius:99px; height:5px; overflow:hidden; }
@@ -82,11 +82,11 @@ $sectionIconColors = [
 .check-item { display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:9px; margin-bottom:4px; }
 .check-item:hover { background:#fef2f2; }
 .check-item .ci-dot { width:28px; height:28px; border-radius:7px; background:#fee2e2; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#dc2626; }
-.check-item .ci-text { font-size:16px; color:var(--text); flex:1; }
+.check-item .ci-text { font-size:14px; color:var(--text); flex:1; }
 .check-item .ci-text strong { color:var(--navy-dark); }
 .check-item .ci-section { font-size:14px; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
 
-.action-btn { display:flex; align-items:center; justify-content:center; gap:8px; padding:11px 16px; border-radius:10px; font-size:16px; font-weight:600; text-decoration:none; transition:all .2s; border:none; cursor:pointer; width:100%; }
+.action-btn { display:flex; align-items:center; justify-content:center; gap:8px; padding:11px 16px; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none; transition:all .2s; border:none; cursor:pointer; width:100%; }
 .action-btn-primary { background:var(--navy); color:#fff; }
 .action-btn-primary:hover { background:var(--navy-light); }
 .action-btn-outline { background:#fff; color:var(--navy); border:1.5px solid var(--border); }
@@ -131,7 +131,7 @@ $sectionIconColors = [
                 </div>
             </div>
 
-            <div style="font-size:15px;color:var(--text-muted);margin-bottom:14px"><?= $totalFilled ?> / <?= $totalFields ?> champs renseignés</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px"><?= $totalFilled ?> / <?= $totalFields ?> champs renseignés</div>
 
             <!-- Grade -->
             <div style="display:inline-flex;align-items:center;gap:10px;background:<?= $gradeColor ?>12;border:1.5px solid <?= $gradeColor ?>33;border-radius:12px;padding:10px 20px">
@@ -139,7 +139,7 @@ $sectionIconColors = [
                     <?= svgIcon('star','18px') ?>
                 </div>
                 <div style="text-align:left">
-                    <div style="font-size:18px;font-weight:800;color:<?= $gradeColor ?>;line-height:1">Grade <?= $grade ?></div>
+                    <div style="font-size:13px;font-weight:800;color:<?= $gradeColor ?>;line-height:1">Grade <?= $grade ?></div>
                     <div style="font-size:14px;color:var(--text-muted);margin-top:1px"><?= $gradeLabels[$grade] ?></div>
                 </div>
             </div>
@@ -190,7 +190,7 @@ $sectionIconColors = [
     <div class="conf-card">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px">
             <div style="color:var(--navy)"><?= svgIcon('clipboard','18px') ?></div>
-            <h3 style="font-size:18px;font-weight:700;color:var(--navy-dark);margin:0">Complétude par section</h3>
+            <h3 style="font-size:13px;font-weight:700;color:var(--navy-dark);margin:0">Complétude par section</h3>
         </div>
         <div class="sections-list">
             <?php foreach ($sections as $secKey => $sec):
@@ -300,9 +300,9 @@ foreach ($sections as $secKey => $sec) {
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
         <div style="display:flex;align-items:center;gap:8px">
             <div style="color:#dc2626"><?= svgIcon('x-circle','18px') ?></div>
-            <h3 style="font-size:18px;font-weight:700;color:var(--navy-dark);margin:0">Champs manquants</h3>
+            <h3 style="font-size:13px;font-weight:700;color:var(--navy-dark);margin:0">Champs manquants</h3>
         </div>
-        <span style="background:#fee2e2;color:#dc2626;font-size:15px;font-weight:700;padding:3px 10px;border-radius:20px"><?= count($manquants) ?> champ<?= count($manquants) > 1 ? 's' : '' ?></span>
+        <span style="background:#fee2e2;color:#dc2626;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px"><?= count($manquants) ?> champ<?= count($manquants) > 1 ? 's' : '' ?></span>
     </div>
     <?php foreach ($manquants as $m): ?>
     <div class="check-item">
@@ -324,7 +324,7 @@ foreach ($sections as $secKey => $sec) {
     <div style="width:56px;height:56px;border-radius:16px;background:#1f6e4e;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff">
         <?= svgIcon('shield-check','28px') ?>
     </div>
-    <div style="font-size:17px;font-weight:700;color:#18583f">Dossier 100% conforme DGID</div>
-    <div style="font-size:16px;color:#166534;margin-top:6px">Toutes les informations sont renseignées. Le fichier Excel est prêt à déposer.</div>
+    <div style="font-size:14px;font-weight:700;color:#18583f">Dossier 100% conforme DGID</div>
+    <div style="font-size:14px;color:#166534;margin-top:6px">Toutes les informations sont renseignées. Le fichier Excel est prêt à déposer.</div>
 </div>
 <?php endif; ?>

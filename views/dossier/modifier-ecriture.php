@@ -22,18 +22,18 @@ $lignesJson = json_encode(array_map(fn($l) => [
 <style>
 #form-ecriture { padding-bottom: 80px; }
 .ec-page-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; color:var(--navy-dark); letter-spacing:-.3px; }
-.ec-page-sub   { font-size:16px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px; }
-.ec-badge-double { display:inline-flex; align-items:center; gap:5px; background:rgba(30,58,95,.07); border:1px solid rgba(30,58,95,.15); border-radius:20px; padding:2px 10px; font-size:15px; color:var(--navy); font-weight:500; }
+.ec-page-sub   { font-size:14px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px; }
+.ec-badge-double { display:inline-flex; align-items:center; gap:5px; background:rgba(30,58,95,.07); border:1px solid rgba(30,58,95,.15); border-radius:20px; padding:2px 10px; font-size:13px; color:var(--navy); font-weight:500; }
 .ec-card { background:#fff; border:1px solid var(--border); border-radius:14px; margin-bottom:14px; overflow:hidden; }
 .ec-card-head { display:flex; align-items:center; gap:10px; padding:13px 20px; border-bottom:1px solid var(--border); background:var(--bg); }
-.ec-card-head-icon { font-size:19px; }
-.ec-card-head-title { font-size:16px; font-weight:700; color:var(--navy-dark); text-transform:uppercase; letter-spacing:.7px; }
+.ec-card-head-icon { font-size:13px; }
+.ec-card-head-title { font-size:14px; font-weight:700; color:var(--navy-dark); text-transform:uppercase; letter-spacing:.7px; }
 .ec-card-body { padding:18px 20px; }
 .ec-header-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; }
 .form-label { display:block; font-size:14px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.6px; margin-bottom:6px; }
 .req { color:var(--danger); }
-.date-saisie-info { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:9px 12px; font-size:16px; color:var(--navy-dark); min-height:38px; display:flex; align-items:center; }
-.ec-field { width:100%; padding:8px 12px; border:1.5px solid var(--border); border-radius:8px; font-size:17px; font-family:'DM Sans',sans-serif; color:var(--navy-dark); background:#fff; box-sizing:border-box; outline:none; transition:border-color .15s; }
+.date-saisie-info { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:9px 12px; font-size:14px; color:var(--navy-dark); min-height:38px; display:flex; align-items:center; }
+.ec-field { width:100%; padding:8px 12px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'DM Sans',sans-serif; color:var(--navy-dark); background:#fff; box-sizing:border-box; outline:none; transition:border-color .15s; }
 .ec-field:focus { border-color:var(--navy); }
 .ec-field-mono { font-family:Arial,sans-serif; text-align:right; }
 .montant-input::-webkit-inner-spin-button, .montant-input::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
@@ -42,33 +42,33 @@ $lignesJson = json_encode(array_map(fn($l) => [
 .ec-table th { padding:10px 8px; font-size:14px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; border-bottom:1px solid var(--border); text-align:left; background:var(--bg); }
 .ec-table td { border-bottom:1px solid #f3f4f6; vertical-align:middle; }
 .ec-table tbody tr:hover { background:rgba(30,58,95,.02); }
-.btn-add-ligne { display:flex; align-items:center; gap:8px; padding:10px 16px; width:100%; border:2px dashed var(--border); border-radius:8px; background:none; cursor:pointer; font-size:17px; color:var(--text-muted); font-family:'DM Sans',sans-serif; transition:border-color .15s,color .15s; margin-top:8px; }
+.btn-add-ligne { display:flex; align-items:center; gap:8px; padding:10px 16px; width:100%; border:2px dashed var(--border); border-radius:8px; background:none; cursor:pointer; font-size:14px; color:var(--text-muted); font-family:'DM Sans',sans-serif; transition:border-color .15s,color .15s; margin-top:8px; }
 .btn-add-ligne:hover { border-color:#1f6e4e; color:#1f6e4e; }
 .btn-ico { border:none; background:none; cursor:pointer; border-radius:6px; display:flex; align-items:center; justify-content:center; transition:background .12s; }
-.btn-ico-del { width:28px; height:28px; color:var(--danger); font-size:16px; }
+.btn-ico-del { width:28px; height:28px; color:var(--danger); font-size:14px; }
 .btn-ico-del:hover { background:rgba(239,68,68,.1); }
 /* Statut bar */
 #status-bar { position:fixed; bottom:0; left:0; right:0; background:var(--navy-dark); color:#fff; padding:0 24px; height:56px; display:flex; align-items:center; gap:20px; z-index:200; box-shadow:0 -2px 12px rgba(0,0,0,.15); }
 .sb-group { display:flex; align-items:center; gap:8px; }
 .sb-label { font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; opacity:.5; }
-.sb-val { font-size:19px; font-weight:700; font-family:Arial,sans-serif; }
+.sb-val { font-size:13px; font-weight:700; font-family:Arial,sans-serif; }
 .sb-val.debit-val { color:#4ade80; }
 .sb-val.credit-val { color:#f87171; }
 .sb-status { flex:1; text-align:center; }
-.sb-ok { color:#4ade80; font-weight:700; font-size:17px; }
-.sb-ko { color:#f87171; font-weight:700; font-size:17px; }
+.sb-ok { color:#4ade80; font-weight:700; font-size:14px; }
+.sb-ko { color:#f87171; font-weight:700; font-size:14px; }
 #btn-enregistrer { flex-shrink:0; }
 #btn-enregistrer:disabled { opacity:.4; cursor:not-allowed; }
 /* Autocomplete */
 .ac-wrapper { position:relative; }
 .ac-input { padding-right:28px !important; }
-.ac-clear { position:absolute; right:6px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:17px; display:none; line-height:1; padding:2px; }
+.ac-clear { position:absolute; right:6px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:14px; display:none; line-height:1; padding:2px; }
 .ac-clear.visible { display:block; }
 .ac-dropdown { position:absolute; top:calc(100% + 4px); left:0; right:0; background:#fff; border:1.5px solid var(--navy); border-radius:10px; box-shadow:0 8px 24px rgba(30,58,95,.13); z-index:500; max-height:220px; overflow-y:auto; display:none; }
 .ac-dropdown.open { display:block; }
-.ac-item { padding:8px 12px; cursor:pointer; font-size:16px; display:flex; align-items:center; gap:6px; }
+.ac-item { padding:8px 12px; cursor:pointer; font-size:14px; display:flex; align-items:center; gap:6px; }
 .ac-item:hover, .ac-item.active { background:rgba(30,58,95,.06); }
-.ac-num { font-family:monospace; font-weight:700; color:var(--navy); font-size:15px; min-width:52px; }
+.ac-num { font-family:monospace; font-weight:700; color:var(--navy); font-size:13px; min-width:52px; }
 .ac-int { color:var(--text-muted); }
 .ac-selected .ac-input { background:rgba(30,58,95,.04); border-color:var(--navy); }
 /* Upload */
@@ -76,12 +76,12 @@ $lignesJson = json_encode(array_map(fn($l) => [
 .upload-zone:hover, .upload-zone.drag { border-color:#1f6e4e; background:rgba(31,110,78,.04); }
 .upload-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
 .upload-zone-icon { font-size:22px; display:block; margin-bottom:6px; }
-.upload-zone-text { font-size:16px; color:var(--text-muted); }
+.upload-zone-text { font-size:14px; color:var(--text-muted); }
 .upload-zone-text strong { color:var(--navy); }
-.upload-name { font-size:16px; color:var(--navy); font-weight:500; margin-top:6px; display:none; }
+.upload-name { font-size:14px; color:var(--navy); font-weight:500; margin-top:6px; display:none; }
 /* Pièce jointe existante */
 .pj-existant { display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(30,58,95,.04); border:1px solid var(--border); border-radius:10px; margin-bottom:12px; }
-.pj-existant a { font-size:16px; font-weight:600; color:var(--navy); text-decoration:none; }
+.pj-existant a { font-size:14px; font-weight:600; color:var(--navy); text-decoration:none; }
 .pj-existant a:hover { text-decoration:underline; }
 </style>
 
@@ -91,9 +91,9 @@ $lignesJson = json_encode(array_map(fn($l) => [
         <p class="ec-page-sub">
             <span class="ec-badge-double">⚖️ Saisie en partie double — Σ Débit = Σ Crédit</span>
             <?php if ($ecriture['statut'] === 'validee'): ?>
-            <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.25);font-size:15px;color:#1f6e4e;font-weight:600">✓ Validée</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.25);font-size:13px;color:#1f6e4e;font-weight:600">✓ Validée</span>
             <?php else: ?>
-            <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);font-size:15px;color:#92400e;font-weight:600">⏳ Brouillon</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);font-size:13px;color:#92400e;font-weight:600">⏳ Brouillon</span>
             <?php endif; ?>
         </p>
     </div>
@@ -104,7 +104,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
 </div>
 
 <?php if ($error ?? null): ?>
-<div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;color:var(--danger);margin-bottom:16px;font-size:17px;display:flex;align-items:center;gap:8px">
+<div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;color:var(--danger);margin-bottom:16px;font-size:14px;display:flex;align-items:center;gap:8px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:17px;height:17px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/></svg>
     <?= e($error) ?>
 </div>
@@ -189,7 +189,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
             <div class="pj-existant">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px;height:20px;color:var(--navy);flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"/></svg>
                 <div style="flex:1">
-                    <div style="font-size:15px;color:var(--text-muted);margin-bottom:2px">Justificatif actuel</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-bottom:2px">Justificatif actuel</div>
                     <a href="<?= $pjUrl ?>" target="_blank"><?= e($ecriture['piece_jointe']) ?></a>
                 </div>
                 <span style="font-size:14px;color:var(--text-muted)">Uploader un nouveau fichier pour remplacer</span>
@@ -381,21 +381,21 @@ function creerTiersRow(ncols) {
     bloc.style.cssText = 'display:flex;align-items:center;gap:12px;flex-wrap:wrap';
 
     const nomDetecte = mkEl('span');
-    nomDetecte.style.cssText = 'font-size:17px;font-weight:600;color:var(--navy-dark);min-width:120px';
+    nomDetecte.style.cssText = 'font-size:14px;font-weight:600;color:var(--navy-dark);min-width:120px';
     nomDetecte.textContent = '—';
 
     const sel = mkEl('select');
-    sel.style.cssText = 'padding:5px 10px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:"DM Sans",sans-serif;color:var(--navy-dark);min-width:220px;outline:none;background:#fff';
+    sel.style.cssText = 'padding:5px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:"DM Sans",sans-serif;color:var(--navy-dark);min-width:220px;outline:none;background:#fff';
     const optDefault = mkEl('option', {value:''});
     optDefault.textContent = '— Lier à un tiers existant —';
     sel.appendChild(optDefault);
 
     const ou = mkEl('span');
-    ou.style.cssText = 'font-size:15px;color:var(--text-muted)';
+    ou.style.cssText = 'font-size:13px;color:var(--text-muted)';
     ou.textContent = 'ou';
 
     const lienCreer = mkEl('a', {href:'#', target:'_blank'});
-    lienCreer.style.cssText = 'font-size:15px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
+    lienCreer.style.cssText = 'font-size:13px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
     const svgPlus = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgPlus.setAttribute('fill','none'); svgPlus.setAttribute('viewBox','0 0 24 24'); svgPlus.setAttribute('stroke-width','2'); svgPlus.setAttribute('stroke','currentColor'); svgPlus.style.cssText='width:13px;height:13px';
     const pathPlus = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -404,7 +404,7 @@ function creerTiersRow(ncols) {
     lienCreer.appendChild(document.createTextNode('Créer ce tiers'));
 
     const badge = mkEl('span');
-    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:15px;color:#1f6e4e;font-weight:600';
+    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:13px;color:#1f6e4e;font-weight:600';
     const svgCheck = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgCheck.setAttribute('fill','none'); svgCheck.setAttribute('viewBox','0 0 24 24'); svgCheck.setAttribute('stroke-width','2'); svgCheck.setAttribute('stroke','currentColor'); svgCheck.style.cssText='width:12px;height:12px';
     const pathCheck = document.createElementNS('http://www.w3.org/2000/svg','path');

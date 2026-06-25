@@ -40,7 +40,7 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
 .td-right { text-align:right; }
 .totaux-block { margin-top:20px;border-top:2px solid var(--border);padding-top:16px; }
 .totaux-row { display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px; }
-.totaux-row.total-final { font-size:17px;font-weight:800;margin-top:8px;padding-top:8px;border-top:2px solid var(--navy-dark); }
+.totaux-row.total-final { font-size:14px;font-weight:800;margin-top:8px;padding-top:8px;border-top:2px solid var(--navy-dark); }
 .totaux-row .label { color:var(--text-muted); }
 
 .side-row { display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px; }
@@ -51,7 +51,7 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
 .paiement-item { display:flex;align-items:center;gap:12px;padding:12px;background:#f8fafc;border-radius:10px;margin-bottom:8px; }
 .pai-icon { width:36px;height:36px;border-radius:9px;background:#dcfce7;color:#1f6e4e;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
 .pai-date { font-size:12px;color:var(--text-muted); }
-.pai-amount { font-size:15px;font-weight:700;color:#1f6e4e;margin-left:auto; }
+.pai-amount { font-size:13px;font-weight:700;color:#1f6e4e;margin-left:auto; }
 
 /* Paiement form */
 .paiement-form { background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:18px;margin-top:12px; }
@@ -188,7 +188,7 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
             <div class="fv-card">
                 <div class="fv-section-title">Client</div>
                 <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-                    <div style="width:44px;height:44px;border-radius:11px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700">
+                    <div style="width:44px;height:44px;border-radius:11px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">
                         <?= strtoupper(substr($facture['prospect_nom'] ?? 'C', 0, 1)) ?>
                     </div>
                     <div>
@@ -213,7 +213,7 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
                 <div class="side-row"><span class="lbl">Encaissé</span><span class="val" style="color:#1f6e4e"><?= number_format($facture['montant_paye'], 0, ',', ' ') ?> F</span></div>
                 <div class="side-row" style="padding-top:8px;border-top:2px solid var(--navy-dark);margin-top:4px">
                     <span class="lbl" style="font-weight:700;color:var(--navy-dark)">Restant dû</span>
-                    <span class="val" style="font-size:16px;color:<?= $reste > 0 ? '#ef4444' : '#1f6e4e' ?>"><?= number_format(max(0,$reste), 0, ',', ' ') ?> F</span>
+                    <span class="val" style="font-size:14px;color:<?= $reste > 0 ? '#ef4444' : '#1f6e4e' ?>"><?= number_format(max(0,$reste), 0, ',', ' ') ?> F</span>
                 </div>
                 <div style="background:#f1f5f9;border-radius:6px;height:8px;margin-top:10px;overflow:hidden">
                     <div style="height:100%;border-radius:6px;background:#1f6e4e;width:<?= $pct ?>%"></div>

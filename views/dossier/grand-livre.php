@@ -27,7 +27,7 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
         <div style="display:flex;gap:10px;flex-wrap:wrap;padding:18px;background:white;border:1px solid var(--border);border-radius:12px;align-items:flex-end">
             <div>
                 <div style="font-size:14px;color:var(--text-muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Exercice</div>
-                <select name="exercice" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                <select name="exercice" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
                     <?php foreach ($exercicesDispos as $ex): ?>
                     <option value="<?= $ex ?>" <?= $ex==$exercice?'selected':'' ?>>Exercice <?= $ex ?></option>
                     <?php endforeach; ?>
@@ -35,11 +35,11 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
             </div>
             <div>
                 <div style="font-size:14px;color:var(--text-muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Compte</div>
-                <input type="text" name="compte" value="<?= e($compte_filtre) ?>" placeholder="Ex: 40, 411, 60" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;width:130px;font-family:inherit">
+                <input type="text" name="compte" value="<?= e($compte_filtre) ?>" placeholder="Ex: 40, 411, 60" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;width:130px;font-family:inherit">
             </div>
             <div>
                 <div style="font-size:14px;color:var(--text-muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Classe</div>
-                <select name="classe" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                <select name="classe" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
                     <option value="">Toutes</option>
                     <?php foreach ([1=>'Comptes de ressources',2=>'Dettes financières',3=>'Comptes de stocks',4=>'Tiers',5=>'Trésorerie',6=>'Charges',7=>'Produits',8=>'Résultat'] as $cl=>$lbl): ?>
                     <option value="<?= $cl ?>" <?= $classe_filtre==$cl?'selected':'' ?>>Classe <?= $cl ?> — <?= $lbl ?></option>
@@ -48,7 +48,7 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
             </div>
             <div>
                 <div style="font-size:14px;color:var(--text-muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Journal</div>
-                <select name="journal" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                <select name="journal" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
                     <option value="">Tous</option>
                     <?php foreach ($journaux_liste as $j): ?>
                     <option value="<?= e($j['code']) ?>" <?= $journal_filtre===$j['code']?'selected':'' ?>><?= e($j['code']) ?> — <?= e($j['libelle']) ?></option>
@@ -57,11 +57,11 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
             </div>
             <div>
                 <div style="font-size:14px;color:var(--text-muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Du</div>
-                <input type="date" name="date_debut" value="<?= e($date_debut) ?>" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                <input type="date" name="date_debut" value="<?= e($date_debut) ?>" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
             </div>
             <div>
                 <div style="font-size:14px;color:var(--text-muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Au</div>
-                <input type="date" name="date_fin" value="<?= e($date_fin) ?>" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                <input type="date" name="date_fin" value="<?= e($date_fin) ?>" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
             </div>
             <div style="display:flex;gap:8px">
                 <button type="submit" class="btn btn-primary btn-sm">Appliquer</button>
@@ -85,15 +85,15 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
 <div class="table-wrap" style="margin-bottom:20px">
     <div class="table-header" style="background:rgba(30,58,95,0.04)">
         <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:9px;background:var(--ent-color);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:white">
+            <div style="width:36px;height:36px;border-radius:9px;background:var(--ent-color);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white">
                 <?= $compte['classe'] ?>
             </div>
             <div>
-                <div style="font-size:17px;font-weight:600;color:var(--navy-dark)"><?= e($num) ?> — <?= e($compte['intitule']) ?></div>
-                <div style="font-size:15px;color:var(--text-muted)"><?= count($compte['lignes']) ?> mouvement<?= count($compte['lignes'])>1?'s':'' ?></div>
+                <div style="font-size:14px;font-weight:600;color:var(--navy-dark)"><?= e($num) ?> — <?= e($compte['intitule']) ?></div>
+                <div style="font-size:13px;color:var(--text-muted)"><?= count($compte['lignes']) ?> mouvement<?= count($compte['lignes'])>1?'s':'' ?></div>
             </div>
         </div>
-        <div style="display:flex;gap:20px;font-size:16px">
+        <div style="display:flex;gap:20px;font-size:14px">
             <div style="text-align:right">
                 <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Débit</div>
                 <div class="montant-debit"><?= number_format($compte['total_debit'],0,',',' ') ?></div>
@@ -129,14 +129,14 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
         <?php foreach ($compte['lignes'] as $l): ?>
         <?php $cumulD += $l['debit']; $cumulC += $l['credit']; $solcum = $cumulD - $cumulC; ?>
         <tr>
-            <td style="font-size:15px;white-space:nowrap"><?= date('d/m/Y', strtotime($l['date_ecriture'])) ?></td>
+            <td style="font-size:13px;white-space:nowrap"><?= date('d/m/Y', strtotime($l['date_ecriture'])) ?></td>
             <td style="font-size:14px;font-family:monospace;color:var(--text-muted)"><?= e($l['numero_piece'] ?? '') ?></td>
             <td><span class="badge badge-navy" style="font-size:13px"><?= e($l['journal_code']) ?></span></td>
-            <td style="font-size:16px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= e($l['ligne_libelle'] ?: $l['ecriture_libelle']) ?></td>
+            <td style="font-size:14px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= e($l['ligne_libelle'] ?: $l['ecriture_libelle']) ?></td>
             <td style="font-size:14px;font-family:monospace;color:var(--success)"><?= e($l['code_lettrage'] ?? '') ?></td>
             <td class="montant-debit" style="text-align:right"><?= $l['debit']>0 ? number_format($l['debit'],0,',',' ') : '—' ?></td>
             <td class="montant-credit" style="text-align:right"><?= $l['credit']>0 ? number_format($l['credit'],0,',',' ') : '—' ?></td>
-            <td style="text-align:right;font-family:monospace;font-size:15px;color:<?= $solcum>=0?'var(--danger)':'var(--success)' ?>">
+            <td style="text-align:right;font-family:monospace;font-size:13px;color:<?= $solcum>=0?'var(--danger)':'var(--success)' ?>">
                 <?= number_format(abs($solcum),0,',',' ') ?> <?= $solcum>=0?'D':'C' ?>
             </td>
         </tr>
@@ -162,7 +162,7 @@ $hasFiltre = !empty($compte_filtre) || !empty($classe_filtre) || !empty($journal
     <a href="<?= $baseUrl ?>&<?= http_build_query(array_merge($queryParams, ['page'=>$page+1])) ?>" class="btn btn-outline btn-sm">Suivant →</a>
     <?php endif; ?>
 
-    <span style="font-size:15px;color:var(--text-muted);margin-left:8px"><?= $total_comptes ?> comptes · Page <?= $page ?>/<?= $total_pages ?></span>
+    <span style="font-size:13px;color:var(--text-muted);margin-left:8px"><?= $total_comptes ?> comptes · Page <?= $page ?>/<?= $total_pages ?></span>
 </div>
 <?php endif; ?>
 

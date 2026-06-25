@@ -15,7 +15,7 @@ $color = $isCGU ? '#b8923f' : '#18583f';
         </p>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
-        <span style="display:inline-flex;padding:5px 14px;border-radius:20px;font-size:15px;font-weight:700;color:#fff;background:<?= $color ?>"><?= e($regime) ?></span>
+        <span style="display:inline-flex;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;color:#fff;background:<?= $color ?>"><?= e($regime) ?></span>
         <a href="<?= APP_URL ?>/dossier/fiscalite/regime?id=<?= $entreprise['id'] ?>" class="btn btn-outline btn-sm">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
             Fiche régime
@@ -24,7 +24,7 @@ $color = $isCGU ? '#b8923f' : '#18583f';
 </div>
 
 <?php if (isset($_GET['saved'])): ?>
-<div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.2);border-radius:10px;padding:12px 18px;color:#1f6e4e;margin-bottom:20px;font-size:16px;display:flex;align-items:center;gap:8px">
+<div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.2);border-radius:10px;padding:12px 18px;color:#1f6e4e;margin-bottom:20px;font-size:14px;display:flex;align-items:center;gap:8px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Déclaration enregistrée avec succès.
 </div>
@@ -64,34 +64,34 @@ $color = $isCGU ? '#b8923f' : '#18583f';
 <!-- Détail calcul -->
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
     <div class="card">
-        <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Détail du calcul</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Détail du calcul</div>
         <div style="display:grid;gap:12px">
             <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
-                <span style="font-size:16px;color:var(--text-muted)">CA HT (base de calcul)</span>
-                <span style="font-size:16px;font-weight:600;color:var(--navy)"><?= $fmt($calcul['ca_ht']) ?> FCFA</span>
+                <span style="font-size:14px;color:var(--text-muted)">CA HT (base de calcul)</span>
+                <span style="font-size:14px;font-weight:600;color:var(--navy)"><?= $fmt($calcul['ca_ht']) ?> FCFA</span>
             </div>
             <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
-                <span style="font-size:16px;color:var(--text-muted)">Taux CGU</span>
-                <span style="font-size:16px;font-weight:600;color:var(--navy)">5%</span>
+                <span style="font-size:14px;color:var(--text-muted)">Taux CGU</span>
+                <span style="font-size:14px;font-weight:600;color:var(--navy)">5%</span>
             </div>
             <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
-                <span style="font-size:16px;color:var(--text-muted)">CGU calculée (CA HT × 5%)</span>
-                <span style="font-size:16px;font-weight:600;color:var(--navy)"><?= $fmt($calcul['cgu_base']) ?> FCFA</span>
+                <span style="font-size:14px;color:var(--text-muted)">CGU calculée (CA HT × 5%)</span>
+                <span style="font-size:14px;font-weight:600;color:var(--navy)"><?= $fmt($calcul['cgu_base']) ?> FCFA</span>
             </div>
             <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
-                <span style="font-size:16px;color:var(--text-muted)">Minimum secteur (<?= e($secteur) ?>)</span>
-                <span style="font-size:16px;font-weight:600;color:var(--navy)"><?= $fmt($calcul['minimum_secteur']) ?> FCFA</span>
+                <span style="font-size:14px;color:var(--text-muted)">Minimum secteur (<?= e($secteur) ?>)</span>
+                <span style="font-size:14px;font-weight:600;color:var(--navy)"><?= $fmt($calcul['minimum_secteur']) ?> FCFA</span>
             </div>
             <div style="display:flex;justify-content:space-between;padding:12px 14px;background:<?= $color ?>10;border-radius:8px;border:1px solid <?= $color ?>30">
-                <span style="font-size:16px;font-weight:600;color:var(--text)">CGU due = max(base, minimum)</span>
-                <span style="font-size:17px;font-weight:700;color:<?= $color ?>"><?= $fmt($calcul['cgu_due']) ?> FCFA</span>
+                <span style="font-size:14px;font-weight:600;color:var(--text)">CGU due = max(base, minimum)</span>
+                <span style="font-size:14px;font-weight:700;color:<?= $color ?>"><?= $fmt($calcul['cgu_due']) ?> FCFA</span>
             </div>
         </div>
     </div>
 
     <!-- Calendrier échéances -->
     <div class="card">
-        <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Calendrier des versements</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Calendrier des versements</div>
         <div style="display:grid;gap:10px">
             <?php
             $versements = [
@@ -106,15 +106,15 @@ $color = $isCGU ? '#b8923f' : '#18583f';
             <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:8px">
                 <div style="width:8px;height:8px;border-radius:50%;background:<?= $isS ? '#ef4444' : $color ?>;flex-shrink:0"></div>
                 <div style="flex:1">
-                    <div style="font-size:16px;font-weight:500;color:var(--text)"><?= $v['label'] ?></div>
-                    <div style="font-size:17px;color:var(--text-muted)"><?= $v['date'] ?></div>
+                    <div style="font-size:14px;font-weight:500;color:var(--text)"><?= $v['label'] ?></div>
+                    <div style="font-size:14px;color:var(--text-muted)"><?= $v['date'] ?></div>
                 </div>
-                <div style="font-size:16px;font-weight:700;color:<?= $isS ? '#ef4444' : 'var(--navy)' ?>"><?= $fmt($v['montant']) ?> F</div>
+                <div style="font-size:14px;font-weight:700;color:<?= $isS ? '#ef4444' : 'var(--navy)' ?>"><?= $fmt($v['montant']) ?> F</div>
             </div>
             <?php endforeach; ?>
         </div>
         <div style="margin-top:12px;padding:10px 14px;background:rgba(201,169,110,0.08);border-radius:8px;border-left:3px solid var(--gold)">
-            <div style="font-size:18px;color:var(--text-muted);line-height:1.6">
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.6">
                 La CGU remplace l'IS, la TVA, la Patente, la CFCE et la taxe sur véhicules. Les retenues salariales (IPRES, TRIMF, IR, IPM) restent dues.
             </div>
         </div>
@@ -123,7 +123,7 @@ $color = $isCGU ? '#b8923f' : '#18583f';
 
 <!-- Formulaire enregistrement -->
 <div class="card">
-    <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:18px">Enregistrer la déclaration</div>
+    <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:18px">Enregistrer la déclaration</div>
     <form method="POST" action="<?= APP_URL ?>/dossier/fiscalite/cgu/store">
         <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
         <input type="hidden" name="annee" value="<?= $annee ?>">
@@ -174,9 +174,9 @@ $color = $isCGU ? '#b8923f' : '#18583f';
      ============================================================ -->
 
 <div class="card" style="margin-bottom:24px;border-left:5px solid <?= $color ?>">
-    <div style="font-size:16px;color:var(--text-muted);margin-bottom:8px">Régime Micro-entreprise</div>
-    <div style="font-size:19px;font-weight:600;color:var(--navy-dark);margin-bottom:12px">Montants forfaitaires trimestriels — <?= $annee ?></div>
-    <div style="font-size:16px;color:var(--text-muted);line-height:1.7">
+    <div style="font-size:14px;color:var(--text-muted);margin-bottom:8px">Régime Micro-entreprise</div>
+    <div style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:12px">Montants forfaitaires trimestriels — <?= $annee ?></div>
+    <div style="font-size:14px;color:var(--text-muted);line-height:1.7">
         L'impôt libératoire est un montant fixe payé chaque trimestre selon le secteur d'activité.
         Il remplace tous les autres impôts (IS, TVA, Patente). Aucune déclaration TVA ni IS n'est requise.
     </div>
@@ -202,16 +202,16 @@ $color = $isCGU ? '#b8923f' : '#18583f';
 </div>
 
 <div class="card">
-    <div style="font-size:17px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Échéances trimestrielles</div>
+    <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Échéances trimestrielles</div>
     <div style="display:grid;gap:10px">
     <?php foreach ($liberatoire as $t => $lib): ?>
     <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;background:var(--bg);border-radius:10px;border-left:4px solid <?= $color ?>">
-        <div style="width:36px;height:36px;border-radius:9px;background:<?= $color ?>15;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:<?= $color ?>;flex-shrink:0">T<?= $t ?></div>
+        <div style="width:36px;height:36px;border-radius:9px;background:<?= $color ?>15;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:<?= $color ?>;flex-shrink:0">T<?= $t ?></div>
         <div style="flex:1">
-            <div style="font-size:16px;font-weight:500;color:var(--text)"><?= e($lib['echeance']['libelle']) ?></div>
+            <div style="font-size:14px;font-weight:500;color:var(--text)"><?= e($lib['echeance']['libelle']) ?></div>
             <div style="font-size:14px;color:var(--text-muted)">Échéance : <?= date('d/m/Y', strtotime($lib['echeance']['date'])) ?></div>
         </div>
-        <div style="font-size:18px;font-weight:700;color:<?= $color ?>"><?= $fmt($lib['montant_trimestriel']) ?> FCFA</div>
+        <div style="font-size:13px;font-weight:700;color:<?= $color ?>"><?= $fmt($lib['montant_trimestriel']) ?> FCFA</div>
     </div>
     <?php endforeach; ?>
     </div>
@@ -224,7 +224,7 @@ $color = $isCGU ? '#b8923f' : '#18583f';
     <a href="<?= APP_URL ?>/dossier/fiscalite/cgu?id=<?= $entreprise['id'] ?>&annee=<?= $annee - 1 ?>" class="btn btn-outline btn-sm">
         ← <?= $annee - 1 ?>
     </a>
-    <span style="padding:6px 16px;font-size:16px;font-weight:600;color:var(--navy);background:rgba(30,58,95,0.07);border-radius:8px"><?= $annee ?></span>
+    <span style="padding:6px 16px;font-size:14px;font-weight:600;color:var(--navy);background:rgba(30,58,95,0.07);border-radius:8px"><?= $annee ?></span>
     <a href="<?= APP_URL ?>/dossier/fiscalite/cgu?id=<?= $entreprise['id'] ?>&annee=<?= $annee + 1 ?>" class="btn btn-outline btn-sm">
         <?= $annee + 1 ?> →
     </a>

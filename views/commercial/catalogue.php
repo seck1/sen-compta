@@ -9,19 +9,19 @@
 .cat-list { }
 .cat-item { background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px;display:flex;align-items:flex-start;gap:16px;transition:all 0.2s; }
 .cat-item:hover { border-color:#cbd5e1;box-shadow:0 4px 12px rgba(30,58,95,0.08); }
-.cat-item-icon { width:42px;height:42px;border-radius:10px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px; }
+.cat-item-icon { width:42px;height:42px;border-radius:10px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px; }
 .cat-item-body { flex:1; }
-.cat-item-name { font-size:15px;font-weight:700;color:var(--navy-dark);margin-bottom:4px; }
+.cat-item-name { font-size:13px;font-weight:700;color:var(--navy-dark);margin-bottom:4px; }
 .cat-item-desc { font-size:12px;color:var(--text-muted);margin-bottom:8px; }
 .cat-item-meta { display:flex;gap:12px;align-items:center; }
-.cat-price { font-size:16px;font-weight:800;color:var(--gold-dark); }
+.cat-price { font-size:14px;font-weight:800;color:var(--gold-dark); }
 .cat-unit { font-size:11px;color:var(--text-muted);background:#f8fafc;padding:2px 8px;border-radius:6px; }
 .cat-category { font-size:11px;color:var(--navy);background:#dbeafe;padding:2px 8px;border-radius:6px; }
 .cat-actions { display:flex;gap:6px;margin-top:10px; }
 
 /* Form panel */
 .cat-form-panel { background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;position:sticky;top:24px; }
-.fp-title { font-size:16px;font-weight:700;color:var(--navy-dark);margin-bottom:4px; }
+.fp-title { font-size:14px;font-weight:700;color:var(--navy-dark);margin-bottom:4px; }
 .fp-sub { font-size:12px;color:var(--text-muted);margin-bottom:20px; }
 .form-group { display:flex;flex-direction:column;gap:6px;margin-bottom:14px; }
 label { font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px; }
@@ -50,7 +50,7 @@ textarea { resize:vertical;min-height:70px; }
             <?php if (empty($catalogue)): ?>
             <div class="empty-state">
                 <div style="font-size:40px;margin-bottom:10px">📋</div>
-                <div style="font-size:16px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Catalogue vide</div>
+                <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Catalogue vide</div>
                 <div>Ajoutez vos premières prestations pour les utiliser dans les devis et factures</div>
             </div>
             <?php else: ?>

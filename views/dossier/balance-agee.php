@@ -27,19 +27,19 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
     <div style="display:flex;gap:4px;background:white;border:1px solid var(--border);border-radius:11px;padding:4px">
         <a href="?id=<?= $entreprise['id'] ?>&type=clients&date_ref=<?= urlencode($dateRef) ?>"
-           style="padding:7px 18px;border-radius:8px;font-size:16px;font-weight:500;text-decoration:none;transition:all .2s;<?= $type==='clients' ? 'background:var(--navy);color:white' : 'color:var(--text-muted)' ?>">
+           style="padding:7px 18px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:all .2s;<?= $type==='clients' ? 'background:var(--navy);color:white' : 'color:var(--text-muted)' ?>">
             Clients
         </a>
         <a href="?id=<?= $entreprise['id'] ?>&type=fournisseurs&date_ref=<?= urlencode($dateRef) ?>"
-           style="padding:7px 18px;border-radius:8px;font-size:16px;font-weight:500;text-decoration:none;transition:all .2s;<?= $type==='fournisseurs' ? 'background:var(--navy);color:white' : 'color:var(--text-muted)' ?>">
+           style="padding:7px 18px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:all .2s;<?= $type==='fournisseurs' ? 'background:var(--navy);color:white' : 'color:var(--text-muted)' ?>">
             Fournisseurs
         </a>
     </div>
     <form method="get" style="display:flex;align-items:center;gap:8px">
         <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
         <input type="hidden" name="type" value="<?= e($type) ?>">
-        <label style="font-size:16px;color:var(--text-muted)">Date de référence :</label>
-        <input type="date" name="date_ref" value="<?= e($dateRef) ?>" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:16px;background:white">
+        <label style="font-size:14px;color:var(--text-muted)">Date de référence :</label>
+        <input type="date" name="date_ref" value="<?= e($dateRef) ?>" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;background:white">
         <button type="submit" class="btn btn-outline btn-sm">Actualiser</button>
     </form>
 </div>
@@ -71,13 +71,13 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
 <?php if (empty($comptes)): ?>
 <div class="card" style="text-align:center;padding:50px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:44px;height:44px;color:var(--border);margin:0 auto 14px;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" /></svg>
-    <div style="font-size:18px;font-weight:500;color:var(--text-muted)">Aucune <?= $type === 'clients' ? 'créance client' : 'dette fournisseur' ?> non lettrée</div>
-    <div style="font-size:16px;color:var(--text-muted);opacity:0.7;margin-top:6px">Toutes les lignes sont lettrées ou le solde est nul.</div>
+    <div style="font-size:13px;font-weight:500;color:var(--text-muted)">Aucune <?= $type === 'clients' ? 'créance client' : 'dette fournisseur' ?> non lettrée</div>
+    <div style="font-size:14px;color:var(--text-muted);opacity:0.7;margin-top:6px">Toutes les lignes sont lettrées ou le solde est nul.</div>
 </div>
 <?php else: ?>
 
 <!-- Legend -->
-<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;font-size:15px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;font-size:13px;flex-wrap:wrap">
     <span style="font-weight:500;color:var(--text-muted)">Légende :</span>
     <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(31,110,78,0.25);border-radius:3px;display:inline-block"></span>0–30j (courant)</span>
     <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(245,158,11,0.25);border-radius:3px;display:inline-block"></span>31–60j</span>
@@ -88,7 +88,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
 <div class="table-wrap">
     <div class="table-header">
         <span class="table-title">Balance âgée — <?= $type === 'clients' ? 'Comptes 41x' : 'Comptes 40x' ?></span>
-        <span style="font-size:15px;color:var(--text-muted)"><?= count($comptes) ?> compte(s) avec solde</span>
+        <span style="font-size:13px;color:var(--text-muted)"><?= count($comptes) ?> compte(s) avec solde</span>
     </div>
     <div style="overflow-x:auto">
     <table style="min-width:900px">
@@ -107,7 +107,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
         <tbody>
             <?php foreach ($comptes as $c): ?>
             <tr>
-                <td><code style="font-size:15px;background:var(--bg);padding:2px 6px;border-radius:5px"><?= e($c['numero']) ?></code></td>
+                <td><code style="font-size:13px;background:var(--bg);padding:2px 6px;border-radius:5px"><?= e($c['numero']) ?></code></td>
                 <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= e($c['intitule']) ?></td>
                 <td style="text-align:right;font-family:monospace;font-weight:600"><?= formatMontant($c['total']) ?></td>
                 <td style="text-align:right;font-family:monospace;background:rgba(31,110,78,0.05);color:<?= $c['courant'] > 0 ? '#1f6e4e' : 'var(--text-muted)' ?>">
@@ -129,7 +129,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
             <?php endforeach; ?>
         </tbody>
         <tfoot>
-            <tr style="background:rgba(30,58,95,0.06);font-weight:700;font-size:16px">
+            <tr style="background:rgba(30,58,95,0.06);font-weight:700;font-size:14px">
                 <td colspan="2">TOTAL</td>
                 <td style="text-align:right;font-family:monospace"><?= formatMontant($totals['total']) ?></td>
                 <td style="text-align:right;font-family:monospace;background:rgba(31,110,78,0.1);color:#1f6e4e"><?= formatMontant($totals['courant']) ?></td>
@@ -146,7 +146,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
 <!-- Visual bar chart of aging -->
 <?php if ($totals['total'] > 0): ?>
 <div class="card" style="margin-top:16px">
-    <div style="font-size:16px;font-weight:600;color:var(--navy-dark);margin-bottom:14px">Répartition par ancienneté</div>
+    <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:14px">Répartition par ancienneté</div>
     <?php
     $bars = [
         ['label'=>'0–30j','val'=>$totals['courant'],'color'=>'#1f6e4e'],
@@ -168,7 +168,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
         <?php foreach ($bars as $bar):
             $pct = $totals['total'] > 0 ? round($bar['val'] / $totals['total'] * 100, 1) : 0;
         ?>
-        <div style="display:flex;align-items:center;gap:6px;font-size:15px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px">
             <span style="width:10px;height:10px;border-radius:50%;background:<?= $bar['color'] ?>;display:inline-block"></span>
             <span style="color:var(--text-muted)"><?= $bar['label'] ?></span>
             <span style="font-weight:600"><?= $pct ?>%</span>

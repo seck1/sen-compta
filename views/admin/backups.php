@@ -80,7 +80,7 @@ $derniere = !empty($fichiers) ? $fichiers[0] : null;
     <?php if(empty($fichiers)): ?>
     <div class="empty-state" style="padding:48px;text-align:center;color:#aaa">
         <div style="font-size:48px;margin-bottom:12px">💾</div>
-        <div style="font-size:16px;font-weight:600;color:#555;margin-bottom:6px">Aucune sauvegarde</div>
+        <div style="font-size:14px;font-weight:600;color:#555;margin-bottom:6px">Aucune sauvegarde</div>
         <div style="font-size:13px">Cliquez sur "Sauvegarder maintenant" pour créer votre première sauvegarde.</div>
     </div>
     <?php else: ?>

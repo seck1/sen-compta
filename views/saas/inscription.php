@@ -55,7 +55,7 @@ html,body{
 
 .intro h1{ font-size:clamp(30px,3.4vw,42px); font-weight:800; line-height:1.12; color:var(--ink); letter-spacing:-0.8px; }
 .intro h1 em{ color:var(--green); font-style:normal; }
-.intro p{ margin-top:16px; font-size:16px; line-height:1.7; color:var(--muted); max-width:560px; }
+.intro p{ margin-top:16px; font-size:14px; line-height:1.7; color:var(--muted); max-width:560px; }
 
 .plans-head{ display:flex; align-items:center; justify-content:space-between; margin:34px 0 16px; }
 .plans-head .lbl{ font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--navy); }
@@ -65,9 +65,9 @@ html,body{
 .plan-row{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; transition:transform .2s, box-shadow .2s, border-color .2s; }
 .plan-row:hover{ transform:translateY(-2px); box-shadow:0 10px 22px -14px rgba(24,36,31,0.2); }
 .plan-row.featured{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold); }
-.plan-name{ font-size:15px; font-weight:700; color:var(--ink); }
+.plan-name{ font-size:13px; font-weight:700; color:var(--ink); }
 .plan-detail{ font-size:12.5px; color:var(--muted); margin-top:3px; }
-.plan-price{ font-size:16px; font-weight:800; color:var(--green); text-align:right; }
+.plan-price{ font-size:14px; font-weight:800; color:var(--green); text-align:right; }
 .plan-price small{ display:block; font-size:10px; color:var(--muted); font-weight:500; }
 
 /* ============ COLONNE DROITE : carte formulaire ============ */
@@ -117,7 +117,7 @@ input:focus,select:focus{ outline:none; border-color:var(--green); box-shadow:0 
 
 .btn-submit{
     width:100%; padding:15px; margin-top:6px;
-    font-family:inherit; font-size:16px; font-weight:700; color:#fff;
+    font-family:inherit; font-size:14px; font-weight:700; color:#fff;
     background:linear-gradient(180deg,var(--green-light),var(--green));
     border:none; border-radius:999px; cursor:pointer;
     box-shadow:0 10px 24px -10px rgba(31,110,78,0.55);

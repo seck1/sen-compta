@@ -19,7 +19,7 @@
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px">
     <!-- Informations personnelles -->
     <div class="card">
-        <h3 style="font-size:16px;font-weight:600;margin-bottom:20px">Informations personnelles</h3>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:20px">Informations personnelles</h3>
         <form method="post" action="<?= APP_URL ?>/profil/update">
             <div class="form-field" style="margin-bottom:16px">
                 <label>Prénom</label>
@@ -44,7 +44,7 @@
 
     <!-- Sécurité 2FA -->
     <div class="card">
-        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px">Authentification à deux facteurs</h3>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:6px">Authentification à deux facteurs</h3>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Sécurisez votre compte avec une application d'authentification (Google Authenticator, Authy…)</p>
 
         <?php if ($user['totp_actif']): ?>

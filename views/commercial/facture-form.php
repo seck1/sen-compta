@@ -17,7 +17,7 @@ textarea { resize:vertical;min-height:70px; }
 .line-row { display:grid;grid-template-columns:3fr 1fr 1.5fr 1fr 1.5fr 40px;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid #f8fafc; }
 .line-row input { padding:8px 10px;font-size:13px; }
 .line-total { padding:9px 12px;background:#f8fafc;border-radius:8px;font-size:13px;font-weight:600;color:var(--navy-dark);border:1.5px solid transparent; }
-.btn-del-line { width:32px;height:36px;background:#fee2e2;color:#ef4444;border:none;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center; }
+.btn-del-line { width:32px;height:36px;background:#fee2e2;color:#ef4444;border:none;border-radius:8px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center; }
 .btn-del-line:hover { background:#ef4444;color:#fff; }
 .catalogue-quick { display:flex;align-items:center;gap:8px;margin-bottom:16px; }
 .catalogue-quick select { flex:1;padding:8px 12px;font-size:13px; }
@@ -26,7 +26,7 @@ textarea { resize:vertical;min-height:70px; }
 .totaux-box { min-width:280px;background:#f8fafc;border-radius:12px;padding:16px 20px; }
 .totaux-row { display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px; }
 .totaux-row .lbl { color:var(--text-muted); }
-.totaux-row.total-final { font-size:17px;font-weight:800;color:var(--navy-dark);margin-top:8px;padding-top:8px;border-top:2px solid var(--navy-dark); }
+.totaux-row.total-final { font-size:14px;font-weight:800;color:var(--navy-dark);margin-top:8px;padding-top:8px;border-top:2px solid var(--navy-dark); }
 .totaux-row.total-final .val { color:var(--gold); }
 .btn { display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s; }
 .btn-gold { background:var(--gold);color:var(--navy-dark); }

@@ -9,7 +9,7 @@
     <form method="POST" action="<?= APP_URL ?>/honoraires/store">
 
         <div class="card" style="margin-bottom:20px">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
                 Informations générales
             </div>
             <div class="form-grid">
@@ -43,7 +43,7 @@
 
         <!-- Lignes -->
         <div class="card" style="margin-bottom:20px">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
                 Prestations
             </div>
 
@@ -63,7 +63,7 @@
                         <td style="padding:6px 12px"><input type="number" name="ligne_qte[]" value="1" class="ligne-qte" step="0.5" min="0" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;text-align:right"></td>
                         <td style="padding:6px 12px"><input type="number" name="ligne_pu[]" value="0" class="ligne-pu" step="1" min="0" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;text-align:right"></td>
                         <td style="padding:6px 12px;text-align:right;font-family:monospace;font-weight:600" class="ligne-total">0</td>
-                        <td style="padding:6px 8px;text-align:center"><button type="button" onclick="removeLigne(this)" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:18px;line-height:1">×</button></td>
+                        <td style="padding:6px 8px;text-align:center"><button type="button" onclick="removeLigne(this)" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:13px;line-height:1">×</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -93,7 +93,7 @@
                             <span id="total-tva" style="font-family:monospace">0 FCFA</span>
                         </div>
                     </div>
-                    <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:700">
+                    <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:14px;font-weight:700">
                         <span>Total TTC</span>
                         <span id="total-ttc" style="font-family:monospace;color:var(--navy-dark)">0 FCFA</span>
                     </div>

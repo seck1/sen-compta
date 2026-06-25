@@ -32,20 +32,20 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
 <!-- KPIs rapides -->
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
     <div class="card" style="padding:16px 20px;background:#e8eef5;border:1px solid #1e3a5f22">
-        <div style="font-size:17px;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:.5px">Matricule</div>
-        <div style="font-size:18px;font-weight:800;color:#1e3a5f;font-family:monospace;margin-top:4px"><?= e($employe['matricule']) ?: '—' ?></div>
+        <div style="font-size:14px;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:.5px">Matricule</div>
+        <div style="font-size:13px;font-weight:800;color:#1e3a5f;font-family:monospace;margin-top:4px"><?= e($employe['matricule']) ?: '—' ?></div>
     </div>
     <div class="card" style="padding:16px 20px;background:#f0fdf4;border:1px solid #16653422">
-        <div style="font-size:17px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.5px">Salaire de base</div>
-        <div style="font-size:18px;font-weight:800;color:#166534;margin-top:4px"><?= number_format($employe['salaire_base'],0,',',' ') ?> F</div>
+        <div style="font-size:14px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.5px">Salaire de base</div>
+        <div style="font-size:13px;font-weight:800;color:#166534;margin-top:4px"><?= number_format($employe['salaire_base'],0,',',' ') ?> F</div>
     </div>
     <div class="card" style="padding:16px 20px;background:#fffbeb;border:1px solid #c9a96e22">
-        <div style="font-size:17px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px">Ancienneté</div>
-        <div style="font-size:18px;font-weight:800;color:#92400e;margin-top:4px"><?= $anciennete_label ?></div>
+        <div style="font-size:14px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px">Ancienneté</div>
+        <div style="font-size:13px;font-weight:800;color:#92400e;margin-top:4px"><?= $anciennete_label ?></div>
     </div>
     <div class="card" style="padding:16px 20px;background:<?= $employe['statut']==='actif'?'#f0fdf4':'#fef2f2' ?>;border:1px solid <?= $employe['statut']==='actif'?'#16653422':'#99111122' ?>">
-        <div style="font-size:17px;font-weight:700;color:<?= $employe['statut']==='actif'?'#166534':'#991b1b' ?>;text-transform:uppercase;letter-spacing:.5px">Statut</div>
-        <div style="font-size:18px;font-weight:800;color:<?= $employe['statut']==='actif'?'#166534':'#991b1b' ?>;margin-top:4px"><?= ucfirst(e($employe['statut'])) ?></div>
+        <div style="font-size:14px;font-weight:700;color:<?= $employe['statut']==='actif'?'#166534':'#991b1b' ?>;text-transform:uppercase;letter-spacing:.5px">Statut</div>
+        <div style="font-size:13px;font-weight:800;color:<?= $employe['statut']==='actif'?'#166534':'#991b1b' ?>;margin-top:4px"><?= ucfirst(e($employe['statut'])) ?></div>
     </div>
 </div>
 
@@ -56,7 +56,7 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
 
 <!-- Identité -->
 <div class="card" style="padding:24px">
-    <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
+    <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
         👤 Identité
     </div>
     <?php $rows = [
@@ -75,15 +75,15 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
     ]; ?>
     <?php foreach($rows as $i => [$label, $val]): ?>
     <div style="display:flex;justify-content:space-between;padding:7px 0;<?= $i>0?'border-top:1px solid #f0f0f0':'' ?>">
-        <span style="font-size:18px;color:#888;min-width:160px"><?= $label ?></span>
-        <span style="font-size:19px;color:#1a1a1a;font-weight:500;text-align:right"><?= e($val) ?></span>
+        <span style="font-size:13px;color:#888;min-width:160px"><?= $label ?></span>
+        <span style="font-size:13px;color:#1a1a1a;font-weight:500;text-align:right"><?= e($val) ?></span>
     </div>
     <?php endforeach; ?>
 </div>
 
 <!-- Organismes sociaux -->
 <div class="card" style="padding:24px">
-    <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
+    <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
         🏛 Organismes sociaux & Fiscal
     </div>
     <?php $rows2 = [
@@ -95,15 +95,15 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
     ]; ?>
     <?php foreach($rows2 as $i => [$label, $val]): ?>
     <div style="display:flex;justify-content:space-between;padding:7px 0;<?= $i>0?'border-top:1px solid #f0f0f0':'' ?>">
-        <span style="font-size:18px;color:#888;min-width:160px"><?= $label ?></span>
-        <span style="font-size:19px;color:#1a1a1a;font-weight:500;font-family:<?= in_array($label,['N° IPRES','N° CSS','N° IPM'])?'monospace':'inherit' ?>"><?= e($val) ?></span>
+        <span style="font-size:13px;color:#888;min-width:160px"><?= $label ?></span>
+        <span style="font-size:13px;color:#1a1a1a;font-weight:500;font-family:<?= in_array($label,['N° IPRES','N° CSS','N° IPM'])?'monospace':'inherit' ?>"><?= e($val) ?></span>
     </div>
     <?php endforeach; ?>
 </div>
 
 <!-- Paiement -->
 <div class="card" style="padding:24px">
-    <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
+    <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
         💳 Paiement
     </div>
     <?php $rows3 = [
@@ -113,8 +113,8 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
     ]; ?>
     <?php foreach($rows3 as $i => [$label, $val]): ?>
     <div style="display:flex;justify-content:space-between;padding:7px 0;<?= $i>0?'border-top:1px solid #f0f0f0':'' ?>">
-        <span style="font-size:18px;color:#888;min-width:120px"><?= $label ?></span>
-        <span style="font-size:19px;color:#1a1a1a;font-weight:500;font-family:<?= $label==='IBAN / Compte'?'monospace':'inherit' ?>"><?= e($val) ?></span>
+        <span style="font-size:13px;color:#888;min-width:120px"><?= $label ?></span>
+        <span style="font-size:13px;color:#1a1a1a;font-weight:500;font-family:<?= $label==='IBAN / Compte'?'monospace':'inherit' ?>"><?= e($val) ?></span>
     </div>
     <?php endforeach; ?>
 </div>
@@ -126,7 +126,7 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
 
 <!-- Contrat -->
 <div class="card" style="padding:24px">
-    <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
+    <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
         📋 Contrat & Poste
     </div>
     <?php $rows4 = [
@@ -140,15 +140,15 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
     ]; ?>
     <?php foreach($rows4 as $i => [$label, $val]): ?>
     <div style="display:flex;justify-content:space-between;padding:7px 0;<?= $i>0?'border-top:1px solid #f0f0f0':'' ?>">
-        <span style="font-size:18px;color:#888;min-width:150px"><?= $label ?></span>
-        <span style="font-size:19px;color:#1a1a1a;font-weight:500"><?= e($val) ?></span>
+        <span style="font-size:13px;color:#888;min-width:150px"><?= $label ?></span>
+        <span style="font-size:13px;color:#1a1a1a;font-weight:500"><?= e($val) ?></span>
     </div>
     <?php endforeach; ?>
 </div>
 
 <!-- Rémunération -->
 <div class="card" style="padding:24px">
-    <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
+    <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
         💰 Rémunération
     </div>
     <?php
@@ -164,20 +164,20 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
     ?>
     <?php foreach($rems as $i => [$label, $val]): if((float)$val == 0 && $label !== 'Salaire de base') continue; ?>
     <div style="display:flex;justify-content:space-between;padding:7px 0;<?= $i>0?'border-top:1px solid #f0f0f0':'' ?>">
-        <span style="font-size:18px;color:#888"><?= $label ?></span>
-        <span style="font-size:19px;color:#1a1a1a;font-weight:600;font-family:monospace"><?= number_format((float)$val,0,',',' ') ?> F</span>
+        <span style="font-size:13px;color:#888"><?= $label ?></span>
+        <span style="font-size:13px;color:#1a1a1a;font-weight:600;font-family:monospace"><?= number_format((float)$val,0,',',' ') ?> F</span>
     </div>
     <?php endforeach; ?>
     <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:2px solid #1e3a5f;margin-top:4px">
-        <span style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase">Brut estimé</span>
-        <span style="font-size:18px;font-weight:800;color:#1e3a5f;font-family:monospace"><?= number_format($brut_total,0,',',' ') ?> F</span>
+        <span style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase">Brut estimé</span>
+        <span style="font-size:13px;font-weight:800;color:#1e3a5f;font-family:monospace"><?= number_format($brut_total,0,',',' ') ?> F</span>
     </div>
 </div>
 
 <!-- Congés -->
 <?php if($solde_conges): ?>
 <div class="card" style="padding:24px">
-    <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
+    <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
         🌴 Congés <?= date('Y') ?>
     </div>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
@@ -199,21 +199,21 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
 <!-- Derniers bulletins -->
 <div class="card" style="padding:24px">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #1e3a5f15">
-        <div style="font-size:18px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px">📊 Derniers bulletins</div>
-        <a href="<?= APP_URL ?>/dossier/rh/employe/bulletins?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" style="font-size:18px;color:#1e3a5f;text-decoration:none">Voir tout →</a>
+        <div style="font-size:13px;font-weight:800;color:#1e3a5f;text-transform:uppercase;letter-spacing:.8px">📊 Derniers bulletins</div>
+        <a href="<?= APP_URL ?>/dossier/rh/employe/bulletins?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" style="font-size:13px;color:#1e3a5f;text-decoration:none">Voir tout →</a>
     </div>
     <?php if(empty($derniers_bulletins)): ?>
-    <div style="text-align:center;color:#aaa;padding:20px;font-size:19px">Aucun bulletin généré</div>
+    <div style="text-align:center;color:#aaa;padding:20px;font-size:13px">Aucun bulletin généré</div>
     <?php else: ?>
     <?php foreach($derniers_bulletins as $b): ?>
     <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0">
         <div>
-            <div style="font-size:19px;font-weight:600;color:#1a1a1a"><?= $mois_noms[$b['periode_mois']] ?> <?= $b['periode_annee'] ?></div>
-            <div style="font-size:17px;color:#888">Brut : <?= number_format($b['salaire_brut'],0,',',' ') ?> F</div>
+            <div style="font-size:13px;font-weight:600;color:#1a1a1a"><?= $mois_noms[$b['periode_mois']] ?> <?= $b['periode_annee'] ?></div>
+            <div style="font-size:14px;color:#888">Brut : <?= number_format($b['salaire_brut'],0,',',' ') ?> F</div>
         </div>
         <div style="text-align:right">
-            <div style="font-size:19px;font-weight:700;color:#166534"><?= number_format($b['net_a_payer'],0,',',' ') ?> F</div>
-            <a href="<?= APP_URL ?>/dossier/rh/bulletin?id=<?= $entreprise['id'] ?>&bulletin_id=<?= $b['id'] ?>" target="_blank" style="font-size:17px;color:#1e3a5f;text-decoration:none">PDF →</a>
+            <div style="font-size:13px;font-weight:700;color:#166534"><?= number_format($b['net_a_payer'],0,',',' ') ?> F</div>
+            <a href="<?= APP_URL ?>/dossier/rh/bulletin?id=<?= $entreprise['id'] ?>&bulletin_id=<?= $b['id'] ?>" target="_blank" style="font-size:14px;color:#1e3a5f;text-decoration:none">PDF →</a>
         </div>
     </div>
     <?php endforeach; ?>

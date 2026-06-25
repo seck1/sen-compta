@@ -18,7 +18,7 @@ $error_msgs = [
     <?php if(isset($_GET['message']) && $_GET['message']==='cloture_ok'): ?>
     <div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:16px 20px;margin-bottom:20px;color:#1f6e4e">
         <strong>Clôture effectuée avec succès.</strong><br>
-        <span style="font-size:16px">Les écritures de report à nouveau ont été générées pour l'exercice <?= e($_GET['new_exercice'] ?? '') ?>.</span>
+        <span style="font-size:14px">Les écritures de report à nouveau ont été générées pour l'exercice <?= e($_GET['new_exercice'] ?? '') ?>.</span>
     </div>
     <?php elseif(isset($_GET['error'])): ?>
     <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:16px 20px;margin-bottom:20px;color:#dc2626">
@@ -40,10 +40,10 @@ $error_msgs = [
                 </div>
                 <?php if($equilibre): ?>
                     <div style="font-size:20px;font-weight:700;color:#1f6e4e">✓ Équilibré</div>
-                    <div style="font-size:15px;color:var(--text-muted);margin-top:4px">Toutes les écritures sont équilibrées.</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Toutes les écritures sont équilibrées.</div>
                 <?php else: ?>
                     <div style="font-size:20px;font-weight:700;color:#dc2626">✗ Déséquilibré</div>
-                    <div style="font-size:15px;color:#dc2626;margin-top:4px">Des écritures ne sont pas équilibrées. La clôture est impossible.</div>
+                    <div style="font-size:13px;color:#dc2626;margin-top:4px">Des écritures ne sont pas équilibrées. La clôture est impossible.</div>
                 <?php endif; ?>
             </div>
 
@@ -53,11 +53,11 @@ $error_msgs = [
                     État de la clôture
                 </div>
                 <?php if($cloture_actuelle): ?>
-                    <div style="font-size:18px;font-weight:700;color:var(--navy-dark)">Clôturé</div>
-                    <div style="font-size:15px;color:var(--text-muted);margin-top:4px">Le <?= date('d/m/Y', strtotime($cloture_actuelle['date_cloture'])) ?></div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy-dark)">Clôturé</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Le <?= date('d/m/Y', strtotime($cloture_actuelle['date_cloture'])) ?></div>
                 <?php else: ?>
-                    <div style="font-size:18px;font-weight:700;color:var(--warning)">En cours</div>
-                    <div style="font-size:15px;color:var(--text-muted);margin-top:4px">Exercice <?= e($exercice) ?> ouvert.</div>
+                    <div style="font-size:13px;font-weight:700;color:var(--warning)">En cours</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Exercice <?= e($exercice) ?> ouvert.</div>
                 <?php endif; ?>
             </div>
         </div>
@@ -65,10 +65,10 @@ $error_msgs = [
         <?php if(!$cloture_actuelle && $equilibre && isAdmin()): ?>
         <!-- Bouton clôture -->
         <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:12px;padding:18px">
-            <div style="font-size:16px;color:var(--text);margin-bottom:14px">
+            <div style="font-size:14px;color:var(--text);margin-bottom:14px">
                 <strong style="color:var(--danger)">Attention :</strong> La clôture est une opération <strong>irréversible</strong>.
                 Elle va :
-                <ul style="margin-top:8px;margin-left:20px;font-size:16px;color:var(--text-muted);line-height:2">
+                <ul style="margin-top:8px;margin-left:20px;font-size:14px;color:var(--text-muted);line-height:2">
                     <li>Verrouiller les écritures de l'exercice <?= e($exercice) ?></li>
                     <li>Générer les écritures de Report à Nouveau (RAN) pour l'exercice <?= e($exercice+1) ?></li>
                     <li>Ouvrir le nouvel exercice <?= e($exercice+1) ?></li>
@@ -85,7 +85,7 @@ $error_msgs = [
             </form>
         </div>
         <?php elseif(!isAdmin()): ?>
-        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:14px 18px;font-size:16px;color:#92400e">
+        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:14px 18px;font-size:14px;color:#92400e">
             Seuls les administrateurs peuvent effectuer la clôture d'exercice.
         </div>
         <?php endif; ?>

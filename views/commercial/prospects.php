@@ -86,7 +86,7 @@ foreach ($prospects as $p) $byStage[$p['pipeline_stage'] ?? 'nouveau'][] = $p;
 .pros-card:hover { transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,58,95,0.1);border-color:#cbd5e1; }
 .pros-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-color,#94a3b8); }
 .pros-card-header { display:flex;align-items:flex-start;gap:12px;margin-bottom:12px; }
-.pros-avatar { width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;background:var(--card-color,#94a3b8); }
+.pros-avatar { width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;background:var(--card-color,#94a3b8); }
 .pros-name { font-size:14px;font-weight:700;color:var(--navy-dark);line-height:1.3; }
 .pros-meta { font-size:11px;color:var(--text-muted);margin-top:2px; }
 .pros-stage { display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;margin-bottom:10px; }
@@ -158,7 +158,7 @@ foreach ($prospects as $p) $byStage[$p['pipeline_stage'] ?? 'nouveau'][] = $p;
         <?php if (empty($prospects)): ?>
         <div class="empty-state">
             <div style="font-size:40px;margin-bottom:10px">🎯</div>
-            <div style="font-size:16px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Aucun prospect</div>
+            <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Aucun prospect</div>
             <div style="margin-bottom:18px">Commencez par ajouter votre premier prospect</div>
             <a href="<?= APP_URL ?>/commercial/prospects/nouveau" class="btn btn-gold">Nouveau prospect</a>
         </div>
@@ -235,7 +235,7 @@ foreach ($prospects as $p) $byStage[$p['pipeline_stage'] ?? 'nouveau'][] = $p;
         <?php if (empty($prospects)): ?>
         <div class="empty-state">
             <div style="font-size:40px;margin-bottom:10px">🎯</div>
-            <div style="font-size:16px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Aucun prospect</div>
+            <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:6px">Aucun prospect</div>
             <a href="<?= APP_URL ?>/commercial/prospects/nouveau" class="btn btn-gold" style="margin-top:12px">Nouveau prospect</a>
         </div>
         <?php else: ?>

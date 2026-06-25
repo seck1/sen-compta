@@ -52,7 +52,7 @@ $fmt = fn($v) => number_format((float)$v, 0, ',', ' ') . ' F';
                 <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:rgba(31,110,78,0.1);color:#2563eb">En cours</span>
                 <?php endif; ?>
             </td>
-            <td style="font-size:16px"><?= e($r['prenom'] . ' ' . $r['nom']) ?></td>
+            <td style="font-size:14px"><?= e($r['prenom'] . ' ' . $r['nom']) ?></td>
             <td>
                 <a href="<?= APP_URL ?>/dossier/rapprochement/voir?id=<?= $entreprise['id'] ?>&rap_id=<?= $r['id'] ?>" class="btn btn-outline btn-sm">Ouvrir</a>
             </td>

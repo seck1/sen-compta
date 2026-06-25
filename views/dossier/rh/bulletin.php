@@ -380,7 +380,7 @@ table.renum tbody td:not(:first-child) {
 <body>
 
 <div class="no-print">
-    <div style="font-size:16px;color:#333">
+    <div style="font-size:14px;color:#333">
         <strong style="color:#1e3a5f"><?= e($bulletin['nom'].' '.$bulletin['prenom']) ?></strong>
         — Bulletin <?= $mois_noms[(int)$bulletin['periode_mois']] ?> <?= $bulletin['periode_annee'] ?>
     </div>
@@ -693,19 +693,19 @@ table.renum tbody td:not(:first-child) {
             <!-- Solde global -->
             <div style="text-align:center;padding:0 12px">
                 <div style="font-size:9px;color:#444;margin-bottom:3px">Acquis N</div>
-                <div style="font-size:18px;font-weight:700;color:#1e3a5f;font-family:'Courier New',monospace"><?= $jours_acquis ?>j</div>
+                <div style="font-size:13px;font-weight:700;color:#1e3a5f;font-family:'Courier New',monospace"><?= $jours_acquis ?>j</div>
             </div>
             <div style="text-align:center;padding:0 12px;border-left:1px solid #ddd">
                 <div style="font-size:9px;color:#444;margin-bottom:3px">Report N-1</div>
-                <div style="font-size:18px;font-weight:700;color:#4338ca;font-family:'Courier New',monospace"><?= $jours_reportes_n1 ?>j</div>
+                <div style="font-size:13px;font-weight:700;color:#4338ca;font-family:'Courier New',monospace"><?= $jours_reportes_n1 ?>j</div>
             </div>
             <div style="text-align:center;padding:0 12px;border-left:1px solid #ddd">
                 <div style="font-size:9px;color:#444;margin-bottom:3px">Pris</div>
-                <div style="font-size:18px;font-weight:700;color:#92400e;font-family:'Courier New',monospace"><?= $jours_pris ?>j</div>
+                <div style="font-size:13px;font-weight:700;color:#92400e;font-family:'Courier New',monospace"><?= $jours_pris ?>j</div>
             </div>
             <div style="text-align:center;padding:0 12px;border-left:1px solid #ddd">
                 <div style="font-size:9px;color:#444;margin-bottom:3px">Solde total</div>
-                <div style="font-size:18px;font-weight:700;color:<?= $jours_restants > 0 ? '#16a34a' : '#dc2626' ?>;font-family:'Courier New',monospace"><?= $jours_restants ?>j</div>
+                <div style="font-size:13px;font-weight:700;color:<?= $jours_restants > 0 ? '#16a34a' : '#dc2626' ?>;font-family:'Courier New',monospace"><?= $jours_restants ?>j</div>
             </div>
             <!-- Séparateur vertical -->
             <div style="background:#ddd;margin:0 16px"></div>
@@ -716,7 +716,7 @@ table.renum tbody td:not(:first-child) {
             <?php foreach($conges_annee as $ca): ?>
             <div style="text-align:center;padding:0 12px;border-left:1px solid #eee">
                 <div style="font-size:9px;color:#444;margin-bottom:3px"><?= $type_labels_conge[$ca['type_conge']] ?? $ca['type_conge'] ?></div>
-                <div style="font-size:17px;font-weight:700;color:#1a1a1a;font-family:'Courier New',monospace"><?= $ca['total'] ?>j</div>
+                <div style="font-size:14px;font-weight:700;color:#1a1a1a;font-family:'Courier New',monospace"><?= $ca['total'] ?>j</div>
             </div>
             <?php endforeach; ?>
             <?php endif; ?>

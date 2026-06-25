@@ -61,7 +61,7 @@ $mois_noms = ['','Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct
         <tbody>
             <?php foreach($bulletins as $b): ?>
             <tr>
-                <td><code style="font-size:15px;background:var(--bg);padding:2px 7px;border-radius:5px"><?= e($b['matricule']) ?></code></td>
+                <td><code style="font-size:13px;background:var(--bg);padding:2px 7px;border-radius:5px"><?= e($b['matricule']) ?></code></td>
                 <td style="font-weight:500"><?= e($b['nom'].' '.$b['prenom']) ?></td>
                 <td><?= $mois_noms[(int)$b['periode_mois']] ?> <?= $b['periode_annee'] ?></td>
                 <td style="text-align:right;font-family:monospace"><?= number_format($b['salaire_brut'],0,',',' ') ?></td>
@@ -79,11 +79,11 @@ $mois_noms = ['','Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct
                 <td style="display:flex;gap:6px;align-items:center">
                     <a href="<?= APP_URL ?>/dossier/rh/bulletin?id=<?= $entreprise['id'] ?>&bulletin_id=<?= $b['id'] ?>" class="btn btn-outline btn-sm">Voir</a>
                     <?php if($b['statut']==='brouillon'): ?>
-                    <button onclick="changerStatut(<?= $b['id'] ?>,'valide')" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;color:#16a34a;font-size:15px;padding:4px 10px;cursor:pointer;font-weight:600">Valider</button>
+                    <button onclick="changerStatut(<?= $b['id'] ?>,'valide')" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;color:#16a34a;font-size:13px;padding:4px 10px;cursor:pointer;font-weight:600">Valider</button>
                     <?php elseif($b['statut']==='valide'): ?>
-                    <button onclick="changerStatut(<?= $b['id'] ?>,'paye')" style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;color:#2563eb;font-size:15px;padding:4px 10px;cursor:pointer;font-weight:600">Marquer payé</button>
+                    <button onclick="changerStatut(<?= $b['id'] ?>,'paye')" style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;color:#2563eb;font-size:13px;padding:4px 10px;cursor:pointer;font-weight:600">Marquer payé</button>
                     <?php endif; ?>
-                    <button onclick="supprimerBulletin(<?= $b['id'] ?>)" style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;color:#dc2626;font-size:15px;padding:4px 10px;cursor:pointer;font-weight:600">Supprimer</button>
+                    <button onclick="supprimerBulletin(<?= $b['id'] ?>)" style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;color:#dc2626;font-size:13px;padding:4px 10px;cursor:pointer;font-weight:600">Supprimer</button>
                 </td>
             </tr>
             <?php endforeach; ?>

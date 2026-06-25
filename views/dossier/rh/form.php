@@ -22,7 +22,7 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
 
     <!-- IDENTITÉ -->
     <div class="card" style="margin-bottom:20px;padding:24px">
-        <div style="font-size:16px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
             <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">1</span>
             Identité
         </div>
@@ -95,21 +95,21 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
 
         <!-- Photo -->
         <div style="margin-top:16px;padding-top:16px;border-top:1px solid #eee">
-            <label style="font-size:15px;font-weight:700;color:#333;display:block;margin-bottom:8px">Photo</label>
+            <label style="font-size:13px;font-weight:700;color:#333;display:block;margin-bottom:8px">Photo</label>
             <div style="display:flex;align-items:center;gap:16px">
                 <?php if($edit && !empty($employe['photo'])): ?>
                 <img src="<?= APP_URL ?>/uploads/employes/<?= e($employe['photo']) ?>" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #ddd">
                 <?php else: ?>
                 <div style="width:56px;height:56px;border-radius:50%;background:#f0f4f8;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:20px">👤</div>
                 <?php endif; ?>
-                <input type="file" name="photo" accept="image/*" style="font-size:16px">
+                <input type="file" name="photo" accept="image/*" style="font-size:14px">
             </div>
         </div>
     </div>
 
     <!-- CONTRAT -->
     <div class="card" style="margin-bottom:20px;padding:24px">
-        <div style="font-size:16px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
             <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">2</span>
             Contrat & Poste
         </div>
@@ -160,7 +160,7 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
 
     <!-- RÉMUNÉRATION -->
     <div class="card" style="margin-bottom:20px;padding:24px">
-        <div style="font-size:16px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
             <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">3</span>
             Rémunération
         </div>
@@ -192,14 +192,14 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
         </div>
 
         <!-- Résumé brut estimé -->
-        <div id="resume_remuneration" style="margin-top:16px;padding:12px 16px;background:#f0f4f8;border-radius:8px;font-size:16px;color:#1e3a5f">
+        <div id="resume_remuneration" style="margin-top:16px;padding:12px 16px;background:#f0f4f8;border-radius:8px;font-size:14px;color:#1e3a5f">
             Brut estimé : <strong id="brut_estime">—</strong>
         </div>
     </div>
 
     <!-- FISCAL & SOCIAL -->
     <div class="card" style="margin-bottom:20px;padding:24px">
-        <div style="font-size:16px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
             <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">4</span>
             Fiscal & Organismes sociaux
         </div>
@@ -233,7 +233,7 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
 
     <!-- PAIEMENT -->
     <div class="card" style="margin-bottom:24px;padding:24px">
-        <div style="font-size:16px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
+        <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
             <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">5</span>
             Paiement du salaire
         </div>

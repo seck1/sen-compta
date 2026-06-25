@@ -30,10 +30,10 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
             </div>
             <div>
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-                    <span style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:15px;font-weight:700;color:#fff;background:<?= $color ?>;letter-spacing:1px"><?= e($regime) ?></span>
+                    <span style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;color:#fff;background:<?= $color ?>;letter-spacing:1px"><?= e($regime) ?></span>
                 </div>
                 <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy-dark);font-weight:600;margin-bottom:4px"><?= e($label) ?></div>
-                <div style="font-size:16px;color:var(--text-muted)">
+                <div style="font-size:14px;color:var(--text-muted)">
                     <?php if ($caHt > 0): ?>
                     CA HT exercice <?= $exercice ?> : <strong style="color:var(--navy)"><?= $fmt($caHt) ?> FCFA</strong>
                     <?php else: ?>
@@ -46,38 +46,38 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
 
     <!-- Infos complémentaires -->
     <div class="card" style="flex:1;min-width:240px">
-        <div style="font-size:15px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">Informations fiscales</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">Informations fiscales</div>
         <div style="display:grid;gap:10px">
             <?php if ($entreprise['numero_contribuable'] ?? ''): ?>
-            <div style="display:flex;justify-content:space-between;font-size:16px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
                 <span style="color:var(--text-muted)">N° Contribuable</span>
                 <span style="font-weight:500;color:var(--navy)"><?= e($entreprise['numero_contribuable']) ?></span>
             </div>
             <?php endif; ?>
             <?php if ($entreprise['ninea'] ?? ''): ?>
-            <div style="display:flex;justify-content:space-between;font-size:16px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
                 <span style="color:var(--text-muted)">NINEA</span>
                 <span style="font-weight:500;color:var(--navy)"><?= e($entreprise['ninea']) ?></span>
             </div>
             <?php endif; ?>
             <?php if ($entreprise['numero_registre_commerce'] ?? ''): ?>
-            <div style="display:flex;justify-content:space-between;font-size:16px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
                 <span style="color:var(--text-muted)">RCCM</span>
                 <span style="font-weight:500;color:var(--navy)"><?= e($entreprise['numero_registre_commerce']) ?></span>
             </div>
             <?php endif; ?>
-            <div style="display:flex;justify-content:space-between;font-size:16px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
                 <span style="color:var(--text-muted)">Régime TVA</span>
                 <span style="font-weight:500;color:var(--navy)"><?= ucfirst(str_replace('_', ' ', $entreprise['regime_tva'] ?? 'mensuel')) ?></span>
             </div>
             <?php if ($entreprise['ca_annuel_estime'] ?? 0): ?>
-            <div style="display:flex;justify-content:space-between;font-size:16px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
                 <span style="color:var(--text-muted)">CA estimé</span>
                 <span style="font-weight:500;color:var(--navy)"><?= $fmt((float)$entreprise['ca_annuel_estime']) ?> FCFA</span>
             </div>
             <?php endif; ?>
             <?php if ($regime === 'EXONERE' && ($entreprise['date_debut_exoneration'] ?? '')): ?>
-            <div style="display:flex;justify-content:space-between;font-size:16px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
                 <span style="color:var(--text-muted)">Période exonération</span>
                 <span style="font-weight:500;color:#b45309"><?= date('d/m/Y', strtotime($entreprise['date_debut_exoneration'])) ?> → <?= $entreprise['date_fin_exoneration'] ? date('d/m/Y', strtotime($entreprise['date_fin_exoneration'])) : '?' ?></span>
             </div>
@@ -88,7 +88,7 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
 
 <!-- Modules inclus / exclus -->
 <div class="card" style="margin-bottom:24px">
-    <div style="font-size:18px;font-weight:600;color:var(--navy-dark);margin-bottom:18px">Obligations & modules fiscaux</div>
+    <div style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:18px">Obligations & modules fiscaux</div>
     <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse">
         <thead>
@@ -113,23 +113,23 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
         foreach ($moduleRows as $key => [$libelle, $detail]):
             $val = $modules[$key] ?? false;
             if ($val === true) {
-                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M4.5 12.75l6 6 9-13.5\' /></svg>Oui</span>';
+                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M4.5 12.75l6 6 9-13.5\' /></svg>Oui</span>';
             } elseif ($val === false) {
-                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(239,68,68,0.07);color:#dc2626"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M6 18L18 6M6 6l12 12\' /></svg>Non</span>';
+                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:rgba(239,68,68,0.07);color:#dc2626"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M6 18L18 6M6 6l12 12\' /></svg>Non</span>';
             } else {
-                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(245,158,11,0.1);color:#d97706">Optionnel</span>';
+                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:rgba(245,158,11,0.1);color:#d97706">Optionnel</span>';
             }
         ?>
         <tr style="border-bottom:1px solid rgba(228,233,240,0.6)">
-            <td style="padding:12px 16px;font-size:16px;color:var(--text);font-weight:500"><?= $libelle ?></td>
+            <td style="padding:12px 16px;font-size:14px;color:var(--text);font-weight:500"><?= $libelle ?></td>
             <td style="padding:12px 16px;text-align:center"><?= $badge ?></td>
-            <td style="padding:12px 16px;font-size:15px;color:var(--text-muted)"><?= $detail ?></td>
+            <td style="padding:12px 16px;font-size:13px;color:var(--text-muted)"><?= $detail ?></td>
         </tr>
         <?php endforeach; ?>
         <tr style="border-bottom:1px solid rgba(228,233,240,0.6);background:rgba(240,243,248,0.4)">
-            <td style="padding:12px 16px;font-size:16px;color:var(--text);font-weight:500">Retenues salariales (IPRES, TRIMF, IR, IPM)</td>
-            <td style="padding:12px 16px;text-align:center"><span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Oui</span></td>
-            <td style="padding:12px 16px;font-size:15px;color:var(--text-muted)">Identiques pour tous les régimes employeurs (sauf RNS sans salariés)</td>
+            <td style="padding:12px 16px;font-size:14px;color:var(--text);font-weight:500">Retenues salariales (IPRES, TRIMF, IR, IPM)</td>
+            <td style="padding:12px 16px;text-align:center"><span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Oui</span></td>
+            <td style="padding:12px 16px;font-size:13px;color:var(--text-muted)">Identiques pour tous les régimes employeurs (sauf RNS sans salariés)</td>
         </tr>
         </tbody>
     </table>
@@ -139,7 +139,7 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
 <!-- Prochaines échéances -->
 <div class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
-        <div style="font-size:18px;font-weight:600;color:var(--navy-dark)">Prochaines échéances fiscales <?= $exercice ?></div>
+        <div style="font-size:13px;font-weight:600;color:var(--navy-dark)">Prochaines échéances fiscales <?= $exercice ?></div>
         <?php if (in_array($regime, ['CGU', 'MICRO'])): ?>
         <a href="<?= APP_URL ?>/dossier/fiscalite/cgu?id=<?= $entreprise['id'] ?>" class="btn btn-primary btn-sm">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -169,11 +169,11 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
     ?>
     <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;background:<?= $bgColor ?>;border-radius:10px;border-left:4px solid <?= $borderColor ?>">
         <div style="text-align:center;min-width:56px">
-            <div style="font-size:18px;font-weight:700;font-family:'Cormorant Garamond',serif;color:<?= $isPast ? '#9ca3af' : 'var(--navy-dark)' ?>"><?= date('d', strtotime($ech['date'])) ?></div>
+            <div style="font-size:13px;font-weight:700;font-family:'Cormorant Garamond',serif;color:<?= $isPast ? '#9ca3af' : 'var(--navy-dark)' ?>"><?= date('d', strtotime($ech['date'])) ?></div>
             <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)"><?= moisFr(strtotime($ech['date'])) ?></div>
         </div>
         <div style="flex:1">
-            <div style="font-size:16px;font-weight:500;color:<?= $isPast ? 'var(--text-muted)' : 'var(--text)' ?>"><?= e($ech['libelle']) ?></div>
+            <div style="font-size:14px;font-weight:500;color:<?= $isPast ? 'var(--text-muted)' : 'var(--text)' ?>"><?= e($ech['libelle']) ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:2px">
                 <span style="display:inline-flex;padding:2px 8px;border-radius:20px;font-weight:600;font-size:13px;background:rgba(30,58,95,0.08);color:var(--navy)"><?= e($ech['type']) ?></span>
             </div>

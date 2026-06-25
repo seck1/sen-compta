@@ -75,9 +75,9 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
         ?>
         <div style="font-size:14px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px">Solde courant</div>
         <div style="font-size:28px;font-weight:700;font-family:Arial">
-            <?= number_format(abs($solde), 0, ',', ' ') ?> <span style="font-size:17px">FCFA</span>
+            <?= number_format(abs($solde), 0, ',', ' ') ?> <span style="font-size:14px">FCFA</span>
         </div>
-        <div style="font-size:15px;color:rgba(255,255,255,.5)">
+        <div style="font-size:13px;color:rgba(255,255,255,.5)">
             <?php
             $isClient = $tiers['type'] === 'client';
             $isFourn  = $tiers['type'] === 'fournisseur';
@@ -112,7 +112,7 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
     </div>
     <div class="info-item">
         <div class="info-item-label">Dernière écriture</div>
-        <div class="info-item-val" style="font-size:17px">
+        <div class="info-item-val" style="font-size:14px">
             <?= $ecritures ? date('d/m/Y', strtotime($ecritures[0]['date_ecriture'])) : '—' ?>
         </div>
     </div>
@@ -124,8 +124,8 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
         <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
         <input type="hidden" name="tiers_id" value="<?= $tiers['id'] ?>">
         <div class="form-field" style="min-width:130px">
-            <label style="font-size:15px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Exercice</label>
-            <select name="exercice" style="padding:7px 10px;border-radius:8px;border:1px solid var(--border);font-size:16px;background:var(--bg);color:var(--text)">
+            <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Exercice</label>
+            <select name="exercice" style="padding:7px 10px;border-radius:8px;border:1px solid var(--border);font-size:14px;background:var(--bg);color:var(--text)">
                 <option value="">Tous</option>
                 <?php foreach ($exercices_dispo as $ex): ?>
                 <option value="<?= $ex ?>" <?= $filtre_ex == $ex ? 'selected' : '' ?>><?= $ex ?></option>
@@ -133,12 +133,12 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
             </select>
         </div>
         <div class="form-field" style="min-width:140px">
-            <label style="font-size:15px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Du</label>
-            <input type="date" name="date_debut" value="<?= htmlspecialchars($date_debut) ?>" style="padding:7px 10px;border-radius:8px;border:1px solid var(--border);font-size:16px">
+            <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Du</label>
+            <input type="date" name="date_debut" value="<?= htmlspecialchars($date_debut) ?>" style="padding:7px 10px;border-radius:8px;border:1px solid var(--border);font-size:14px">
         </div>
         <div class="form-field" style="min-width:140px">
-            <label style="font-size:15px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Au</label>
-            <input type="date" name="date_fin" value="<?= htmlspecialchars($date_fin) ?>" style="padding:7px 10px;border-radius:8px;border:1px solid var(--border);font-size:16px">
+            <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Au</label>
+            <input type="date" name="date_fin" value="<?= htmlspecialchars($date_fin) ?>" style="padding:7px 10px;border-radius:8px;border:1px solid var(--border);font-size:14px">
         </div>
         <button type="submit" class="btn btn-primary" style="height:36px">Filtrer</button>
         <?php if ($filtre_ex || $date_debut || $date_fin): ?>
@@ -151,7 +151,7 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
 <div class="table-wrap">
     <div class="table-header">
         <span class="table-title">Historique des écritures<?= $filtre_ex ? " — Exercice $filtre_ex" : '' ?></span>
-        <span style="font-size:16px;color:var(--text-muted)"><?= count($ecritures) ?> ligne<?= count($ecritures) > 1 ? 's' : '' ?></span>
+        <span style="font-size:14px;color:var(--text-muted)"><?= count($ecritures) ?> ligne<?= count($ecritures) > 1 ? 's' : '' ?></span>
     </div>
     <?php if (empty($ecritures)): ?>
     <div class="empty-state">
@@ -178,7 +178,7 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
             <tr>
                 <td style="font-family:Arial;white-space:nowrap"><?= date('d/m/Y', strtotime($e['date_ecriture'])) ?></td>
                 <td><span class="badge badge-navy"><?= e($e['journal_code']) ?></span></td>
-                <td style="font-family:Arial;font-size:16px;color:var(--text-muted)"><?= e($e['numero_piece']) ?></td>
+                <td style="font-family:Arial;font-size:14px;color:var(--text-muted)"><?= e($e['numero_piece']) ?></td>
                 <td style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= e($e['libelle']) ?></td>
                 <td style="font-family:Arial;font-weight:600"><?= e($e['numero_compte']) ?></td>
                 <td style="text-align:right;font-family:Arial" class="<?= $e['debit'] > 0 ? 'montant-debit' : '' ?>">
@@ -199,7 +199,7 @@ $initiales = strtoupper(substr($tiers['nom'], 0, 2));
         </tbody>
         <tfoot>
             <tr style="background:var(--bg);font-weight:700">
-                <td colspan="5" style="padding:11px 18px;font-size:16px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Totaux</td>
+                <td colspan="5" style="padding:11px 18px;font-size:14px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Totaux</td>
                 <td style="text-align:right;padding:11px 18px;font-family:Arial;color:var(--danger)"><?= number_format($totalD, 0, ',', ' ') ?></td>
                 <td style="text-align:right;padding:11px 18px;font-family:Arial;color:var(--success)"><?= number_format($totalC, 0, ',', ' ') ?></td>
                 <td></td>

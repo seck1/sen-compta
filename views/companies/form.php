@@ -24,7 +24,7 @@
         <?php endif; ?>
 
         <div style="margin-bottom:28px">
-            <h3 style="font-size:15px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Informations générales</h3>
+            <h3 style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Informations générales</h3>
             <p style="font-size:13px;color:var(--text-muted)">Identité juridique de l'entreprise</p>
         </div>
 
@@ -164,7 +164,7 @@
         <hr style="border:none;border-top:1px solid var(--border);margin-bottom:24px">
 
         <div style="margin-bottom:20px">
-            <h3 style="font-size:15px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Contact & localisation</h3>
+            <h3 style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:4px">Contact & localisation</h3>
         </div>
 
         <div class="form-grid" style="margin-bottom:24px">

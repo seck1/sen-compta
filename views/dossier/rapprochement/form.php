@@ -53,7 +53,7 @@
             <div class="form-field">
                 <label>Solde du relevé bancaire (FCFA) *</label>
                 <input type="number" name="solde_releve" required step="1" placeholder="0">
-                <span style="font-size:15px;color:var(--text-muted)">Solde final figurant sur votre relevé de compte.</span>
+                <span style="font-size:13px;color:var(--text-muted)">Solde final figurant sur votre relevé de compte.</span>
             </div>
         </div>
 

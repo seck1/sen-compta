@@ -21,13 +21,13 @@ $statut_colors = ['actif'=>'#166534','inactif'=>'#991b1b','suspendu'=>'#92400e']
 <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
     <form method="get" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
         <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
-        <select name="statut" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:16px;background:#fff">
+        <select name="statut" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:14px;background:#fff">
             <option value="">Tous statuts</option>
             <option value="actif" <?= ($_GET['statut']??'')==='actif'?'selected':'' ?>>Actifs</option>
             <option value="inactif" <?= ($_GET['statut']??'')==='inactif'?'selected':'' ?>>Inactifs</option>
             <option value="suspendu" <?= ($_GET['statut']??'')==='suspendu'?'selected':'' ?>>Suspendus</option>
         </select>
-        <select name="departement" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:16px;background:#fff">
+        <select name="departement" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:14px;background:#fff">
             <option value="">Tous départements</option>
             <?php foreach($departements as $dept): ?>
             <option value="<?= e($dept) ?>" <?= ($_GET['departement']??'')===$dept?'selected':'' ?>><?= e($dept) ?></option>
@@ -52,7 +52,7 @@ $cdd_count = count(array_filter($employes, fn($e) => $e['type_contrat']==='CDD')
     ] as [$label,$val,$col,$bg]): ?>
     <div class="card" style="padding:16px 20px;background:<?= $bg ?>;border:1px solid <?= $col ?>22">
         <div style="font-size:26px;font-weight:800;color:<?= $col ?>"><?= $val ?></div>
-        <div style="font-size:15px;color:#555;margin-top:2px"><?= $label ?></div>
+        <div style="font-size:13px;color:#555;margin-top:2px"><?= $label ?></div>
     </div>
     <?php endforeach; ?>
 </div>
@@ -64,7 +64,7 @@ $cdd_count = count(array_filter($employes, fn($e) => $e['type_contrat']==='CDD')
 </div>
 <?php else: ?>
 <div class="card" style="padding:0;overflow:hidden">
-    <table style="width:100%;border-collapse:collapse;font-size:16px">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
         <thead>
             <tr style="background:#1e3a5f;color:#fff">
                 <th style="padding:11px 14px;text-align:left;font-weight:600">Matricule</th>
@@ -108,8 +108,8 @@ $cdd_count = count(array_filter($employes, fn($e) => $e['type_contrat']==='CDD')
                 <td style="padding:10px 14px;font-weight:600;color:#1a1a1a;text-align:right">
                     <?= number_format($emp['salaire_base'], 0, ',', ' ') ?> F
                 </td>
-                <td style="padding:10px 14px;color:#555;font-family:monospace;font-size:15px"><?= e($emp['num_ipres']) ?: '—' ?></td>
-                <td style="padding:10px 14px;color:#555;font-family:monospace;font-size:15px"><?= e($emp['num_css']) ?: '—' ?></td>
+                <td style="padding:10px 14px;color:#555;font-family:monospace;font-size:13px"><?= e($emp['num_ipres']) ?: '—' ?></td>
+                <td style="padding:10px 14px;color:#555;font-family:monospace;font-size:13px"><?= e($emp['num_css']) ?: '—' ?></td>
                 <td style="padding:10px 14px">
                     <span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:14px;font-weight:700;background:<?= $emp['statut']==='actif'?'#f0fdf4':'#fef2f2' ?>;color:<?= $statut_colors[$emp['statut']] ?? '#555' ?>">
                         <?= ucfirst(e($emp['statut'])) ?>

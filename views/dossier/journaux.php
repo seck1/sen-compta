@@ -14,12 +14,12 @@
         <div style="height:4px;background:var(--ent-color)"></div>
         <div style="padding:20px">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-                <div style="width:44px;height:44px;border-radius:11px;background:var(--ent-color);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white">
+                <div style="width:44px;height:44px;border-radius:11px;background:var(--ent-color);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white">
                     <?= e($j['code']) ?>
                 </div>
                 <span class="badge badge-info"><?= ucfirst(str_replace('_',' ',$j['type'])) ?></span>
             </div>
-            <div style="font-size:18px;font-weight:600;color:var(--navy-dark);margin-bottom:14px"><?= e($j['libelle']) ?></div>
+            <div style="font-size:13px;font-weight:600;color:var(--navy-dark);margin-bottom:14px"><?= e($j['libelle']) ?></div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                 <div style="background:var(--bg);border-radius:8px;padding:10px">
                     <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Écritures</div>
@@ -27,7 +27,7 @@
                 </div>
                 <div style="background:var(--bg);border-radius:8px;padding:10px">
                     <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Total</div>
-                    <div style="font-size:16px;font-weight:600;color:var(--danger)"><?= number_format($j['total_debit'],0,',',' ') ?></div>
+                    <div style="font-size:14px;font-weight:600;color:var(--danger)"><?= number_format($j['total_debit'],0,',',' ') ?></div>
                 </div>
             </div>
         </div>

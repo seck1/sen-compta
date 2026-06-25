@@ -28,7 +28,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 
 <style>
 .profil-tabs { display:flex; gap:4px; margin-bottom:24px; background:#fff; border:1px solid var(--border); border-radius:12px; padding:5px; width:fit-content; }
-.profil-tab { padding:10px 22px; border-radius:9px; font-size:16px; font-weight:500; cursor:pointer; border:none; background:none; color:var(--text-muted); transition:all .2s; }
+.profil-tab { padding:10px 22px; border-radius:9px; font-size:14px; font-weight:500; cursor:pointer; border:none; background:none; color:var(--text-muted); transition:all .2s; }
 .profil-tab.active { background:var(--navy); color:#fff; }
 .profil-tab:hover:not(.active) { background:var(--bg); color:var(--text); }
 
@@ -36,7 +36,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 .section-head { padding:18px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
 .section-head-left { display:flex; align-items:center; gap:14px; }
 .section-icon { width:40px; height:40px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
-.section-title { font-size:17px; font-weight:600; color:var(--navy-dark); }
+.section-title { font-size:14px; font-weight:600; color:var(--navy-dark); }
 .section-subtitle { font-size:14px; color:var(--text-muted); margin-top:2px; }
 .section-chevron { width:20px; height:20px; color:var(--text-muted); transition:transform .2s; }
 .section-chevron.open { transform:rotate(180deg); }
@@ -50,7 +50,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 .form-field label .req { color:var(--danger); margin-left:2px; }
 .form-field input, .form-field select, .form-field textarea {
     padding:11px 14px; border:1.5px solid var(--border); border-radius:9px;
-    font-size:16px; font-family:'DM Sans',sans-serif; color:var(--text);
+    font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text);
     background:#fff; transition:border-color .15s;
     width:100%;
 }
@@ -69,7 +69,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 .profil-hero-avatar { width:80px; height:80px; border-radius:18px; background:var(--ent-color); display:flex; align-items:center; justify-content:center; font-size:30px; font-weight:700; color:#fff; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,.3); }
 .profil-hero-info { flex:1; }
 .profil-hero-name { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; margin-bottom:4px; }
-.profil-hero-meta { font-size:15px; opacity:.7; display:flex; gap:16px; flex-wrap:wrap; margin-top:6px; }
+.profil-hero-meta { font-size:13px; opacity:.7; display:flex; gap:16px; flex-wrap:wrap; margin-top:6px; }
 .profil-hero-meta span { display:flex; align-items:center; gap:5px; }
 .regime-badge-lg { display:inline-flex; align-items:center; gap:6px; padding:6px 15px; border-radius:20px; font-size:14px; font-weight:700; letter-spacing:.5px; margin-top:8px; }
 
@@ -84,7 +84,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 <!-- Bouton conformité -->
 <div style="display:flex;justify-content:flex-end;margin-bottom:16px">
     <a href="<?= APP_URL ?>/dossier/profil/conformite-dgid?id=<?= $entreprise['id'] ?>"
-       style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1e3a5f,#2a5080);color:#fff;padding:12px 22px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;box-shadow:0 2px 10px rgba(30,58,95,.2)">
+       style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1e3a5f,#2a5080);color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 2px 10px rgba(30,58,95,.2)">
         📋 Rapport de Conformité DGID
         <span style="background:<?= $score_color ?>;color:#fff;border-radius:20px;padding:3px 10px;font-size:14px;font-weight:700"><?= $score ?>%</span>
     </a>

@@ -38,8 +38,8 @@ $st = $devis['statut'] ?? 'brouillon';
 .dv-section-title { font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold-dark);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold); }
 
 .dv-prospect-info { display:flex;align-items:center;gap:14px;margin-bottom:16px; }
-.dv-avatar { width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0; }
-.dv-prospect-name { font-size:16px;font-weight:700;color:var(--navy-dark); }
+.dv-avatar { width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0; }
+.dv-prospect-name { font-size:14px;font-weight:700;color:var(--navy-dark); }
 .dv-prospect-meta { font-size:12px;color:var(--text-muted);margin-top:2px; }
 .info-row { display:flex;gap:8px;margin-bottom:8px;font-size:13px;color:var(--text-muted); }
 .info-row strong { color:var(--text);min-width:130px; }
@@ -53,7 +53,7 @@ $st = $devis['statut'] ?? 'brouillon';
 
 .totaux-block { margin-top:20px;border-top:2px solid var(--border);padding-top:16px; }
 .totaux-row { display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px; }
-.totaux-row.total-final { font-size:17px;font-weight:800;color:var(--navy-dark);margin-top:8px;padding-top:8px;border-top:2px solid var(--navy-dark); }
+.totaux-row.total-final { font-size:14px;font-weight:800;color:var(--navy-dark);margin-top:8px;padding-top:8px;border-top:2px solid var(--navy-dark); }
 .totaux-row .label { color:var(--text-muted); }
 
 /* Side info */
@@ -218,7 +218,7 @@ $st = $devis['statut'] ?? 'brouillon';
                 <div class="side-info-row"><span class="lbl">TVA (<?= $devis['taux_tva'] ?>%)</span><span class="val"><?= number_format($devis['montant_tva'], 0, ',', ' ') ?> F</span></div>
                 <div class="side-info-row" style="padding-top:8px;border-top:2px solid var(--navy-dark);margin-top:4px">
                     <span class="lbl" style="font-weight:700;color:var(--navy-dark)">TTC</span>
-                    <span class="val" style="font-size:18px;color:var(--gold)"><?= number_format($devis['montant_ttc'], 0, ',', ' ') ?> F</span>
+                    <span class="val" style="font-size:13px;color:var(--gold)"><?= number_format($devis['montant_ttc'], 0, ',', ' ') ?> F</span>
                 </div>
             </div>
         </div>

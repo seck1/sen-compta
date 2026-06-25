@@ -36,12 +36,12 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)">
         <div style="padding:20px 32px;border-right:1px solid var(--border)">
             <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px;font-weight:600">De</div>
-            <div style="font-weight:700;font-size:15px;margin-bottom:4px">SenCompta</div>
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">SenCompta</div>
             <div style="font-size:13px;color:var(--text-muted)">Expert-Comptable agréé</div>
         </div>
         <div style="padding:20px 32px">
             <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px;font-weight:600">Facturé à</div>
-            <div style="font-weight:700;font-size:15px;margin-bottom:4px"><?= e($honoraire['raison_sociale']) ?></div>
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px"><?= e($honoraire['raison_sociale']) ?></div>
             <?php if($honoraire['ninea']): ?>
             <div style="font-size:12px;color:var(--text-muted)">NINEA : <?= e($honoraire['ninea']) ?></div>
             <?php endif; ?>
@@ -91,7 +91,7 @@
                 <span>TVA (<?= number_format($honoraire['taux_tva'],0) ?> %)</span>
                 <span style="font-family:monospace"><?= number_format($honoraire['montant_tva'],0,',',' ') ?> FCFA</span>
             </div>
-            <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:18px;font-weight:700">
+            <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:13px;font-weight:700">
                 <span>Total TTC</span>
                 <span style="font-family:monospace;color:var(--navy-dark)"><?= number_format($honoraire['montant_ttc'],0,',',' ') ?> FCFA</span>
             </div>

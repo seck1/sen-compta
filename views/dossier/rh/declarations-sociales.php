@@ -9,7 +9,7 @@ $mois_noms = ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao�
     <div style="display:flex;gap:10px;align-items:center">
         <form method="get" style="display:flex;gap:8px;align-items:center">
             <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
-            <select name="annee" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:16px">
+            <select name="annee" onchange="this.form.submit()" style="padding:8px 12px;border:1.5px solid #ddd;border-radius:7px;font-size:14px">
                 <?php for($y=2022;$y<=2027;$y++): ?>
                 <option value="<?= $y ?>" <?= $y===$annee?'selected':'' ?>><?= $y ?></option>
                 <?php endfor; ?>
@@ -26,12 +26,12 @@ $mois_noms = ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao�
 <div class="card" style="padding:40px;text-align:center;color:#888">
     <div style="font-size:32px;margin-bottom:8px">📋</div>
     <div>Aucun bulletin généré pour <?= $annee ?>.</div>
-    <div style="font-size:15px;margin-top:6px">Générez des bulletins de paie pour voir les déclarations sociales.</div>
+    <div style="font-size:13px;margin-top:6px">Générez des bulletins de paie pour voir les déclarations sociales.</div>
 </div>
 <?php else: ?>
 
 <!-- Info légale -->
-<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:15px;color:#92400e">
+<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#92400e">
     <strong>Taux IPRES 2026 :</strong> Salarié 5,6% / Patronal 8,6% — CSS : Accident 1% / Prestations familiales 7% (patronal uniquement) — TRIMF : forfait salarié.
 </div>
 
@@ -45,7 +45,7 @@ $mois_noms = ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao�
         ['IR retenu', number_format($totaux['total_ir'],0,',',' ').' F', '#b8923f', '#f5f3ff'],
     ] as [$label,$val,$col,$bg]): ?>
     <div class="card" style="padding:16px 20px;background:<?= $bg ?>;border:1px solid <?= $col ?>22">
-        <div style="font-size:18px;font-weight:800;color:<?= $col ?>"><?= $val ?></div>
+        <div style="font-size:13px;font-weight:800;color:<?= $col ?>"><?= $val ?></div>
         <div style="font-size:14px;color:#555;margin-top:2px"><?= $label ?> — <?= $annee ?></div>
     </div>
     <?php endforeach; ?>
@@ -54,11 +54,11 @@ $mois_noms = ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao�
 
 <!-- Tableau mensuel -->
 <div class="card" style="padding:0;overflow:hidden;margin-bottom:24px">
-    <div style="padding:14px 20px;background:#1e3a5f;color:#fff;font-weight:700;font-size:17px">
+    <div style="padding:14px 20px;background:#1e3a5f;color:#fff;font-weight:700;font-size:14px">
         Récapitulatif mensuel <?= $annee ?>
     </div>
     <div style="overflow-x:auto">
-    <table style="width:100%;border-collapse:collapse;font-size:16px;min-width:800px">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;min-width:800px">
         <thead>
             <tr style="background:#f0f4f8;border-bottom:2px solid #ddd">
                 <th style="padding:10px 14px;text-align:left;font-weight:700;color:#1e3a5f">Mois</th>
@@ -128,7 +128,7 @@ $mois_noms = ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao�
 <?php endif; ?>
 
 <!-- Note échéances -->
-<div style="background:#f0f4f8;border-radius:8px;padding:14px 18px;font-size:15px;color:#444;line-height:1.8">
+<div style="background:#f0f4f8;border-radius:8px;padding:14px 18px;font-size:13px;color:#444;line-height:1.8">
     <strong style="color:#1e3a5f">Échéances de déclarations :</strong><br>
     • <strong>IPRES :</strong> Déclaration et paiement avant le 15 du mois suivant<br>
     • <strong>IR / TRIMF :</strong> Déclaration mensuelle avant le 15 du mois suivant à la DGI<br>

@@ -38,7 +38,7 @@ ob_start();
 <!-- Derniers cabinets -->
 <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
   <div style="padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-    <span style="font-size:15px;font-weight:600;">Derniers cabinets inscrits</span>
+    <span style="font-size:13px;font-weight:600;">Derniers cabinets inscrits</span>
     <a href="<?= APP_URL ?>/superadmin/cabinets" style="font-size:12px;color:var(--gold);text-decoration:none;">Voir tout →</a>
   </div>
   <div style="overflow-x:auto;">

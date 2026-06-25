@@ -58,7 +58,7 @@
 <!-- Liste missions -->
 <?php if (empty($missions)): ?>
 <div class="card" style="text-align:center;padding:60px">
-    <h3 style="font-size:16px;color:var(--text-muted)">Aucune mission trouvée</h3>
+    <h3 style="font-size:14px;color:var(--text-muted)">Aucune mission trouvée</h3>
 </div>
 <?php else: ?>
 <div style="display:flex;flex-direction:column;gap:12px">
@@ -75,8 +75,8 @@ foreach ($missions as $m):
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
         <div style="flex:1">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-                <span style="font-size:18px"><?= $typeIcons[$m['type']] ?? '📁' ?></span>
-                <span style="font-size:15px;font-weight:600"><?= e($m['libelle']) ?></span>
+                <span style="font-size:13px"><?= $typeIcons[$m['type']] ?? '📁' ?></span>
+                <span style="font-size:13px;font-weight:600"><?= e($m['libelle']) ?></span>
                 <span style="font-size:12px;background:<?= $sbg ?>;color:<?= $sc ?>;padding:3px 10px;border-radius:20px;font-weight:500"><?= ucfirst(str_replace('_',' ',$m['statut'])) ?></span>
                 <?php if ($enRetard): ?><span class="badge badge-danger">En retard</span><?php endif; ?>
             </div>

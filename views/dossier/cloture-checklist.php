@@ -24,10 +24,10 @@ $score      = $total > 0 ? round($nb_ok / $total * 100) : 0;
         <span style="font-size:22px;font-weight:700;color:#fff"><?= $score ?>%</span>
     </div>
     <div style="flex:1">
-        <div style="font-size:18px;font-weight:700;margin-bottom:6px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px">
             <?= $score==100 ? '✅ Dossier prêt pour la clôture' : ($score>=70 ? '⚠️ Vérifications en cours' : '❌ Actions requises avant clôture') ?>
         </div>
-        <div style="display:flex;gap:16px;font-size:16px">
+        <div style="display:flex;gap:16px;font-size:14px">
             <span style="color:#1f6e4e;font-weight:600">✓ <?= $nb_ok ?> validé<?= $nb_ok>1?'s':'' ?></span>
             <?php if($nb_warning): ?><span style="color:#f59e0b;font-weight:600">⚠ <?= $nb_warning ?> avertissement<?= $nb_warning>1?'s':'' ?></span><?php endif; ?>
             <?php if($nb_error): ?><span style="color:#dc2626;font-weight:600">✗ <?= $nb_error ?> erreur<?= $nb_error>1?'s':'' ?></span><?php endif; ?>
@@ -46,21 +46,21 @@ $score      = $total > 0 ? round($nb_ok / $total * 100) : 0;
         $icon = $check['status']==='ok' ? '✓' : ($check['status']==='warning' ? '⚠' : '✗');
     ?>
     <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border);background:<?= $i%2==0?'#fff':'#fafbfc' ?>">
-        <div style="width:28px;height:28px;border-radius:50%;background:<?= $c[1] ?>;border:2px solid <?= $c[2] ?>;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;font-weight:700;color:<?= $c[0] ?>">
+        <div style="width:28px;height:28px;border-radius:50%;background:<?= $c[1] ?>;border:2px solid <?= $c[2] ?>;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;font-weight:700;color:<?= $c[0] ?>">
             <?= $icon ?>
         </div>
         <div style="flex:1;min-width:0">
-            <div style="font-weight:600;font-size:17px"><?= e($check['label']) ?></div>
+            <div style="font-weight:600;font-size:14px"><?= e($check['label']) ?></div>
             <?php if(!empty($check['detail'])): ?>
-            <div style="font-size:15px;color:var(--text-muted);margin-top:2px"><?= e($check['detail']) ?></div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:2px"><?= e($check['detail']) ?></div>
             <?php endif; ?>
         </div>
         <?php if(!empty($check['link'])): ?>
-        <a href="<?= $check['link'] ?>" style="padding:5px 14px;border-radius:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap">
+        <a href="<?= $check['link'] ?>" style="padding:5px 14px;border-radius:8px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap">
             Corriger →
         </a>
         <?php else: ?>
-        <span style="padding:3px 12px;border-radius:20px;font-size:15px;font-weight:600;background:<?= $c[1] ?>;color:<?= $c[0] ?>;border:1px solid <?= $c[2] ?>">
+        <span style="padding:3px 12px;border-radius:20px;font-size:13px;font-weight:600;background:<?= $c[1] ?>;color:<?= $c[0] ?>;border:1px solid <?= $c[2] ?>">
             <?= $check['status']==='ok'?'OK':($check['status']==='warning'?'Attention':'Requis') ?>
         </span>
         <?php endif; ?>

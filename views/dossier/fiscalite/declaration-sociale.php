@@ -5,7 +5,7 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
 ?>
 
 <?php if ($saved): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:14px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Déclaration sociale validée pour <?= e($moisLabel) ?>.
 </div>
@@ -20,12 +20,12 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
         <!-- Period selector -->
         <form method="get" style="display:flex;align-items:center;gap:6px">
             <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
-            <select name="mois" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:16px;background:white">
+            <select name="mois" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;background:white">
                 <?php for($m=1;$m<=12;$m++): ?>
                 <option value="<?= $m ?>" <?= $m==$mois?'selected':'' ?>><?= $moisNoms[$m] ?></option>
                 <?php endfor; ?>
             </select>
-            <select name="annee" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:16px;background:white">
+            <select name="annee" style="padding:7px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;background:white">
                 <?php for($y=date('Y');$y>=date('Y')-3;$y--): ?>
                 <option value="<?= $y ?>" <?= $y==$annee?'selected':'' ?>><?= $y ?></option>
                 <?php endfor; ?>
@@ -42,8 +42,8 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
 <?php if (empty($bulletins)): ?>
 <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:40px;text-align:center">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:44px;height:44px;color:var(--warning);margin:0 auto 16px;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
-    <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:6px">Aucun bulletin généré pour <?= e($moisLabel) ?></div>
-    <div style="font-size:16px;color:var(--text-muted);margin-bottom:20px">Générez les bulletins de paie avant de valider la déclaration sociale.</div>
+    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Aucun bulletin généré pour <?= e($moisLabel) ?></div>
+    <div style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Générez les bulletins de paie avant de valider la déclaration sociale.</div>
     <a href="<?= APP_URL ?>/dossier/rh/bulletin/creer?id=<?= $entreprise['id'] ?>" class="btn btn-primary btn-sm">Créer des bulletins</a>
 </div>
 <?php else: ?>
@@ -53,17 +53,17 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
     <div class="kpi-card">
         <div class="kpi-label">IPRES Total</div>
         <div class="kpi-value" style="font-size:20px"><?= formatMontant($totaux['ipres_total']) ?></div>
-        <div class="kpi-sub" style="color:var(--text-muted);font-size:17px">Sal: <?= formatMontant($totaux['ipres_salarie']) ?> · Pat: <?= formatMontant($totaux['ipres_patronal']) ?></div>
+        <div class="kpi-sub" style="color:var(--text-muted);font-size:14px">Sal: <?= formatMontant($totaux['ipres_salarie']) ?> · Pat: <?= formatMontant($totaux['ipres_patronal']) ?></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">CSS Total</div>
         <div class="kpi-value" style="font-size:20px"><?= formatMontant($totaux['css_total']) ?></div>
-        <div class="kpi-sub" style="font-size:17px">Acc: <?= formatMontant($totaux['css_accidents']) ?> · Prest: <?= formatMontant($totaux['css_prestations']) ?></div>
+        <div class="kpi-sub" style="font-size:14px">Acc: <?= formatMontant($totaux['css_accidents']) ?> · Prest: <?= formatMontant($totaux['css_prestations']) ?></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">IPM Total</div>
         <div class="kpi-value" style="font-size:20px"><?= formatMontant($totaux['ipm_total']) ?></div>
-        <div class="kpi-sub" style="font-size:17px">Sal: <?= formatMontant($totaux['ipm_salarie']) ?> · Pat: <?= formatMontant($totaux['ipm_patronal']) ?></div>
+        <div class="kpi-sub" style="font-size:14px">Sal: <?= formatMontant($totaux['ipm_salarie']) ?> · Pat: <?= formatMontant($totaux['ipm_patronal']) ?></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">CFCE</div>
@@ -105,14 +105,14 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
                 <td>
                     <div style="font-weight:500"><?= e($b['prenom'].' '.$b['nom']) ?></div>
                 </td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['salaire_brut']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['ipres_salarie']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['ipres_patronal']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['css_accident']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['css_prestation']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['ipm_salarie']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['ipm_patronal']) ?></td>
-                <td style="text-align:right;font-family:monospace;font-size:18px"><?= formatMontant($b['cfce']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['salaire_brut']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['ipres_salarie']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['ipres_patronal']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['css_accident']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['css_prestation']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['ipm_salarie']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['ipm_patronal']) ?></td>
+                <td style="text-align:right;font-family:monospace;font-size:13px"><?= formatMontant($b['cfce']) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -135,46 +135,46 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
 <!-- Breakdown salarié vs patronal -->
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px">
     <div class="card">
-        <div style="font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px">IPRES</div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:16px">
+        <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px">IPRES</div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">
             <span style="color:var(--text-muted)">Part salarié</span>
             <span style="font-family:monospace"><?= formatMontant($totaux['ipres_salarie']) ?></span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:16px">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">
             <span style="color:var(--text-muted)">Part patronale</span>
             <span style="font-family:monospace"><?= formatMontant($totaux['ipres_patronal']) ?></span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:16px;font-weight:600">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:14px;font-weight:600">
             <span>Total IPRES</span>
             <span style="font-family:monospace;color:var(--navy-dark)"><?= formatMontant($totaux['ipres_total']) ?></span>
         </div>
     </div>
     <div class="card">
-        <div style="font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px">CSS</div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:16px">
+        <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px">CSS</div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">
             <span style="color:var(--text-muted)">Accidents travail</span>
             <span style="font-family:monospace"><?= formatMontant($totaux['css_accidents']) ?></span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:16px">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">
             <span style="color:var(--text-muted)">Prestations familiales</span>
             <span style="font-family:monospace"><?= formatMontant($totaux['css_prestations']) ?></span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:16px;font-weight:600">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:14px;font-weight:600">
             <span>Total CSS</span>
             <span style="font-family:monospace;color:var(--navy-dark)"><?= formatMontant($totaux['css_total']) ?></span>
         </div>
     </div>
     <div class="card">
-        <div style="font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px">IPM</div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:16px">
+        <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px">IPM</div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">
             <span style="color:var(--text-muted)">Part salarié</span>
             <span style="font-family:monospace"><?= formatMontant($totaux['ipm_salarie']) ?></span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:16px">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">
             <span style="color:var(--text-muted)">Part patronale</span>
             <span style="font-family:monospace"><?= formatMontant($totaux['ipm_patronal']) ?></span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:16px;font-weight:600">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:14px;font-weight:600">
             <span>Total IPM</span>
             <span style="font-family:monospace;color:var(--navy-dark)"><?= formatMontant($totaux['ipm_total']) ?></span>
         </div>
@@ -184,9 +184,9 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
 <!-- Total récap + action -->
 <div style="background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:14px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
     <div>
-        <div style="font-size:18px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.6);margin-bottom:6px">Total à déclarer et payer</div>
+        <div style="font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.6);margin-bottom:6px">Total à déclarer et payer</div>
         <div style="font-size:36px;font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold)"><?= formatMontant($totaux['total_a_payer']) ?></div>
-        <div style="font-size:18px;color:rgba(255,255,255,0.5);margin-top:4px">Échéance : 15 <?= $moisNoms[$mois==12?1:$mois+1] ?> <?= $mois==12?$annee+1:$annee ?></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px">Échéance : 15 <?= $moisNoms[$mois==12?1:$mois+1] ?> <?= $mois==12?$annee+1:$annee ?></div>
     </div>
     <?php if (!$isDepose): ?>
     <form method="post" action="<?= APP_URL ?>/dossier/fiscalite/declaration-sociale/store">
@@ -206,13 +206,13 @@ $isDepose = $declaration_existante && $declaration_existante['statut'] !== 'brou
         <input type="hidden" name="ipm_total" value="<?= $totaux['ipm_total'] ?>">
         <input type="hidden" name="cfce" value="<?= $totaux['cfce'] ?>">
         <input type="hidden" name="total_a_payer" value="<?= $totaux['total_a_payer'] ?>">
-        <button type="submit" style="padding:12px 24px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;transition:all .2s" onmouseover="this.style.background='#e2c99a'" onmouseout="this.style.background='var(--gold)'">
+        <button type="submit" style="padding:12px 24px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s" onmouseover="this.style.background='#e2c99a'" onmouseout="this.style.background='var(--gold)'">
             Valider la déclaration
         </button>
     </form>
     <?php else: ?>
     <div style="text-align:center">
-        <div class="badge badge-success" style="font-size:16px;padding:8px 16px">Déclarée le <?= date('d/m/Y', strtotime($declaration_existante['created_at'])) ?></div>
+        <div class="badge badge-success" style="font-size:14px;padding:8px 16px">Déclarée le <?= date('d/m/Y', strtotime($declaration_existante['created_at'])) ?></div>
     </div>
     <?php endif; ?>
 </div>

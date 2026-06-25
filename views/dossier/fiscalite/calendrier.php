@@ -32,7 +32,7 @@ $moisFr = ['01'=>'Janvier','02'=>'Février','03'=>'Mars','04'=>'Avril','05'=>'Ma
 ?>
 
 <?php if ($saved): ?>
-<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:14px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Calendrier fiscal <?= $annee ?> initialisé — <?= count($echeances) ?> échéances créées.
 </div>
@@ -48,7 +48,7 @@ $moisFr = ['01'=>'Janvier','02'=>'Février','03'=>'Mars','04'=>'Avril','05'=>'Ma
         <a href="?id=<?= $entreprise['id'] ?>&annee=<?= $annee-1 ?>" class="btn btn-outline btn-sm">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
         </a>
-        <span style="padding:7px 14px;background:white;border:1px solid var(--border);border-radius:9px;font-size:17px;font-weight:600;color:var(--navy-dark);min-width:64px;text-align:center"><?= $annee ?></span>
+        <span style="padding:7px 14px;background:white;border:1px solid var(--border);border-radius:9px;font-size:14px;font-weight:600;color:var(--navy-dark);min-width:64px;text-align:center"><?= $annee ?></span>
         <a href="?id=<?= $entreprise['id'] ?>&annee=<?= $annee+1 ?>" class="btn btn-outline btn-sm">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
         </a>
@@ -90,7 +90,7 @@ $moisFr = ['01'=>'Janvier','02'=>'Février','03'=>'Mars','04'=>'Avril','05'=>'Ma
 
 <?php if ($kpi_total_db === 0 && !empty($echeances)): ?>
 <!-- Preview mode (not yet initialized) -->
-<div style="background:rgba(31,110,78,0.06);border:1px solid rgba(31,110,78,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:16px;color:#1d4ed8">
+<div style="background:rgba(31,110,78,0.06);border:1px solid rgba(31,110,78,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#1d4ed8">
     <strong>Aperçu du calendrier <?= $annee ?></strong> — Cliquez sur "Générer <?= $annee ?>" pour enregistrer les <?= count($echeances) ?> échéances en base et pouvoir les marquer comme réglées.
 </div>
 <?php endif; ?>
@@ -116,7 +116,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
 ?>
 <div style="margin-bottom:24px">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-        <div style="font-size:16px;font-weight:600;color:var(--navy-dark);min-width:120px"><?= $mLabel ?></div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);min-width:120px"><?= $mLabel ?></div>
         <div style="flex:1;height:1px;background:var(--border)"></div>
         <?php if ($hasRetard): ?><span class="badge badge-danger">Retard</span><?php endif; ?>
     </div>
@@ -128,19 +128,19 @@ foreach ($dbByMonth as $ym => $monthEchs):
     <div style="background:<?= $bgRow ?>;border:1px solid <?= $isRetard ? 'rgba(239,68,68,0.2)' : 'var(--border)' ?>;border-radius:12px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;gap:14px">
         <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:<?= $tc['bg'] ?>;color:<?= $tc['color'] ?>;flex-shrink:0;min-width:56px;text-align:center"><?= e($ech['type']) ?></span>
         <div style="flex:1;min-width:0">
-            <div style="font-size:16px;font-weight:500;color:var(--text)"><?= e($ech['libelle']) ?></div>
+            <div style="font-size:14px;font-weight:500;color:var(--text)"><?= e($ech['libelle']) ?></div>
             <div style="font-size:14px;color:var(--text-muted);margin-top:2px">Échéance : <?= date('d/m/Y', strtotime($ech['date_echeance'])) ?></div>
         </div>
         <?php if ($ech['montant_estime']): ?>
         <div style="text-align:right;flex-shrink:0">
             <div style="font-size:14px;color:var(--text-muted)">Estimé</div>
-            <div style="font-size:16px;font-family:monospace"><?= formatMontant($ech['montant_estime']) ?></div>
+            <div style="font-size:14px;font-family:monospace"><?= formatMontant($ech['montant_estime']) ?></div>
         </div>
         <?php endif; ?>
         <?php if ($ech['montant_reel']): ?>
         <div style="text-align:right;flex-shrink:0">
             <div style="font-size:14px;color:var(--text-muted)">Réel</div>
-            <div style="font-size:16px;font-family:monospace;font-weight:600;color:#1f6e4e"><?= formatMontant($ech['montant_reel']) ?></div>
+            <div style="font-size:14px;font-family:monospace;font-weight:600;color:#1f6e4e"><?= formatMontant($ech['montant_reel']) ?></div>
         </div>
         <?php endif; ?>
         <div style="flex-shrink:0">
@@ -154,7 +154,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
         </div>
         <?php if ($ech['statut'] !== 'regle'): ?>
         <!-- Mini form to mark as paid -->
-        <button type="button" onclick="toggleForm(<?= $ech['id'] ?>)" style="padding:5px 12px;background:rgba(31,110,78,0.1);color:#1f6e4e;border:1px solid rgba(31,110,78,0.25);border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;flex-shrink:0">Marquer réglé</button>
+        <button type="button" onclick="toggleForm(<?= $ech['id'] ?>)" style="padding:5px 12px;background:rgba(31,110,78,0.1);color:#1f6e4e;border:1px solid rgba(31,110,78,0.25);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;flex-shrink:0">Marquer réglé</button>
         <?php endif; ?>
     </div>
     <?php if ($ech['statut'] !== 'regle'): ?>
@@ -188,7 +188,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
 ?>
 <div style="margin-bottom:20px">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-        <div style="font-size:16px;font-weight:600;color:var(--navy-dark);min-width:120px"><?= $mLabel ?></div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy-dark);min-width:120px"><?= $mLabel ?></div>
         <div style="flex:1;height:1px;background:var(--border)"></div>
     </div>
     <?php foreach ($monthEchs as $ech):
@@ -198,11 +198,11 @@ foreach ($dbByMonth as $ym => $monthEchs):
     <div style="background:<?= $isPast ? 'rgba(239,68,68,0.04)' : 'white' ?>;border:1px solid <?= $isPast ? 'rgba(239,68,68,0.15)' : 'var(--border)' ?>;border-radius:10px;padding:12px 16px;margin-bottom:6px;display:flex;align-items:center;gap:12px;opacity:0.8">
         <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:<?= $tc['bg'] ?>;color:<?= $tc['color'] ?>;flex-shrink:0;min-width:56px;text-align:center"><?= e($ech['type']) ?></span>
         <div style="flex:1">
-            <div style="font-size:16px;color:var(--text)"><?= e($ech['libelle']) ?></div>
+            <div style="font-size:14px;color:var(--text)"><?= e($ech['libelle']) ?></div>
             <div style="font-size:14px;color:var(--text-muted)">Échéance : <?= date('d/m/Y', strtotime($ech['date'])) ?></div>
         </div>
         <?php if ($ech['montant_estime']): ?>
-        <div style="font-family:monospace;font-size:16px;color:var(--text-muted)"><?= formatMontant($ech['montant_estime']) ?></div>
+        <div style="font-family:monospace;font-size:14px;color:var(--text-muted)"><?= formatMontant($ech['montant_estime']) ?></div>
         <?php endif; ?>
         <?php if ($isPast): ?><span class="badge badge-danger">Passé</span><?php else: ?><span class="badge badge-info">À venir</span><?php endif; ?>
     </div>
@@ -228,12 +228,12 @@ $cdd_expirants = $stmt_cdd->fetchAll(PDO::FETCH_ASSOC);
 <?php if(!empty($cdd_expirants)): ?>
 <div class="card" style="margin-top:24px;padding:0;overflow:hidden;border-top:3px solid #f59e0b">
     <div style="padding:14px 20px;background:#fffbeb;border-bottom:1px solid #fde68a;display:flex;align-items:center;justify-content:space-between">
-        <div style="font-weight:700;font-size:17px;color:#92400e">
+        <div style="font-weight:700;font-size:14px;color:#92400e">
             ⚠️ Contrats expirant bientôt — <?= count($cdd_expirants) ?> employé(s)
         </div>
         <a href="<?= APP_URL ?>/dossier/rh?id=<?= $entreprise['id'] ?>" class="btn btn-outline btn-sm">Voir RH →</a>
     </div>
-    <table style="width:100%;border-collapse:collapse;font-size:16px">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
         <thead>
             <tr style="background:#f8f9fb;border-bottom:1px solid #eee">
                 <th style="padding:9px 16px;text-align:left;font-weight:700;color:#555">Employé</th>
@@ -263,7 +263,7 @@ $cdd_expirants = $stmt_cdd->fetchAll(PDO::FETCH_ASSOC);
                 <span style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:14px;font-weight:700;background:<?= $badge_bg ?>;color:<?= $badge_col ?>"><?= $label ?></span>
             </td>
             <td style="padding:10px 16px;text-align:center">
-                <a href="<?= APP_URL ?>/dossier/rh/employe?id=<?= $entreprise['id'] ?>&employe_id=<?= $emp['id'] ?>" style="font-size:15px;color:#1e3a5f;text-decoration:none;padding:4px 10px;border:1px solid #1e3a5f33;border-radius:5px">Fiche →</a>
+                <a href="<?= APP_URL ?>/dossier/rh/employe?id=<?= $entreprise['id'] ?>&employe_id=<?= $emp['id'] ?>" style="font-size:13px;color:#1e3a5f;text-decoration:none;padding:4px 10px;border:1px solid #1e3a5f33;border-radius:5px">Fiche →</a>
             </td>
         </tr>
         <?php endforeach; ?>

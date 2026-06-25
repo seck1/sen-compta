@@ -17,7 +17,7 @@ foreach ($ecritures_dispo as $ec) $ec_index[$ec['id']] = $ec;
     <div style="display:flex;gap:10px;align-items:center">
         <button type="button" id="btn-auto-rappr"
                 onclick="lancerRapprochementAuto()"
-                style="display:flex;align-items:center;gap:8px;padding:9px 16px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;border:none;border-radius:9px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(184,134,11,.35)">
+                style="display:flex;align-items:center;gap:8px;padding:9px 16px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(184,134,11,.35)">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
             <span id="btn-auto-label">⚡ Rapprochement automatique</span>
         </button>
@@ -34,7 +34,7 @@ foreach ($ecritures_dispo as $ec) $ec_index[$ec['id']] = $ec;
 $importedCount = isset($flash_imported) ? $flash_imported : (isset($_GET['imported']) ? (int)$_GET['imported'] : null);
 if ($importedCount !== null):
 ?>
-<div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#f0fdf4;border:1px solid #86efac;border-radius:12px;margin-bottom:18px;font-size:16px;color:#18583f;font-weight:500">
+<div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#f0fdf4;border:1px solid #86efac;border-radius:12px;margin-bottom:18px;font-size:14px;color:#18583f;font-weight:500">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     <?= (int)$importedCount ?> ligne<?= $importedCount > 1 ? 's' : '' ?> importée<?= $importedCount > 1 ? 's' : '' ?> avec succès.
 </div>
@@ -45,7 +45,7 @@ if ($errRaw):
     $errMsgs = ['nofile' => 'Aucun fichier sélectionné.', 'badfile' => 'Impossible de lire le fichier — vérifiez son format.'];
     $errMsg  = $errMsgs[$errRaw] ?? 'Une erreur est survenue lors de l\'import.';
 ?>
-<div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;margin-bottom:18px;font-size:16px;color:#dc2626;font-weight:500">
+<div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;margin-bottom:18px;font-size:14px;color:#dc2626;font-weight:500">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
     <?= e($errMsg) ?>
 </div>
@@ -93,8 +93,8 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
         </div>
         <div>
             <div style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">Solde importé</div>
-            <div style="font-size:18px;font-weight:700;color:<?= $soldeClr ?>;line-height:1.2">
-                <?= number_format(abs($soldeImp), 0, ',', ' ') ?> <span style="font-size:15px">FCFA</span>
+            <div style="font-size:13px;font-weight:700;color:<?= $soldeClr ?>;line-height:1.2">
+                <?= number_format(abs($soldeImp), 0, ',', ' ') ?> <span style="font-size:13px">FCFA</span>
                 <?php if ($soldeImp != 0): ?>
                 <span style="font-size:14px;background:<?= $soldeImp > 0 ? 'rgba(22,163,74,0.1)' : 'rgba(220,38,38,0.1)' ?>;color:<?= $soldeClr ?>;padding:2px 6px;border-radius:4px"><?= $soldeImp > 0 ? 'C' : 'D' ?></span>
                 <?php endif; ?>
@@ -110,8 +110,8 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--navy)" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
         </div>
         <div>
-            <div style="font-size:18px;font-weight:700;color:var(--navy-dark)">Importer un relevé bancaire CSV</div>
-            <div style="font-size:15px;color:var(--text-muted)">Colonnes attendues : Date, Libellé, Débit, Crédit (ou Montant + Sens)</div>
+            <div style="font-size:13px;font-weight:700;color:var(--navy-dark)">Importer un relevé bancaire CSV</div>
+            <div style="font-size:13px;color:var(--text-muted)">Colonnes attendues : Date, Libellé, Débit, Crédit (ou Montant + Sens)</div>
         </div>
     </div>
 
@@ -127,13 +127,13 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
              style="border:2px dashed var(--border);border-radius:14px;padding:38px 24px;text-align:center;cursor:pointer;background:#fafbfd;transition:border-color .2s,background .2s;margin-bottom:16px">
             <div id="dz-idle">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9ca3af" style="width:46px;height:46px;display:block;margin:0 auto 12px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
-                <div style="font-size:17px;font-weight:600;color:#374151;margin-bottom:4px">Glissez votre fichier CSV / TXT ici</div>
-                <div style="font-size:15px;color:#9ca3af">ou <span style="color:var(--navy);font-weight:600;text-decoration:underline">cliquez pour sélectionner</span></div>
+                <div style="font-size:14px;font-weight:600;color:#374151;margin-bottom:4px">Glissez votre fichier CSV / TXT ici</div>
+                <div style="font-size:13px;color:#9ca3af">ou <span style="color:var(--navy);font-weight:600;text-decoration:underline">cliquez pour sélectionner</span></div>
             </div>
             <div id="dz-selected" style="display:none;align-items:center;justify-content:center;gap:12px">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1f6e4e" style="width:26px;height:26px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                 <div style="text-align:left">
-                    <div id="dz-fname" style="font-size:17px;font-weight:600;color:#18583f"></div>
+                    <div id="dz-fname" style="font-size:14px;font-weight:600;color:#18583f"></div>
                     <div id="dz-fsize" style="font-size:14px;color:var(--text-muted)"></div>
                 </div>
                 <button type="button" onclick="dzReset(event)" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:22px;line-height:1;margin-left:4px">×</button>
@@ -144,14 +144,14 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
         <!-- Options avancées (pliables) -->
         <div style="margin-bottom:16px">
             <button type="button" id="opts-toggle" onclick="toggleOpts()"
-                    style="background:none;border:none;font-size:15px;color:var(--text-muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:0;font-family:inherit">
+                    style="background:none;border:none;font-size:13px;color:var(--text-muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:0;font-family:inherit">
                 <svg id="opts-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:12px;height:12px;transition:transform .2s"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                 Options avancées (séparateur, format de date)
             </button>
             <div id="opts-panel" style="display:none;margin-top:13px;grid-template-columns:1fr 1fr;gap:12px">
                 <div>
                     <label style="display:block;font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Séparateur de colonnes</label>
-                    <select name="separateur" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                    <select name="separateur" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
                         <option value=";">Point-virgule ; (défaut)</option>
                         <option value=",">Virgule ,</option>
                         <option value="&#9;">Tabulation (TSV)</option>
@@ -160,7 +160,7 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
                 </div>
                 <div>
                     <label style="display:block;font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Format de date</label>
-                    <select name="format" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;font-family:inherit">
+                    <select name="format" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
                         <option value="auto">Détection automatique</option>
                         <option value="dmy">JJ/MM/AAAA</option>
                         <option value="ymd">AAAA-MM-JJ (ISO)</option>
@@ -171,7 +171,7 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
         </div>
 
         <!-- Note encodage + colonnes attendues -->
-        <div style="padding:11px 15px;background:rgba(31,110,78,0.05);border:1px solid rgba(31,110,78,0.18);border-radius:9px;font-size:15px;color:#1e40af;margin-bottom:18px;line-height:1.75">
+        <div style="padding:11px 15px;background:rgba(31,110,78,0.05);border:1px solid rgba(31,110,78,0.18);border-radius:9px;font-size:13px;color:#1e40af;margin-bottom:18px;line-height:1.75">
             <strong>Colonnes reconnues automatiquement :</strong>
             <code style="background:rgba(31,110,78,0.1);padding:1px 5px;border-radius:4px;margin:0 2px">Date</code>
             <code style="background:rgba(31,110,78,0.1);padding:1px 5px;border-radius:4px;margin:0 2px">Libellé</code>
@@ -197,9 +197,9 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
         <div class="table-title">Lignes importées</div>
         <div style="display:flex;align-items:center;gap:10px">
             <?php if ($nbAttente > 0): ?>
-            <span style="font-size:15px;background:rgba(245,158,11,0.1);color:#d97706;border:1px solid rgba(245,158,11,0.3);padding:3px 10px;border-radius:20px;font-weight:600"><?= $nbAttente ?> en attente</span>
+            <span style="font-size:13px;background:rgba(245,158,11,0.1);color:#d97706;border:1px solid rgba(245,158,11,0.3);padding:3px 10px;border-radius:20px;font-weight:600"><?= $nbAttente ?> en attente</span>
             <?php endif; ?>
-            <span style="font-size:15px;color:var(--text-muted)"><?= count($lignes) ?> ligne<?= count($lignes) > 1 ? 's' : '' ?></span>
+            <span style="font-size:13px;color:var(--text-muted)"><?= count($lignes) ?> ligne<?= count($lignes) > 1 ? 's' : '' ?></span>
         </div>
     </div>
 
@@ -225,16 +225,16 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
         <tbody>
         <?php foreach ($lignes as $l): ?>
         <tr id="row-<?= $l['id'] ?>" style="<?= $l['rapprochee'] ? 'opacity:.65' : '' ?>">
-            <td style="white-space:nowrap;font-size:16px;font-family:monospace;color:var(--text-muted)">
+            <td style="white-space:nowrap;font-size:14px;font-family:monospace;color:var(--text-muted)">
                 <?= date('d/m/Y', strtotime($l['date_operation'])) ?>
             </td>
-            <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px" title="<?= e($l['libelle']) ?>">
+            <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px" title="<?= e($l['libelle']) ?>">
                 <?= e($l['libelle']) ?>
             </td>
-            <td style="text-align:right;font-size:16px;font-family:monospace;font-weight:600;color:<?= $l['sens']==='debit' ? '#dc2626' : 'var(--text-muted)' ?>">
+            <td style="text-align:right;font-size:14px;font-family:monospace;font-weight:600;color:<?= $l['sens']==='debit' ? '#dc2626' : 'var(--text-muted)' ?>">
                 <?= $l['sens']==='debit' ? number_format($l['montant'], 0, ',', ' ') : '—' ?>
             </td>
-            <td style="text-align:right;font-size:16px;font-family:monospace;font-weight:600;color:<?= $l['sens']==='credit' ? '#1f6e4e' : 'var(--text-muted)' ?>">
+            <td style="text-align:right;font-size:14px;font-family:monospace;font-weight:600;color:<?= $l['sens']==='credit' ? '#1f6e4e' : 'var(--text-muted)' ?>">
                 <?= $l['sens']==='credit' ? number_format($l['montant'], 0, ',', ' ') : '—' ?>
             </td>
             <td style="text-align:center">
@@ -293,7 +293,7 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
                     <button type="button"
                             onclick="supprimerLigne(<?= $l['id'] ?>)"
                             title="Supprimer cette ligne"
-                            style="display:inline-flex;align-items:center;padding:5px 8px;background:rgba(239,68,68,0.07);color:#dc2626;border:1px solid rgba(239,68,68,0.2);border-radius:7px;font-size:15px;cursor:pointer;line-height:1"
+                            style="display:inline-flex;align-items:center;padding:5px 8px;background:rgba(239,68,68,0.07);color:#dc2626;border:1px solid rgba(239,68,68,0.2);border-radius:7px;font-size:13px;cursor:pointer;line-height:1"
                             onmouseover="this.style.background='rgba(239,68,68,0.15)'"
                             onmouseout="this.style.background='rgba(239,68,68,0.07)'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -306,11 +306,11 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
         </tbody>
         <tfoot>
             <tr style="background:var(--bg);font-weight:600">
-                <td colspan="2" style="padding:11px 18px;font-size:16px;color:var(--navy-dark)">TOTAL</td>
-                <td style="padding:11px 18px;text-align:right;font-size:16px;font-family:monospace;color:#dc2626">
+                <td colspan="2" style="padding:11px 18px;font-size:14px;color:var(--navy-dark)">TOTAL</td>
+                <td style="padding:11px 18px;text-align:right;font-size:14px;font-family:monospace;color:#dc2626">
                     <?= number_format(array_sum(array_map(fn($l) => $l['sens']==='debit'  ? $l['montant'] : 0, $lignes)), 0, ',', ' ') ?>
                 </td>
-                <td style="padding:11px 18px;text-align:right;font-size:16px;font-family:monospace;color:#1f6e4e">
+                <td style="padding:11px 18px;text-align:right;font-size:14px;font-family:monospace;color:#1f6e4e">
                     <?= number_format(array_sum(array_map(fn($l) => $l['sens']==='credit' ? $l['montant'] : 0, $lignes)), 0, ',', ' ') ?>
                 </td>
                 <td colspan="3"></td>
@@ -325,13 +325,13 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
     <div style="background:#fff;border-radius:16px;padding:28px 30px;width:540px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.2)">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
             <div>
-                <h3 style="margin:0;font-size:19px;font-weight:700;color:var(--navy-dark)">Rapprocher une écriture</h3>
-                <p style="margin:4px 0 0;font-size:15px;color:var(--text-muted)">Associez cette ligne bancaire à une écriture comptable</p>
+                <h3 style="margin:0;font-size:13px;font-weight:700;color:var(--navy-dark)">Rapprocher une écriture</h3>
+                <p style="margin:4px 0 0;font-size:13px;color:var(--text-muted)">Associez cette ligne bancaire à une écriture comptable</p>
             </div>
             <button onclick="fermerRappr()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-muted);line-height:1;padding:0 0 0 12px">×</button>
         </div>
 
-        <div id="rappr-banner" style="padding:10px 14px;background:#fef9c3;border:1px solid #fcd34d;border-radius:9px;font-size:15px;color:#92400e;margin-bottom:16px">
+        <div id="rappr-banner" style="padding:10px 14px;background:#fef9c3;border:1px solid #fcd34d;border-radius:9px;font-size:13px;color:#92400e;margin-bottom:16px">
             <strong>Ligne sélectionnée :</strong> <span id="rappr-info"></span>
         </div>
 
@@ -340,17 +340,17 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
             <input type="text" id="rappr-search"
                    placeholder="Filtrer par libellé ou montant…"
                    oninput="filtrerEcritures()"
-                   style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;margin-bottom:8px;font-family:inherit;box-sizing:border-box;outline:none"
+                   style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:8px;font-family:inherit;box-sizing:border-box;outline:none"
                    onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'">
 
             <?php if (empty($ecritures_dispo)): ?>
-            <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:16px;border:1px solid var(--border);border-radius:8px;background:#fafafa">
+            <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:14px;border:1px solid var(--border);border-radius:8px;background:#fafafa">
                 Aucune écriture disponible pour cet exercice.<br>
                 <span style="font-size:14px">Toutes les écritures sont déjà rapprochées, ou aucune écriture validée n'existe.</span>
             </div>
             <?php else: ?>
             <select id="rappr-select" size="7"
-                    style="width:100%;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:inherit;padding:4px;background:#fff">
+                    style="width:100%;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;padding:4px;background:#fff">
                 <?php foreach ($ecritures_dispo as $ec):
                     $total = max((float)$ec['total_debit'], (float)$ec['total_credit']);
                 ?>
@@ -372,11 +372,11 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
 
         <div style="display:flex;gap:10px;margin-top:18px">
             <button type="button" onclick="fermerRappr()"
-                    style="flex:1;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:9px;font-size:16px;font-family:inherit;cursor:pointer">
+                    style="flex:1;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;cursor:pointer">
                 Annuler
             </button>
             <button type="button" id="rappr-btn" onclick="validerRappr()"
-                    style="flex:2;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:9px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer"
+                    style="flex:2;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer"
                     <?= empty($ecritures_dispo) ? 'disabled style="opacity:.45;cursor:not-allowed"' : '' ?>>
                 Confirmer le rapprochement
             </button>
@@ -385,18 +385,18 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
 </div>
 
 <!-- Toast succès (réutilisable) -->
-<div id="toast-ok" style="display:none;position:fixed;top:20px;right:20px;z-index:9999;background:#1f6e4e;color:#fff;padding:12px 20px;border-radius:10px;font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2);align-items:center;gap:8px">
+<div id="toast-ok" style="display:none;position:fixed;top:20px;right:20px;z-index:9999;background:#1f6e4e;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2);align-items:center;gap:8px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
     <span id="toast-msg"></span>
 </div>
 
 <!-- Toast rapprochement auto (doré) -->
-<div id="toast-auto" style="display:none;position:fixed;top:20px;right:20px;z-index:9999;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;padding:14px 22px;border-radius:12px;font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(184,134,11,.4);max-width:380px">
+<div id="toast-auto" style="display:none;position:fixed;top:20px;right:20px;z-index:9999;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;padding:14px 22px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(184,134,11,.4);max-width:380px">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-        <span style="font-size:17px">Rapprochement automatique terminé</span>
+        <span style="font-size:14px">Rapprochement automatique terminé</span>
     </div>
-    <div id="toast-auto-detail" style="font-size:15px;opacity:.9;line-height:1.6"></div>
+    <div id="toast-auto-detail" style="font-size:13px;opacity:.9;line-height:1.6"></div>
 </div>
 
 <style>

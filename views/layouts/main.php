@@ -40,8 +40,8 @@
     --credit: #1f6e4e;
 }
 
-html { font-size: 19px; overflow-x: hidden; }
-body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 19px; line-height: 1.5; overflow-x: hidden; max-width: 100%; }
+html { font-size: 11pt; overflow-x: hidden; }
+body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 11pt; line-height: 1.5; overflow-x: hidden; max-width: 100%; }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
@@ -587,9 +587,9 @@ table {
 }
 
 thead th {
-    padding: 14px 20px;
+    padding: 11px 16px;
     text-align: left;
-    font-size: 14px;
+    font-size: 9pt;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -606,8 +606,8 @@ tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--green-soft); }
 
 tbody td {
-    padding: 15px 20px;
-    font-size: 17px;
+    padding: 11px 16px;
+    font-size: 11pt;
     color: var(--text);
     vertical-align: middle;
 }

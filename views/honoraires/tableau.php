@@ -102,7 +102,7 @@
 <!-- Modal paiement -->
 <div id="modal-paiement" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center">
     <div style="background:white;border-radius:16px;padding:32px;width:420px;max-width:90vw">
-        <h3 style="font-size:18px;font-weight:600;margin-bottom:20px">Enregistrer le paiement</h3>
+        <h3 style="font-size:13px;font-weight:600;margin-bottom:20px">Enregistrer le paiement</h3>
         <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px" id="modal-facture-info"></p>
         <div class="form-field" style="margin-bottom:16px">
             <label>Date de paiement</label>

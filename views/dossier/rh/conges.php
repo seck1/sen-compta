@@ -28,7 +28,7 @@ $id = $entreprise['id'];
         <div class="page-subtitle"><?= e($entreprise['raison_sociale']) ?> — <?= $annee ?></div>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
-        <select onchange="location.href='?id=<?= $id ?>&annee='+this.value" style="padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:16px">
+        <select onchange="location.href='?id=<?= $id ?>&annee='+this.value" style="padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:14px">
             <?php for($y=2027;$y>=2022;$y--): ?>
             <option value="<?= $y ?>" <?= $y==$annee?'selected':'' ?>><?= $y ?></option>
             <?php endfor; ?>
@@ -46,7 +46,7 @@ $id = $entreprise['id'];
 </div>
 
 <?php if(isset($_GET['ok'])): ?>
-<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;margin-bottom:20px;color:#166534;font-size:16px">Opération enregistrée.</div>
+<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;margin-bottom:20px;color:#166534;font-size:14px">Opération enregistrée.</div>
 <?php endif; ?>
 
 <!-- KPIs -->
@@ -75,7 +75,7 @@ $id = $entreprise['id'];
 <div>
     <!-- Demandes de congés -->
     <div class="card" style="padding:0;overflow:hidden;margin-bottom:20px">
-        <div style="padding:14px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:17px;display:flex;justify-content:space-between;align-items:center">
+        <div style="padding:14px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center">
             Demandes de congés
             <?php if($en_attente > 0 && isSuperviseur()): ?>
             <span style="background:#fef3c7;color:#92400e;font-size:14px;font-weight:700;padding:3px 10px;border-radius:20px"><?= $en_attente ?> à traiter</span>
@@ -85,10 +85,10 @@ $id = $entreprise['id'];
         <div style="padding:48px;text-align:center;color:var(--text-muted)">
             <div style="font-size:32px;margin-bottom:12px">🏖️</div>
             <div style="font-weight:600">Aucune demande de congé</div>
-            <div style="font-size:16px;margin-top:6px">Cliquez sur "Nouvelle demande" pour en créer une.</div>
+            <div style="font-size:14px;margin-top:6px">Cliquez sur "Nouvelle demande" pour en créer une.</div>
         </div>
         <?php else: ?>
-        <table style="width:100%;border-collapse:collapse;font-size:16px">
+        <table style="width:100%;border-collapse:collapse;font-size:14px">
             <thead>
                 <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
                     <th style="padding:10px 16px;text-align:left;font-size:14px;background:#f1f5f9;color:#4a554f;text-transform:uppercase">Employé</th>
@@ -111,7 +111,7 @@ $id = $entreprise['id'];
                         <?= $type_labels[$c['type_conge']] ?? $c['type_conge'] ?>
                     </span>
                 </td>
-                <td style="padding:11px 16px;font-size:15px">
+                <td style="padding:11px 16px;font-size:13px">
                     <?= date('d/m/Y', strtotime($c['date_debut'])) ?> → <?= date('d/m/Y', strtotime($c['date_fin'])) ?>
                 </td>
                 <td style="padding:11px 16px;text-align:center;font-weight:700;font-family:monospace"><?= $c['nb_jours'] ?>j</td>
@@ -143,16 +143,16 @@ $id = $entreprise['id'];
 <!-- Colonne droite : soldes -->
 <div>
     <div class="card" style="padding:0;overflow:hidden;margin-bottom:16px">
-        <div style="padding:14px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:17px">
+        <div style="padding:14px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px">
             Soldes de congés <?= $annee ?>
         </div>
         <?php if(empty($soldes) && empty($employes_sans_solde)): ?>
-        <div style="padding:24px;text-align:center;color:var(--text-muted);font-size:16px">Aucun solde défini</div>
+        <div style="padding:24px;text-align:center;color:var(--text-muted);font-size:14px">Aucun solde défini</div>
         <?php else: ?>
         <div style="padding:12px 16px;display:flex;flex-direction:column;gap:10px">
             <?php foreach($soldes as $s): ?>
             <div style="border:1px solid var(--border);border-radius:8px;padding:12px">
-                <div style="font-weight:600;font-size:16px;margin-bottom:8px"><?= e($s['nom'].' '.$s['prenom']) ?></div>
+                <div style="font-weight:600;font-size:14px;margin-bottom:8px"><?= e($s['nom'].' '.$s['prenom']) ?></div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;text-align:center;margin-bottom:6px">
                     <div style="background:#f0f3f8;border-radius:6px;padding:6px">
                         <div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">Acquis N</div>
@@ -177,7 +177,7 @@ $id = $entreprise['id'];
             <?php endforeach; ?>
             <?php foreach($employes_sans_solde as $e): ?>
             <div style="border:1px dashed var(--border);border-radius:8px;padding:10px;opacity:.7">
-                <div style="font-size:15px;font-weight:600;margin-bottom:4px"><?= e($e['nom'].' '.$e['prenom']) ?></div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:4px"><?= e($e['nom'].' '.$e['prenom']) ?></div>
                 <div style="font-size:14px;color:var(--text-muted)">Solde non défini</div>
             </div>
             <?php endforeach; ?>
@@ -188,12 +188,12 @@ $id = $entreprise['id'];
     <?php if(isSuperviseur()): ?>
     <!-- Formulaire solde -->
     <div class="card" style="padding:16px 20px">
-        <div style="font-weight:700;font-size:16px;margin-bottom:14px;color:var(--navy-dark)">Définir un solde</div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:14px;color:var(--navy-dark)">Définir un solde</div>
         <form method="post" action="<?= APP_URL ?>/dossier/rh/conges/solde">
             <input type="hidden" name="entreprise_id" value="<?= $id ?>">
             <div style="margin-bottom:10px">
                 <label style="font-size:14px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Employé</label>
-                <select name="employe_id" required style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:16px">
+                <select name="employe_id" required style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:14px">
                     <option value="">Sélectionner...</option>
                     <?php foreach($employes as $emp): ?>
                     <option value="<?= $emp['id'] ?>"><?= e($emp['nom'].' '.$emp['prenom']) ?></option>
@@ -203,16 +203,16 @@ $id = $entreprise['id'];
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
                 <div>
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Année</label>
-                    <input type="number" name="annee" value="<?= $annee ?>" min="2020" max="2030" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:16px">
+                    <input type="number" name="annee" value="<?= $annee ?>" min="2020" max="2030" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:14px">
                 </div>
                 <div>
                     <label style="font-size:14px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Jours acquis N</label>
-                    <input type="number" name="jours_acquis" value="24" min="0" max="365" step="0.5" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:16px">
+                    <input type="number" name="jours_acquis" value="24" min="0" max="365" step="0.5" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:14px">
                 </div>
             </div>
             <div style="margin-bottom:12px">
                 <label style="font-size:14px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Report N-1 (jours non pris année précédente)</label>
-                <input type="number" name="jours_reportes_n1" value="0" min="0" max="365" step="0.5" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:16px">
+                <input type="number" name="jours_reportes_n1" value="0" min="0" max="365" step="0.5" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:14px">
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enregistrer le solde</button>
         </form>
@@ -226,14 +226,14 @@ $id = $entreprise['id'];
 <div id="modaleDemande" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center">
 <div style="background:#fff;border-radius:14px;width:500px;max-width:95vw;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-        <div style="font-size:17px;font-weight:700;color:#1e3a5f">Nouvelle demande de congé</div>
+        <div style="font-size:14px;font-weight:700;color:#1e3a5f">Nouvelle demande de congé</div>
         <button onclick="document.getElementById('modaleDemande').style.display='none'" style="background:none;border:none;font-size:22px;cursor:pointer;color:#444;line-height:1">×</button>
     </div>
     <form method="post" action="<?= APP_URL ?>/dossier/rh/conges/store">
         <input type="hidden" name="entreprise_id" value="<?= $id ?>">
         <div style="margin-bottom:14px">
-            <label style="font-size:15px;font-weight:700;color:#333;display:block;margin-bottom:5px">Employé *</label>
-            <select name="employe_id" required style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:16px;color:#1a1a1a;background:#fff">
+            <label style="font-size:13px;font-weight:700;color:#333;display:block;margin-bottom:5px">Employé *</label>
+            <select name="employe_id" required style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;color:#1a1a1a;background:#fff">
                 <option value="">Sélectionner un employé...</option>
                 <?php foreach($employes as $emp): ?>
                 <option value="<?= $emp['id'] ?>"><?= e($emp['nom'].' '.$emp['prenom']) ?><?= $emp['poste'] ? ' — '.$emp['poste'] : '' ?></option>
@@ -241,8 +241,8 @@ $id = $entreprise['id'];
             </select>
         </div>
         <div style="margin-bottom:14px">
-            <label style="font-size:15px;font-weight:700;color:#333;display:block;margin-bottom:5px">Type de congé *</label>
-            <select name="type_conge" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:16px;color:#1a1a1a;background:#fff">
+            <label style="font-size:13px;font-weight:700;color:#333;display:block;margin-bottom:5px">Type de congé *</label>
+            <select name="type_conge" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;color:#1a1a1a;background:#fff">
                 <?php foreach($type_labels as $val => $lab): ?>
                 <option value="<?= $val ?>"><?= $lab ?></option>
                 <?php endforeach; ?>
@@ -250,18 +250,18 @@ $id = $entreprise['id'];
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
             <div>
-                <label style="font-size:15px;font-weight:700;color:#333;display:block;margin-bottom:5px">Date début *</label>
-                <input type="date" name="date_debut" id="dateDebut" required onchange="calculerJours()" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:16px;color:#1a1a1a">
+                <label style="font-size:13px;font-weight:700;color:#333;display:block;margin-bottom:5px">Date début *</label>
+                <input type="date" name="date_debut" id="dateDebut" required onchange="calculerJours()" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;color:#1a1a1a">
             </div>
             <div>
-                <label style="font-size:15px;font-weight:700;color:#333;display:block;margin-bottom:5px">Date fin *</label>
-                <input type="date" name="date_fin" id="dateFin" required onchange="calculerJours()" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:16px;color:#1a1a1a">
+                <label style="font-size:13px;font-weight:700;color:#333;display:block;margin-bottom:5px">Date fin *</label>
+                <input type="date" name="date_fin" id="dateFin" required onchange="calculerJours()" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;color:#1a1a1a">
             </div>
         </div>
-        <div id="nbJoursApercu" style="display:none;background:#e8f0fb;border-radius:6px;padding:9px 14px;margin-bottom:14px;font-size:16px;font-weight:700;color:#1e3a5f"></div>
+        <div id="nbJoursApercu" style="display:none;background:#e8f0fb;border-radius:6px;padding:9px 14px;margin-bottom:14px;font-size:14px;font-weight:700;color:#1e3a5f"></div>
         <div style="margin-bottom:20px">
-            <label style="font-size:15px;font-weight:700;color:#333;display:block;margin-bottom:5px">Motif (optionnel)</label>
-            <textarea name="motif" rows="2" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:16px;color:#1a1a1a;resize:vertical"></textarea>
+            <label style="font-size:13px;font-weight:700;color:#333;display:block;margin-bottom:5px">Motif (optionnel)</label>
+            <textarea name="motif" rows="2" style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;color:#1a1a1a;resize:vertical"></textarea>
         </div>
         <div style="display:flex;justify-content:flex-end;gap:10px">
             <button type="button" onclick="document.getElementById('modaleDemande').style.display='none'" class="btn btn-secondary">Annuler</button>
@@ -274,10 +274,10 @@ $id = $entreprise['id'];
 <!-- Modal traitement -->
 <div id="modaleTraiter" style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center">
 <div style="background:#fff;border-radius:14px;width:420px;max-width:95vw;padding:24px">
-    <div style="font-size:19px;font-weight:700;color:var(--navy-dark);margin-bottom:16px" id="traiterTitre">Traiter la demande</div>
+    <div style="font-size:13px;font-weight:700;color:var(--navy-dark);margin-bottom:16px" id="traiterTitre">Traiter la demande</div>
     <div style="margin-bottom:16px">
-        <label style="font-size:15px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Commentaire RH (optionnel)</label>
-        <textarea id="traiterCommentaire" rows="3" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:16px;resize:vertical"></textarea>
+        <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Commentaire RH (optionnel)</label>
+        <textarea id="traiterCommentaire" rows="3" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;resize:vertical"></textarea>
     </div>
     <div style="display:flex;justify-content:flex-end;gap:10px">
         <button onclick="document.getElementById('modaleTraiter').style.display='none'" class="btn btn-secondary">Annuler</button>
