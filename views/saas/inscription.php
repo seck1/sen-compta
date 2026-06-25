@@ -180,14 +180,6 @@ a:focus-visible, button:focus-visible, input:focus-visible{ outline:3px solid rg
             <?= $p['max_users'] == -1 ? 'Illimité' : $p['max_users'] ?> utilisateur<?= $p['max_users'] > 1 || $p['max_users'] == -1 ? 's' : '' ?>
           </div>
         </div>
-        <div class="plan-price">
-          <?php if ($p['prix_mois'] > 0): ?>
-            <?= number_format($p['prix_mois'], 0, ',', ' ') ?> FCFA
-            <small>/mois</small>
-          <?php else: ?>
-            Sur devis
-          <?php endif; ?>
-        </div>
       </div>
       <?php endforeach; ?>
     </div>
@@ -254,9 +246,6 @@ a:focus-visible, button:focus-visible, input:focus-visible{ outline:3px solid rg
               <div class="plan-option-info">
                 <div class="plan-option-name"><?= e($p['nom']) ?> — <?= $p['max_entreprises'] ?> entreprise<?= $p['max_entreprises'] > 1 ? 's' : '' ?></div>
                 <div class="plan-option-desc"><?= $p['max_users'] ?> utilisateurs inclus</div>
-              </div>
-              <div class="plan-option-price">
-                <?= $p['prix_mois'] > 0 ? number_format($p['prix_mois'], 0, ',', ' ') . ' FCFA/mois' : 'Gratuit 14j' ?>
               </div>
             </label>
             <?php endforeach; ?>
