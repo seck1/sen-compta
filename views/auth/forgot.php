@@ -23,7 +23,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 }
 .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.12; animation: float 9s ease-in-out infinite; }
 .orb-1 { width: 600px; height: 600px; background: var(--gold); top: -200px; right: -150px; }
-.orb-2 { width: 400px; height: 400px; background: #3b82f6; bottom: -120px; left: -100px; animation-delay: 4s; }
+.orb-2 { width: 400px; height: 400px; background: #1f6e4e; bottom: -120px; left: -100px; animation-delay: 4s; }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-28px); } }
 
 .page {

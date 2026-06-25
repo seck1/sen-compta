@@ -1,7 +1,7 @@
 <?php
-$statusColors = ['brouillon'=>'#94a3b8','envoye'=>'#3b82f6','accepte'=>'#22c55e','refuse'=>'#ef4444','expire'=>'#f59e0b','converti'=>'#8b5cf6'];
-$statusBg     = ['brouillon'=>'#f1f5f9','envoye'=>'#dbeafe','accepte'=>'#dcfce7','refuse'=>'#fee2e2','expire'=>'#fef3c7','converti'=>'#ede9fe'];
-$statusText   = ['brouillon'=>'#475569','envoye'=>'#2563eb','accepte'=>'#16a34a','refuse'=>'#dc2626','expire'=>'#d97706','converti'=>'#7c3aed'];
+$statusColors = ['brouillon'=>'#94a3b8','envoye'=>'#1f6e4e','accepte'=>'#1f6e4e','refuse'=>'#ef4444','expire'=>'#f59e0b','converti'=>'#8b5cf6'];
+$statusBg     = ['brouillon'=>'#f1f5f9','envoye'=>'#dbeafe','accepte'=>'#dcfce7','refuse'=>'#fee2e2','expire'=>'#fef3c7','converti'=>'rgba(184,146,63,0.1)'];
+$statusText   = ['brouillon'=>'#475569','envoye'=>'#2563eb','accepte'=>'#1f6e4e','refuse'=>'#dc2626','expire'=>'#d97706','converti'=>'#b8923f'];
 $statusLabels = ['brouillon'=>'Brouillon','envoye'=>'Envoyé','accepte'=>'Accepté','refuse'=>'Refusé','expire'=>'Expiré','converti'=>'Converti en facture'];
 $st = $devis['statut'] ?? 'brouillon';
 ?>
@@ -25,8 +25,8 @@ $st = $devis['statut'] ?? 'brouillon';
 .btn-primary:hover { background:var(--navy-light); }
 .btn-gold { background:var(--gold);color:var(--navy-dark); }
 .btn-gold:hover { background:var(--gold-dark);color:#fff; }
-.btn-green { background:#22c55e;color:#fff; }
-.btn-green:hover { background:#16a34a; }
+.btn-green { background:#1f6e4e;color:#fff; }
+.btn-green:hover { background:#1f6e4e; }
 .btn-red { background:#ef4444;color:#fff; }
 .btn-red:hover { background:#dc2626; }
 .btn-outline { background:transparent;color:var(--navy);border:1.5px solid var(--border); }

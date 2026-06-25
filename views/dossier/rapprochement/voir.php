@@ -60,13 +60,13 @@ $errorMsg = match($_GET['error'] ?? '') {
 <?php endif; ?>
 
 <?php if ($imported !== null): ?>
-<div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#16a34a;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#1f6e4e;font-size:16px">
     ✓ <?= $imported ?> ligne(s) importée(s) depuis le relevé CSV.
 </div>
 <?php endif; ?>
 
 <?php if ($autoMatched !== null): ?>
-<div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#2563eb;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#2563eb;font-size:16px">
     ✓ Lettrage automatique : <strong><?= $autoMatched ?> correspondance(s)</strong> trouvée(s) (montant exact ± date 3 jours).
 </div>
 <?php endif; ?>
@@ -83,12 +83,12 @@ $errorMsg = match($_GET['error'] ?? '') {
         <div class="kpi-value" style="font-size:18px"><?= $fmt($solde_comptable) ?></div>
         <div class="kpi-sub"><?= $nbRapproche ?> ligne(s) rapprochée(s)</div>
     </div>
-    <div class="kpi-card" style="border:2px solid <?= $ecartOk ? 'rgba(34,197,94,0.4)' : 'rgba(239,68,68,0.4)' ?>">
+    <div class="kpi-card" style="border:2px solid <?= $ecartOk ? 'rgba(31,110,78,0.4)' : 'rgba(239,68,68,0.4)' ?>">
         <div class="kpi-label">Écart</div>
-        <div class="kpi-value" style="font-size:22px;color:<?= $ecartOk ? '#16a34a' : '#dc2626' ?>">
+        <div class="kpi-value" style="font-size:22px;color:<?= $ecartOk ? '#1f6e4e' : '#dc2626' ?>">
             <?= $ecartOk ? '0 F ✓' : $fmt(abs($ecart)) ?>
         </div>
-        <div class="kpi-sub" style="color:<?= $ecartOk ? '#16a34a' : '#dc2626' ?>">
+        <div class="kpi-sub" style="color:<?= $ecartOk ? '#1f6e4e' : '#dc2626' ?>">
             <?= $ecartOk ? 'Équilibré' : 'À corriger' ?>
         </div>
     </div>
@@ -96,13 +96,13 @@ $errorMsg = match($_GET['error'] ?? '') {
         <div class="kpi-label">Avancement</div>
         <div class="kpi-value" style="font-size:22px"><?= $pct ?>%</div>
         <div style="margin-top:6px;height:5px;background:var(--border);border-radius:3px;overflow:hidden">
-            <div style="height:100%;width:<?= $pct ?>%;background:<?= $pct==100?'#16a34a':'#c9a96e' ?>;border-radius:3px;transition:width .4s"></div>
+            <div style="height:100%;width:<?= $pct ?>%;background:<?= $pct==100?'#1f6e4e':'#c9a96e' ?>;border-radius:3px;transition:width .4s"></div>
         </div>
     </div>
 </div>
 
 <?php if ($ecartOk && $rapprochement['statut'] === 'rapproche'): ?>
-<div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;color:#16a34a;font-size:16px;display:flex;align-items:center;gap:10px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;color:#1f6e4e;font-size:16px;display:flex;align-items:center;gap:10px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     <strong>Rapprochement équilibré</strong> — tous les mouvements concordent parfaitement.
 </div>
@@ -120,7 +120,7 @@ $errorMsg = match($_GET['error'] ?? '') {
                     <div style="font-size:15px;color:var(--text-muted);margin-top:2px"><?= $nbReleve ?> ligne(s) · <?= $nbRapproche ?> rapprochée(s)</div>
                 </div>
                 <?php if ($nbReleve > 0): ?>
-                <span style="font-size:14px;padding:3px 10px;border-radius:20px;background:<?= $nbNonRapproche>0?'rgba(245,158,11,0.1)':'rgba(34,197,94,0.1)' ?>;color:<?= $nbNonRapproche>0?'#d97706':'#16a34a' ?>;font-weight:600">
+                <span style="font-size:14px;padding:3px 10px;border-radius:20px;background:<?= $nbNonRapproche>0?'rgba(245,158,11,0.1)':'rgba(31,110,78,0.1)' ?>;color:<?= $nbNonRapproche>0?'#d97706':'#1f6e4e' ?>;font-weight:600">
                     <?= $nbNonRapproche > 0 ? $nbNonRapproche . ' non rapprochée(s)' : '✓ Tout rapproché' ?>
                 </span>
                 <?php endif; ?>
@@ -146,14 +146,14 @@ $errorMsg = match($_GET['error'] ?? '') {
                 </thead>
                 <tbody>
                 <?php foreach ($releveLignes as $rl): ?>
-                <tr style="<?= $rl['rapproche'] ? 'background:rgba(34,197,94,0.05)' : '' ?>;opacity:<?= $rl['rapproche'] ? '.7' : '1' ?>">
+                <tr style="<?= $rl['rapproche'] ? 'background:rgba(31,110,78,0.05)' : '' ?>;opacity:<?= $rl['rapproche'] ? '.7' : '1' ?>">
                     <td style="font-size:15px;white-space:nowrap"><?= date('d/m/Y', strtotime($rl['date_operation'])) ?></td>
                     <td style="font-size:15px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($rl['libelle']) ?>"><?= e($rl['libelle']) ?></td>
-                    <td style="text-align:right;font-size:15px;color:#16a34a;font-weight:500"><?= $rl['debit'] > 0 ? $fmt($rl['debit']) : '' ?></td>
+                    <td style="text-align:right;font-size:15px;color:#1f6e4e;font-weight:500"><?= $rl['debit'] > 0 ? $fmt($rl['debit']) : '' ?></td>
                     <td style="text-align:right;font-size:15px;color:#dc2626;font-weight:500"><?= $rl['credit'] > 0 ? $fmt($rl['credit']) : '' ?></td>
                     <td style="text-align:center">
                         <?php if ($rl['rapproche']): ?>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#16a34a" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#1f6e4e" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                         <?php else: ?>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#f59e0b" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
                         <?php endif; ?>
@@ -193,7 +193,7 @@ $errorMsg = match($_GET['error'] ?? '') {
                 <tbody>
                 <?php foreach ($lignes as $l): ?>
                 <?php $isRap = in_array($l['ligne_id'], $rapIds); ?>
-                <tr style="<?= $isRap ? 'background:rgba(34,197,94,0.05);opacity:.7' : '' ?>">
+                <tr style="<?= $isRap ? 'background:rgba(31,110,78,0.05);opacity:.7' : '' ?>">
                     <td style="text-align:center">
                         <form method="post" action="<?= APP_URL ?>/dossier/rapprochement/marquer" style="display:inline">
                             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
@@ -202,7 +202,7 @@ $errorMsg = match($_GET['error'] ?? '') {
                             <input type="hidden" name="rapproche" value="<?= $isRap ? 0 : 1 ?>">
                             <button type="submit" style="background:none;border:none;cursor:pointer;padding:4px" title="<?= $isRap ? 'Décocher' : 'Marquer rapproché' ?>">
                                 <?php if ($isRap): ?>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#16a34a" style="width:17px;height:17px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#1f6e4e" style="width:17px;height:17px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 <?php else: ?>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9ca3af" style="width:17px;height:17px"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 <?php endif; ?>
@@ -211,7 +211,7 @@ $errorMsg = match($_GET['error'] ?? '') {
                     </td>
                     <td style="font-size:15px;white-space:nowrap"><?= date('d/m/Y', strtotime($l['date_ecriture'])) ?></td>
                     <td style="font-size:15px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($l['ecriture_libelle'] ?: $l['ligne_libelle']) ?>"><?= e($l['ecriture_libelle'] ?: $l['ligne_libelle']) ?></td>
-                    <td style="text-align:right;font-size:15px;color:#16a34a"><?= $l['debit'] > 0 ? $fmt($l['debit']) : '' ?></td>
+                    <td style="text-align:right;font-size:15px;color:#1f6e4e"><?= $l['debit'] > 0 ? $fmt($l['debit']) : '' ?></td>
                     <td style="text-align:right;font-size:15px;color:#dc2626"><?= $l['credit'] > 0 ? $fmt($l['credit']) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>

@@ -2,7 +2,7 @@
 // $entreprise, $regime, $annee, $secteur, $caHt, $caTtc, $calcul, $liberatoire, $declaration_existante
 $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
 $isCGU = $regime === 'CGU';
-$color = $isCGU ? '#7c3aed' : '#15803d';
+$color = $isCGU ? '#b8923f' : '#18583f';
 ?>
 
 <div class="page-header">
@@ -24,7 +24,7 @@ $color = $isCGU ? '#7c3aed' : '#15803d';
 </div>
 
 <?php if (isset($_GET['saved'])): ?>
-<div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 18px;color:#16a34a;margin-bottom:20px;font-size:16px;display:flex;align-items:center;gap:8px">
+<div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.2);border-radius:10px;padding:12px 18px;color:#1f6e4e;margin-bottom:20px;font-size:16px;display:flex;align-items:center;gap:8px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Déclaration enregistrée avec succès.
 </div>

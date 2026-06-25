@@ -3,7 +3,7 @@ $statut_cfg = [
     'soumise'   => ['Soumise',   '#f59e0b'],
     'approuvee' => ['Approuvée', '#2563eb'],
     'rejetee'   => ['Rejetée',   '#dc2626'],
-    'remboursee'=> ['Remboursée','#16a34a'],
+    'remboursee'=> ['Remboursée','#1f6e4e'],
 ];
 ?>
 <div class="page-header">
@@ -17,7 +17,7 @@ $statut_cfg = [
 </div>
 
 <?php if(!empty($_GET['saved'])): ?>
-<div style="background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#16a34a;font-weight:600">Note de frais enregistrée avec succès.</div>
+<div style="background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#1f6e4e;font-weight:600">Note de frais enregistrée avec succès.</div>
 <?php endif; ?>
 
 <!-- KPIs -->
@@ -32,7 +32,7 @@ $statut_cfg = [
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Remboursées</div>
-        <div style="font-size:20px;font-weight:700;color:#16a34a;font-family:monospace"><?= formatMontant($total_rembourse) ?></div>
+        <div style="font-size:20px;font-weight:700;color:#1f6e4e;font-family:monospace"><?= formatMontant($total_rembourse) ?></div>
     </div>
 </div>
 

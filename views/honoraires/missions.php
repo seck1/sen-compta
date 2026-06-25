@@ -1,7 +1,7 @@
 <?php
 $type_colors = [
     'comptabilite' => ['border'=>'#1e3a5f', 'bg'=>'#e8eef5', 'text'=>'#1e3a5f', 'label'=>'Comptabilité'],
-    'audit'        => ['border'=>'#7c3aed', 'bg'=>'#f5f3ff', 'text'=>'#7c3aed', 'label'=>'Audit'],
+    'audit'        => ['border'=>'#b8923f', 'bg'=>'#f5f3ff', 'text'=>'#b8923f', 'label'=>'Audit'],
     'fiscalite'    => ['border'=>'#b91c1c', 'bg'=>'#fef2f2', 'text'=>'#b91c1c', 'label'=>'Fiscalité'],
     'paie'         => ['border'=>'#166534', 'bg'=>'#f0fdf4', 'text'=>'#166534', 'label'=>'Paie'],
     'conseil'      => ['border'=>'#c9a96e', 'bg'=>'#fffbeb', 'text'=>'#92400e', 'label'=>'Conseil'],

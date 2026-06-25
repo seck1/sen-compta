@@ -42,7 +42,7 @@ $mois_noms = ['','Janvier','F√©vrier','Mars','Avril','Mai','Juin','Juillet','Ao√
         ['Brut total', number_format($totaux['total_brut'],0,',',' ').' F', '#1e3a5f', '#e8eef5'],
         ['IPRES salari√©', number_format($totaux['total_sal_ipres_general'],0,',',' ').' F', '#b91c1c', '#fef2f2'],
         ['IPRES patronal', number_format($totaux['total_pat_ipres'],0,',',' ').' F', '#c9a96e', '#fffbeb'],
-        ['IR retenu', number_format($totaux['total_ir'],0,',',' ').' F', '#7c3aed', '#f5f3ff'],
+        ['IR retenu', number_format($totaux['total_ir'],0,',',' ').' F', '#b8923f', '#f5f3ff'],
     ] as [$label,$val,$col,$bg]): ?>
     <div class="card" style="padding:16px 20px;background:<?= $bg ?>;border:1px solid <?= $col ?>22">
         <div style="font-size:18px;font-weight:800;color:<?= $col ?>"><?= $val ?></div>
@@ -66,7 +66,7 @@ $mois_noms = ['','Janvier','F√©vrier','Mars','Avril','Mai','Juin','Juillet','Ao√
                 <th style="padding:10px 14px;text-align:right;font-weight:700;color:#1e3a5f">Brut total</th>
                 <th style="padding:10px 14px;text-align:right;font-weight:700;color:#b91c1c">IPRES sal.</th>
                 <th style="padding:10px 14px;text-align:right;font-weight:700;color:#c9a96e">IPRES pat.</th>
-                <th style="padding:10px 14px;text-align:right;font-weight:700;color:#7c3aed">IR retenu</th>
+                <th style="padding:10px 14px;text-align:right;font-weight:700;color:#b8923f">IR retenu</th>
                 <th style="padding:10px 14px;text-align:right;font-weight:700;color:#0369a1">TRIMF</th>
                 <th style="padding:10px 14px;text-align:right;font-weight:700;color:#059669">CSS total</th>
                 <th style="padding:10px 14px;text-align:right;font-weight:700;color:#166534">Net pay√©</th>
@@ -80,7 +80,7 @@ $mois_noms = ['','Janvier','F√©vrier','Mars','Avril','Mai','Juin','Juillet','Ao√
                 <td style="padding:10px 14px;text-align:right;font-weight:600"><?= number_format($d['total_brut'],0,',',' ') ?></td>
                 <td style="padding:10px 14px;text-align:right;color:#b91c1c"><?= number_format($d['total_sal_ipres_general'],0,',',' ') ?></td>
                 <td style="padding:10px 14px;text-align:right;color:#c9a96e"><?= number_format($d['total_pat_ipres'],0,',',' ') ?></td>
-                <td style="padding:10px 14px;text-align:right;color:#7c3aed"><?= number_format($d['total_ir'],0,',',' ') ?></td>
+                <td style="padding:10px 14px;text-align:right;color:#b8923f"><?= number_format($d['total_ir'],0,',',' ') ?></td>
                 <td style="padding:10px 14px;text-align:right;color:#0369a1"><?= number_format($d['total_trimf'],0,',',' ') ?></td>
                 <td style="padding:10px 14px;text-align:right;color:#059669"><?= number_format($d['total_css'],0,',',' ') ?></td>
                 <td style="padding:10px 14px;text-align:right;color:#166534;font-weight:700"><?= number_format($d['total_net'],0,',',' ') ?></td>

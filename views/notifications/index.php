@@ -6,8 +6,8 @@ $typeIcons = [
     'danger'  => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>',
 ];
 $typeColors = [
-    'info'    => '#3b82f6',
-    'success' => '#22c55e',
+    'info'    => '#1f6e4e',
+    'success' => '#1f6e4e',
     'warning' => '#f59e0b',
     'danger'  => '#ef4444',
 ];
@@ -28,10 +28,10 @@ $typeColors = [
 <?php else: ?>
 <div class="card" style="padding:0;overflow:hidden">
     <?php foreach ($notifications as $n):
-        $color = $typeColors[$n['type']] ?? '#3b82f6';
+        $color = $typeColors[$n['type']] ?? '#1f6e4e';
         $icon  = $typeIcons[$n['type']] ?? $typeIcons['info'];
     ?>
-    <div style="display:flex;align-items:flex-start;gap:16px;padding:18px 24px;border-bottom:1px solid var(--border);<?= $n['lu'] ? 'opacity:0.6' : 'background:rgba(59,130,246,0.03)' ?>">
+    <div style="display:flex;align-items:flex-start;gap:16px;padding:18px 24px;border-bottom:1px solid var(--border);<?= $n['lu'] ? 'opacity:0.6' : 'background:rgba(31,110,78,0.03)' ?>">
         <div style="width:38px;height:38px;border-radius:10px;background:<?= $color ?>1a;color:<?= $color ?>;display:flex;align-items:center;justify-content:center;flex-shrink:0">
             <?php echo $icon ?>
         </div>

@@ -16,7 +16,7 @@ $error_msgs = [
     </div>
 
     <?php if(isset($_GET['message']) && $_GET['message']==='cloture_ok'): ?>
-    <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:16px 20px;margin-bottom:20px;color:#16a34a">
+    <div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:16px 20px;margin-bottom:20px;color:#1f6e4e">
         <strong>Clôture effectuée avec succès.</strong><br>
         <span style="font-size:16px">Les écritures de report à nouveau ont été générées pour l'exercice <?= e($_GET['new_exercice'] ?? '') ?>.</span>
     </div>
@@ -34,12 +34,12 @@ $error_msgs = [
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
             <!-- Équilibre -->
-            <div style="padding:18px;border-radius:12px;border:1px solid <?= $equilibre ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)' ?>;background:<?= $equilibre ? 'rgba(34,197,94,0.06)' : 'rgba(239,68,68,0.06)' ?>">
-                <div style="font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:600;color:<?= $equilibre ? '#16a34a' : '#dc2626' ?>">
+            <div style="padding:18px;border-radius:12px;border:1px solid <?= $equilibre ? 'rgba(31,110,78,0.3)' : 'rgba(239,68,68,0.3)' ?>;background:<?= $equilibre ? 'rgba(31,110,78,0.06)' : 'rgba(239,68,68,0.06)' ?>">
+                <div style="font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:600;color:<?= $equilibre ? '#1f6e4e' : '#dc2626' ?>">
                     Équilibre des écritures
                 </div>
                 <?php if($equilibre): ?>
-                    <div style="font-size:20px;font-weight:700;color:#16a34a">✓ Équilibré</div>
+                    <div style="font-size:20px;font-weight:700;color:#1f6e4e">✓ Équilibré</div>
                     <div style="font-size:15px;color:var(--text-muted);margin-top:4px">Toutes les écritures sont équilibrées.</div>
                 <?php else: ?>
                     <div style="font-size:20px;font-weight:700;color:#dc2626">✗ Déséquilibré</div>
@@ -108,7 +108,7 @@ $error_msgs = [
                 <?php foreach($historique as $h): ?>
                 <tr>
                     <td><strong><?= e($h['exercice']) ?></strong></td>
-                    <td style="text-align:right;font-family:monospace;font-weight:600;color:<?= $h['resultat_net']>=0 ? '#16a34a' : '#dc2626' ?>">
+                    <td style="text-align:right;font-family:monospace;font-weight:600;color:<?= $h['resultat_net']>=0 ? '#1f6e4e' : '#dc2626' ?>">
                         <?= formatMontant($h['resultat_net']) ?>
                     </td>
                     <td><?= date('d/m/Y', strtotime($h['date_cloture'])) ?></td>

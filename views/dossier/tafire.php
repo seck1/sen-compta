@@ -8,7 +8,7 @@ extract($tafire);
 .tf-col { background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
 .tf-col-header { padding:14px 20px; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:2px solid var(--border); }
 .tf-col.emplois .tf-col-header { background:rgba(239,68,68,0.05); color:#dc2626; }
-.tf-col.ressources .tf-col-header { background:rgba(34,197,94,0.05); color:#16a34a; }
+.tf-col.ressources .tf-col-header { background:rgba(31,110,78,0.05); color:#1f6e4e; }
 .tf-row { display:flex; justify-content:space-between; padding:10px 20px; border-bottom:1px solid rgba(228,233,240,0.4); font-size:16px; gap:12px; }
 .tf-row.sub { padding-left:32px; color:var(--text-muted); font-size:15px; }
 .tf-row.subtotal { background:rgba(240,243,248,0.7); font-weight:600; }
@@ -20,7 +20,7 @@ extract($tafire);
 .tf-sum-item { border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; }
 .tf-sum-label { font-size:14px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
 .tf-sum-val { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; }
-.tf-sum-val.pos { color:#16a34a; }
+.tf-sum-val.pos { color:#1f6e4e; }
 .tf-sum-val.neg { color:#dc2626; }
 </style>
 
@@ -66,7 +66,7 @@ extract($tafire);
         <div class="tf-col-header">Ressources</div>
         <div class="tf-row sub">
             <span>Résultat net de l'exercice</span>
-            <span class="tf-num" style="<?= $resultat_net >= 0 ? 'color:#16a34a' : 'color:#dc2626' ?>">
+            <span class="tf-num" style="<?= $resultat_net >= 0 ? 'color:#1f6e4e' : 'color:#dc2626' ?>">
                 <?= number_format($resultat_net,0,',',' ') ?>
             </span>
         </div>
@@ -111,7 +111,7 @@ extract($tafire);
                 ΔActif circ. <?= formatMontant($var_actif_circ) ?> — ΔPassif circ. <?= formatMontant($var_passif_circ) ?>
             </div>
         </div>
-        <div class="tf-sum-item" style="border:2px solid <?= $variation_tresorerie >= 0 ? '#22c55e' : '#ef4444' ?>">
+        <div class="tf-sum-item" style="border:2px solid <?= $variation_tresorerie >= 0 ? '#1f6e4e' : '#ef4444' ?>">
             <div class="tf-sum-label">Variation Trésorerie<br><small>= ΔFRN – ΔBFR</small></div>
             <div class="tf-sum-val <?= $variation_tresorerie >= 0 ? 'pos' : 'neg' ?>">
                 <?= $variation_tresorerie >= 0 ? '+' : '' ?><?= number_format($variation_tresorerie/1000,0,',',' ') ?> K

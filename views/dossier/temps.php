@@ -1,7 +1,7 @@
 <?php
 $cats = [
     'saisie'      => ['label'=>'Saisie comptable',   'color'=>'#2563eb'],
-    'revision'    => ['label'=>'Révision / Contrôle','color'=>'#7c3aed'],
+    'revision'    => ['label'=>'Révision / Contrôle','color'=>'#b8923f'],
     'declaration' => ['label'=>'Déclaration fiscale', 'color'=>'#dc2626'],
     'reunion'     => ['label'=>'Réunion client',      'color'=>'#059669'],
     'rapport'     => ['label'=>'Rapport / Bilan',     'color'=>'#c9a96e'],
@@ -50,7 +50,7 @@ function fmtMin(int $min): string {
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Facturable</div>
-        <div style="font-size:24px;font-weight:700;color:#16a34a;font-family:monospace"><?= fmtMin($total_fact_min) ?></div>
+        <div style="font-size:24px;font-weight:700;color:#1f6e4e;font-family:monospace"><?= fmtMin($total_fact_min) ?></div>
         <div style="font-size:15px;color:var(--text-muted);margin-top:3px"><?= $total_minutes > 0 ? round($total_fact_min/$total_minutes*100) : 0 ?>% du total</div>
     </div>
     <div class="card" style="padding:16px 20px">
@@ -73,7 +73,7 @@ function fmtMin(int $min): string {
             <tr style="border-bottom:1px solid var(--border)">
                 <td style="padding:10px 18px;font-weight:600"><?= e($pc['prenom'].' '.$pc['nom']) ?></td>
                 <td style="padding:10px 18px;text-align:right;font-family:monospace;font-weight:700"><?= fmtMin((int)$pc['total_min']) ?></td>
-                <td style="padding:10px 18px;text-align:right;font-size:15px;color:#16a34a"><?= fmtMin((int)$pc['fact_min']) ?> fact.</td>
+                <td style="padding:10px 18px;text-align:right;font-size:15px;color:#1f6e4e"><?= fmtMin((int)$pc['fact_min']) ?> fact.</td>
             </tr>
             <?php endforeach; ?>
         </table>
@@ -151,7 +151,7 @@ function fmtMin(int $min): string {
             </td>
             <td style="padding:11px 16px;text-align:center">
                 <?php if(!$s['facture'] && isSuperviseur()): ?>
-                <button onclick="marquerFacture(<?= $s['id'] ?>)" style="padding:4px 10px;border-radius:6px;background:#16a34a18;color:#16a34a;border:1px solid #16a34a44;cursor:pointer;font-size:14px;font-weight:600;margin-right:4px">✓ Facturé</button>
+                <button onclick="marquerFacture(<?= $s['id'] ?>)" style="padding:4px 10px;border-radius:6px;background:#1f6e4e18;color:#1f6e4e;border:1px solid #1f6e4e44;cursor:pointer;font-size:14px;font-weight:600;margin-right:4px">✓ Facturé</button>
                 <?php endif; ?>
                 <?php if((int)$s['user_id'] === (int)(auth()['id'] ?? 0) || isAdmin()): ?>
                 <button onclick="supprimer(<?= $s['id'] ?>)" style="padding:4px 10px;border-radius:6px;background:#fee2e218;color:#dc2626;border:1px solid #dc262644;cursor:pointer;font-size:14px;font-weight:600">Suppr.</button>

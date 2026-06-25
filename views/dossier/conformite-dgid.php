@@ -1,5 +1,5 @@
 <?php
-$gradeColors = ['A'=>'#16a34a','B'=>'#2563eb','C'=>'#f59e0b','D'=>'#ef4444'];
+$gradeColors = ['A'=>'#1f6e4e','B'=>'#2563eb','C'=>'#f59e0b','D'=>'#ef4444'];
 $gradeColor  = $gradeColors[$grade] ?? '#6b7280';
 $gradeLabels = ['A'=>'Excellent','B'=>'Bien','C'=>'Moyen','D'=>'Insuffisant'];
 
@@ -41,7 +41,7 @@ $sectionIcons = [
 $sectionIconColors = [
     'Identification' => '#2563eb',
     'Contacts'       => '#0891b2',
-    'Comptable'      => '#7c3aed',
+    'Comptable'      => '#b8923f',
     'Activite'       => '#059669',
     'Dirigeant'      => '#d97706',
     'Professionnel'  => '#dc2626',
@@ -60,7 +60,7 @@ $sectionIconColors = [
 .export-status.ok  { background:#f0fdf4; border:1px solid #bbf7d0; }
 .export-status.nok { background:#fef2f2; border:1px solid #fecaca; }
 .export-status .es-icon { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.export-status.ok .es-icon  { background:#dcfce7; color:#16a34a; }
+.export-status.ok .es-icon  { background:#dcfce7; color:#1f6e4e; }
 .export-status.nok .es-icon { background:#fee2e2; color:#dc2626; }
 .export-status .es-title { font-size:16px; font-weight:700; }
 .export-status .es-sub { font-size:14px; color:var(--text-muted); margin-top:3px; line-height:1.4; }
@@ -153,7 +153,7 @@ $sectionIconColors = [
                     <?= svgIcon($exportPret ? 'check-circle' : 'x-circle', '18px') ?>
                 </div>
                 <div>
-                    <div class="es-title" style="color:<?= $exportPret ? '#16a34a' : '#dc2626' ?>">
+                    <div class="es-title" style="color:<?= $exportPret ? '#1f6e4e' : '#dc2626' ?>">
                         Export DGID — <?= $exportPret ? 'Prêt' : 'Non prêt' ?>
                     </div>
                     <div class="es-sub">
@@ -194,7 +194,7 @@ $sectionIconColors = [
         </div>
         <div class="sections-list">
             <?php foreach ($sections as $secKey => $sec):
-                $barColor = $sec['pct'] >= 80 ? '#16a34a' : ($sec['pct'] >= 50 ? '#f59e0b' : '#ef4444');
+                $barColor = $sec['pct'] >= 80 ? '#1f6e4e' : ($sec['pct'] >= 50 ? '#f59e0b' : '#ef4444');
                 $iconKey  = $sectionIcons[$secKey] ?? 'building';
                 $iconColor = $sectionIconColors[$secKey] ?? '#1e3a5f';
             ?>
@@ -219,7 +219,7 @@ $sectionIconColors = [
             <?php endforeach; ?>
 
             <!-- Activités R2 -->
-            <?php $actColor = $nbActivites > 0 ? '#16a34a' : '#ef4444'; ?>
+            <?php $actColor = $nbActivites > 0 ? '#1f6e4e' : '#ef4444'; ?>
             <div class="sec-row">
                 <div class="sec-icon-wrap" style="background:#05966912;color:#059669">
                     <?= svgIcon('trending','16px') ?>
@@ -240,7 +240,7 @@ $sectionIconColors = [
             </div>
 
             <!-- Écritures -->
-            <?php $ecrColor = $nbEcritures > 0 ? '#16a34a' : '#ef4444'; ?>
+            <?php $ecrColor = $nbEcritures > 0 ? '#1f6e4e' : '#ef4444'; ?>
             <div class="sec-row">
                 <div class="sec-icon-wrap" style="background:#2563eb12;color:#2563eb">
                     <?= svgIcon('book','16px') ?>
@@ -321,10 +321,10 @@ foreach ($sections as $secKey => $sec) {
 
 <?php if ($scorePct === 100 && $nbActivites > 0 && $nbEcritures > 0): ?>
 <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:16px;padding:28px;text-align:center;margin-top:16px">
-    <div style="width:56px;height:56px;border-radius:16px;background:#16a34a;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff">
+    <div style="width:56px;height:56px;border-radius:16px;background:#1f6e4e;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff">
         <?= svgIcon('shield-check','28px') ?>
     </div>
-    <div style="font-size:17px;font-weight:700;color:#15803d">Dossier 100% conforme DGID</div>
+    <div style="font-size:17px;font-weight:700;color:#18583f">Dossier 100% conforme DGID</div>
     <div style="font-size:16px;color:#166534;margin-top:6px">Toutes les informations sont renseignées. Le fichier Excel est prêt à déposer.</div>
 </div>
 <?php endif; ?>

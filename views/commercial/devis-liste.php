@@ -32,10 +32,10 @@ table.tbl tr:hover td{background:#fafbfc}
 .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
 .badge-gray{background:#f3f4f6;color:#6b7280}
 .badge-blue{background:#dbeafe;color:#2563eb}
-.badge-green{background:#dcfce7;color:#16a34a}
+.badge-green{background:#dcfce7;color:#1f6e4e}
 .badge-red{background:#fee2e2;color:#dc2626}
 .badge-orange{background:#fef3c7;color:#d97706}
-.badge-purple{background:#ede9fe;color:#7c3aed}
+.badge-purple{background:rgba(184,146,63,0.1);color:#b8923f}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s}
 .btn-primary{background:var(--navy);color:#fff}
 .btn-gold{background:var(--gold);color:var(--navy-dark)}
@@ -49,7 +49,7 @@ table.tbl tr:hover td{background:#fafbfc}
     </div>
     <div class="stats-row">
         <?php
-        $allStats = ['brouillon'=>['Brouillons','#6b7280'],'envoye'=>['Envoyés','#2563eb'],'accepte'=>['Acceptés','#16a34a'],'refuse'=>['Refusés','#dc2626'],'converti'=>['Convertis','#7c3aed']];
+        $allStats = ['brouillon'=>['Brouillons','#6b7280'],'envoye'=>['Envoyés','#2563eb'],'accepte'=>['Acceptés','#1f6e4e'],'refuse'=>['Refusés','#dc2626'],'converti'=>['Convertis','#b8923f']];
         foreach ($allStats as $k => [$label, $color]): ?>
         <div class="stat-card">
             <div class="stat-num" style="color:<?= $color ?>"><?= $statsMap[$k]['nb'] ?? 0 ?></div>

@@ -153,7 +153,7 @@ function fmt(float $v): string {
 
 .montant-zero { color: var(--text-muted); font-size: 15px; }
 .montant-debit  { color: #dc2626; }
-.montant-credit { color: #16a34a; }
+.montant-credit { color: #1f6e4e; }
 .montant-sold   { color: #1d4ed8; }
 .code-compte {
     background: var(--bg);
@@ -175,7 +175,7 @@ function fmt(float $v): string {
     font-size: 16px;
     font-weight: 500;
 }
-.bal-equilibre.ok  { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25); color: #16a34a; }
+.bal-equilibre.ok  { background: rgba(31,110,78,.08); border: 1px solid rgba(31,110,78,.25); color: #1f6e4e; }
 .bal-equilibre.err { background: rgba(239,68,68,.08);  border: 1px solid rgba(239,68,68,.25);  color: #dc2626; }
 .bal-equilibre svg { width: 20px; height: 20px; flex-shrink: 0; }
 

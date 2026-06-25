@@ -1,7 +1,7 @@
 <?php
-$statusColors = ['brouillon'=>'#94a3b8','envoyee'=>'#3b82f6','payee'=>'#22c55e','partiel'=>'#f59e0b','retard'=>'#ef4444','annulee'=>'#6b7280'];
+$statusColors = ['brouillon'=>'#94a3b8','envoyee'=>'#1f6e4e','payee'=>'#1f6e4e','partiel'=>'#f59e0b','retard'=>'#ef4444','annulee'=>'#6b7280'];
 $statusBg     = ['brouillon'=>'#f1f5f9','envoyee'=>'#dbeafe','payee'=>'#dcfce7','partiel'=>'#fef3c7','retard'=>'#fee2e2','annulee'=>'#f3f4f6'];
-$statusText   = ['brouillon'=>'#475569','envoyee'=>'#2563eb','payee'=>'#16a34a','partiel'=>'#d97706','retard'=>'#dc2626','annulee'=>'#374151'];
+$statusText   = ['brouillon'=>'#475569','envoyee'=>'#2563eb','payee'=>'#1f6e4e','partiel'=>'#d97706','retard'=>'#dc2626','annulee'=>'#374151'];
 $statusLabels = ['brouillon'=>'Brouillon','envoyee'=>'Envoyée','payee'=>'Payée','partiel'=>'Paiement partiel','retard'=>'En retard','annulee'=>'Annulée'];
 ?>
 <style>
@@ -15,8 +15,8 @@ $statusLabels = ['brouillon'=>'Brouillon','envoyee'=>'Envoyée','payee'=>'Payée
 .stats-grid { display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:28px; }
 .stat-card { background:#fff;border-radius:14px;border:1px solid var(--border);padding:18px 20px;position:relative;overflow:hidden; }
 .stat-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px; }
-.stat-card.blue::before { background:#3b82f6; }
-.stat-card.green::before { background:#22c55e; }
+.stat-card.blue::before { background:#1f6e4e; }
+.stat-card.green::before { background:#1f6e4e; }
 .stat-card.amber::before { background:#f59e0b; }
 .stat-card.red::before { background:#ef4444; }
 .stat-card.navy::before { background:var(--navy); }
@@ -44,7 +44,7 @@ table.fac-table tbody tr:last-child td { border-bottom:none; }
 .fac-client { font-size:12px;color:var(--text-muted);margin-top:2px; }
 .badge { display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600; }
 .fac-progress { background:#f1f5f9;border-radius:4px;height:5px;width:80px;overflow:hidden;margin-top:4px; }
-.fac-progress-bar { height:100%;border-radius:4px;background:#22c55e; }
+.fac-progress-bar { height:100%;border-radius:4px;background:#1f6e4e; }
 .td-right { text-align:right; }
 
 .btn { display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s; }

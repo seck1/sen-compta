@@ -49,13 +49,13 @@ $nb_crediteurs = count(array_filter($balance, fn($r) => $r['solde'] < 0));
         </div>
         <div class="card" style="padding:16px 20px">
             <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px">Total mouvements crédit</div>
-            <div style="font-family:monospace;font-size:18px;font-weight:700;color:#16a34a"><?= formatMontant($total_credit) ?></div>
+            <div style="font-family:monospace;font-size:18px;font-weight:700;color:#1f6e4e"><?= formatMontant($total_credit) ?></div>
         </div>
         <div class="card" style="padding:16px 20px">
             <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px">
                 Solde net — <?= $nb_debiteurs ?> débiteur<?= $nb_debiteurs>1?'s':'' ?> / <?= $nb_crediteurs ?> créditeur<?= $nb_crediteurs>1?'s':'' ?>
             </div>
-            <div style="font-family:monospace;font-size:18px;font-weight:700;color:<?= $total_solde > 0 ? '#dc2626' : ($total_solde < 0 ? '#16a34a' : 'var(--text-muted)') ?>">
+            <div style="font-family:monospace;font-size:18px;font-weight:700;color:<?= $total_solde > 0 ? '#dc2626' : ($total_solde < 0 ? '#1f6e4e' : 'var(--text-muted)') ?>">
                 <?= formatMontant(abs($total_solde)) ?> <?= $total_solde > 0 ? 'D' : ($total_solde < 0 ? 'C' : '') ?>
             </div>
         </div>
@@ -79,7 +79,7 @@ $nb_crediteurs = count(array_filter($balance, fn($r) => $r['solde'] < 0));
             </thead>
             <tbody>
             <?php foreach($balance as $row): ?>
-            <tr style="border-bottom:1px solid var(--border)<?= $row['solde'] != 0 ? ';background:'.($row['solde']>0?'rgba(239,68,68,0.03)':'rgba(34,197,94,0.03)') : '' ?>">
+            <tr style="border-bottom:1px solid var(--border)<?= $row['solde'] != 0 ? ';background:'.($row['solde']>0?'rgba(239,68,68,0.03)':'rgba(31,110,78,0.03)') : '' ?>">
                 <td style="padding:11px 16px">
                     <div style="font-weight:600"><?= e($row['nom']) ?></div>
                     <?php if($row['telephone'] || $row['email']): ?>
@@ -91,13 +91,13 @@ $nb_crediteurs = count(array_filter($balance, fn($r) => $r['solde'] < 0));
                 <td style="padding:11px 16px;text-align:right;font-family:monospace;color:#dc2626">
                     <?= $row['total_debit'] > 0 ? formatMontant($row['total_debit']) : '—' ?>
                 </td>
-                <td style="padding:11px 16px;text-align:right;font-family:monospace;color:#16a34a">
+                <td style="padding:11px 16px;text-align:right;font-family:monospace;color:#1f6e4e">
                     <?= $row['total_credit'] > 0 ? formatMontant($row['total_credit']) : '—' ?>
                 </td>
                 <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:#dc2626">
                     <?= $row['solde'] > 0 ? formatMontant($row['solde']) : '—' ?>
                 </td>
-                <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:#16a34a">
+                <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:#1f6e4e">
                     <?= $row['solde'] < 0 ? formatMontant(abs($row['solde'])) : '—' ?>
                 </td>
                 <td style="padding:11px 16px;text-align:center">
@@ -111,9 +111,9 @@ $nb_crediteurs = count(array_filter($balance, fn($r) => $r['solde'] < 0));
                 <tr style="border-top:2px solid var(--border);background:var(--bg-secondary)">
                     <td style="padding:11px 16px;font-weight:700;font-size:16px">TOTAL</td>
                     <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#dc2626"><?= formatMontant($total_debit) ?></td>
-                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#16a34a"><?= formatMontant($total_credit) ?></td>
+                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#1f6e4e"><?= formatMontant($total_credit) ?></td>
                     <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#dc2626"><?= $total_solde > 0 ? formatMontant($total_solde) : '—' ?></td>
-                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#16a34a"><?= $total_solde < 0 ? formatMontant(abs($total_solde)) : '—' ?></td>
+                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#1f6e4e"><?= $total_solde < 0 ? formatMontant(abs($total_solde)) : '—' ?></td>
                     <td></td>
                 </tr>
             </tfoot>

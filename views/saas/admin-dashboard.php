@@ -65,7 +65,7 @@ ob_start();
           <td style="padding:14px 16px;text-align:center;"><?= $c['nb_users'] ?></td>
           <td style="padding:14px 16px;">
             <?php
-            $colors = ['actif'=>'#22c55e','essai'=>'#f59e0b','suspendu'=>'#ef4444','expire'=>'#6b7280','annule'=>'#6b7280'];
+            $colors = ['actif'=>'#1f6e4e','essai'=>'#f59e0b','suspendu'=>'#ef4444','expire'=>'#6b7280','annule'=>'#6b7280'];
             $col = $colors[$c['statut']] ?? '#6b7280';
             ?>
             <span style="color:<?= $col ?>;font-size:12px;font-weight:600;">● <?= ucfirst($c['statut']) ?></span>

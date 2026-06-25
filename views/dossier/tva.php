@@ -35,13 +35,13 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
     </div>
 
     <?php if(isset($_GET['saved'])): ?>
-    <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;color:#16a34a;font-size:16px;display:flex;align-items:center;gap:8px">
+    <div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;color:#1f6e4e;font-size:16px;display:flex;align-items:center;gap:8px">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         Déclaration enregistrée avec succès.
     </div>
     <?php endif; ?>
     <?php if(isset($_GET['paid'])): ?>
-    <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;color:#16a34a;font-size:16px;display:flex;align-items:center;gap:8px">
+    <div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;color:#1f6e4e;font-size:16px;display:flex;align-items:center;gap:8px">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
         Paiement enregistré avec succès.
     </div>
@@ -58,7 +58,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
     <?php endif; ?>
 
     <?php if(!empty($credit_auto) && !isset($_GET['calculer'])): ?>
-    <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:16px;color:#2563eb">
+    <div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.2);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:16px;color:#2563eb">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px;display:inline;margin-right:6px;vertical-align:-2px"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
         Crédit de TVA reportable du mois précédent : <strong><?= formatMontant($credit_auto) ?></strong> — pré-rempli dans "Crédit antérieur"
     </div>
@@ -104,7 +104,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
     </div>
 
     <?php if($declaration_existante && !$tva): ?>
-    <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:16px;color:#2563eb">
+    <div style="background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.2);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:16px;color:#2563eb">
         Une déclaration existe déjà pour <?= $mois_noms[$mois] ?> <?= $annee ?> —
         montant déclaré : <strong><?= formatMontant($declaration_existante['tva_a_payer']) ?></strong>
     </div>
@@ -113,7 +113,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
     <?php if($tva): ?>
 
     <!-- ===== SECTION 1 : TVA COLLECTÉE ===== -->
-    <div style="background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.18);border-radius:14px;padding:24px;margin-bottom:16px">
+    <div style="background:rgba(31,110,78,0.05);border:1px solid rgba(31,110,78,0.18);border-radius:14px;padding:24px;margin-bottom:16px">
         <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#2563eb;margin-bottom:14px">
             1 — TVA Collectée
         </div>
@@ -136,15 +136,15 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
         </div>
         <?php endif; ?>
 
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px;border-top:2px solid rgba(59,130,246,0.2);margin-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px;border-top:2px solid rgba(31,110,78,0.2);margin-top:12px">
             <span style="font-size:16px;font-weight:700;color:#1e3a8a">= TVA collectée nette</span>
             <span style="font-family:monospace;font-size:18px;font-weight:700;color:#1e3a8a"><?= formatMontant($tva['tva_collectee_nette']) ?></span>
         </div>
     </div>
 
     <!-- ===== SECTION 2 : TVA DÉDUCTIBLE ===== -->
-    <div style="background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);border-radius:14px;padding:24px;margin-bottom:16px">
-        <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#16a34a;margin-bottom:14px">
+    <div style="background:rgba(31,110,78,0.05);border:1px solid rgba(31,110,78,0.2);border-radius:14px;padding:24px;margin-bottom:16px">
+        <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#1f6e4e;margin-bottom:14px">
             2 — TVA Déductible
         </div>
 
@@ -152,14 +152,14 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
         <?php tva_row('TVA sur immobilisations (4442)', $tva['tva_ded_immo']) ?>
         <?php tva_row('TVA sur importations (4443)', $tva['tva_importation']) ?>
 
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;border-top:2px solid rgba(34,197,94,0.25);margin-top:4px">
-            <span style="font-size:16px;font-weight:700;color:#15803d">= Total TVA déductible</span>
-            <span style="font-family:monospace;font-size:18px;font-weight:700;color:#15803d"><?= formatMontant($tva['tva_deductible']) ?></span>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;border-top:2px solid rgba(31,110,78,0.25);margin-top:4px">
+            <span style="font-size:16px;font-weight:700;color:#18583f">= Total TVA déductible</span>
+            <span style="font-family:monospace;font-size:18px;font-weight:700;color:#18583f"><?= formatMontant($tva['tva_deductible']) ?></span>
         </div>
     </div>
 
     <!-- ===== SECTION 3 : RÉSULTAT ===== -->
-    <div style="border:2px solid <?= $tva['tva_a_payer'] > 0 ? 'rgba(239,68,68,0.35)' : 'rgba(34,197,94,0.35)' ?>;border-radius:14px;padding:28px;margin-bottom:20px;<?= $tva['tva_a_payer'] > 0 ? 'background:rgba(239,68,68,0.04)' : 'background:rgba(34,197,94,0.04)' ?>">
+    <div style="border:2px solid <?= $tva['tva_a_payer'] > 0 ? 'rgba(239,68,68,0.35)' : 'rgba(31,110,78,0.35)' ?>;border-radius:14px;padding:28px;margin-bottom:20px;<?= $tva['tva_a_payer'] > 0 ? 'background:rgba(239,68,68,0.04)' : 'background:rgba(31,110,78,0.04)' ?>">
         <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-muted);margin-bottom:18px">
             3 — Résultat de la déclaration
         </div>
@@ -194,11 +194,11 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
                 </div>
                 <div style="font-size:17px;color:#dc2626;margin-top:4px;letter-spacing:0.5px">FCFA</div>
             <?php else: ?>
-                <div style="font-size:18px;text-transform:uppercase;letter-spacing:1.5px;color:#16a34a;font-weight:700;margin-bottom:8px">Credit a Reporter</div>
-                <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#16a34a;line-height:1">
+                <div style="font-size:18px;text-transform:uppercase;letter-spacing:1.5px;color:#1f6e4e;font-weight:700;margin-bottom:8px">Credit a Reporter</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#1f6e4e;line-height:1">
                     <?= number_format($tva['credit_reportable'], 0, ',', ' ') ?>
                 </div>
-                <div style="font-size:17px;color:#16a34a;margin-top:4px;letter-spacing:0.5px">FCFA</div>
+                <div style="font-size:17px;color:#1f6e4e;margin-top:4px;letter-spacing:0.5px">FCFA</div>
             <?php endif; ?>
         </div>
 
@@ -262,24 +262,24 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
                     $dHasTva  = $decl['tva_a_payer'] > 0;
                     $isCredit = $decl['credit_reportable'] > 0;
                     $statutConfig = match($decl['statut']) {
-                        'paye'    => ['label'=>'Payée',    'bg'=>'rgba(34,197,94,0.12)',  'color'=>'#16a34a'],
-                        'depose'  => ['label'=>'Déposée',  'bg'=>'rgba(59,130,246,0.12)', 'color'=>'#2563eb'],
+                        'paye'    => ['label'=>'Payée',    'bg'=>'rgba(31,110,78,0.12)',  'color'=>'#1f6e4e'],
+                        'depose'  => ['label'=>'Déposée',  'bg'=>'rgba(31,110,78,0.12)', 'color'=>'#2563eb'],
                         default   => ['label'=>'Brouillon','bg'=>'rgba(107,114,128,0.12)','color'=>'#6b7280'],
                     };
                     $isCurrent = $decl['periode_mois'] == $mois && $decl['periode_annee'] == $annee;
                     $modalId = 'modal-pay-' . $decl['id'];
                 ?>
-                <tr style="border-bottom:1px solid var(--border);<?= $isCurrent ? 'background:rgba(59,130,246,0.04)' : '' ?>">
+                <tr style="border-bottom:1px solid var(--border);<?= $isCurrent ? 'background:rgba(31,110,78,0.04)' : '' ?>">
                     <td style="padding:11px 16px;font-weight:<?= $isCurrent ? '600' : '400' ?>">
                         <?= $mois_noms[$decl['periode_mois']] ?> <?= $decl['periode_annee'] ?>
                         <?php if($isCurrent): ?>
-                        <span style="font-size:13px;background:rgba(59,130,246,0.15);color:#2563eb;border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:600">En cours</span>
+                        <span style="font-size:13px;background:rgba(31,110,78,0.15);color:#2563eb;border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:600">En cours</span>
                         <?php endif; ?>
                     </td>
                     <td style="padding:11px 16px;text-align:right;font-family:monospace"><?= formatMontant($decl['tva_collectee']) ?></td>
                     <td style="padding:11px 16px;text-align:right;font-family:monospace"><?= formatMontant($decl['tva_deductible_biens'] + $decl['tva_deductible_immo']) ?></td>
                     <td style="padding:11px 16px;text-align:right;font-family:monospace"><?= formatMontant($decl['tva_nette']) ?></td>
-                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:<?= $dHasTva ? '#dc2626' : ($isCredit ? '#16a34a' : 'var(--text-muted)') ?>">
+                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:<?= $dHasTva ? '#dc2626' : ($isCredit ? '#1f6e4e' : 'var(--text-muted)') ?>">
                         <?php if($dHasTva): ?>- <?= formatMontant($decl['tva_a_payer']) ?>
                         <?php elseif($isCredit): ?>+ <?= formatMontant($decl['credit_reportable']) ?>
                         <?php else: ?>0 FCFA<?php endif; ?>
@@ -304,7 +304,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
                            style="font-size:18px;color:#6b7280;text-decoration:none;margin-right:10px">Voir</a>
                         <?php if($decl['statut'] === 'depose' && $dHasTva): ?>
                         <button onclick="document.getElementById('<?= $modalId ?>').style.display='flex'"
-                                style="font-size:18px;font-weight:600;color:#16a34a;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:6px;padding:3px 10px;cursor:pointer">
+                                style="font-size:18px;font-weight:600;color:#1f6e4e;background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:6px;padding:3px 10px;cursor:pointer">
                             ✓ Marquer payée
                         </button>
                         <?php endif; ?>
@@ -340,7 +340,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
                                         Annuler
                                     </button>
                                     <button type="submit"
-                                            style="padding:8px 18px;border-radius:8px;border:none;background:#16a34a;color:#fff;font-size:16px;font-weight:600;cursor:pointer">
+                                            style="padding:8px 18px;border-radius:8px;border:none;background:#1f6e4e;color:#fff;font-size:16px;font-weight:600;cursor:pointer">
                                         Confirmer le paiement
                                     </button>
                                 </div>

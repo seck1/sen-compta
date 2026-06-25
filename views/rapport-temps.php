@@ -32,7 +32,7 @@ function fmtMin(int $min): string {
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Heures facturables</div>
-        <div style="font-size:26px;font-weight:700;color:#16a34a;font-family:monospace"><?= fmtMin((int)$total_fact_global) ?></div>
+        <div style="font-size:26px;font-weight:700;color:#1f6e4e;font-family:monospace"><?= fmtMin((int)$total_fact_global) ?></div>
         <div style="font-size:12px;color:var(--text-muted);margin-top:3px"><?= $total_min_global > 0 ? round($total_fact_global/$total_min_global*100) : 0 ?>% du total</div>
     </div>
     <div class="card" style="padding:16px 20px">
@@ -69,12 +69,12 @@ function fmtMin(int $min): string {
                     </div>
                     <div style="text-align:right">
                         <span style="font-family:monospace;font-weight:700;font-size:14px"><?= fmtMin((int)$pc['total_min']) ?></span>
-                        <span style="font-size:11px;color:#16a34a;margin-left:6px"><?= fmtMin((int)$pc['fact_min']) ?> fact.</span>
+                        <span style="font-size:11px;color:#1f6e4e;margin-left:6px"><?= fmtMin((int)$pc['fact_min']) ?> fact.</span>
                     </div>
                 </div>
                 <div style="height:8px;background:#f0f3f8;border-radius:4px;overflow:hidden">
                     <div style="height:8px;width:<?= $pct ?>%;background:var(--navy-dark);border-radius:4px;position:relative">
-                        <div style="position:absolute;top:0;left:0;height:8px;width:<?= $fact_pct ?>%;background:#16a34a;border-radius:4px"></div>
+                        <div style="position:absolute;top:0;left:0;height:8px;width:<?= $fact_pct ?>%;background:#1f6e4e;border-radius:4px"></div>
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@ function fmtMin(int $min): string {
                 </div>
             </td>
             <td style="padding:10px 16px;text-align:right;font-family:monospace;font-weight:700"><?= fmtMin((int)$d['total_min']) ?></td>
-            <td style="padding:10px 16px;text-align:right;font-family:monospace;color:#16a34a"><?= fmtMin((int)$d['fact_min']) ?></td>
+            <td style="padding:10px 16px;text-align:right;font-family:monospace;color:#1f6e4e"><?= fmtMin((int)$d['fact_min']) ?></td>
             <td style="padding:10px 16px;text-align:right;font-family:monospace;color:#2563eb"><?= fmtMin((int)$d['facture_min']) ?></td>
             <td style="padding:10px 16px;text-align:center;color:var(--text-muted)"><?= $d['nb_saisies'] ?></td>
         </tr>

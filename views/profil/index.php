@@ -6,7 +6,7 @@
 </div>
 
 <?php if (isset($_GET['saved'])): ?>
-<div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:14px;color:#166534">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:14px;color:#166534">
     ✓ Profil mis à jour <?= isset($_GET['2fa']) ? '— Authentification 2FA activée !' : '' ?>
 </div>
 <?php endif; ?>
@@ -48,8 +48,8 @@
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Sécurisez votre compte avec une application d'authentification (Google Authenticator, Authy…)</p>
 
         <?php if ($user['totp_actif']): ?>
-        <div style="display:flex;align-items:center;gap:10px;padding:14px;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:10px;margin-bottom:20px">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e" style="width:20px;height:20px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+        <div style="display:flex;align-items:center;gap:10px;padding:14px;background:rgba(31,110,78,0.06);border:1px solid rgba(31,110,78,0.2);border-radius:10px;margin-bottom:20px">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#1f6e4e" style="width:20px;height:20px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
             <div>
                 <div style="font-size:13px;font-weight:600;color:#166534">2FA activée</div>
                 <div style="font-size:12px;color:#166534;opacity:0.8">Votre compte est protégé</div>

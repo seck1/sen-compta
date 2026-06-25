@@ -86,7 +86,7 @@
             <td><span class="badge badge-warning">En attente</span></td>
             <td>
                 <div style="display:flex;gap:6px">
-                    <button onclick="marquerPaye(<?= $h['id'] ?>, '<?= e($h['numero_facture']) ?>')" class="btn btn-sm" style="background:rgba(34,197,94,0.1);color:#16a34a;border:1px solid rgba(34,197,94,0.3)">
+                    <button onclick="marquerPaye(<?= $h['id'] ?>, '<?= e($h['numero_facture']) ?>')" class="btn btn-sm" style="background:rgba(31,110,78,0.1);color:#1f6e4e;border:1px solid rgba(31,110,78,0.3)">
                         ✓ Marquer payé
                     </button>
                     <a href="<?= APP_URL ?>/honoraires/pdf?id=<?= $h['id'] ?>" target="_blank" class="btn btn-outline btn-sm">PDF</a>

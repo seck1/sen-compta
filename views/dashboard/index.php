@@ -78,13 +78,13 @@
     </div>
     <?php endif; ?>
     <?php if (!empty($exercices_ouverts)): ?>
-    <div style="padding:14px 18px;background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.18);border-radius:12px">
+    <div style="padding:14px 18px;background:rgba(184,146,63,0.06);border:1px solid rgba(184,146,63,0.18);border-radius:12px">
         <div style="font-size:13px;font-weight:600;color:#4c1d95;margin-bottom:8px">
             🔒 Exercices anciens non clôturés
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
         <?php foreach ($exercices_ouverts as $ex): ?>
-            <a href="<?= APP_URL ?>/dossier/cloture?id=<?= $ex['id'] ?>" style="padding:4px 12px;background:rgba(124,58,237,0.1);border-radius:20px;font-size:12px;color:#7c3aed;text-decoration:none;font-weight:600">
+            <a href="<?= APP_URL ?>/dossier/cloture?id=<?= $ex['id'] ?>" style="padding:4px 12px;background:rgba(184,146,63,0.1);border-radius:20px;font-size:12px;color:#b8923f;text-decoration:none;font-weight:600">
                 <?= e($ex['raison_sociale']) ?> — Exercice <?= $ex['exercice'] ?>
             </a>
         <?php endforeach; ?>
@@ -175,8 +175,8 @@ $repartData   = array_map(fn($r)=>max(0,(float)$r['total']), $repartition);
                 <div style="font-size:12px;color:var(--text-muted);margin-top:3px">6 derniers mois — toutes entreprises</div>
             </div>
             <div style="display:flex;gap:14px;font-size:12px">
-                <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#1e3a5f;display:inline-block"></span>Produits</span>
-                <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#ef4444;display:inline-block"></span>Charges</span>
+                <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#1f6e4e;display:inline-block"></span>Produits</span>
+                <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#b8923f;display:inline-block"></span>Charges</span>
             </div>
         </div>
         <canvas id="chartCa" height="100"></canvas>
@@ -208,8 +208,8 @@ new Chart(document.getElementById('chartCa'), {
     data: {
         labels: caLabels,
         datasets: [
-            { label: 'Produits', data: caData, backgroundColor: 'rgba(30,58,95,0.75)', borderRadius: 6 },
-            { label: 'Charges',  data: chData,  backgroundColor: 'rgba(239,68,68,0.65)', borderRadius: 6 }
+            { label: 'Produits', data: caData, backgroundColor: 'rgba(31,110,78,0.85)', borderRadius: 6 },
+            { label: 'Charges',  data: chData,  backgroundColor: 'rgba(184,146,63,0.80)', borderRadius: 6 }
         ]
     },
     options: {
@@ -231,7 +231,7 @@ new Chart(document.getElementById('chartRep'), {
     type: 'doughnut',
     data: {
         labels: repLabels,
-        datasets: [{ data: repData, backgroundColor: ['#1e3a5f','#c9a96e','#3b82f6','#22c55e','#f59e0b','#ef4444'], borderWidth: 0 }]
+        datasets: [{ data: repData, backgroundColor: ['#1f6e4e','#2a8a63','#46a87d','#7ab59a','#b8923f','#d4b673'], borderWidth: 2, borderColor: '#fff' }]
     },
     options: {
         responsive: true,
@@ -325,7 +325,7 @@ new Chart(document.getElementById('chartRep'), {
                         <span style="padding:2px 8px;background:rgba(220,38,38,0.1);border-radius:10px;font-size:11px;color:#dc2626;font-weight:600">TVA</span>
                     <?php endif; ?>
                     <?php if (!empty($entEx)): ?>
-                        <span style="padding:2px 8px;background:rgba(124,58,237,0.1);border-radius:10px;font-size:11px;color:#7c3aed;font-weight:600">Clôture</span>
+                        <span style="padding:2px 8px;background:rgba(184,146,63,0.1);border-radius:10px;font-size:11px;color:#b8923f;font-weight:600">Clôture</span>
                     <?php endif; ?>
                     <?php if (!empty($entInactif)): ?>
                         <span style="padding:2px 8px;background:rgba(245,158,11,0.12);border-radius:10px;font-size:11px;color:#92400e;font-weight:600">Inactif</span>

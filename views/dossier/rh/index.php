@@ -10,7 +10,7 @@
 </div>
 
 <?php if(isset($_GET['created'])): ?>
-<div class="alert-success" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#16a34a;font-size:16px">
+<div class="alert-success" style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.25);border-radius:10px;padding:12px 18px;margin-bottom:16px;color:#1f6e4e;font-size:16px">
     Employé créé avec succès.
 </div>
 <?php endif; ?>

@@ -8,8 +8,8 @@
 .tiers-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.08); transform:translateY(-1px); }
 .tiers-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:14px 14px 0 0; }
 .tiers-card.fournisseur::before { background:#f59e0b; }
-.tiers-card.client::before      { background:#3b82f6; }
-.tiers-card.les_deux::before    { background:linear-gradient(90deg,#f59e0b,#3b82f6); }
+.tiers-card.client::before      { background:#1f6e4e; }
+.tiers-card.les_deux::before    { background:linear-gradient(90deg,#f59e0b,#1f6e4e); }
 
 .tiers-actions { flex-wrap:wrap; }
 
@@ -19,8 +19,8 @@
     margin-bottom:10px;
 }
 .badge-fourn { background:rgba(245,158,11,.1); color:#d97706; }
-.badge-cli   { background:rgba(59,130,246,.1); color:#2563eb; }
-.badge-deux  { background:rgba(139,92,246,.1); color:#7c3aed; }
+.badge-cli   { background:rgba(31,110,78,.1); color:#2563eb; }
+.badge-deux  { background:rgba(139,92,246,.1); color:#b8923f; }
 
 .tiers-nom { font-size:19px; font-weight:700; color:var(--navy-dark); margin-bottom:8px; }
 .tiers-info { font-size:16px; color:var(--text-muted); display:flex; flex-direction:column; gap:3px; }
@@ -85,14 +85,14 @@
         </div>
     </div>
     <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px 20px">
-        <div style="width:42px;height:42px;border-radius:10px;background:rgba(59,130,246,.1);display:flex;align-items:center;justify-content:center;color:#2563eb"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg></div>
+        <div style="width:42px;height:42px;border-radius:10px;background:rgba(31,110,78,.1);display:flex;align-items:center;justify-content:center;color:#2563eb"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg></div>
         <div>
             <div style="font-size:26px;font-weight:700;color:var(--navy-dark);font-family:Arial"><?= $stats['client'] + $stats['les_deux'] ?></div>
             <div style="font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px">Clients</div>
         </div>
     </div>
     <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px 20px">
-        <div style="width:42px;height:42px;border-radius:10px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;color:#7c3aed"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg></div>
+        <div style="width:42px;height:42px;border-radius:10px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;color:#b8923f"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg></div>
         <div>
             <div style="font-size:26px;font-weight:700;color:var(--navy-dark);font-family:Arial"><?= array_sum($stats) ?></div>
             <div style="font-size:15px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px">Total tiers</div>
@@ -109,12 +109,12 @@
             <button type="submit" name="type" value="fournisseur" class="filter-btn" style="display:inline-flex;align-items:center;gap:5px;border-color:#f59e0b;color:#d97706">
                 Fournisseurs <span style="background:rgba(245,158,11,.15);color:#d97706;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['fournisseur'] ?></span>
             </button>
-            <button type="submit" name="type" value="client" class="filter-btn" style="display:inline-flex;align-items:center;gap:5px;border-color:#3b82f6;color:#2563eb">
-                Clients <span style="background:rgba(59,130,246,.12);color:#2563eb;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['client'] ?></span>
+            <button type="submit" name="type" value="client" class="filter-btn" style="display:inline-flex;align-items:center;gap:5px;border-color:#1f6e4e;color:#2563eb">
+                Clients <span style="background:rgba(31,110,78,.12);color:#2563eb;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['client'] ?></span>
             </button>
             <?php if ($stats['les_deux'] > 0): ?>
-            <button type="submit" name="type" value="les_deux" class="filter-btn" style="display:inline-flex;align-items:center;gap:5px;border-color:#7c3aed;color:#7c3aed">
-                Les deux <span style="background:rgba(139,92,246,.12);color:#7c3aed;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['les_deux'] ?></span>
+            <button type="submit" name="type" value="les_deux" class="filter-btn" style="display:inline-flex;align-items:center;gap:5px;border-color:#b8923f;color:#b8923f">
+                Les deux <span style="background:rgba(139,92,246,.12);color:#b8923f;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['les_deux'] ?></span>
             </button>
             <?php endif; ?>
         <?php elseif ($filtre_type === 'fournisseur'): ?>
@@ -122,11 +122,11 @@
                 Fournisseurs <span style="background:rgba(255,255,255,.25);color:#fff;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['fournisseur'] ?></span>
             </span>
         <?php elseif ($filtre_type === 'client'): ?>
-            <span class="filter-btn active" style="display:inline-flex;align-items:center;gap:5px;background:#3b82f6;color:#fff;border-color:#3b82f6">
+            <span class="filter-btn active" style="display:inline-flex;align-items:center;gap:5px;background:#1f6e4e;color:#fff;border-color:#1f6e4e">
                 Clients <span style="background:rgba(255,255,255,.25);color:#fff;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['client'] ?></span>
             </span>
         <?php else: ?>
-            <span class="filter-btn active" style="display:inline-flex;align-items:center;gap:5px;background:#7c3aed;color:#fff;border-color:#7c3aed">
+            <span class="filter-btn active" style="display:inline-flex;align-items:center;gap:5px;background:#b8923f;color:#fff;border-color:#b8923f">
                 Les deux <span style="background:rgba(255,255,255,.25);color:#fff;border-radius:20px;padding:1px 7px;font-size:13px;font-weight:700"><?= $stats['les_deux'] ?></span>
             </span>
         <?php endif; ?>

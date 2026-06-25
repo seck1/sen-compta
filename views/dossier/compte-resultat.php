@@ -10,7 +10,7 @@ $r = $cr['resultats'];
 .cr-kpi { background:#fff; border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; }
 .cr-kpi-label { font-size:13px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
 .cr-kpi-val { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; }
-.cr-kpi-val.pos { color:#16a34a; }
+.cr-kpi-val.pos { color:#1f6e4e; }
 .cr-kpi-val.neg { color:#dc2626; }
 .cr-kpi-val.neutral { color:var(--navy-dark); }
 
@@ -18,7 +18,7 @@ $r = $cr['resultats'];
 .cr-col { background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
 .cr-col-header { padding:14px 20px; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:2px solid var(--border); }
 .cr-col.charges .cr-col-header { background:rgba(239,68,68,0.05); color:#dc2626; }
-.cr-col.produits .cr-col-header { background:rgba(34,197,94,0.05); color:#16a34a; }
+.cr-col.produits .cr-col-header { background:rgba(31,110,78,0.05); color:#1f6e4e; }
 .cr-section-title { padding:9px 20px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; background:var(--bg); color:var(--text-muted); border-bottom:1px solid var(--border); }
 .cr-row { display:flex; justify-content:space-between; align-items:center; padding:9px 20px; border-bottom:1px solid rgba(228,233,240,0.4); font-size:16px; gap:12px; }
 .cr-row.sub { padding-left:32px; color:var(--text-muted); font-size:15px; }
@@ -138,7 +138,7 @@ $r = $cr['resultats'];
         </div>
 
         <?php if($r['net'] > 0): ?>
-        <div class="cr-row" style="background:rgba(34,197,94,0.08);font-weight:600;color:#16a34a">
+        <div class="cr-row" style="background:rgba(31,110,78,0.08);font-weight:600;color:#1f6e4e">
             <span>Bénéfice de l'exercice</span>
             <span class="cr-num"><?= number_format($r['net'],0,',',' ') ?></span>
         </div>

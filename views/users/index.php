@@ -1,12 +1,12 @@
 <?php
 $roleColors = [
     'admin'        => ['bg'=>'#1e3a5f', 'text'=>'white',   'label'=>'Administrateur'],
-    'superviseur'  => ['bg'=>'#7c3aed', 'text'=>'white',   'label'=>'Superviseur'],
+    'superviseur'  => ['bg'=>'#b8923f', 'text'=>'white',   'label'=>'Superviseur'],
     'collaborateur'=> ['bg'=>'#0891b2', 'text'=>'white',   'label'=>'Collaborateur'],
 ];
 $avatarGradients = [
     ['#1e3a5f','#2a4f7c'],
-    ['#7c3aed','#a855f7'],
+    ['#b8923f','#a855f7'],
     ['#0891b2','#22d3ee'],
     ['#c9a96e','#a8843f'],
     ['#059669','#34d399'],
@@ -67,7 +67,7 @@ $avatarGradients = [
                 </div>
             </div>
             <!-- Statut actif/inactif -->
-            <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;font-size:12px;font-weight:600;color:<?= $u['actif'] ? '#16a34a' : '#dc2626' ?>">
+            <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;font-size:12px;font-weight:600;color:<?= $u['actif'] ? '#1f6e4e' : '#dc2626' ?>">
                 <span style="width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block"></span>
                 <?= $u['actif'] ? 'Actif' : 'Inactif' ?>
             </div>
@@ -94,7 +94,7 @@ $avatarGradients = [
                 <div style="font-size:13px;font-weight:500;color:var(--navy-dark);margin-top:1px">
                     <?= $connDate ?>
                     <?php if ($joursConnexion !== null): ?>
-                    <span style="font-size:11px;color:<?= $joursConnexion > 7 ? '#dc2626' : '#16a34a' ?>;font-weight:400;margin-left:5px">
+                    <span style="font-size:11px;color:<?= $joursConnexion > 7 ? '#dc2626' : '#1f6e4e' ?>;font-weight:400;margin-left:5px">
                         (il y a <?= $joursConnexion === 0 ? "aujourd'hui" : $joursConnexion . 'j' ?>)
                     </span>
                     <?php endif; ?>

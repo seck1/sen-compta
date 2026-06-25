@@ -6,7 +6,7 @@
 .hon-stat-val { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:600; color:var(--navy-dark); }
 .hon-stat-sub { font-size:12px; color:var(--text-muted); margin-top:4px; }
 .hon-stat.navy::before  { background:linear-gradient(90deg,#1e3a5f,#2a4f7c); }
-.hon-stat.green::before { background:linear-gradient(90deg,#166534,#22c55e); }
+.hon-stat.green::before { background:linear-gradient(90deg,#166534,#1f6e4e); }
 .hon-stat.red::before   { background:linear-gradient(90deg,#b91c1c,#ef4444); }
 .hon-stat.gold::before  { background:linear-gradient(90deg,#c9a96e,#f59e0b); }
 </style>

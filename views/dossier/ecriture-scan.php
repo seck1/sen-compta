@@ -37,7 +37,7 @@ $journauxJson = json_encode(array_map(fn($j) => [
     flex:1; position:relative;
 }
 .step.active { background:var(--navy); color:#fff; }
-.step.done   { background:rgba(34,197,94,.1); color:#16a34a; }
+.step.done   { background:rgba(31,110,78,.1); color:#1f6e4e; }
 .step-num {
     width:26px; height:26px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
@@ -45,7 +45,7 @@ $journauxJson = json_encode(array_map(fn($j) => [
     background:rgba(0,0,0,.1);
 }
 .step.active .step-num { background:rgba(255,255,255,.2); color:#fff; }
-.step.done   .step-num { background:#22c55e; color:#fff; }
+.step.done   .step-num { background:#1f6e4e; color:#fff; }
 .step-arrow { color:var(--border); font-size:18px; flex-shrink:0; }
 
 /* ── Upload zone ── */
@@ -54,12 +54,12 @@ $journauxJson = json_encode(array_map(fn($j) => [
     padding:48px 32px; text-align:center; cursor:pointer;
     transition:border-color .2s, background .2s; position:relative;
 }
-.upload-zone:hover, .upload-zone.drag { border-color:#3b82f6; background:rgba(59,130,246,.04); }
+.upload-zone:hover, .upload-zone.drag { border-color:#1f6e4e; background:rgba(31,110,78,.04); }
 .upload-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
 .upload-icon { font-size:48px; display:block; margin-bottom:14px; }
 .upload-title { font-size:19px; font-weight:600; color:var(--navy-dark); margin-bottom:6px; }
 .upload-sub   { font-size:16px; color:var(--text-muted); }
-.upload-preview { display:none; align-items:center; gap:16px; padding:16px; background:rgba(59,130,246,.05); border-radius:12px; border:1px solid rgba(59,130,246,.2); }
+.upload-preview { display:none; align-items:center; gap:16px; padding:16px; background:rgba(31,110,78,.05); border-radius:12px; border:1px solid rgba(31,110,78,.2); }
 .upload-preview img { width:80px; height:80px; object-fit:cover; border-radius:8px; border:1px solid var(--border); }
 .upload-preview-info { flex:1; text-align:left; }
 .upload-preview-name { font-size:17px; font-weight:600; color:var(--navy-dark); }
@@ -91,7 +91,7 @@ $journauxJson = json_encode(array_map(fn($j) => [
     display:inline-flex; align-items:center; gap:5px;
     padding:4px 12px; border-radius:20px; font-size:15px; font-weight:600;
 }
-.confiance-haute   { background:rgba(34,197,94,.12); color:#16a34a; }
+.confiance-haute   { background:rgba(31,110,78,.12); color:#1f6e4e; }
 .confiance-moyenne { background:rgba(245,158,11,.12); color:#d97706; }
 .confiance-faible  { background:rgba(239,68,68,.12);  color:#dc2626; }
 
@@ -120,7 +120,7 @@ $journauxJson = json_encode(array_map(fn($j) => [
     font-size:17px; font-family:'DM Sans',sans-serif; background:#fff; color:inherit;
     box-sizing:border-box; transition:border-color .15s;
 }
-.ec-field:focus { outline:none; border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.15); }
+.ec-field:focus { outline:none; border-color:#1f6e4e; box-shadow:0 0 0 3px rgba(31,110,78,.15); }
 .ec-field-mono { font-family:Arial, sans-serif; text-align:right; }
 
 /* Masquer les spinners number */
@@ -141,8 +141,8 @@ input[type=number] { -moz-appearance:textfield; }
 }
 .ia-spinner {
     width:48px; height:48px; border-radius:50%;
-    border:4px solid rgba(59,130,246,.15);
-    border-top-color:#3b82f6;
+    border:4px solid rgba(31,110,78,.15);
+    border-top-color:#1f6e4e;
     animation:spin .8s linear infinite;
 }
 @keyframes spin { to { transform:rotate(360deg); } }
@@ -273,11 +273,11 @@ input[type=number] { -moz-appearance:textfield; }
                                     <option value="">— Lier à un tiers existant —</option>
                                 </select>
                                 <span style="font-size:15px;color:var(--text-muted)">ou</span>
-                                <a id="btn-creer-tiers" href="#" target="_blank" style="font-size:15px;color:#3b82f6;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px">
+                                <a id="btn-creer-tiers" href="#" target="_blank" style="font-size:15px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                                     Créer ce tiers
                                 </a>
-                                <span id="tiers-linked-badge" style="display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:20px;font-size:15px;color:#16a34a;font-weight:600">
+                                <span id="tiers-linked-badge" style="display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:15px;color:#1f6e4e;font-weight:600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
                                     Lié
                                 </span>

@@ -9,14 +9,14 @@ $kpi_total_db = count($echeances_db);
 
 // Type badge colors
 $typeColors = [
-    'TVA'    => ['bg'=>'rgba(59,130,246,0.12)', 'color'=>'#2563eb'],
-    'IS'     => ['bg'=>'rgba(124,58,237,0.12)', 'color'=>'#7c3aed'],
+    'TVA'    => ['bg'=>'rgba(31,110,78,0.12)', 'color'=>'#2563eb'],
+    'IS'     => ['bg'=>'rgba(184,146,63,0.12)', 'color'=>'#b8923f'],
     'IPRES'  => ['bg'=>'rgba(14,165,233,0.12)', 'color'=>'#0284c7'],
     'CFCE'   => ['bg'=>'rgba(245,158,11,0.12)', 'color'=>'#d97706'],
     'TF'     => ['bg'=>'rgba(239,68,68,0.12)',  'color'=>'#dc2626'],
     'Patente'=> ['bg'=>'rgba(168,131,63,0.12)', 'color'=>'#a8843f'],
     'Autre'  => ['bg'=>'rgba(107,114,128,0.12)','color'=>'#4b5563'],
-    'CGU'    => ['bg'=>'rgba(124,58,237,0.12)', 'color'=>'#7c3aed'],
+    'CGU'    => ['bg'=>'rgba(184,146,63,0.12)', 'color'=>'#b8923f'],
 ];
 
 // Group generated echeances by month for display
@@ -32,7 +32,7 @@ $moisFr = ['01'=>'Janvier','02'=>'Février','03'=>'Mars','04'=>'Avril','05'=>'Ma
 ?>
 
 <?php if ($saved): ?>
-<div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#16a34a;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:16px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Calendrier fiscal <?= $annee ?> initialisé — <?= count($echeances) ?> échéances créées.
 </div>
@@ -71,12 +71,12 @@ $moisFr = ['01'=>'Janvier','02'=>'Février','03'=>'Mars','04'=>'Avril','05'=>'Ma
         <div class="kpi-value"><?= $kpi_total_db ?: count($echeances) ?></div>
         <div class="kpi-sub">dans le calendrier <?= $annee ?></div>
     </div>
-    <div class="kpi-card" style="border-top-color:#22c55e">
-        <div class="kpi-label" style="color:#16a34a">Réglées</div>
-        <div class="kpi-value" style="color:#16a34a"><?= $kpi_reglees ?></div>
+    <div class="kpi-card" style="border-top-color:#1f6e4e">
+        <div class="kpi-label" style="color:#1f6e4e">Réglées</div>
+        <div class="kpi-value" style="color:#1f6e4e"><?= $kpi_reglees ?></div>
         <div class="kpi-sub">paiements confirmés</div>
     </div>
-    <div class="kpi-card" style="border-top-color:#3b82f6">
+    <div class="kpi-card" style="border-top-color:#1f6e4e">
         <div class="kpi-label" style="color:#2563eb">En attente</div>
         <div class="kpi-value" style="color:#2563eb"><?= $kpi_attente ?></div>
         <div class="kpi-sub">à venir</div>
@@ -90,7 +90,7 @@ $moisFr = ['01'=>'Janvier','02'=>'Février','03'=>'Mars','04'=>'Avril','05'=>'Ma
 
 <?php if ($kpi_total_db === 0 && !empty($echeances)): ?>
 <!-- Preview mode (not yet initialized) -->
-<div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:16px;color:#1d4ed8">
+<div style="background:rgba(31,110,78,0.06);border:1px solid rgba(31,110,78,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:16px;color:#1d4ed8">
     <strong>Aperçu du calendrier <?= $annee ?></strong> — Cliquez sur "Générer <?= $annee ?>" pour enregistrer les <?= count($echeances) ?> échéances en base et pouvoir les marquer comme réglées.
 </div>
 <?php endif; ?>
@@ -122,7 +122,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
     </div>
     <?php foreach ($monthEchs as $ech):
         $isRetard = $ech['statut'] !== 'regle' && $ech['date_echeance'] < $today;
-        $bgRow = $ech['statut'] === 'regle' ? 'rgba(34,197,94,0.05)' : ($isRetard ? 'rgba(239,68,68,0.05)' : 'white');
+        $bgRow = $ech['statut'] === 'regle' ? 'rgba(31,110,78,0.05)' : ($isRetard ? 'rgba(239,68,68,0.05)' : 'white');
         $tc = $typeColors[$ech['type']] ?? $typeColors['Autre'];
     ?>
     <div style="background:<?= $bgRow ?>;border:1px solid <?= $isRetard ? 'rgba(239,68,68,0.2)' : 'var(--border)' ?>;border-radius:12px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;gap:14px">
@@ -140,7 +140,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
         <?php if ($ech['montant_reel']): ?>
         <div style="text-align:right;flex-shrink:0">
             <div style="font-size:14px;color:var(--text-muted)">Réel</div>
-            <div style="font-size:16px;font-family:monospace;font-weight:600;color:#16a34a"><?= formatMontant($ech['montant_reel']) ?></div>
+            <div style="font-size:16px;font-family:monospace;font-weight:600;color:#1f6e4e"><?= formatMontant($ech['montant_reel']) ?></div>
         </div>
         <?php endif; ?>
         <div style="flex-shrink:0">
@@ -154,7 +154,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
         </div>
         <?php if ($ech['statut'] !== 'regle'): ?>
         <!-- Mini form to mark as paid -->
-        <button type="button" onclick="toggleForm(<?= $ech['id'] ?>)" style="padding:5px 12px;background:rgba(34,197,94,0.1);color:#16a34a;border:1px solid rgba(34,197,94,0.25);border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;flex-shrink:0">Marquer réglé</button>
+        <button type="button" onclick="toggleForm(<?= $ech['id'] ?>)" style="padding:5px 12px;background:rgba(31,110,78,0.1);color:#1f6e4e;border:1px solid rgba(31,110,78,0.25);border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;flex-shrink:0">Marquer réglé</button>
         <?php endif; ?>
     </div>
     <?php if ($ech['statut'] !== 'regle'): ?>
@@ -171,7 +171,7 @@ foreach ($dbByMonth as $ym => $monthEchs):
                 <label>Date de règlement</label>
                 <input type="date" name="date_reglement" value="<?= date('Y-m-d') ?>">
             </div>
-            <button type="submit" class="btn btn-sm" style="background:#22c55e;color:white;border:none;margin-bottom:1px">Confirmer</button>
+            <button type="submit" class="btn btn-sm" style="background:#1f6e4e;color:white;border:none;margin-bottom:1px">Confirmer</button>
             <button type="button" onclick="toggleForm(<?= $ech['id'] ?>)" class="btn btn-outline btn-sm" style="margin-bottom:1px">Annuler</button>
         </form>
     </div>

@@ -23,7 +23,7 @@ $score_fields = [
 ];
 $filled = array_filter($score_fields, fn($f) => !empty($entreprise[$f]));
 $score = round(count($filled) / count($score_fields) * 100);
-$score_color = $score >= 80 ? '#22c55e' : ($score >= 50 ? '#f59e0b' : '#ef4444');
+$score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444');
 ?>
 
 <style>
@@ -55,7 +55,7 @@ $score_color = $score >= 80 ? '#22c55e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
     width:100%;
 }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-    outline:none; border-color:var(--gold);
+    outline:none; border-color:var(--green); box-shadow:0 0 0 3px rgba(31,110,78,0.16);
 }
 .form-field textarea { resize:vertical; min-height:90px; }
 .form-field .hint { font-size:13px; color:var(--text-muted); margin-top:2px; }

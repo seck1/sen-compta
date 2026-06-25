@@ -42,14 +42,14 @@ $fmt = fn($v) => number_format((float)$v, 0, ',', ' ') . ' F';
             <td><span class="badge badge-navy"><?= e($r['compte_banque']) ?></span></td>
             <td style="text-align:right"><?= $fmt($r['solde_releve']) ?></td>
             <td style="text-align:right"><?= $fmt($r['solde_comptable']) ?></td>
-            <td style="text-align:right;color:<?= abs($r['ecart']) < 0.01 ? '#16a34a' : '#dc2626' ?>;font-weight:600">
+            <td style="text-align:right;color:<?= abs($r['ecart']) < 0.01 ? '#1f6e4e' : '#dc2626' ?>;font-weight:600">
                 <?= $fmt(abs($r['ecart'])) ?><?= abs($r['ecart']) < 0.01 ? ' ✓' : '' ?>
             </td>
             <td style="text-align:center">
                 <?php if ($r['statut'] === 'rapproche'): ?>
-                <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:rgba(34,197,94,0.1);color:#16a34a">Rapproché</span>
+                <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e">Rapproché</span>
                 <?php else: ?>
-                <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:rgba(59,130,246,0.1);color:#2563eb">En cours</span>
+                <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:rgba(31,110,78,0.1);color:#2563eb">En cours</span>
                 <?php endif; ?>
             </td>
             <td style="font-size:16px"><?= e($r['prenom'] . ' ' . $r['nom']) ?></td>

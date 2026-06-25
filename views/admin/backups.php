@@ -3,7 +3,7 @@
 .backup-stat { background:#fff; border:1px solid var(--border); border-radius:14px; padding:20px; position:relative; overflow:hidden; }
 .backup-stat::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
 .backup-stat.navy::before { background:linear-gradient(90deg,#1e3a5f,#2a4f7c); }
-.backup-stat.green::before { background:linear-gradient(90deg,#166534,#22c55e); }
+.backup-stat.green::before { background:linear-gradient(90deg,#166534,#1f6e4e); }
 .backup-stat.gold::before  { background:linear-gradient(90deg,#c9a96e,#f59e0b); }
 .backup-stat-label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:8px; font-weight:500; }
 .backup-stat-val { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:600; color:var(--navy-dark); }

@@ -1,17 +1,17 @@
 <?php
 $stageLabels = ['nouveau'=>'Nouveau','qualifie'=>'Qualifié','devis_envoye'=>'Devis envoyé','negociation'=>'Négociation','client'=>'Client','perdu'=>'Perdu'];
-$stageColors = ['nouveau'=>'#94a3b8','qualifie'=>'#3b82f6','devis_envoye'=>'#f59e0b','negociation'=>'#8b5cf6','client'=>'#22c55e','perdu'=>'#ef4444'];
-$stageBg    = ['nouveau'=>'#f1f5f9','qualifie'=>'#dbeafe','devis_envoye'=>'#fef3c7','negociation'=>'#ede9fe','client'=>'#dcfce7','perdu'=>'#fee2e2'];
-$stageText  = ['nouveau'=>'#475569','qualifie'=>'#2563eb','devis_envoye'=>'#d97706','negociation'=>'#7c3aed','client'=>'#16a34a','perdu'=>'#dc2626'];
+$stageColors = ['nouveau'=>'#94a3b8','qualifie'=>'#1f6e4e','devis_envoye'=>'#f59e0b','negociation'=>'#8b5cf6','client'=>'#1f6e4e','perdu'=>'#ef4444'];
+$stageBg    = ['nouveau'=>'#f1f5f9','qualifie'=>'#dbeafe','devis_envoye'=>'#fef3c7','negociation'=>'rgba(184,146,63,0.1)','client'=>'#dcfce7','perdu'=>'#fee2e2'];
+$stageText  = ['nouveau'=>'#475569','qualifie'=>'#2563eb','devis_envoye'=>'#d97706','negociation'=>'#b8923f','client'=>'#1f6e4e','perdu'=>'#dc2626'];
 $color = $stageColors[$prospect['pipeline_stage']] ?? '#1e3a5f';
 $initiales = strtoupper(substr($prospect['raison_sociale'],0,1)) . (strpos($prospect['raison_sociale'],' ') ? strtoupper(substr(strstr($prospect['raison_sociale'],' '),1,1)) : '');
 function statutDevisBadge(string $s): string {
     return match($s) {
         'brouillon'=>'<span style="background:#f3f4f6;color:#6b7280;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Brouillon</span>',
         'envoye'=>'<span style="background:#dbeafe;color:#2563eb;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Envoyé</span>',
-        'accepte'=>'<span style="background:#dcfce7;color:#16a34a;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Accepté</span>',
+        'accepte'=>'<span style="background:#dcfce7;color:#1f6e4e;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Accepté</span>',
         'refuse'=>'<span style="background:#fee2e2;color:#dc2626;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Refusé</span>',
-        'converti'=>'<span style="background:#ede9fe;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Converti</span>',
+        'converti'=>'<span style="background:rgba(184,146,63,0.1);color:#b8923f;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Converti</span>',
         default=>'<span style="background:#f3f4f6;color:#6b7280;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">' . e($s) . '</span>',
     };
 }
@@ -19,7 +19,7 @@ function statutFacBadge(string $s): string {
     return match($s) {
         'brouillon'=>'<span style="background:#f3f4f6;color:#6b7280;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Brouillon</span>',
         'envoyee'=>'<span style="background:#dbeafe;color:#2563eb;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Envoyée</span>',
-        'payee'=>'<span style="background:#dcfce7;color:#16a34a;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Payée</span>',
+        'payee'=>'<span style="background:#dcfce7;color:#1f6e4e;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Payée</span>',
         'en_retard'=>'<span style="background:#fee2e2;color:#dc2626;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">En retard</span>',
         'partiellement_payee'=>'<span style="background:#fef3c7;color:#d97706;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Partiel</span>',
         default=>'<span style="background:#f3f4f6;color:#6b7280;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">' . e($s) . '</span>',
@@ -122,7 +122,7 @@ table.tbl tr:last-child td { border-bottom:none; }
                 <h3>Avancer dans le pipeline</h3>
                 <div class="pipeline-steps">
                     <?php
-                    $stages = ['nouveau'=>['Nouveau','#94a3b8'],'qualifie'=>['Qualifié','#3b82f6'],'devis_envoye'=>['Devis','#f59e0b'],'negociation'=>['Négo.','#8b5cf6'],'client'=>['Client','#22c55e'],'perdu'=>['Perdu','#ef4444']];
+                    $stages = ['nouveau'=>['Nouveau','#94a3b8'],'qualifie'=>['Qualifié','#1f6e4e'],'devis_envoye'=>['Devis','#f59e0b'],'negociation'=>['Négo.','#8b5cf6'],'client'=>['Client','#1f6e4e'],'perdu'=>['Perdu','#ef4444']];
                     foreach ($stages as $k => [$label, $col]):
                         $isActive = $prospect['pipeline_stage'] === $k;
                     ?>
@@ -222,7 +222,7 @@ table.tbl tr:last-child td { border-bottom:none; }
                         <td><a href="<?= APP_URL ?>/commercial/factures/voir?id=<?= $f['id'] ?>" style="color:var(--navy);font-weight:600"><?= e($f['numero']) ?></a></td>
                         <td><?= date('d/m/Y', strtotime($f['date_facture'])) ?></td>
                         <td style="font-weight:600"><?= number_format($f['montant_ttc'],0,',',' ') ?></td>
-                        <td style="color:<?= $f['montant_paye'] >= $f['montant_ttc'] ? '#16a34a' : '#d97706' ?>"><?= number_format($f['montant_paye'],0,',',' ') ?></td>
+                        <td style="color:<?= $f['montant_paye'] >= $f['montant_ttc'] ? '#1f6e4e' : '#d97706' ?>"><?= number_format($f['montant_paye'],0,',',' ') ?></td>
                         <td><?= statutFacBadge($f['statut']) ?></td>
                     </tr>
                     <?php endforeach; ?>

@@ -68,7 +68,7 @@
                             ],
                             'superviseur' => [
                                 'label' => 'Superviseur',
-                                'color' => '#7c3aed',
+                                'color' => '#b8923f',
                                 'desc'  => 'Contrôle et valide le travail des collaborateurs. Voit tous les dossiers.',
                                 'droits'=> ['✅ Saisie et validation écritures', '✅ Tous les dossiers (sans assignation)', '✅ Planning toute l\'équipe', '✅ Export comptable', '❌ Invalider une écriture validée', '❌ Honoraires / Facturation'],
                             ],
@@ -109,7 +109,7 @@
                             <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5"><?= $r['desc'] ?></p>
                             <ul style="margin:0;padding:0;list-style:none;font-size:11.5px;display:flex;flex-direction:column;gap:3px">
                                 <?php foreach ($r['droits'] as $d): ?>
-                                <li style="color:<?= str_starts_with($d,'✅') ? '#16a34a' : '#9ca3af' ?>"><?= $d ?></li>
+                                <li style="color:<?= str_starts_with($d,'✅') ? '#1f6e4e' : '#9ca3af' ?>"><?= $d ?></li>
                                 <?php endforeach; ?>
                             </ul>
                         </label>
@@ -169,7 +169,7 @@
                 ],
                 'superviseur' => [
                     'label' => 'Superviseur',
-                    'color' => '#7c3aed',
+                    'color' => '#b8923f',
                     'desc'  => 'Expert-comptable associé ou chef de mission.',
                     'droits'=> [
                         '✅ Tous les dossiers entreprises',
@@ -213,7 +213,7 @@
                 <p style="font-size:12px;color:var(--text-muted);margin:0 0 14px;line-height:1.5"><?= $r['desc'] ?></p>
                 <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px">
                     <?php foreach ($r['droits'] as $d): ?>
-                    <li style="font-size:12px;color:<?= str_starts_with($d,'✅') ? '#15803d' : '#9ca3af' ?>"><?= $d ?></li>
+                    <li style="font-size:12px;color:<?= str_starts_with($d,'✅') ? '#18583f' : '#9ca3af' ?>"><?= $d ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -323,10 +323,10 @@
         <div style="display:flex;flex-direction:column;gap:0">
             <?php
             $actionMap = [
-                'ECRITURE_VALIDER'        => ['dot'=>'#22c55e', 'label'=>'Écriture validée'],
+                'ECRITURE_VALIDER'        => ['dot'=>'#1f6e4e', 'label'=>'Écriture validée'],
                 'ECRITURE_INVALIDER'      => ['dot'=>'#ef4444', 'label'=>'Écriture invalidée'],
-                'ECRITURE_VALIDER_TOUT'   => ['dot'=>'#22c55e', 'label'=>'Toutes écritures validées'],
-                'ECRITURE_CREER'          => ['dot'=>'#3b82f6', 'label'=>'Écriture créée'],
+                'ECRITURE_VALIDER_TOUT'   => ['dot'=>'#1f6e4e', 'label'=>'Toutes écritures validées'],
+                'ECRITURE_CREER'          => ['dot'=>'#1f6e4e', 'label'=>'Écriture créée'],
                 'ECRITURE_MODIFIER'       => ['dot'=>'#f59e0b', 'label'=>'Écriture modifiée'],
                 'ECRITURE_SUPPRIMER'      => ['dot'=>'#ef4444', 'label'=>'Écriture supprimée'],
                 'LOGIN'                   => ['dot'=>'#6366f1', 'label'=>'Connexion'],

@@ -215,14 +215,14 @@ $nomFichier = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entre
     </div>
     <div class="info-card">
         <h3>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:17px;height:17px;color:#7c3aed"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:17px;height:17px;color:#b8923f"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
             Norme SYSCOHADA
         </h3>
         <div class="info-row"><span class="info-label">Référentiel</span><span class="info-value">SYSCOHADA Révisé 2017</span></div>
         <div class="info-row"><span class="info-label">Format</span><span class="info-value">DGID Sénégal</span></div>
         <div class="info-row"><span class="info-label">Fichier</span><span class="info-value">.xlsx (Excel)</span></div>
         <div class="info-row"><span class="info-label">Feuilles</span><span class="info-value">4 (Garde, Bilan, CR, TAFIRE)</span></div>
-        <div class="info-row"><span class="info-label">Calcul automatique</span><span class="info-value" style="color:#16a34a">✓ Depuis les écritures</span></div>
+        <div class="info-row"><span class="info-label">Calcul automatique</span><span class="info-value" style="color:#1f6e4e">✓ Depuis les écritures</span></div>
     </div>
 </div>
 

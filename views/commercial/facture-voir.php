@@ -1,7 +1,7 @@
 <?php
-$statusColors = ['brouillon'=>'#94a3b8','envoyee'=>'#3b82f6','payee'=>'#22c55e','partiel'=>'#f59e0b','retard'=>'#ef4444','annulee'=>'#6b7280'];
+$statusColors = ['brouillon'=>'#94a3b8','envoyee'=>'#1f6e4e','payee'=>'#1f6e4e','partiel'=>'#f59e0b','retard'=>'#ef4444','annulee'=>'#6b7280'];
 $statusBg     = ['brouillon'=>'#f1f5f9','envoyee'=>'#dbeafe','payee'=>'#dcfce7','partiel'=>'#fef3c7','retard'=>'#fee2e2','annulee'=>'#f3f4f6'];
-$statusText   = ['brouillon'=>'#475569','envoyee'=>'#2563eb','payee'=>'#16a34a','partiel'=>'#d97706','retard'=>'#dc2626','annulee'=>'#374151'];
+$statusText   = ['brouillon'=>'#475569','envoyee'=>'#2563eb','payee'=>'#1f6e4e','partiel'=>'#d97706','retard'=>'#dc2626','annulee'=>'#374151'];
 $statusLabels = ['brouillon'=>'Brouillon','envoyee'=>'Envoyée','payee'=>'Payée','partiel'=>'Paiement partiel','retard'=>'En retard','annulee'=>'Annulée'];
 $st = $facture['statut'] ?? 'brouillon';
 $reste = $facture['montant_ttc'] - $facture['montant_paye'];
@@ -17,7 +17,7 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
 .fv-amount { font-size:36px;font-weight:800;color:var(--gold);font-family:'Playfair Display',serif; }
 .fv-amount-label { font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px;margin-top:2px; }
 .fv-progress { background:rgba(255,255,255,0.15);border-radius:6px;height:8px;width:200px;margin:10px 0 6px auto;overflow:hidden; }
-.fv-progress-bar { height:100%;border-radius:6px;background:#22c55e; }
+.fv-progress-bar { height:100%;border-radius:6px;background:#1f6e4e; }
 .fv-progress-text { font-size:12px;opacity:0.8; }
 
 .fv-actions { display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap; }
@@ -27,7 +27,7 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
 .btn-outline { background:transparent;color:var(--navy);border:1.5px solid var(--border); }
 .btn-outline:hover { border-color:var(--navy);background:#f8fafc; }
 .btn-sm { padding:7px 14px;font-size:12px; }
-.btn-green { background:#22c55e;color:#fff; }
+.btn-green { background:#1f6e4e;color:#fff; }
 
 .fv-grid { display:grid;grid-template-columns:1fr 320px;gap:20px; }
 .fv-card { background:#fff;border-radius:16px;border:1px solid var(--border);padding:24px;margin-bottom:20px; }
@@ -49,16 +49,16 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
 
 /* Paiements */
 .paiement-item { display:flex;align-items:center;gap:12px;padding:12px;background:#f8fafc;border-radius:10px;margin-bottom:8px; }
-.pai-icon { width:36px;height:36px;border-radius:9px;background:#dcfce7;color:#16a34a;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+.pai-icon { width:36px;height:36px;border-radius:9px;background:#dcfce7;color:#1f6e4e;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
 .pai-date { font-size:12px;color:var(--text-muted); }
-.pai-amount { font-size:15px;font-weight:700;color:#16a34a;margin-left:auto; }
+.pai-amount { font-size:15px;font-weight:700;color:#1f6e4e;margin-left:auto; }
 
 /* Paiement form */
 .paiement-form { background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:18px;margin-top:12px; }
-.paiement-form h4 { font-size:13px;font-weight:700;color:#15803d;margin-bottom:14px; }
+.paiement-form h4 { font-size:13px;font-weight:700;color:#18583f;margin-bottom:14px; }
 .pf-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px; }
 .pf-grid input, .pf-grid select { padding:8px 12px;border:1.5px solid #bbf7d0;border-radius:8px;font-size:13px;color:var(--text);background:#fff; }
-.pf-grid input:focus, .pf-grid select:focus { outline:none;border-color:#22c55e; }
+.pf-grid input:focus, .pf-grid select:focus { outline:none;border-color:#1f6e4e; }
 </style>
 
 <div class="fv-root">
@@ -210,13 +210,13 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
             <div class="fv-card">
                 <div class="fv-section-title">Recouvrement</div>
                 <div class="side-row"><span class="lbl">Total TTC</span><span class="val"><?= number_format($facture['montant_ttc'], 0, ',', ' ') ?> F</span></div>
-                <div class="side-row"><span class="lbl">Encaissé</span><span class="val" style="color:#16a34a"><?= number_format($facture['montant_paye'], 0, ',', ' ') ?> F</span></div>
+                <div class="side-row"><span class="lbl">Encaissé</span><span class="val" style="color:#1f6e4e"><?= number_format($facture['montant_paye'], 0, ',', ' ') ?> F</span></div>
                 <div class="side-row" style="padding-top:8px;border-top:2px solid var(--navy-dark);margin-top:4px">
                     <span class="lbl" style="font-weight:700;color:var(--navy-dark)">Restant dû</span>
-                    <span class="val" style="font-size:16px;color:<?= $reste > 0 ? '#ef4444' : '#16a34a' ?>"><?= number_format(max(0,$reste), 0, ',', ' ') ?> F</span>
+                    <span class="val" style="font-size:16px;color:<?= $reste > 0 ? '#ef4444' : '#1f6e4e' ?>"><?= number_format(max(0,$reste), 0, ',', ' ') ?> F</span>
                 </div>
                 <div style="background:#f1f5f9;border-radius:6px;height:8px;margin-top:10px;overflow:hidden">
-                    <div style="height:100%;border-radius:6px;background:#22c55e;width:<?= $pct ?>%"></div>
+                    <div style="height:100%;border-radius:6px;background:#1f6e4e;width:<?= $pct ?>%"></div>
                 </div>
                 <div style="font-size:11px;color:var(--text-muted);margin-top:4px;text-align:right"><?= $pct ?>% encaissé</div>
             </div>

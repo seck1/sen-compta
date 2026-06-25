@@ -15,11 +15,11 @@ $taux_charges  = $total_budget_charges  > 0 ? min(100, round($total_realise_char
     <div class="card" style="padding:20px">
         <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:10px">Produits — Réalisé vs Budget</div>
         <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-            <span style="font-size:18px;font-weight:700;color:#16a34a;font-family:monospace"><?= formatMontant($total_realise_produits) ?></span>
+            <span style="font-size:18px;font-weight:700;color:#1f6e4e;font-family:monospace"><?= formatMontant($total_realise_produits) ?></span>
             <span style="font-size:16px;color:var(--text-muted)">/ <?= formatMontant($total_budget_produits) ?></span>
         </div>
         <div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
-            <div style="height:100%;width:<?= $taux_produits ?>%;background:#16a34a;border-radius:4px;transition:width .5s"></div>
+            <div style="height:100%;width:<?= $taux_produits ?>%;background:#1f6e4e;border-radius:4px;transition:width .5s"></div>
         </div>
         <div style="font-size:18px;color:var(--text-muted);margin-top:6px"><?= $taux_produits ?>% du budget</div>
     </div>
@@ -51,14 +51,14 @@ new Chart(document.getElementById('budgetChart'), {
             {
                 label: 'Produits réalisés',
                 data: <?= json_encode(array_map(fn($m) => round($realise_mois[$m]['produits']), range(1,12))) ?>,
-                backgroundColor: '#16a34a',
+                backgroundColor: '#1f6e4e',
                 borderRadius: 4,
             },
             {
                 label: 'Budget produits',
                 data: <?= json_encode(array_map(fn($m) => round($budget_mois[$m]['produits']), range(1,12))) ?>,
                 backgroundColor: 'rgba(22,163,74,0.2)',
-                borderColor: '#16a34a',
+                borderColor: '#1f6e4e',
                 borderWidth: 2,
                 borderDash: [4,4],
                 borderRadius: 4,
@@ -126,7 +126,7 @@ new Chart(document.getElementById('budgetChart'), {
                 <span style="font-weight:600;font-family:monospace;font-size:18px;color:var(--text-muted)"><?= e($l['numero']) ?></span>
                 <span style="margin-left:8px"><?= e($l['intitule']) ?></span>
             </td>
-            <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:<?= $is_charge?'#dc2626':'#16a34a' ?>">
+            <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:600;color:<?= $is_charge?'#dc2626':'#1f6e4e' ?>">
                 <?= formatMontant($l['realise_total']) ?>
             </td>
             <td style="padding:11px 16px;text-align:right;font-family:monospace;color:var(--text-muted)">
@@ -136,12 +136,12 @@ new Chart(document.getElementById('budgetChart'), {
                     <?= $l['budget_total'] > 0 ? formatMontant($l['budget_total']) : '— Définir' ?>
                 </span>
             </td>
-            <td style="padding:11px 16px;text-align:right;font-family:monospace;color:<?= ($is_charge&&$ecart>0)||(!$is_charge&&$ecart<0) ? '#dc2626' : '#16a34a' ?>">
+            <td style="padding:11px 16px;text-align:right;font-family:monospace;color:<?= ($is_charge&&$ecart>0)||(!$is_charge&&$ecart<0) ? '#dc2626' : '#1f6e4e' ?>">
                 <?= $ecart >= 0 ? '+' : '' ?><?= formatMontant($ecart) ?>
             </td>
             <td style="padding:11px 16px;text-align:center">
                 <?php if($l['budget_total'] > 0): ?>
-                <span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:18px;font-weight:700;background:<?= $depasse?'#dc262622':'#16a34a22' ?>;color:<?= $depasse?'#dc2626':'#16a34a' ?>">
+                <span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:18px;font-weight:700;background:<?= $depasse?'#dc262622':'#1f6e4e22' ?>;color:<?= $depasse?'#dc2626':'#1f6e4e' ?>">
                     <?= $pct ?>%
                 </span>
                 <?php else: ?>

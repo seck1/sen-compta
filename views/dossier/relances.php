@@ -1,5 +1,5 @@
 <?php
-$niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formelle','color'=>'#ef4444'], 3 => ['label'=>'Mise en demeure','color'=>'#7c3aed']];
+$niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formelle','color'=>'#ef4444'], 3 => ['label'=>'Mise en demeure','color'=>'#b8923f']];
 ?>
 <div class="page-header">
     <div>
@@ -24,7 +24,7 @@ $niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formel
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">> 90 jours</div>
-        <div style="font-size:20px;font-weight:700;color:#7c3aed"><?= $nb_retard_90 ?> client<?= $nb_retard_90>1?'s':'' ?></div>
+        <div style="font-size:20px;font-weight:700;color:#b8923f"><?= $nb_retard_90 ?> client<?= $nb_retard_90>1?'s':'' ?></div>
     </div>
 </div>
 
@@ -53,7 +53,7 @@ $niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formel
         <tbody>
         <?php foreach($creances as $c):
             $jr = (int)$c['jours_retard'];
-            $couleur = $jr > 90 ? '#7c3aed' : ($jr > 60 ? '#ef4444' : ($jr > 30 ? '#f59e0b' : '#6b7280'));
+            $couleur = $jr > 90 ? '#b8923f' : ($jr > 60 ? '#ef4444' : ($jr > 30 ? '#f59e0b' : '#6b7280'));
             $niveau_actuel = $c['relance_niveau'] ?? 0;
         ?>
         <tr style="border-bottom:1px solid var(--border)" id="row-tiers-<?= $c['tiers_id'] ?>">
@@ -88,7 +88,7 @@ $niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formel
                     ✉ Relancer
                 </button>
                 <button onclick="marquerReglee(<?= $c['tiers_id'] ?>)"
-                        style="padding:5px 12px;border-radius:8px;background:#16a34a22;color:#16a34a;border:1px solid #16a34a44;cursor:pointer;font-size:18px;font-weight:600">
+                        style="padding:5px 12px;border-radius:8px;background:#1f6e4e22;color:#1f6e4e;border:1px solid #1f6e4e44;cursor:pointer;font-size:18px;font-weight:600">
                     ✓ Réglée
                 </button>
             </td>
@@ -125,7 +125,7 @@ $niveaux = [1 => ['label'=>'Amiable','color'=>'#f59e0b'], 2 => ['label'=>'Formel
                 <span style="padding:2px 8px;border-radius:20px;font-size:17px;font-weight:600;background:<?= $niv['color'] ?>22;color:<?= $niv['color'] ?>"><?= $niv['label'] ?></span>
             </td>
             <td style="padding:9px 16px;text-align:center">
-                <?php $sc=['relancee'=>['Relancée','#2563eb'],'reglee'=>['Réglée','#16a34a'],'en_attente'=>['En attente','#f59e0b'],'contentieux'=>['Contentieux','#7c3aed']]; $s=$sc[$h['statut']]??['?','#999']; ?>
+                <?php $sc=['relancee'=>['Relancée','#2563eb'],'reglee'=>['Réglée','#1f6e4e'],'en_attente'=>['En attente','#f59e0b'],'contentieux'=>['Contentieux','#b8923f']]; $s=$sc[$h['statut']]??['?','#999']; ?>
                 <span style="padding:2px 8px;border-radius:20px;font-size:17px;font-weight:600;background:<?= $s[1] ?>22;color:<?= $s[1] ?>"><?= $s[0] ?></span>
             </td>
             <td style="padding:9px 16px;color:var(--text-muted)"><?= e($h['prenom'].' '.$h['user_nom']) ?></td>

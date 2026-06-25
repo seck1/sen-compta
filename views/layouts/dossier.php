@@ -10,12 +10,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
     --navy: #1e3a5f; --navy-dark: #122540; --navy-light: #2a4f7c;
-    --gold: #c9a96e; --gold-light: #e2c99a; --gold-dark: #a8843f;
-    --white: #fff; --bg: #f0f3f8; --bg-card: #fff;
-    --text: #1a2535; --text-muted: #6b7a94; --border: #e4e9f0;
+    --green: #1f6e4e; --green-light: #2a8a63; --green-dark: #18583f;
+    --green-soft: rgba(31,110,78,0.06); --green-tint: rgba(31,110,78,0.10);
+    --gold: #b8923f; --gold-light: #d9b876; --gold-dark: #a8843f;
+    --white: #fff; --bg: #eef1f0; --bg-card: #fff;
+    --text: #18241f; --text-muted: #4a554f; --border: #d9dcdb;
     --sidebar-w: 290px; --header-h: 64px;
-    --success: #22c55e; --warning: #f59e0b; --danger: #ef4444; --info: #3b82f6;
-    --ent-color: <?= e($entreprise['couleur'] ?? '#1e3a5f') ?>;
+    --success: #1f6e4e; --warning: #f59e0b; --danger: #ef4444; --info: #1f6e4e;
+    --debit: #c0392b; --credit: #1f6e4e;
+    --ent-color: <?= e($entreprise['couleur'] ?? '#1f6e4e') ?>;
 }
 html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 19px; overflow-x: hidden; max-width: 100%; }
 
@@ -247,12 +250,12 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 /* Boutons */
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-size: 17px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
 .btn svg { width: 17px; height: 17px; }
-.btn-primary { background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: var(--white); box-shadow: 0 4px 12px rgba(30,58,95,0.2); }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(30,58,95,0.3); }
+.btn-primary { background: linear-gradient(135deg, var(--green-light), var(--green)); color: var(--white); box-shadow: 0 4px 12px rgba(31,110,78,0.28); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(31,110,78,0.38); }
 .btn-ent { background: var(--ent-color); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 .btn-ent:hover { transform: translateY(-1px); filter: brightness(1.1); }
 .btn-outline { background: var(--white); color: var(--text); border: 1px solid var(--border); }
-.btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+.btn-outline:hover { border-color: var(--green); color: var(--green); }
 .btn-danger { background: rgba(239,68,68,0.08); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
 .btn-danger:hover { background: var(--danger); color: white; }
 .btn-sm { padding: 8px 16px; font-size: 15.5px; }
@@ -280,19 +283,19 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .table-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); }
 .table-title { font-size: 18px; font-weight: 600; color: var(--navy-dark); }
 table { width: 100%; border-collapse: collapse; }
-thead th { padding: 14px 20px; text-align: left; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); background: var(--bg); border-bottom: 1px solid var(--border); }
+thead th { padding: 14px 20px; text-align: left; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; background: var(--green); border-bottom: 1px solid var(--green-dark); }
 tbody tr { border-bottom: 1px solid rgba(228,233,240,0.6); transition: background 0.15s; }
 tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: rgba(240,243,248,0.8); }
+tbody tr:hover { background: var(--green-soft); }
 tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-align: middle; }
 
 /* Badges */
 .badge { display: inline-flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 20px; font-size: 15px; font-weight: 500; }
 .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; }
-.badge-success { background: rgba(34,197,94,0.1); color: #16a34a; } .badge-success::before { background: #22c55e; }
+.badge-success { background: var(--green-tint); color: var(--green-dark); } .badge-success::before { background: var(--green); }
 .badge-warning { background: rgba(245,158,11,0.1); color: #d97706; } .badge-warning::before { background: #f59e0b; }
 .badge-danger  { background: rgba(239,68,68,0.1); color: #dc2626; }  .badge-danger::before  { background: #ef4444; }
-.badge-info    { background: rgba(59,130,246,0.1); color: #2563eb; }  .badge-info::before    { background: #3b82f6; }
+.badge-info    { background: rgba(31,110,78,0.1); color: #2563eb; }  .badge-info::before    { background: #1f6e4e; }
 .badge-navy    { background: rgba(30,58,95,0.08); color: var(--navy); } .badge-navy::before { background: var(--navy); }
 
 /* Form */
@@ -305,7 +308,7 @@ tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-ali
     background: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
 }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-    border-color: var(--ent-color); box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
+    border-color: var(--green); box-shadow: 0 0 0 3px rgba(31,110,78,0.16);
 }
 .form-field textarea { resize: vertical; min-height: 80px; }
 
@@ -457,7 +460,7 @@ tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-ali
                 <?php foreach(($entreprise['_exercices'] ?? [$entreprise['exercice_courant']]) as $ex): ?>
                 <?php $isCurrent = ($ex == $entreprise['exercice_courant']); ?>
                 <a href="<?= APP_URL ?>/dossier/exercice/switch?id=<?= $entreprise['id'] ?>&annee=<?= $ex ?>"
-                   style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 14px;background:<?= $isCurrent ? 'rgba(59,130,246,0.1)' : 'transparent' ?>;font-size:13px;color:<?= $isCurrent ? '#2563eb' : '#1a2535' ?>;font-weight:<?= $isCurrent ? '600' : '400' ?>;text-decoration:none">
+                   style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 14px;background:<?= $isCurrent ? 'rgba(31,110,78,0.1)' : 'transparent' ?>;font-size:13px;color:<?= $isCurrent ? '#2563eb' : '#1a2535' ?>;font-weight:<?= $isCurrent ? '600' : '400' ?>;text-decoration:none">
                     <?= $ex ?>
                     <?php if($isCurrent): ?>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#2563eb" style="width:13px;height:13px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
@@ -738,7 +741,7 @@ tbody td { padding: 15px 20px; font-size: 17px; color: var(--text); vertical-ali
                 <span id="chrono-dot" style="width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block"></span>
                 <span id="chrono-display" style="font-family:monospace;font-weight:600;color:var(--text-muted);min-width:52px">00:00:00</span>
                 <button id="chrono-btn" onclick="chronoToggle()" style="padding:3px 10px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:var(--navy-dark);color:#fff">▶ Start</button>
-                <button id="chrono-save-btn" onclick="chronoSave()" style="padding:3px 10px;border-radius:6px;border:1px solid #16a34a;color:#16a34a;background:none;cursor:pointer;font-size:12px;font-weight:600;display:none">✓ Enregistrer</button>
+                <button id="chrono-save-btn" onclick="chronoSave()" style="padding:3px 10px;border-radius:6px;border:1px solid #1f6e4e;color:#1f6e4e;background:none;cursor:pointer;font-size:12px;font-weight:600;display:none">✓ Enregistrer</button>
             </div>
             <span style="font-size:12px;color:var(--text-muted);background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:8px">
                 <?= date('d/m/Y') ?>
@@ -976,7 +979,7 @@ tickTimer = setInterval(tick, 1000);
 .note-item { background: #fff; border-radius: 10px; padding: 12px 14px; border: 1px solid var(--border); border-left: 4px solid #e4e9f0; }
 .note-item[data-type="alerte"] { border-left-color: #ef4444; }
 .note-item[data-type="tache"]  { border-left-color: #f59e0b; }
-.note-item[data-type="info"]   { border-left-color: #3b82f6; }
+.note-item[data-type="info"]   { border-left-color: #1f6e4e; }
 .note-item[data-type="note"]   { border-left-color: #8b5cf6; }
 .note-item.resolu { opacity: .5; }
 .note-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
@@ -1040,7 +1043,7 @@ var USER_ID = <?= (int)(auth()['id'] ?? 0) ?>;
 var APP     = '<?= APP_URL ?>';
 var panelOpen = false;
 var pollTimer = null;
-var typeColors = {note:'#8b5cf6',alerte:'#ef4444',tache:'#f59e0b',info:'#3b82f6'};
+var typeColors = {note:'#8b5cf6',alerte:'#ef4444',tache:'#f59e0b',info:'#1f6e4e'};
 var typeLabels = {note:'Note',alerte:'Alerte',tache:'Tâche',info:'Info'};
 var typeIcons  = {note:'📝',alerte:'🔴',tache:'✅',info:'ℹ️'};
 

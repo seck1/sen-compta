@@ -57,23 +57,23 @@ $moisLabels = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','No
     background: var(--kpi-color, var(--navy));
 }
 .kpi-card.gold::before { background: var(--gold); }
-.kpi-card.green::before { background: #22c55e; }
-.kpi-card.orange::before { background: #f59e0b; }
-.kpi-card.red::before { background: #ef4444; }
+.kpi-card.green::before { background: var(--green); }
+.kpi-card.orange::before { background: var(--gold); }
+.kpi-card.red::before { background: #c0392b; }
 .kpi-icon {
     width: 44px; height: 44px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 16px; font-size: 20px;
 }
-.kpi-icon.gold { background: rgba(201,169,110,0.12); }
-.kpi-icon.green { background: rgba(34,197,94,0.1); }
-.kpi-icon.orange { background: rgba(245,158,11,0.1); }
-.kpi-icon.blue { background: rgba(59,130,246,0.1); }
+.kpi-icon.gold { background: rgba(184,146,63,0.12); }
+.kpi-icon.green { background: rgba(31,110,78,0.1); }
+.kpi-icon.orange { background: rgba(184,146,63,0.12); }
+.kpi-icon.blue { background: rgba(31,110,78,0.1); }
 .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
 .kpi-value { font-size: 26px; font-weight: 700; color: var(--navy-dark); font-family: 'Playfair Display', serif; line-height: 1; }
-.kpi-value.green { color: #16a34a; }
-.kpi-value.orange { color: #d97706; }
-.kpi-value.red { color: #dc2626; }
+.kpi-value.green { color: var(--green); }
+.kpi-value.orange { color: var(--gold-dark); }
+.kpi-value.red { color: #c0392b; }
 .kpi-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
 
 /* Main grid */
@@ -140,20 +140,20 @@ table.com-table tr:hover td { background: #fafbfc; }
 
 /* Badges */
 .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-.badge-green  { background: #dcfce7; color: #16a34a; }
-.badge-blue   { background: #dbeafe; color: #2563eb; }
-.badge-orange { background: #fef3c7; color: #d97706; }
-.badge-red    { background: #fee2e2; color: #dc2626; }
-.badge-gray   { background: #f3f4f6; color: #6b7280; }
+.badge-green  { background: var(--green-tint); color: var(--green-dark); }
+.badge-blue   { background: rgba(30,58,95,0.1); color: var(--navy); }
+.badge-orange { background: rgba(184,146,63,0.14); color: var(--gold-dark); }
+.badge-red    { background: rgba(192,57,43,0.1); color: #c0392b; }
+.badge-gray   { background: #eef1f0; color: #64748b; }
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; transition: all 0.2s; }
-.btn-primary { background: var(--navy); color: #fff; }
-.btn-primary:hover { background: var(--navy-light); }
-.btn-gold { background: var(--gold); color: var(--navy-dark); }
+.btn-primary { background: linear-gradient(135deg, var(--green-light), var(--green)); color: #fff; }
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-gold { background: var(--gold); color: #fff; }
 .btn-gold:hover { background: var(--gold-dark); color: #fff; }
 .btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
-.btn-outline:hover { border-color: var(--navy); background: #f8fafc; }
+.btn-outline:hover { border-color: var(--green); color: var(--green); background: #f5faf7; }
 .btn-sm { padding: 6px 12px; font-size: 12px; }
 
 /* Montant retard */
@@ -226,10 +226,10 @@ table.com-table tr:hover td { background: #fafbfc; }
             <?php
             $stages = [
                 'nouveau'      => ['label'=>'Nouveau', 'color'=>'#94a3b8'],
-                'qualifie'     => ['label'=>'Qualifié', 'color'=>'#3b82f6'],
+                'qualifie'     => ['label'=>'Qualifié', 'color'=>'#1f6e4e'],
                 'devis_envoye' => ['label'=>'Devis envoyé', 'color'=>'#f59e0b'],
                 'negociation'  => ['label'=>'Négociation', 'color'=>'#8b5cf6'],
-                'client'       => ['label'=>'Client', 'color'=>'#22c55e'],
+                'client'       => ['label'=>'Client', 'color'=>'#1f6e4e'],
                 'perdu'        => ['label'=>'Perdu', 'color'=>'#ef4444'],
             ];
             $totalProspects = array_sum(array_column($pipelineMap, 'nb')) ?: 1;

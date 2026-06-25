@@ -58,7 +58,7 @@ $solde_cumule = $solde_ouverture;
         </div>
         <div style="text-align:right">
             <div style="font-size:17px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted)">Solde ouverture</div>
-            <div style="font-family:monospace;font-size:18px;font-weight:700;color:<?= $solde_ouverture > 0 ? '#dc2626' : ($solde_ouverture < 0 ? '#16a34a' : 'var(--text-muted)') ?>">
+            <div style="font-family:monospace;font-size:18px;font-weight:700;color:<?= $solde_ouverture > 0 ? '#dc2626' : ($solde_ouverture < 0 ? '#1f6e4e' : 'var(--text-muted)') ?>">
                 <?= formatMontant(abs($solde_ouverture)) ?> <?= $solde_ouverture > 0 ? 'D' : ($solde_ouverture < 0 ? 'C' : '') ?>
             </div>
         </div>
@@ -85,7 +85,7 @@ $solde_cumule = $solde_ouverture;
                 </tr>
                 <!-- Solde ouverture -->
                 <?php if($solde_ouverture != 0): ?>
-                <tr style="background:rgba(59,130,246,0.04);border-bottom:1px solid var(--border)">
+                <tr style="background:rgba(31,110,78,0.04);border-bottom:1px solid var(--border)">
                     <td colspan="5" style="padding:8px 16px;font-size:15px;color:var(--text-muted);font-style:italic">Solde au <?= date('d/m/Y', strtotime($date_debut)) ?></td>
                     <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:15px"><?= $solde_ouverture > 0 ? formatMontant($solde_ouverture) : '—' ?></td>
                     <td style="padding:8px 16px;text-align:right;font-family:monospace;font-size:15px"><?= $solde_ouverture < 0 ? formatMontant(abs($solde_ouverture)) : '—' ?></td>
@@ -113,10 +113,10 @@ $solde_cumule = $solde_ouverture;
                 <td style="padding:10px 16px;text-align:right;font-family:monospace;color:<?= $m['debit']>0 ? '#dc2626' : 'var(--text-muted)' ?>">
                     <?= $m['debit'] > 0 ? formatMontant($m['debit']) : '—' ?>
                 </td>
-                <td style="padding:10px 16px;text-align:right;font-family:monospace;color:<?= $m['credit']>0 ? '#16a34a' : 'var(--text-muted)' ?>">
+                <td style="padding:10px 16px;text-align:right;font-family:monospace;color:<?= $m['credit']>0 ? '#1f6e4e' : 'var(--text-muted)' ?>">
                     <?= $m['credit'] > 0 ? formatMontant($m['credit']) : '—' ?>
                 </td>
-                <td style="padding:10px 16px;text-align:right;font-family:monospace;font-weight:600;color:<?= $solde_cumule > 0 ? '#dc2626' : ($solde_cumule < 0 ? '#16a34a' : 'var(--text-muted)') ?>">
+                <td style="padding:10px 16px;text-align:right;font-family:monospace;font-weight:600;color:<?= $solde_cumule > 0 ? '#dc2626' : ($solde_cumule < 0 ? '#1f6e4e' : 'var(--text-muted)') ?>">
                     <?= formatMontant(abs($solde_cumule)) ?> <?= $solde_cumule > 0 ? 'D' : ($solde_cumule < 0 ? 'C' : '') ?>
                 </td>
             </tr>
@@ -126,8 +126,8 @@ $solde_cumule = $solde_ouverture;
                 <tr style="border-top:2px solid var(--border);background:var(--bg-secondary)">
                     <td colspan="5" style="padding:11px 16px;font-weight:700;font-size:16px">TOTAL PÉRIODE</td>
                     <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#dc2626"><?= formatMontant($total_debit) ?></td>
-                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#16a34a"><?= formatMontant($total_credit) ?></td>
-                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:<?= $solde_cumule > 0 ? '#dc2626' : ($solde_cumule < 0 ? '#16a34a' : 'var(--text-muted)') ?>">
+                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#1f6e4e"><?= formatMontant($total_credit) ?></td>
+                    <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:<?= $solde_cumule > 0 ? '#dc2626' : ($solde_cumule < 0 ? '#1f6e4e' : 'var(--text-muted)') ?>">
                         <?= formatMontant(abs($solde_cumule)) ?> <?= $solde_cumule > 0 ? 'D' : ($solde_cumule < 0 ? 'C' : '') ?>
                     </td>
                 </tr>

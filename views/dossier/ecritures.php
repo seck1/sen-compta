@@ -139,7 +139,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                 <?php if (!empty($ec['moyen_paiement'])): ?>
                 <?php
                     $mpLabels = ['virement'=>'Virement','cheque'=>'Chèque','especes'=>'Espèces','orange_money'=>'Orange Money','wave'=>'Wave','free_money'=>'Free Money','carte'=>'Carte','autre'=>'Autre'];
-                    $mpColors = ['virement'=>'#2563eb','cheque'=>'#7c3aed','especes'=>'#16a34a','orange_money'=>'#ea580c','wave'=>'#0284c7','free_money'=>'#dc2626','carte'=>'#0891b2','autre'=>'#6b7280'];
+                    $mpColors = ['virement'=>'#2563eb','cheque'=>'#b8923f','especes'=>'#1f6e4e','orange_money'=>'#ea580c','wave'=>'#0284c7','free_money'=>'#dc2626','carte'=>'#0891b2','autre'=>'#6b7280'];
                     $mpKey = $ec['moyen_paiement'];
                     $mpLabel = $mpLabels[$mpKey] ?? $mpKey;
                     $mpColor = $mpColors[$mpKey] ?? '#6b7280';
@@ -173,7 +173,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                 ?>
                 <div style="display:inline-flex;gap:5px;align-items:center">
                     <a href="<?= $pjUrl ?>" target="_blank" title="Ouvrir le justificatif"
-                       style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:7px;font-size:14px;font-weight:600;text-decoration:none;<?= $isPdf ? 'background:rgba(239,68,68,.08);color:#dc2626;border:1px solid rgba(239,68,68,.2)' : 'background:rgba(59,130,246,.08);color:#2563eb;border:1px solid rgba(59,130,246,.2)' ?>">
+                       style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:7px;font-size:14px;font-weight:600;text-decoration:none;<?= $isPdf ? 'background:rgba(239,68,68,.08);color:#dc2626;border:1px solid rgba(239,68,68,.2)' : 'background:rgba(31,110,78,.08);color:#2563eb;border:1px solid rgba(31,110,78,.2)' ?>">
                         <?php if ($isPdf): ?>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                         PDF
@@ -209,7 +209,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                         Modifier
                     </a>
                 <?php if ($ec['statut'] === 'brouillon'): ?>
-                    <button onclick="validerEcriture(<?= $ec['id'] ?>)" title="Valider" style="padding:4px 10px;background:rgba(34,197,94,0.1);color:#16a34a;border:1px solid rgba(34,197,94,0.3);border-radius:6px;font-size:14px;font-weight:600;cursor:pointer">✓ Valider</button>
+                    <button onclick="validerEcriture(<?= $ec['id'] ?>)" title="Valider" style="padding:4px 10px;background:rgba(31,110,78,0.1);color:#1f6e4e;border:1px solid rgba(31,110,78,0.3);border-radius:6px;font-size:14px;font-weight:600;cursor:pointer">✓ Valider</button>
                     <?php if (canValiderEcriture()): ?>
                     <button onclick="rejeterEcriture(<?= $ec['id'] ?>)" title="Rejeter" style="padding:4px 10px;background:rgba(239,68,68,0.1);color:#dc2626;border:1px solid rgba(239,68,68,0.3);border-radius:6px;font-size:14px;font-weight:600;cursor:pointer">✗ Rejeter</button>
                     <?php endif; ?>
@@ -226,12 +226,12 @@ $filtreStatut = $_GET['statut'] ?? '';
                         $soldeRestant = max(0, round($montantTiers - $dejaRegle, 2));
                     ?>
                     <?php if ($montantTiers > 0 && $soldeRestant > 0): ?>
-                    <button onclick="ouvrirRegler(<?= $ec['id'] ?>, '<?= e(addslashes($ec['libelle'])) ?>', <?= $montantTiers ?>, <?= $soldeRestant ?>)" title="Régler cette facture — Solde restant : <?= number_format($soldeRestant,0,',',' ') ?> FCFA" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(37,99,235,0.08);color:#2563eb;border:1px solid rgba(37,99,235,0.25);border-radius:6px;font-size:14px;font-weight:600;cursor:pointer">
+                    <button onclick="ouvrirRegler(<?= $ec['id'] ?>, '<?= e(addslashes($ec['libelle'])) ?>', <?= $montantTiers ?>, <?= $soldeRestant ?>)" title="Régler cette facture — Solde restant : <?= number_format($soldeRestant,0,',',' ') ?> FCFA" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(31,110,78,0.08);color:#2563eb;border:1px solid rgba(31,110,78,0.25);border-radius:6px;font-size:14px;font-weight:600;cursor:pointer">
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        Régler<?= $dejaRegle > 0 ? ' <span style="background:rgba(37,99,235,0.15);padding:1px 5px;border-radius:4px;font-size:13px">partiel</span>' : '' ?>
+                        Régler<?= $dejaRegle > 0 ? ' <span style="background:rgba(31,110,78,0.15);padding:1px 5px;border-radius:4px;font-size:13px">partiel</span>' : '' ?>
                     </button>
                     <?php elseif ($montantTiers > 0): ?>
-                    <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(22,163,74,0.08);color:#16a34a;border:1px solid rgba(22,163,74,0.2);border-radius:6px;font-size:14px;font-weight:600">
+                    <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(22,163,74,0.08);color:#1f6e4e;border:1px solid rgba(22,163,74,0.2);border-radius:6px;font-size:14px;font-weight:600">
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
                         Soldé
                     </span>
@@ -273,7 +273,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                             <td style="padding:7px 10px;text-align:right;font-weight:600;color:<?= $lg['debit'] > 0 ? '#dc2626' : 'var(--text-muted)' ?>">
                                 <?= $lg['debit'] > 0 ? number_format($lg['debit'], 2, ',', ' ') : '—' ?>
                             </td>
-                            <td style="padding:7px 10px;text-align:right;font-weight:600;color:<?= $lg['credit'] > 0 ? '#16a34a' : 'var(--text-muted)' ?>">
+                            <td style="padding:7px 10px;text-align:right;font-weight:600;color:<?= $lg['credit'] > 0 ? '#1f6e4e' : 'var(--text-muted)' ?>">
                                 <?= $lg['credit'] > 0 ? number_format($lg['credit'], 2, ',', ' ') : '—' ?>
                             </td>
                             <td style="padding:7px 10px;text-align:center">
@@ -290,7 +290,7 @@ $filtreStatut = $_GET['statut'] ?? '';
                             <tr style="background:#f1f5f9;font-weight:700">
                                 <td colspan="3" style="padding:6px 10px;font-size:14px;color:var(--navy-dark)">Totaux</td>
                                 <td style="padding:6px 10px;text-align:right;color:#dc2626"><?= number_format(array_sum(array_column($lignesEc,'debit')), 2, ',', ' ') ?></td>
-                                <td style="padding:6px 10px;text-align:right;color:#16a34a"><?= number_format(array_sum(array_column($lignesEc,'credit')), 2, ',', ' ') ?></td>
+                                <td style="padding:6px 10px;text-align:right;color:#1f6e4e"><?= number_format(array_sum(array_column($lignesEc,'credit')), 2, ',', ' ') ?></td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -332,7 +332,7 @@ $filtreStatut = $_GET['statut'] ?? '';
             <button type="button" id="regl-tab-pj" onclick="reglTab('pj')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:15px;font-weight:700;background:#fff;color:var(--text-muted);border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;letter-spacing:.3px">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
                 Justificatif
-                <span id="regl-pj-badge" style="display:none;background:#16a34a;color:#fff;font-size:13px;padding:1px 6px;border-radius:10px;font-weight:700">1</span>
+                <span id="regl-pj-badge" style="display:none;background:#1f6e4e;color:#fff;font-size:13px;padding:1px 6px;border-radius:10px;font-weight:700">1</span>
             </button>
         </div>
 
@@ -401,8 +401,8 @@ $filtreStatut = $_GET['statut'] ?? '';
                 </div>
                 <input type="file" id="regl-file" name="justificatif" accept="image/jpeg,image/png,image/webp,application/pdf" style="display:none" onchange="reglFileSelected(this)">
                 <div id="regl-file-preview" style="display:none;margin-top:12px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;display:none;align-items:center;gap:10px">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#16a34a" style="width:20px;height:20px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
-                    <span id="regl-file-name" style="font-size:16px;font-weight:600;color:#15803d;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1f6e4e" style="width:20px;height:20px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                    <span id="regl-file-name" style="font-size:16px;font-weight:600;color:#18583f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
                     <button type="button" onclick="reglRemoveFile()" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:19px;padding:0">×</button>
                 </div>
                 <p style="margin:12px 0 0;font-size:14px;color:#9ca3af;text-align:center">Le fichier sera attaché comme justificatif à l'écriture de règlement.</p>
@@ -676,13 +676,13 @@ function scanLancer(){
 function scanFmt(n){return new Intl.NumberFormat('fr-SN',{maximumFractionDigits:0}).format(n)+' FCFA';}
 
 function scanRenderPreview(e){
-  var confColors={'haute':'background:#dcfce7;color:#16a34a','moyenne':'background:#fef9c3;color:#ca8a04','faible':'background:#fee2e2;color:#dc2626'};
+  var confColors={'haute':'background:#dcfce7;color:#1f6e4e','moyenne':'background:#fef9c3;color:#ca8a04','faible':'background:#fee2e2;color:#dc2626'};
   var conf=confColors[e.confiance]||confColors['moyenne'];
   var lignesRows=(e.lignes||[]).map(function(l){
     return '<tr style="border-bottom:1px solid #f3f4f6"><td style="padding:9px 14px;font-family:monospace;font-size:15px;color:#0f6fba;font-weight:700">'+l.compte+'</td><td style="padding:9px 14px;font-size:16px;color:#374151">'+l.intitule+'</td><td style="padding:9px 14px;text-align:right;font-size:16px;color:#059669">'+( l.debit>0?scanFmt(l.debit):'' )+'</td><td style="padding:9px 14px;text-align:right;font-size:16px;color:#dc2626">'+( l.credit>0?scanFmt(l.credit):'' )+'</td></tr>';
   }).join('');
   var equil=e.equilibre
-    ? '<div style="margin-top:10px;padding:8px 14px;background:#dcfce7;border-radius:8px;font-size:15px;color:#16a34a;font-weight:600">✓ Écriture équilibrée — Débit = Crédit = '+scanFmt(e.total_debit)+'</div>'
+    ? '<div style="margin-top:10px;padding:8px 14px;background:#dcfce7;border-radius:8px;font-size:15px;color:#1f6e4e;font-weight:600">✓ Écriture équilibrée — Débit = Crédit = '+scanFmt(e.total_debit)+'</div>'
     : '<div style="margin-top:10px;padding:8px 14px;background:#fee2e2;border-radius:8px;font-size:15px;color:#dc2626;font-weight:600">⚠ Attention : écriture non équilibrée</div>';
   var notes=e.notes?'<div style="margin-top:10px;padding:10px 14px;background:#fef9c3;border-radius:8px;font-size:15px;color:#92400e">💡 '+e.notes+'</div>':'';
   var html='<div style="background:#f8fafc;border-radius:14px;padding:18px">'
@@ -867,7 +867,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fermerRegler();
             const msg = '✅ Règlement enregistré (' + j.numero_piece + ')' + (j.lettre ? ' · Lettré ' + j.lettre : '');
             const flash = document.createElement('div');
-            flash.style = 'position:fixed;top:20px;right:20px;z-index:9999;background:#16a34a;color:#fff;padding:12px 20px;border-radius:10px;font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+            flash.style = 'position:fixed;top:20px;right:20px;z-index:9999;background:#1f6e4e;color:#fff;padding:12px 20px;border-radius:10px;font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2)';
             flash.textContent = msg;
             document.body.appendChild(flash);
             setTimeout(() => { flash.remove(); location.reload(); }, 2500);

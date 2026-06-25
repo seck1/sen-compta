@@ -8,8 +8,8 @@ $svgUsers   = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 
 $svgSwitch  = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:28px;height:28px"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>';
 $typeConfig = [
     'fournisseur' => ['icon'=>$svgTruck,  'label'=>'Fournisseur', 'desc'=>'Achats, charges',       'bg'=>'rgba(245,158,11,.12)', 'col'=>'#d97706'],
-    'client'      => ['icon'=>$svgUsers,  'label'=>'Client',      'desc'=>'Ventes, recettes',       'bg'=>'rgba(59,130,246,.12)', 'col'=>'#2563eb'],
-    'les_deux'    => ['icon'=>$svgSwitch, 'label'=>'Les deux',    'desc'=>'Fournisseur & client',   'bg'=>'rgba(139,92,246,.12)', 'col'=>'#7c3aed'],
+    'client'      => ['icon'=>$svgUsers,  'label'=>'Client',      'desc'=>'Ventes, recettes',       'bg'=>'rgba(31,110,78,.12)', 'col'=>'#2563eb'],
+    'les_deux'    => ['icon'=>$svgSwitch, 'label'=>'Les deux',    'desc'=>'Fournisseur & client',   'bg'=>'rgba(139,92,246,.12)', 'col'=>'#b8923f'],
 ];
 
 $tc      = $typeConfig[$typeDefaut] ?? $typeConfig['fournisseur'];

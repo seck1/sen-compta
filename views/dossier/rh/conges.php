@@ -9,7 +9,7 @@ $type_labels = [
 ];
 $statut_colors = [
     'en_attente' => '#f59e0b',
-    'approuve'   => '#16a34a',
+    'approuve'   => '#1f6e4e',
     'refuse'     => '#dc2626',
     'annule'     => '#6b7280',
 ];
@@ -61,7 +61,7 @@ $id = $entreprise['id'];
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Approuvés</div>
-        <div style="font-size:28px;font-weight:700;color:#16a34a"><?= $approuves ?></div>
+        <div style="font-size:28px;font-weight:700;color:#1f6e4e"><?= $approuves ?></div>
     </div>
     <div class="card" style="padding:16px 20px">
         <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px">Employés actifs</div>
@@ -123,7 +123,7 @@ $id = $entreprise['id'];
                 <td style="padding:11px 16px;text-align:center">
                     <div style="display:flex;gap:6px;justify-content:center">
                     <?php if($c['statut'] === 'en_attente' && isSuperviseur()): ?>
-                        <button onclick="traiterConge(<?= $c['id'] ?>, 'approuve')" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:5px;color:#16a34a;font-size:14px;font-weight:700;padding:4px 10px;cursor:pointer">✓ Approuver</button>
+                        <button onclick="traiterConge(<?= $c['id'] ?>, 'approuve')" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:5px;color:#1f6e4e;font-size:14px;font-weight:700;padding:4px 10px;cursor:pointer">✓ Approuver</button>
                         <button onclick="traiterConge(<?= $c['id'] ?>, 'refuse')" style="background:#fef2f2;border:1px solid #fecaca;border-radius:5px;color:#dc2626;font-size:14px;font-weight:700;padding:4px 10px;cursor:pointer">✗ Refuser</button>
                     <?php elseif($c['statut'] === 'en_attente'): ?>
                         <button onclick="supprimerConge(<?= $c['id'] ?>)" style="background:#fef2f2;border:1px solid #fecaca;border-radius:5px;color:#dc2626;font-size:14px;padding:4px 10px;cursor:pointer">Annuler</button>
@@ -158,7 +158,7 @@ $id = $entreprise['id'];
                         <div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">Acquis N</div>
                         <div style="font-weight:700;color:var(--navy-dark)"><?= $s['jours_acquis'] ?>j</div>
                     </div>
-                    <div style="background:#ede9fe;border-radius:6px;padding:6px">
+                    <div style="background:rgba(184,146,63,0.1);border-radius:6px;padding:6px">
                         <div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">Report N-1</div>
                         <div style="font-weight:700;color:#4338ca"><?= $s['jours_reportes_n1'] ?>j</div>
                     </div>
@@ -170,7 +170,7 @@ $id = $entreprise['id'];
                     </div>
                     <div style="background:<?= $s['jours_restants'] > 0 ? '#f0fdf4' : '#fef2f2' ?>;border-radius:6px;padding:6px">
                         <div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">Solde total</div>
-                        <div style="font-weight:700;color:<?= $s['jours_restants'] > 0 ? '#16a34a' : '#dc2626' ?>"><?= $s['jours_restants'] ?>j</div>
+                        <div style="font-weight:700;color:<?= $s['jours_restants'] > 0 ? '#1f6e4e' : '#dc2626' ?>"><?= $s['jours_restants'] ?>j</div>
                     </div>
                 </div>
             </div>
@@ -312,7 +312,7 @@ function traiterConge(congeId, statut) {
     statutEnCours = statut;
     document.getElementById('traiterTitre').textContent = statut === 'approuve' ? 'Approuver la demande' : 'Refuser la demande';
     document.getElementById('traiterCommentaire').value = '';
-    document.getElementById('btnConfirmerTraiter').style.background = statut === 'approuve' ? '#16a34a' : '#dc2626';
+    document.getElementById('btnConfirmerTraiter').style.background = statut === 'approuve' ? '#1f6e4e' : '#dc2626';
     document.getElementById('modaleTraiter').style.display = 'flex';
 }
 

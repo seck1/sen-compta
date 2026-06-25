@@ -14,21 +14,30 @@
     --navy-dark: #122540;
     --navy-mid: #1a3252;
     --navy-light: #2a4f7c;
-    --gold: #c9a96e;
-    --gold-light: #e2c99a;
+    /* Vert SenCompta = couleur d'action principale */
+    --green: #1f6e4e;
+    --green-light: #2a8a63;
+    --green-dark: #18583f;
+    --green-soft: rgba(31,110,78,0.06);
+    --green-tint: rgba(31,110,78,0.10);
+    /* Or = accent / signature premium */
+    --gold: #b8923f;
+    --gold-light: #d9b876;
     --gold-dark: #a8843f;
     --white: #ffffff;
-    --bg: #f0f3f8;
+    --bg: #eef1f0;
     --bg-card: #ffffff;
-    --text: #1a2535;
-    --text-muted: #6b7a94;
-    --border: #e4e9f0;
+    --text: #18241f;
+    --text-muted: #4a554f;
+    --border: #d9dcdb;
     --sidebar-w: 290px;
     --header-h: 68px;
-    --success: #22c55e;
+    --success: #1f6e4e;
     --warning: #f59e0b;
     --danger: #ef4444;
-    --info: #3b82f6;
+    --info: #1e3a5f;
+    --debit:  #c0392b;
+    --credit: #1f6e4e;
 }
 
 html { font-size: 19px; overflow-x: hidden; }
@@ -442,25 +451,25 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 .btn svg { width: 16px; height: 16px; }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    background: linear-gradient(135deg, var(--green-light), var(--green));
     color: var(--white);
-    box-shadow: 0 4px 12px rgba(30,58,95,0.25);
+    box-shadow: 0 4px 12px rgba(31,110,78,0.28);
 }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(30,58,95,0.35); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(31,110,78,0.38); }
 
 .btn-gold {
     background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-    color: var(--navy-dark);
-    box-shadow: 0 4px 12px rgba(201,169,110,0.3);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(184,146,63,0.3);
 }
-.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(201,169,110,0.4); }
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(184,146,63,0.4); }
 
 .btn-outline {
     background: var(--white);
     color: var(--text);
     border: 1px solid var(--border);
 }
-.btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+.btn-outline:hover { border-color: var(--green); color: var(--green); }
 
 .btn-danger {
     background: rgba(239,68,68,0.08);
@@ -508,7 +517,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--navy), var(--gold));
+    background: linear-gradient(90deg, var(--green), var(--gold));
 }
 
 .kpi-label {
@@ -544,10 +553,10 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     display: flex; align-items: center; justify-content: center;
 }
 .kpi-icon svg { width: 22px; height: 22px; }
-.kpi-icon.navy { background: rgba(30,58,95,0.08); color: var(--navy); }
-.kpi-icon.gold  { background: rgba(201,169,110,0.12); color: var(--gold-dark); }
-.kpi-icon.green { background: rgba(34,197,94,0.1); color: var(--success); }
-.kpi-icon.orange { background: rgba(245,158,11,0.1); color: var(--warning); }
+.kpi-icon.navy { background: rgba(31,110,78,0.08); color: var(--green); }
+.kpi-icon.gold  { background: rgba(184,146,63,0.12); color: var(--gold); }
+.kpi-icon.green { background: rgba(31,110,78,0.10); color: var(--green); }
+.kpi-icon.orange { background: rgba(184,146,63,0.12); color: var(--gold); }
 
 /* Table */
 .table-wrap {
@@ -582,10 +591,10 @@ thead th {
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: var(--green);
+    border-bottom: 1px solid var(--green-dark);
 }
 
 tbody tr {
@@ -593,7 +602,7 @@ tbody tr {
     transition: background 0.15s;
 }
 tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: rgba(240,243,248,0.8); }
+tbody tr:hover { background: var(--green-soft); }
 
 tbody td {
     padding: 15px 20px;
@@ -614,14 +623,14 @@ tbody td {
 }
 .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
 
-.badge-success { background: rgba(34,197,94,0.1); color: #16a34a; }
-.badge-success::before { background: #22c55e; }
+.badge-success { background: var(--green-tint); color: var(--green-dark); }
+.badge-success::before { background: var(--green); }
 .badge-warning { background: rgba(245,158,11,0.1); color: #d97706; }
 .badge-warning::before { background: #f59e0b; }
 .badge-danger  { background: rgba(239,68,68,0.1); color: #dc2626; }
 .badge-danger::before  { background: #ef4444; }
-.badge-info    { background: rgba(59,130,246,0.1); color: #2563eb; }
-.badge-info::before    { background: #3b82f6; }
+.badge-info    { background: rgba(31,110,78,0.1); color: #2563eb; }
+.badge-info::before    { background: #1f6e4e; }
 .badge-navy    { background: rgba(30,58,95,0.08); color: var(--navy); }
 .badge-navy::before    { background: var(--navy); }
 
@@ -672,8 +681,8 @@ tbody td {
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(31,110,78,0.16);
 }
 
 .form-field textarea { resize: vertical; min-height: 90px; }
@@ -1006,9 +1015,9 @@ tbody td {
                         </div>
                     <?php else: ?>
                     <?php
-                    $notifColors = ['info'=>'#3b82f6','success'=>'#22c55e','warning'=>'#f59e0b','danger'=>'#ef4444'];
+                    $notifColors = ['info'=>'#1f6e4e','success'=>'#1f6e4e','warning'=>'#f59e0b','danger'=>'#ef4444'];
                     foreach (array_slice($notifItems, 0, 8) as $ni):
-                        $nc = $notifColors[$ni['type']] ?? '#3b82f6';
+                        $nc = $notifColors[$ni['type']] ?? '#1f6e4e';
                     ?>
                     <a href="<?= ($ni['lien'] && str_starts_with($ni['lien'], '/')) ? APP_URL . e($ni['lien']) : APP_URL.'/notifications' ?>" class="notif-dropdown-item <?= !$ni['lu'] ? 'unread' : '' ?>">
                         <div class="notif-icon-wrap" style="background:<?= $nc ?>1a;color:<?= $nc ?>">

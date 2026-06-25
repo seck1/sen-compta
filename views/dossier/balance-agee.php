@@ -51,9 +51,9 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
         <div class="kpi-value" style="font-size:22px"><?= formatMontant($totals['total']) ?></div>
         <div class="kpi-sub"><?= count($comptes) ?> compte(s)</div>
     </div>
-    <div class="kpi-card" style="border-top-color:#22c55e">
-        <div class="kpi-label" style="color:#16a34a">Courantes (0–30j)</div>
-        <div class="kpi-value" style="font-size:22px;color:#16a34a"><?= formatMontant($totals['courant']) ?></div>
+    <div class="kpi-card" style="border-top-color:#1f6e4e">
+        <div class="kpi-label" style="color:#1f6e4e">Courantes (0–30j)</div>
+        <div class="kpi-value" style="font-size:22px;color:#1f6e4e"><?= formatMontant($totals['courant']) ?></div>
         <div class="kpi-sub"><?= $totals['total'] > 0 ? round($totals['courant']/$totals['total']*100) : 0 ?>% du total</div>
     </div>
     <div class="kpi-card" style="border-top-color:#f59e0b">
@@ -79,7 +79,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
 <!-- Legend -->
 <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;font-size:15px;flex-wrap:wrap">
     <span style="font-weight:500;color:var(--text-muted)">Légende :</span>
-    <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(34,197,94,0.25);border-radius:3px;display:inline-block"></span>0–30j (courant)</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(31,110,78,0.25);border-radius:3px;display:inline-block"></span>0–30j (courant)</span>
     <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(245,158,11,0.25);border-radius:3px;display:inline-block"></span>31–60j</span>
     <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(249,115,22,0.25);border-radius:3px;display:inline-block"></span>61–90j</span>
     <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:rgba(239,68,68,0.25);border-radius:3px;display:inline-block"></span>&gt;90j (critique)</span>
@@ -97,7 +97,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
                 <th>Compte</th>
                 <th>Intitulé</th>
                 <th style="text-align:right">Total</th>
-                <th style="text-align:right;background:rgba(34,197,94,0.08)">0–30j</th>
+                <th style="text-align:right;background:rgba(31,110,78,0.08)">0–30j</th>
                 <th style="text-align:right;background:rgba(245,158,11,0.08)">31–60j</th>
                 <th style="text-align:right;background:rgba(249,115,22,0.08)">61–90j</th>
                 <th style="text-align:right;background:rgba(239,68,68,0.1)">91–180j</th>
@@ -110,7 +110,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
                 <td><code style="font-size:15px;background:var(--bg);padding:2px 6px;border-radius:5px"><?= e($c['numero']) ?></code></td>
                 <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= e($c['intitule']) ?></td>
                 <td style="text-align:right;font-family:monospace;font-weight:600"><?= formatMontant($c['total']) ?></td>
-                <td style="text-align:right;font-family:monospace;background:rgba(34,197,94,0.05);color:<?= $c['courant'] > 0 ? '#16a34a' : 'var(--text-muted)' ?>">
+                <td style="text-align:right;font-family:monospace;background:rgba(31,110,78,0.05);color:<?= $c['courant'] > 0 ? '#1f6e4e' : 'var(--text-muted)' ?>">
                     <?= $c['courant'] > 0.01 ? formatMontant($c['courant']) : '—' ?>
                 </td>
                 <td style="text-align:right;font-family:monospace;background:rgba(245,158,11,0.05);color:<?= $c['j30_60'] > 0 ? '#d97706' : 'var(--text-muted)' ?>">
@@ -132,7 +132,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
             <tr style="background:rgba(30,58,95,0.06);font-weight:700;font-size:16px">
                 <td colspan="2">TOTAL</td>
                 <td style="text-align:right;font-family:monospace"><?= formatMontant($totals['total']) ?></td>
-                <td style="text-align:right;font-family:monospace;background:rgba(34,197,94,0.1);color:#16a34a"><?= formatMontant($totals['courant']) ?></td>
+                <td style="text-align:right;font-family:monospace;background:rgba(31,110,78,0.1);color:#1f6e4e"><?= formatMontant($totals['courant']) ?></td>
                 <td style="text-align:right;font-family:monospace;background:rgba(245,158,11,0.1);color:#d97706"><?= formatMontant($totals['j30_60']) ?></td>
                 <td style="text-align:right;font-family:monospace;background:rgba(249,115,22,0.1);color:#ea580c"><?= formatMontant($totals['j60_90']) ?></td>
                 <td style="text-align:right;font-family:monospace;background:rgba(239,68,68,0.12);color:#dc2626"><?= formatMontant($totals['j90_180']) ?></td>
@@ -149,7 +149,7 @@ $critique  = $totals['j90_180'] + $totals['plus180'];
     <div style="font-size:16px;font-weight:600;color:var(--navy-dark);margin-bottom:14px">Répartition par ancienneté</div>
     <?php
     $bars = [
-        ['label'=>'0–30j','val'=>$totals['courant'],'color'=>'#22c55e'],
+        ['label'=>'0–30j','val'=>$totals['courant'],'color'=>'#1f6e4e'],
         ['label'=>'31–60j','val'=>$totals['j30_60'],'color'=>'#f59e0b'],
         ['label'=>'61–90j','val'=>$totals['j60_90'],'color'=>'#f97316'],
         ['label'=>'91–180j','val'=>$totals['j90_180'],'color'=>'#ef4444'],

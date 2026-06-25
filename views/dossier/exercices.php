@@ -13,8 +13,8 @@ $id = $entreprise['id'];
 </div>
 
 <?php if ($saved): ?>
-<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px;font-size:16px;color:#14532d;margin-bottom:18px">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;color:#22c55e;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(31,110,78,0.08);border:1px solid rgba(31,110,78,0.25);border-radius:10px;font-size:16px;color:#14532d;margin-bottom:18px">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;color:#1f6e4e;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     Modifications enregistrées avec succès.
 </div>
 <?php endif; ?>
@@ -63,8 +63,8 @@ $id = $entreprise['id'];
             </td>
             <td style="padding:14px 16px">
                 <?php if ($ex['statut'] === 'ouvert'): ?>
-                <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:8px;font-size:15px;font-weight:600;background:rgba(34,197,94,0.1);color:#15803d">
-                    <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block"></span>
+                <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:8px;font-size:15px;font-weight:600;background:rgba(31,110,78,0.1);color:#18583f">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#1f6e4e;display:inline-block"></span>
                     Ouvert
                 </span>
                 <?php else: ?>

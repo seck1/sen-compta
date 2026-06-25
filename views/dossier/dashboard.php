@@ -78,13 +78,13 @@
     <div class="kpi-card">
         <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" /></svg></div>
         <div class="kpi-label">Créances clients</div>
-        <div class="kpi-value" style="font-size:20px;color:var(--info)"><?= number_format($creancesClients, 0, ',', ' ') ?></div>
+        <div class="kpi-value" style="font-size:20px;color:var(--text)"><?= number_format($creancesClients, 0, ',', ' ') ?></div>
         <div class="kpi-sub">FCFA · Solde comptes 41x</div>
     </div>
     <div class="kpi-card">
         <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" /></svg></div>
         <div class="kpi-label">Dettes fournisseurs</div>
-        <div class="kpi-value" style="font-size:20px;color:var(--warning)"><?= number_format($dettesFournisseurs, 0, ',', ' ') ?></div>
+        <div class="kpi-value" style="font-size:20px;color:var(--text)"><?= number_format($dettesFournisseurs, 0, ',', ' ') ?></div>
         <div class="kpi-sub">FCFA · Comptes 40x</div>
     </div>
     <div class="kpi-card">
@@ -106,7 +106,7 @@
             </div>
             <div style="display:flex;gap:14px;font-size:14px;color:var(--text-muted)">
                 <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:var(--ent-color);display:inline-block"></span>Produits</span>
-                <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#ef4444;display:inline-block"></span>Charges</span>
+                <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#b8923f;display:inline-block"></span>Charges</span>
             </div>
         </div>
         <canvas id="chartDossierCA" height="110"></canvas>
@@ -141,8 +141,8 @@ new Chart(document.getElementById('chartDossierCA'), {
     data: {
         labels: <?= json_encode($chartLabels) ?>,
         datasets: [
-            { label:'Produits', data: <?= json_encode($chartCA) ?>, backgroundColor: <?= json_encode($entreprise['couleur'] ?? '#1e3a5f') ?>, borderRadius:5, opacity:0.8 },
-            { label:'Charges',  data: <?= json_encode($chartCharges) ?>, backgroundColor:'rgba(239,68,68,0.65)', borderRadius:5 }
+            { label:'Produits', data: <?= json_encode($chartCA) ?>, backgroundColor: <?= json_encode($entreprise['couleur'] ?? '#1f6e4e') ?>, borderRadius:5, opacity:0.8 },
+            { label:'Charges',  data: <?= json_encode($chartCharges) ?>, backgroundColor:'rgba(184,146,63,0.80)', borderRadius:5 }
         ]
     },
     options: {

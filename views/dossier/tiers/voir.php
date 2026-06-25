@@ -11,7 +11,7 @@
     font-size: 26px; font-weight: 700;
 }
 .tiers-avatar.fournisseur { background: rgba(245,158,11,.25); }
-.tiers-avatar.client      { background: rgba(59,130,246,.25); }
+.tiers-avatar.client      { background: rgba(31,110,78,.25); }
 .tiers-avatar.les_deux    { background: rgba(139,92,246,.25); }
 .tiers-header-info { flex: 1; }
 .tiers-header-nom  { font-size: 24px; font-weight: 700; margin-bottom: 6px; }

@@ -15,10 +15,10 @@
 <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
     <?php
     $kpis = [
-        ['En cours', $stats['en_cours'], 'navy', '#3b82f6'],
+        ['En cours', $stats['en_cours'], 'navy', '#1f6e4e'],
         ['Planifiées', $stats['planifiee'], 'gold', '#c9a96e'],
         ['En retard', $stats['retard'], 'orange', '#ef4444'],
-        ['Terminées', $stats['termine'], 'green', '#22c55e'],
+        ['Terminées', $stats['termine'], 'green', '#1f6e4e'],
     ];
     foreach ($kpis as [$lbl, $val, $cls, $col]):
     ?>
@@ -63,7 +63,7 @@
 <?php else: ?>
 <div style="display:flex;flex-direction:column;gap:12px">
 <?php
-$statutColors = ['planifiee'=>['#f59e0b','#fffbeb'],'en_cours'=>['#3b82f6','#eff6ff'],'terminee'=>['#22c55e','#f0fdf4'],'facturee'=>['#c9a96e','#fdf8ef'],'annulee'=>['#9ca3af','#f9fafb']];
+$statutColors = ['planifiee'=>['#f59e0b','#fffbeb'],'en_cours'=>['#1f6e4e','#eff6ff'],'terminee'=>['#1f6e4e','#f0fdf4'],'facturee'=>['#c9a96e','#fdf8ef'],'annulee'=>['#9ca3af','#f9fafb']];
 $typeIcons = ['comptabilite'=>'📊','audit'=>'🔍','fiscalite'=>'📋','paie'=>'💰','conseil'=>'💼','autre'=>'📁'];
 foreach ($missions as $m):
     $jr = (int)$m['jours_restants'];

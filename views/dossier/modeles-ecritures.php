@@ -61,7 +61,7 @@
             <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border)">
                 <span style="color:var(--navy-dark);font-weight:600"><?= e($l['compte']) ?></span>
                 <span style="color:var(--text-muted);flex:1;margin:0 8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><?= e($l['libelle']) ?></span>
-                <span style="font-family:monospace;color:#16a34a"><?= $l['debit']>0 ? number_format($l['debit'],0,'.',','). ' D' : '' ?></span>
+                <span style="font-family:monospace;color:#1f6e4e"><?= $l['debit']>0 ? number_format($l['debit'],0,'.',','). ' D' : '' ?></span>
                 <span style="font-family:monospace;color:#dc2626;margin-left:8px"><?= $l['credit']>0 ? number_format($l['credit'],0,'.',','). ' C' : '' ?></span>
             </div>
         <?php endforeach; ?>

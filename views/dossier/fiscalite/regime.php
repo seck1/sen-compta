@@ -113,7 +113,7 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
         foreach ($moduleRows as $key => [$libelle, $detail]):
             $val = $modules[$key] ?? false;
             if ($val === true) {
-                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(34,197,94,0.1);color:#16a34a"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M4.5 12.75l6 6 9-13.5\' /></svg>Oui</span>';
+                $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M4.5 12.75l6 6 9-13.5\' /></svg>Oui</span>';
             } elseif ($val === false) {
                 $badge = '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(239,68,68,0.07);color:#dc2626"><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke-width=\'2.5\' stroke=\'currentColor\' style=\'width:12px;height:12px\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' d=\'M6 18L18 6M6 6l12 12\' /></svg>Non</span>';
             } else {
@@ -128,7 +128,7 @@ $fmt = fn(float $n): string => number_format($n, 0, ',', ' ');
         <?php endforeach; ?>
         <tr style="border-bottom:1px solid rgba(228,233,240,0.6);background:rgba(240,243,248,0.4)">
             <td style="padding:12px 16px;font-size:16px;color:var(--text);font-weight:500">Retenues salariales (IPRES, TRIMF, IR, IPM)</td>
-            <td style="padding:12px 16px;text-align:center"><span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(34,197,94,0.1);color:#16a34a"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Oui</span></td>
+            <td style="padding:12px 16px;text-align:center"><span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:15px;font-weight:600;background:rgba(31,110,78,0.1);color:#1f6e4e"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Oui</span></td>
             <td style="padding:12px 16px;font-size:15px;color:var(--text-muted)">Identiques pour tous les régimes employeurs (sauf RNS sans salariés)</td>
         </tr>
         </tbody>

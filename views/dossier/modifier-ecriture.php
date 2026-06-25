@@ -43,7 +43,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
 .ec-table td { border-bottom:1px solid #f3f4f6; vertical-align:middle; }
 .ec-table tbody tr:hover { background:rgba(30,58,95,.02); }
 .btn-add-ligne { display:flex; align-items:center; gap:8px; padding:10px 16px; width:100%; border:2px dashed var(--border); border-radius:8px; background:none; cursor:pointer; font-size:17px; color:var(--text-muted); font-family:'DM Sans',sans-serif; transition:border-color .15s,color .15s; margin-top:8px; }
-.btn-add-ligne:hover { border-color:#3b82f6; color:#3b82f6; }
+.btn-add-ligne:hover { border-color:#1f6e4e; color:#1f6e4e; }
 .btn-ico { border:none; background:none; cursor:pointer; border-radius:6px; display:flex; align-items:center; justify-content:center; transition:background .12s; }
 .btn-ico-del { width:28px; height:28px; color:var(--danger); font-size:16px; }
 .btn-ico-del:hover { background:rgba(239,68,68,.1); }
@@ -73,7 +73,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
 .ac-selected .ac-input { background:rgba(30,58,95,.04); border-color:var(--navy); }
 /* Upload */
 .upload-zone { border:2px dashed var(--border); border-radius:10px; padding:20px; text-align:center; cursor:pointer; position:relative; transition:border-color .15s,background .15s; }
-.upload-zone:hover, .upload-zone.drag { border-color:#3b82f6; background:rgba(59,130,246,.04); }
+.upload-zone:hover, .upload-zone.drag { border-color:#1f6e4e; background:rgba(31,110,78,.04); }
 .upload-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
 .upload-zone-icon { font-size:22px; display:block; margin-bottom:6px; }
 .upload-zone-text { font-size:16px; color:var(--text-muted); }
@@ -91,7 +91,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
         <p class="ec-page-sub">
             <span class="ec-badge-double">⚖️ Saisie en partie double — Σ Débit = Σ Crédit</span>
             <?php if ($ecriture['statut'] === 'validee'): ?>
-            <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);font-size:15px;color:#16a34a;font-weight:600">✓ Validée</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.25);font-size:15px;color:#1f6e4e;font-weight:600">✓ Validée</span>
             <?php else: ?>
             <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);font-size:15px;color:#92400e;font-weight:600">⏳ Brouillon</span>
             <?php endif; ?>
@@ -395,7 +395,7 @@ function creerTiersRow(ncols) {
     ou.textContent = 'ou';
 
     const lienCreer = mkEl('a', {href:'#', target:'_blank'});
-    lienCreer.style.cssText = 'font-size:15px;color:#3b82f6;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
+    lienCreer.style.cssText = 'font-size:15px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
     const svgPlus = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgPlus.setAttribute('fill','none'); svgPlus.setAttribute('viewBox','0 0 24 24'); svgPlus.setAttribute('stroke-width','2'); svgPlus.setAttribute('stroke','currentColor'); svgPlus.style.cssText='width:13px;height:13px';
     const pathPlus = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -404,7 +404,7 @@ function creerTiersRow(ncols) {
     lienCreer.appendChild(document.createTextNode('Créer ce tiers'));
 
     const badge = mkEl('span');
-    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:20px;font-size:15px;color:#16a34a;font-weight:600';
+    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:15px;color:#1f6e4e;font-weight:600';
     const svgCheck = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgCheck.setAttribute('fill','none'); svgCheck.setAttribute('viewBox','0 0 24 24'); svgCheck.setAttribute('stroke-width','2'); svgCheck.setAttribute('stroke','currentColor'); svgCheck.style.cssText='width:12px;height:12px';
     const pathCheck = document.createElementNS('http://www.w3.org/2000/svg','path');

@@ -10,7 +10,7 @@ $total_net   = $total_net ?? 0;
 ?>
 
 <?php if ($amort_calcule): ?>
-<div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#16a34a;font-size:16px">
+<div style="background:rgba(31,110,78,0.1);border:1px solid rgba(31,110,78,0.3);border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#1f6e4e;font-size:16px">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     Amortissements recalculés pour l'exercice <?= $exercice ?>.
 </div>
@@ -111,12 +111,12 @@ $g_net   = array_sum(array_column($items, 'valeur_nette'));
             <td style="text-align:right;font-weight:600;color:var(--navy)"><?= $fmt($immo['valeur_nette']) ?></td>
             <td style="text-align:center"><?= $immo['duree_amort'] ?> ans</td>
             <td style="text-align:center">
-                <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:<?= $immo['methode_amort']==='lineaire' ? 'rgba(59,130,246,0.1)' : 'rgba(124,58,237,0.1)' ?>;color:<?= $immo['methode_amort']==='lineaire' ? '#2563eb' : '#7c3aed' ?>">
+                <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:<?= $immo['methode_amort']==='lineaire' ? 'rgba(31,110,78,0.1)' : 'rgba(184,146,63,0.1)' ?>;color:<?= $immo['methode_amort']==='lineaire' ? '#2563eb' : '#b8923f' ?>">
                     <?= ucfirst($immo['methode_amort']) ?>
                 </span>
             </td>
             <td style="text-align:center">
-                <?php $sc = ['actif'=>['rgba(34,197,94,0.1)','#16a34a'],'cede'=>['rgba(239,68,68,0.1)','#dc2626'],'mis_au_rebut'=>['rgba(107,114,128,0.1)','#4b5563']][$immo['statut']] ?? ['rgba(107,114,128,0.1)','#4b5563']; ?>
+                <?php $sc = ['actif'=>['rgba(31,110,78,0.1)','#1f6e4e'],'cede'=>['rgba(239,68,68,0.1)','#dc2626'],'mis_au_rebut'=>['rgba(107,114,128,0.1)','#4b5563']][$immo['statut']] ?? ['rgba(107,114,128,0.1)','#4b5563']; ?>
                 <span style="padding:3px 10px;border-radius:20px;font-size:14px;font-weight:600;background:<?= $sc[0] ?>;color:<?= $sc[1] ?>"><?= ucfirst(str_replace('_',' ',$immo['statut'])) ?></span>
             </td>
         </tr>

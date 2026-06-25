@@ -20,7 +20,7 @@ $score      = $total > 0 ? round($nb_ok / $total * 100) : 0;
 
 <!-- Score global -->
 <div class="card" style="padding:24px;margin-bottom:20px;display:flex;align-items:center;gap:24px">
-    <div style="width:80px;height:80px;border-radius:50%;background:<?= $score==100?'#16a34a':($score>=70?'#f59e0b':'#dc2626') ?>;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+    <div style="width:80px;height:80px;border-radius:50%;background:<?= $score==100?'#1f6e4e':($score>=70?'#f59e0b':'#dc2626') ?>;display:flex;align-items:center;justify-content:center;flex-shrink:0">
         <span style="font-size:22px;font-weight:700;color:#fff"><?= $score ?>%</span>
     </div>
     <div style="flex:1">
@@ -28,12 +28,12 @@ $score      = $total > 0 ? round($nb_ok / $total * 100) : 0;
             <?= $score==100 ? '✅ Dossier prêt pour la clôture' : ($score>=70 ? '⚠️ Vérifications en cours' : '❌ Actions requises avant clôture') ?>
         </div>
         <div style="display:flex;gap:16px;font-size:16px">
-            <span style="color:#16a34a;font-weight:600">✓ <?= $nb_ok ?> validé<?= $nb_ok>1?'s':'' ?></span>
+            <span style="color:#1f6e4e;font-weight:600">✓ <?= $nb_ok ?> validé<?= $nb_ok>1?'s':'' ?></span>
             <?php if($nb_warning): ?><span style="color:#f59e0b;font-weight:600">⚠ <?= $nb_warning ?> avertissement<?= $nb_warning>1?'s':'' ?></span><?php endif; ?>
             <?php if($nb_error): ?><span style="color:#dc2626;font-weight:600">✗ <?= $nb_error ?> erreur<?= $nb_error>1?'s':'' ?></span><?php endif; ?>
         </div>
         <div style="margin-top:10px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
-            <div style="height:100%;width:<?= $score ?>%;background:<?= $score==100?'#16a34a':($score>=70?'#f59e0b':'#dc2626') ?>;border-radius:4px;transition:width .5s"></div>
+            <div style="height:100%;width:<?= $score ?>%;background:<?= $score==100?'#1f6e4e':($score>=70?'#f59e0b':'#dc2626') ?>;border-radius:4px;transition:width .5s"></div>
         </div>
     </div>
 </div>
@@ -41,7 +41,7 @@ $score      = $total > 0 ? round($nb_ok / $total * 100) : 0;
 <!-- Checklist items -->
 <div class="card" style="padding:0;overflow:hidden">
     <?php foreach($checks as $i => $check):
-        $colors = ['ok'=>['#16a34a','#f0fdf4','#bbf7d0'], 'warning'=>['#d97706','#fffbeb','#fde68a'], 'error'=>['#dc2626','#fef2f2','#fecaca']];
+        $colors = ['ok'=>['#1f6e4e','#f0fdf4','#bbf7d0'], 'warning'=>['#d97706','#fffbeb','#fde68a'], 'error'=>['#dc2626','#fef2f2','#fecaca']];
         $c = $colors[$check['status']];
         $icon = $check['status']==='ok' ? '✓' : ($check['status']==='warning' ? '⚠' : '✗');
     ?>

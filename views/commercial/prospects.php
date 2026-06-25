@@ -1,8 +1,8 @@
 <?php
 $stageLabels = ['nouveau'=>'Nouveau','qualifie'=>'Qualifié','devis_envoye'=>'Devis envoyé','negociation'=>'Négociation','client'=>'Client','perdu'=>'Perdu'];
-$stageColors = ['nouveau'=>'#94a3b8','qualifie'=>'#3b82f6','devis_envoye'=>'#f59e0b','negociation'=>'#8b5cf6','client'=>'#22c55e','perdu'=>'#ef4444'];
-$stageBg     = ['nouveau'=>'#f1f5f9','qualifie'=>'#dbeafe','devis_envoye'=>'#fef3c7','negociation'=>'#ede9fe','client'=>'#dcfce7','perdu'=>'#fee2e2'];
-$stageText   = ['nouveau'=>'#475569','qualifie'=>'#2563eb','devis_envoye'=>'#d97706','negociation'=>'#7c3aed','client'=>'#16a34a','perdu'=>'#dc2626'];
+$stageColors = ['nouveau'=>'#94a3b8','qualifie'=>'#1f6e4e','devis_envoye'=>'#f59e0b','negociation'=>'#8b5cf6','client'=>'#1f6e4e','perdu'=>'#ef4444'];
+$stageBg     = ['nouveau'=>'#f1f5f9','qualifie'=>'#dbeafe','devis_envoye'=>'#fef3c7','negociation'=>'rgba(184,146,63,0.1)','client'=>'#dcfce7','perdu'=>'#fee2e2'];
+$stageText   = ['nouveau'=>'#475569','qualifie'=>'#2563eb','devis_envoye'=>'#d97706','negociation'=>'#b8923f','client'=>'#1f6e4e','perdu'=>'#dc2626'];
 $viewMode = $_GET['view'] ?? 'kanban';
 
 // Grouper par stage pour kanban
@@ -63,8 +63,8 @@ foreach ($prospects as $p) $byStage[$p['pipeline_stage'] ?? 'nouveau'][] = $p;
 .kb-card[draggable="true"] { cursor:grab; }
 .kb-card[draggable="true"]:active { cursor:grabbing; }
 .kb-card.dragging { opacity:0.4;transform:scale(0.97); }
-.kb-body.drag-over { background:#e8f0fe;border-color:#3b82f6;border-style:dashed; }
-.kb-body.drag-over .kb-empty { color:#3b82f6; }
+.kb-body.drag-over { background:#e8f0fe;border-color:#1f6e4e;border-style:dashed; }
+.kb-body.drag-over .kb-empty { color:#1f6e4e; }
 .kb-card::before { content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px; }
 .kb-card-name { font-size:13px;font-weight:700;color:var(--navy-dark);margin-bottom:3px;line-height:1.3; }
 .kb-card-sub { font-size:11px;color:var(--text-muted);margin-bottom:8px; }
@@ -448,7 +448,7 @@ function updateColCount(stage) {
 
 function showToast(msg, type) {
     const t = document.createElement('div');
-    t.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;color:#fff;background:' + (type === 'error' ? '#ef4444' : '#22c55e') + ';box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:opacity .3s';
+    t.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;color:#fff;background:' + (type === 'error' ? '#ef4444' : '#1f6e4e') + ';box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:opacity .3s';
     t.textContent = msg;
     document.body.appendChild(t);
     setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);

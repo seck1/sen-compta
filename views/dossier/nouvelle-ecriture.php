@@ -82,7 +82,7 @@ $comptesJson = json_encode(array_map(fn($c) => [
     box-sizing: border-box;
     transition: border-color .15s, box-shadow .15s;
 }
-.ec-field:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+.ec-field:focus { outline: none; border-color: #1f6e4e; box-shadow: 0 0 0 3px rgba(31,110,78,.15); }
 .ec-field-mono { font-family: Arial, sans-serif; text-align: right; }
 
 /* Masquer les spinners number */
@@ -111,7 +111,7 @@ input[type=number] { -moz-appearance: textfield; }
     transition: border-color .2s, background .2s;
     position: relative;
 }
-.upload-zone:hover, .upload-zone.drag { border-color: #3b82f6; background: rgba(59,130,246,.04); }
+.upload-zone:hover, .upload-zone.drag { border-color: #1f6e4e; background: rgba(31,110,78,.04); }
 .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
 .upload-zone-icon { font-size: 22px; display: block; margin-bottom: 6px; }
 .upload-zone-text { font-size: 16px; color: var(--text-muted); }
@@ -136,7 +136,7 @@ input[type=number] { -moz-appearance: textfield; }
 .ec-table thead th:nth-child(3),
 .ec-table thead th:nth-child(4) { text-align: right; }
 .ec-table tbody tr:nth-child(even) { background: rgba(0,0,0,.018); }
-.ec-table tbody tr:hover { background: rgba(37,99,235,.04); }
+.ec-table tbody tr:hover { background: rgba(31,110,78,.04); }
 .ec-table td { padding: 6px 8px; vertical-align: middle; }
 .ec-table tfoot td {
     padding: 10px 10px;
@@ -167,10 +167,10 @@ input[type=number] { -moz-appearance: textfield; }
     display: flex; align-items: baseline; gap: 8px;
 }
 .ac-item:last-child { border-bottom: none; }
-.ac-item:hover, .ac-item.active { background: rgba(59,130,246,.1); }
+.ac-item:hover, .ac-item.active { background: rgba(31,110,78,.1); }
 .ac-item .ac-num { font-weight: 700; font-family: monospace; font-size: 16px; }
 .ac-item .ac-int { color: var(--text-muted); font-size: 15px; }
-.ac-wrapper.ac-selected .ec-field { border-color: #3b82f6; background: rgba(59,130,246,.04); }
+.ac-wrapper.ac-selected .ec-field { border-color: #1f6e4e; background: rgba(31,110,78,.04); }
 
 /* ── Boutons icône ── */
 .btn-ico {
@@ -214,7 +214,7 @@ input[type=number] { -moz-appearance: textfield; }
     transition: border-color .15s, color .15s;
     margin-top: 8px;
 }
-.btn-add-ligne:hover { border-color: #3b82f6; color: #3b82f6; }
+.btn-add-ligne:hover { border-color: #1f6e4e; color: #1f6e4e; }
 </style>
 
 <div class="page-header">
@@ -570,7 +570,7 @@ function creerTiersRow(ncols, tiersId, tiersNom) {
 
     // Lien créer
     const lienCreer = mkEl('a', {href:'#', target:'_blank'});
-    lienCreer.style.cssText = 'font-size:15px;color:#3b82f6;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
+    lienCreer.style.cssText = 'font-size:15px;color:#1f6e4e;font-weight:500;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:4px';
     const svgPlus = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgPlus.setAttribute('fill','none'); svgPlus.setAttribute('viewBox','0 0 24 24'); svgPlus.setAttribute('stroke-width','2'); svgPlus.setAttribute('stroke','currentColor'); svgPlus.style.cssText='width:13px;height:13px';
     const pathPlus = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -580,7 +580,7 @@ function creerTiersRow(ncols, tiersId, tiersNom) {
 
     // Badge lié
     const badge = mkEl('span');
-    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:20px;font-size:15px;color:#16a34a;font-weight:600';
+    badge.style.cssText = 'display:none;align-items:center;gap:4px;padding:3px 9px;background:rgba(31,110,78,.1);border:1px solid rgba(31,110,78,.2);border-radius:20px;font-size:15px;color:#1f6e4e;font-weight:600';
     const svgCheck = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgCheck.setAttribute('fill','none'); svgCheck.setAttribute('viewBox','0 0 24 24'); svgCheck.setAttribute('stroke-width','2'); svgCheck.setAttribute('stroke','currentColor'); svgCheck.style.cssText='width:12px;height:12px';
     const pathCheck = document.createElementNS('http://www.w3.org/2000/svg','path');
