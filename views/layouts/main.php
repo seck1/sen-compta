@@ -148,8 +148,8 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 }
 
 .nav-item.active {
-    background: rgba(201,169,110,0.12);
-    color: var(--gold);
+    background: rgba(42,138,99,0.16);
+    color: #5fc89a;
     font-weight: 500;
 }
 
@@ -158,7 +158,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     position: absolute;
     left: 0; top: 25%; bottom: 25%;
     width: 3px;
-    background: var(--gold);
+    background: var(--green-light);
     border-radius: 0 3px 3px 0;
 }
 

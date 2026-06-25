@@ -165,10 +165,10 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 }
 .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
 .nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
-.nav-item.active { background: rgba(201,169,110,0.12); color: var(--gold); font-weight: 500; }
+.nav-item.active { background: rgba(42,138,99,0.16); color: #5fc89a; font-weight: 500; }
 .nav-item.active::before {
     content: ''; position: absolute; left: 0; top: 25%; bottom: 25%;
-    width: 3px; background: var(--gold); border-radius: 0 3px 3px 0;
+    width: 3px; background: var(--green-light); border-radius: 0 3px 3px 0;
 }
 
 /* Footer sidebar */
