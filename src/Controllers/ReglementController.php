@@ -82,6 +82,19 @@ class ReglementController {
             // Pour fournisseur: solde = credit; pour client: solde = debit (on le détermine après)
             $montantFacture += $lt['credit'] + $lt['debit'];
         }
+        // Déduire les avoirs/extournes émis sur cette facture (réduit le montant dû).
+        try {
+            $stmtAv = $db->prepare("
+                SELECT COALESCE(SUM(la.debit + la.credit),0)
+                FROM avoirs_dossier ad
+                JOIN lignes_ecritures la ON la.ecriture_id=ad.ecriture_avoir_id
+                JOIN comptes ca ON ca.id=la.compte_id
+                WHERE ad.ecriture_origine_id=? AND ad.statut='emis'
+                  AND (ca.numero LIKE '41%' OR ca.numero LIKE '40%')");
+            $stmtAv->execute([$ecritureId]);
+            $montantFacture -= (float)$stmtAv->fetchColumn();
+            if ($montantFacture < 0) $montantFacture = 0;
+        } catch (\Throwable $e) { /* table avoirs absente : pas de déduction */ }
         // Déjà réglé : règlements (BNQ/CAI/MOB) rattachés à cette facture par lettrage
         // commun, ou à défaut par n° facture (non vide). Couvre les paiements partiels.
         $stmtDeja = $db->prepare("

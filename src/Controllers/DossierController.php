@@ -783,12 +783,22 @@ class DossierController {
             (SELECT SUM(l.credit) FROM lignes_ecritures l WHERE l.ecriture_id = e.id) as total_credit,
             (SELECT COUNT(*)      FROM lignes_ecritures l WHERE l.ecriture_id = e.id) as nb_lignes,
             (SELECT t.nom FROM lignes_ecritures l JOIN tiers t ON t.id = l.tiers_id WHERE l.ecriture_id = e.id AND l.tiers_id IS NOT NULL LIMIT 1) as nom_tiers,
-            /* Montant tiers = débit 41x (client) ou crédit 40x (fournisseur) sur cette écriture */
-            (SELECT COALESCE(
+            /* Montant tiers = débit 41x (client) ou crédit 40x (fournisseur) sur cette écriture,
+               DIMINUÉ des avoirs/extournes émis sur cette facture. On déduit le crédit 41x
+               (resp. débit 40x) des écritures d'avoir liées (via avoirs_dossier). */
+            GREATEST(0,
+              COALESCE(
                 (SELECT SUM(l.debit)  FROM lignes_ecritures l JOIN comptes c ON c.id=l.compte_id WHERE l.ecriture_id=e.id AND c.numero LIKE '41%'),
                 (SELECT SUM(l.credit) FROM lignes_ecritures l JOIN comptes c ON c.id=l.compte_id WHERE l.ecriture_id=e.id AND c.numero LIKE '40%'),
                 0
-            )) as montant_tiers,
+              )
+              - COALESCE((
+                  SELECT SUM(la.credit) FROM avoirs_dossier ad
+                  JOIN lignes_ecritures la ON la.ecriture_id=ad.ecriture_avoir_id
+                  JOIN comptes ca ON ca.id=la.compte_id
+                  WHERE ad.ecriture_origine_id=e.id AND ad.statut='emis' AND ca.numero LIKE '41%'
+                ), 0)
+            ) as montant_tiers,
             /* Déjà réglé : règlements (BNQ/CAI/MOB) rattachés à cette facture, par
                lettrage commun, OU même n° facture (non vide), OU même tiers + même libellé.
                Inclut les paiements non lettrés (évite la sur-saisie d'encaissement). */
