@@ -14,7 +14,7 @@ $comptesJson = json_encode(array_map(fn($c) => [
 /* ── En-tête page ── */
 .ec-page-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 400;
+    font-size: 24px; font-weight: 400;
     color: var(--navy-dark); letter-spacing: -.3px;
 }
 .ec-page-sub {
@@ -64,7 +64,7 @@ $comptesJson = json_encode(array_map(fn($c) => [
 /* ── Label ── */
 .form-label {
     display: block;
-    font-size: 15px; font-weight: 600;
+    font-size: 14px; font-weight: 600;
     color: var(--text-muted);
     margin-bottom: 5px;
     text-transform: uppercase; letter-spacing: .6px;
@@ -77,7 +77,7 @@ $comptesJson = json_encode(array_map(fn($c) => [
     padding: 9px 12px;
     border: 1px solid var(--border);
     border-radius: 8px;
-    font-size: 17px;
+    font-size: 16px;
     font-family: 'DM Sans', sans-serif;
     background: #fff; color: inherit;
     box-sizing: border-box;
