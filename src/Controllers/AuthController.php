@@ -36,7 +36,9 @@ class AuthController {
         }
 
         $db   = getDB();
-        $stmt = $db->prepare("SELECT * FROM users WHERE email = ? AND actif = 1 LIMIT 1");
+        // On récupère l'utilisateur SANS filtrer sur actif=1, afin de distinguer
+        // un mauvais mot de passe d'un compte non encore validé par email.
+        $stmt = $db->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
@@ -48,6 +50,24 @@ class AuthController {
             }
             $_SESSION[$key] = $attempts;
             $_SESSION['login_error'] = 'Email ou mot de passe incorrect.';
+            redirect('/login');
+        }
+
+        // Identifiants corrects, mais compte non encore validé par email :
+        // on régénère un code, on l'envoie, et on renvoie l'utilisateur sur la
+        // page de saisie du code (au lieu de "mot de passe incorrect").
+        if ((int)($user['email_verifie'] ?? 1) === 0) {
+            unset($_SESSION[$key]); // identifiants bons : pas de pénalité brute-force
+            $code = $this->regenererCodeVerification((int)$user['id']);
+            $_SESSION['verif_user_id'] = (int)$user['id'];
+            $_SESSION['verif_email']   = $user['email'];
+            $_SESSION['verif_info']    = "Votre compte n'est pas encore validé. Un nouveau code vient de vous être envoyé par email.";
+            redirect('/inscription/verifier');
+        }
+
+        // Compte désactivé par un administrateur (et non un simple défaut de validation)
+        if ((int)($user['actif'] ?? 1) === 0) {
+            $_SESSION['login_error'] = "Votre compte est désactivé. Contactez le support.";
             redirect('/login');
         }
 
@@ -77,6 +97,27 @@ class AuthController {
         ];
 
         redirect('/dashboard');
+    }
+
+    /**
+     * Régénère un code de vérification email pour un user non validé et l'envoie.
+     * Retourne le code (4 chiffres) ou null. Utilisé quand un compte non validé
+     * tente de se connecter.
+     */
+    private function regenererCodeVerification(int $userId): ?string {
+        $db = getDB();
+        $u = $db->prepare("SELECT u.email, c.nom AS cabinet_nom, u.cabinet_id FROM users u LEFT JOIN cabinets c ON c.id=u.cabinet_id WHERE u.id=?");
+        $u->execute([$userId]);
+        $row = $u->fetch(PDO::FETCH_ASSOC);
+        if (!$row) return null;
+        $code = str_pad((string)random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+        $expires = date('Y-m-d H:i:s', time() + 1800);
+        $db->prepare("UPDATE email_verifications SET verified_at=NOW() WHERE user_id=? AND verified_at IS NULL")->execute([$userId]);
+        $db->prepare("INSERT INTO email_verifications (user_id, cabinet_id, email, code, expires_at) VALUES (?,?,?,?,?)")
+           ->execute([$userId, $row['cabinet_id'], $row['email'], $code, $expires]);
+        require_once APP_ROOT . '/config/mail.php';
+        @mailVerificationCode($row['email'], $row['cabinet_nom'] ?? 'votre cabinet', $code);
+        return $code;
     }
 
     public function verify2fa(): void {
