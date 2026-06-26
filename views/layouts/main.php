@@ -505,8 +505,8 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 .kpi-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 14px 18px;
+    border-radius: 14px;
+    padding: 10px 14px;
     position: relative;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -526,25 +526,25 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 }
 
 .kpi-label {
-    font-size: 12.5px;
+    font-size: 11px;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    letter-spacing: .8px;
+    margin-bottom: 2px;
     font-weight: 600;
 }
 
 .kpi-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 34px;
+    font-size: 26px;
     font-weight: 600;
     color: var(--navy-dark);
     line-height: 1;
-    margin-bottom: 3px;
+    margin-bottom: 1px;
 }
 
 .kpi-trend {
-    font-size: 13px;
+    font-size: 11.5px;
     color: var(--text-muted);
 }
 .kpi-trend.up { color: var(--success); }
@@ -552,12 +552,12 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 
 .kpi-icon {
     position: absolute;
-    top: 14px; right: 16px;
-    width: 34px; height: 34px;
-    border-radius: 9px;
+    top: 10px; right: 12px;
+    width: 28px; height: 28px;
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
 }
-.kpi-icon svg { width: 18px; height: 18px; }
+.kpi-icon svg { width: 15px; height: 15px; }
 .kpi-icon.navy { background: rgba(31,110,78,0.08); color: var(--green); }
 .kpi-icon.gold  { background: rgba(184,146,63,0.12); color: var(--gold); }
 .kpi-icon.green { background: rgba(31,110,78,0.10); color: var(--green); }
