@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Vérification 2FA — SenCompta</title>
+<link rel="icon" type="image/svg+xml" href="/logo/sencompta-icon.svg">
+<link rel="icon" type="image/png" href="/logo/logo.png">
+<link rel="apple-touch-icon" href="/logo/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}

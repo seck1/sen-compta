@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mon espace · SenCompta</title>
+<link rel="icon" type="image/svg+xml" href="<?= APP_URL ?>/logo/sencompta-icon.svg">
+<link rel="icon" type="image/png" href="<?= APP_URL ?>/logo/logo.png">
+<link rel="apple-touch-icon" href="<?= APP_URL ?>/logo/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
