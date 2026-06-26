@@ -222,7 +222,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     .modules-title { text-align: center; }
 }
 @media (max-width: 520px) {
-    .shell { padding: 28px 14px; }
+    .shell { padding: 72px 14px 28px; }  /* espace pour la topbar fixe */
     .card { padding: 32px 22px 28px; border-radius: 16px; }
     .card h1 { font-size: 23px; }
     .modules-grid { grid-template-columns: 1fr; }
@@ -238,14 +238,23 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 </div>
 <style>
 .login-topbar{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;justify-content:flex-end;
-  align-items:center;gap:10px;padding:16px 28px}
+  align-items:center;gap:10px;padding:16px 28px;flex-wrap:nowrap}
 .login-topbar .lt-link{font-size:14px;font-weight:600;color:var(--navy);padding:9px 14px;border-radius:9px;
-  text-decoration:none;transition:.18s}
+  text-decoration:none;transition:.18s;white-space:nowrap}
 .login-topbar .lt-link:hover{background:rgba(30,58,95,.07)}
 .login-topbar .lt-cta{font-size:14px;font-weight:700;color:#fff;background:var(--green);padding:10px 18px;
-  border-radius:10px;text-decoration:none;transition:.2s;box-shadow:0 8px 18px -10px rgba(31,110,78,.7)}
+  border-radius:10px;text-decoration:none;transition:.2s;box-shadow:0 8px 18px -10px rgba(31,110,78,.7);white-space:nowrap}
 .login-topbar .lt-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
-@media(max-width:560px){.login-topbar{padding:12px 16px}.login-topbar .lt-link{display:none}}
+/* Mobile : on garde les DEUX liens, Fonctionnalités à gauche + CTA compact à droite */
+@media(max-width:560px){
+  .login-topbar{padding:12px 14px;justify-content:space-between;gap:8px}
+  .login-topbar .lt-link{font-size:13px;padding:8px 10px}
+  .login-topbar .lt-cta{font-size:13px;padding:9px 14px}
+}
+@media(max-width:360px){
+  .login-topbar .lt-link{font-size:12px;padding:7px 8px}
+  .login-topbar .lt-cta{font-size:12px;padding:8px 11px}
+}
 </style>
 
 <div class="shell">
