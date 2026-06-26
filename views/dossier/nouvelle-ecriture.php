@@ -43,13 +43,24 @@ $comptesJson = json_encode(array_map(fn($c) => [
     background: var(--bg);
 }
 .ec-card-head-icon {
-    font-size: 19px; line-height: 1;
+    width: 18px; height: 18px; color: var(--green); opacity: .85; flex-shrink: 0;
 }
 .ec-card-head-title {
-    font-size: 16px; font-weight: 700;
+    font-size: 15px; font-weight: 700;
     color: var(--navy-dark);
-    text-transform: uppercase; letter-spacing: .7px;
+    letter-spacing: .2px;
 }
+/* Pièce jointe inline (discrète) */
+.pj-inline { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+.pj-btn {
+    display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font-size: 14px; font-weight: 600; color: var(--navy);
+    font-family: 'DM Sans', sans-serif; transition: all .15s;
+}
+.pj-btn:hover { border-color: var(--green); background: rgba(31,110,78,.04); }
+.pj-hint { font-size: 13px; color: var(--text-muted); }
+.upload-name { font-size: 13px; font-weight: 600; color: var(--green); }
 .ec-card-body { padding: 18px 20px; }
 
 /* ── Grille en-tête ── */
@@ -102,22 +113,7 @@ input[type=number] { -moz-appearance: textfield; }
 }
 .date-saisie-info strong { color: var(--navy); }
 
-/* ── Upload pièce jointe ── */
-.upload-zone {
-    border: 2px dashed var(--border);
-    border-radius: 10px;
-    padding: 18px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color .2s, background .2s;
-    position: relative;
-}
-.upload-zone:hover, .upload-zone.drag { border-color: #1f6e4e; background: rgba(31,110,78,.04); }
-.upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
-.upload-zone-icon { font-size: 22px; display: block; margin-bottom: 6px; }
-.upload-zone-text { font-size: 16px; color: var(--text-muted); }
-.upload-zone-text strong { color: var(--navy); }
-.upload-name { font-size: 16px; color: var(--navy); font-weight: 500; margin-top: 6px; display: none; }
+.pj-inline.drag .pj-btn { border-color: var(--green); background: rgba(31,110,78,.08); }
 
 /* ── Table lignes ── */
 .ec-table {
@@ -196,12 +192,12 @@ input[type=number] { -moz-appearance: textfield; }
 }
 .sb-group { display: flex; align-items: center; gap: 6px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,.08); height: 100%; }
 .sb-label { font-size: 14px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .8px; font-weight: 500; }
-.sb-val { font-family: Arial, sans-serif; font-weight: 700; font-size: 18px; color: #fff; }
+.sb-val { font-family: 'DM Sans', sans-serif; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 18px; color: #fff; }
 .sb-status { display: flex; align-items: center; gap: 10px; padding: 0 28px; flex: 1; justify-content: center; }
-.sb-ok { color: #4ade80; font-weight: 700; font-size: 17px; }
-.sb-ko { color: #f87171; font-weight: 700; font-size: 17px; }
-.sb-diff-ok { color: #4ade80; }
-.sb-diff-ko { color: #f87171; }
+.sb-ok { color: #6ee7b7; font-weight: 700; font-size: 16px; }
+.sb-ko { color: #fca5a5; font-weight: 700; font-size: 16px; }
+.sb-diff-ok { color: #6ee7b7; }
+.sb-diff-ko { color: #fca5a5; }
 #btn-enregistrer { flex-shrink: 0; }
 #btn-enregistrer:disabled { opacity: .4; cursor: not-allowed; }
 
@@ -216,13 +212,24 @@ input[type=number] { -moz-appearance: textfield; }
     margin-top: 8px;
 }
 .btn-add-ligne:hover { border-color: #1f6e4e; color: #1f6e4e; }
+
+/* Bouton Enregistrer — accent or (action signature) */
+.btn-save-ecr {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px;
+    margin-right: 20px; padding: 11px 24px; border: none; border-radius: 10px;
+    background: linear-gradient(135deg, #d9b876, #a8843f); color: #fff;
+    font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(168,132,63,.4); transition: all .2s;
+}
+.btn-save-ecr:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(168,132,63,.5); }
+.btn-save-ecr:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
 </style>
 
 <div class="page-header">
     <div>
         <h1 class="ec-page-title">Nouvelle écriture manuelle</h1>
         <p class="ec-page-sub">
-            <span class="ec-badge-double">⚖️ Saisie en partie double — Σ Débit = Σ Crédit</span>
+            <span class="ec-badge-double">Saisie en partie double — Σ Débit = Σ Crédit</span>
         </p>
     </div>
     <a href="<?= APP_URL ?>/dossier/ecritures?id=<?= $entreprise['id'] ?>" class="btn btn-outline">
@@ -244,14 +251,14 @@ input[type=number] { -moz-appearance: textfield; }
     <!-- ── Section En-tête ── -->
     <div class="ec-card">
         <div class="ec-card-head">
-            <span class="ec-card-head-icon">📓</span>
+            <svg class="ec-card-head-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
             <span class="ec-card-head-title">En-tête de l'écriture</span>
         </div>
         <div class="ec-card-body">
             <div class="ec-header-grid">
                 <!-- Journal -->
                 <div>
-                    <label class="form-label">📓 Journal <span class="req">*</span></label>
+                    <label class="form-label">Journal <span class="req">*</span></label>
                     <select name="journal_id" class="ec-field" required>
                         <option value="">— Choisir un journal —</option>
                         <?php foreach ($journaux as $j): ?>
@@ -262,13 +269,13 @@ input[type=number] { -moz-appearance: textfield; }
 
                 <!-- Date pièce -->
                 <div>
-                    <label class="form-label">📅 Date de pièce <span class="req">*</span></label>
+                    <label class="form-label">Date de pièce <span class="req">*</span></label>
                     <input type="date" name="date_ecriture" class="ec-field" value="<?= date('Y-m-d') ?>" required>
                 </div>
 
                 <!-- Date saisie auto -->
                 <div>
-                    <label class="form-label">🕐 Date de saisie</label>
+                    <label class="form-label">Date de saisie</label>
                     <div class="date-saisie-info">
                         <strong id="date-saisie-val"><?= date('d/m/Y H:i') ?></strong>
                         <span style="font-size:14px;margin-left:4px">(générée automatiquement à l'enregistrement)</span>
@@ -277,19 +284,19 @@ input[type=number] { -moz-appearance: textfield; }
 
                 <!-- N° pièce -->
                 <div>
-                    <label class="form-label">🔖 N° Pièce (auto)</label>
+                    <label class="form-label">N° Pièce (auto)</label>
                     <input type="text" name="numero_piece" id="numero-piece" class="ec-field" placeholder="[généré automatiquement]" autocomplete="off">
                 </div>
 
                 <!-- N° facture fournisseur -->
                 <div>
-                    <label class="form-label">🧾 N° Facture fournisseur</label>
+                    <label class="form-label">N° Facture fournisseur</label>
                     <input type="text" name="numero_facture" class="ec-field" placeholder="Ex: FAC-853-ACO-1" autocomplete="off">
                 </div>
 
                 <!-- Moyen de paiement -->
                 <div>
-                    <label class="form-label">💳 Moyen de paiement</label>
+                    <label class="form-label">Moyen de paiement</label>
                     <select name="moyen_paiement" class="ec-field">
                         <option value="">— Non précisé —</option>
                         <option value="virement">Virement bancaire</option>
@@ -305,27 +312,22 @@ input[type=number] { -moz-appearance: textfield; }
 
                 <!-- Libellé général — pleine largeur -->
                 <div style="grid-column:1/-1">
-                    <label class="form-label">📝 Libellé <span class="req">*</span></label>
+                    <label class="form-label">Libellé <span class="req">*</span></label>
                     <input type="text" name="libelle" class="ec-field" placeholder="Description de l'écriture" required>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ── Section Pièce jointe ── -->
-    <div class="ec-card">
-        <div class="ec-card-head">
-            <span class="ec-card-head-icon">📎</span>
-            <span class="ec-card-head-title">Pièce jointe (PDF, image · max 5 Mo)</span>
-        </div>
-        <div class="ec-card-body" style="padding:14px 20px">
-            <div class="upload-zone" id="upload-zone">
-                <input type="file" name="piece_jointe" id="piece-jointe" accept=".pdf,.jpg,.jpeg,.png,.webp" onchange="handleFile(this)">
-                <span class="upload-zone-icon">☁️</span>
-                <div class="upload-zone-text">
-                    <strong>Cliquez ou glissez un fichier ici</strong>
+                <!-- Pièce jointe — ligne discrète -->
+                <div style="grid-column:1/-1">
+                    <div class="pj-inline" id="upload-zone">
+                        <input type="file" name="piece_jointe" id="piece-jointe" accept=".pdf,.jpg,.jpeg,.png,.webp" onchange="handleFile(this)" style="display:none">
+                        <button type="button" class="pj-btn" onclick="document.getElementById('piece-jointe').click()">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"/></svg>
+                            Joindre un fichier
+                        </button>
+                        <span class="pj-hint">PDF ou image · max 5 Mo · optionnel</span>
+                        <span class="upload-name" id="upload-name"></span>
+                    </div>
                 </div>
-                <div class="upload-name" id="upload-name"></div>
             </div>
         </div>
     </div>
@@ -333,7 +335,7 @@ input[type=number] { -moz-appearance: textfield; }
     <!-- ── Section Lignes ── -->
     <div class="ec-card">
         <div class="ec-card-head">
-            <span class="ec-card-head-icon">📊</span>
+            <svg class="ec-card-head-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
             <span class="ec-card-head-title">Lignes (débit = crédit obligatoire)</span>
         </div>
         <div class="ec-card-body" style="padding:0">
@@ -375,10 +377,12 @@ input[type=number] { -moz-appearance: textfield; }
         <span class="sb-val" id="sb-credit">0,00</span>
     </div>
     <div class="sb-status">
-        <span id="sb-status-icon" class="sb-ok">✅ Équilibrée</span>
+        <span id="sb-status-icon" style="color:rgba(255,255,255,.45)">Saisie en cours…</span>
     </div>
-    <button type="button" id="btn-enregistrer" class="btn btn-ent" onclick="document.getElementById('form-ecriture').submit()" disabled>
-        🚀 Enregistrer l'écriture
+    <button type="button" id="btn-enregistrer" class="btn-save-ecr" onclick="document.getElementById('form-ecriture').submit()" disabled>
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:17px;height:17px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        Enregistrer l'écriture
+        <span style="opacity:.6;font-size:12px;font-weight:600;margin-left:4px">F9</span>
     </button>
 </div>
 
@@ -459,6 +463,9 @@ function createAutocomplete(wrapper, onSelect) {
         dropdown.classList.remove('open');
         activeIdx = -1;
         if (onSelect) onSelect(div.dataset.num);
+        // Saut de focus vers le champ Débit de la même ligne (rythme de saisie)
+        var tr = wrapper.closest('tr');
+        if (tr) { var deb = tr.querySelector('input[name="debit[]"]'); if (deb) setTimeout(function(){ deb.focus(); }, 0); }
     }
 
     function clearSel() {
@@ -723,20 +730,40 @@ function creerLigne() {
 
 /* ── Solde intelligent ── */
 function autoBalance(tr, side) {
+    // Cas simple à 2 lignes : recopie le montant sur la colonne opposée de l'autre ligne.
     const tbody  = document.getElementById('lignes-tbody');
     const lignes = tbody.querySelectorAll('.ligne-ecriture');
-    if (lignes.length !== 2) return;
-    const idx = Array.prototype.indexOf.call(lignes, tr);
-    if (idx < 0) return;
-    const other   = lignes[idx === 0 ? 1 : 0];
-    const myDeb   = tr.querySelector('[name="debit[]"]');
-    const myCre   = tr.querySelector('[name="credit[]"]');
-    const otDeb   = other.querySelector('[name="debit[]"]');
-    const otCre   = other.querySelector('[name="credit[]"]');
-    if (side === 'debit' && parseNum(myDeb.value) > 0 && !parseNum(otDeb.value) && !parseNum(otCre.value))
-        otCre.value = myDeb.value;
-    else if (side === 'credit' && parseNum(myCre.value) > 0 && !parseNum(otDeb.value) && !parseNum(otCre.value))
-        otDeb.value = myCre.value;
+    if (lignes.length === 2) {
+        const idx = Array.prototype.indexOf.call(lignes, tr);
+        if (idx < 0) return;
+        const other = lignes[idx === 0 ? 1 : 0];
+        const myDeb = tr.querySelector('[name="debit[]"]');
+        const myCre = tr.querySelector('[name="credit[]"]');
+        const otDeb = other.querySelector('[name="debit[]"]');
+        const otCre = other.querySelector('[name="credit[]"]');
+        if (side === 'debit' && parseNum(myDeb.value) > 0 && !parseNum(otDeb.value) && !parseNum(otCre.value))
+            otCre.value = myDeb.value;
+        else if (side === 'credit' && parseNum(myCre.value) > 0 && !parseNum(otDeb.value) && !parseNum(otCre.value))
+            otDeb.value = myCre.value;
+        return;
+    }
+    // Cas N>2 lignes : si UNE seule cellule montant est vide dans tout le tableau,
+    // la remplir avec l'écart d'équilibre (ex. achat avec TVA = 3 lignes).
+    const debs = Array.prototype.slice.call(document.querySelectorAll('[name="debit[]"]'));
+    const cres = Array.prototype.slice.call(document.querySelectorAll('[name="credit[]"]'));
+    let totD = 0, totC = 0, vides = [];
+    debs.forEach(function(d, i){
+        const vd = parseNum(d.value), vc = parseNum(cres[i].value);
+        totD += vd; totC += vc;
+        if (!vd && !vc) vides.push({deb:d, cre:cres[i]});
+    });
+    if (vides.length === 1) {
+        const diff = totD - totC;
+        if (Math.abs(diff) > 0.005) {
+            if (diff > 0) vides[0].cre.value = diff.toFixed(2); // manque du crédit
+            else          vides[0].deb.value = (-diff).toFixed(2);
+        }
+    }
 }
 
 /* ── Totaux ── */
@@ -753,14 +780,15 @@ function calculerTotaux() {
 
     const icon = document.getElementById('sb-status-icon');
     if (balanced && hasAmt) {
-        icon.textContent = '✅ Équilibrée';
+        icon.textContent = '✓ Équilibrée';
         icon.className = 'sb-ok';
+        icon.style.color = '';
     } else if (!hasAmt) {
-        icon.textContent = '— Aucun montant';
+        icon.textContent = 'Saisie en cours…';
         icon.className = '';
-        icon.style.color = 'rgba(255,255,255,.35)';
+        icon.style.color = 'rgba(255,255,255,.45)';
     } else {
-        icon.textContent = '⚠️ Déséquilibrée (' + fmt(Math.abs(totalD - totalC)) + ')';
+        icon.textContent = '⚠ Déséquilibrée (' + fmt(Math.abs(totalD - totalC)) + ')';
         icon.className = 'sb-ko';
         icon.style.color = '';
     }
@@ -782,23 +810,24 @@ window.ajouterLigne = ajouterLigne;
 window.handleFile = function(input) {
     const nameEl = document.getElementById('upload-name');
     if (input.files && input.files[0]) {
-        nameEl.textContent = '📄 ' + input.files[0].name;
-        nameEl.style.display = 'block';
-        document.querySelector('.upload-zone-text').style.display = 'none';
-        document.querySelector('.upload-zone-icon').style.display = 'none';
+        nameEl.textContent = '✓ ' + input.files[0].name;
+    } else {
+        nameEl.textContent = '';
     }
 };
 
-// Drag & drop
+// Drag & drop sur la ligne pièce jointe
 const zone = document.getElementById('upload-zone');
-zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
-zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
-zone.addEventListener('drop', e => {
-    e.preventDefault(); zone.classList.remove('drag');
-    const input = document.getElementById('piece-jointe');
-    input.files = e.dataTransfer.files;
-    window.handleFile(input);
-});
+if (zone) {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+    zone.addEventListener('drop', e => {
+        e.preventDefault(); zone.classList.remove('drag');
+        const input = document.getElementById('piece-jointe');
+        input.files = e.dataTransfer.files;
+        window.handleFile(input);
+    });
+}
 
 /* ── Init 2 lignes ── */
 (function() {
