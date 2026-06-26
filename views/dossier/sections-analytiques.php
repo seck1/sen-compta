@@ -28,12 +28,36 @@
 .sa-act .del { color:#c0392b; border-color:rgba(192,57,43,.25); }
 </style>
 
-<div class="page-header" style="margin-bottom:20px">
+<div class="page-header" style="margin-bottom:16px">
     <div>
         <h1 class="page-title">Sections analytiques</h1>
         <p class="page-subtitle"><?= e($entreprise['raison_sociale']) ?> · Centres de coûts / activités / projets</p>
     </div>
 </div>
+
+<!-- Aide : à quoi ça sert -->
+<details class="sa-help" open>
+    <summary>💡 À quoi servent les sections analytiques ?</summary>
+    <div class="sa-help-body">
+        <p>Une <strong>section analytique</strong> est une « étiquette » (un service, un chantier, un projet, une boutique…) que vous posez sur vos charges et produits pour savoir <strong>quelle activité vous coûte ou vous rapporte de l'argent</strong>.</p>
+        <p style="margin-top:8px"><strong>Comment l'utiliser, en 3 étapes :</strong></p>
+        <ol class="sa-steps">
+            <li><strong>Créez vos sections</strong> ici (ex. code <code>AUDIT</code> → « Service Audit »).</li>
+            <li>Lors de la <strong>saisie d'une écriture</strong>, choisissez la section dans la colonne « Section » sur les lignes de charges (classe 6) et de produits (classe 7).</li>
+            <li>Consultez le <a href="<?= APP_URL ?>/dossier/rapport-analytique?id=<?= $entreprise['id'] ?>"><strong>Rapport analytique</strong></a> pour voir la rentabilité (Produits − Charges) de chaque section.</li>
+        </ol>
+        <p style="margin-top:8px;font-size:12.5px;color:var(--text-muted)">La colonne « Lignes ventilées » indique combien de lignes d'écriture sont déjà affectées à chaque section. La ventilation est <strong>optionnelle</strong> : une écriture sans section reste valide.</p>
+    </div>
+</details>
+<style>
+.sa-help { background:#fff; border:1px solid var(--border); border-left:4px solid var(--green); border-radius:12px; padding:14px 18px; margin-bottom:20px; }
+.sa-help summary { cursor:pointer; font-weight:700; font-size:14px; color:var(--navy-dark); list-style:none; }
+.sa-help summary::-webkit-details-marker { display:none; }
+.sa-help-body { margin-top:12px; font-size:13.5px; color:var(--text); line-height:1.6; }
+.sa-help-body code { background:rgba(31,110,78,.1); color:#1f6e4e; padding:1px 6px; border-radius:5px; font-size:12.5px; }
+.sa-help-body a { color:#1f6e4e; font-weight:600; }
+.sa-steps { margin:6px 0 0 20px; } .sa-steps li { margin-bottom:5px; }
+</style>
 
 <?php if (!empty($_SESSION['flash_success'])): ?>
 <div class="sa-flash ok"><?= e($_SESSION['flash_success']) ?></div>

@@ -45,6 +45,29 @@ $maxAbs = $maxAbs ?: 1;
     <?php endif; ?>
 </div>
 
+<!-- Aide : comment lire ce rapport -->
+<details class="ra-help">
+    <summary>💡 Comment lire ce rapport ?</summary>
+    <div class="ra-help-body">
+        <p>Ce rapport mesure la <strong>rentabilité de chaque section analytique</strong> (service, chantier, projet…) sur l'exercice :</p>
+        <ul class="ra-help-list">
+            <li><strong>Produits</strong> = ce que la section a rapporté (soldes des comptes de classe 7).</li>
+            <li><strong>Charges</strong> = ce que la section a coûté (soldes des comptes de classe 6).</li>
+            <li><strong>Résultat</strong> = Produits − Charges. <span class="ra-pos">Vert = bénéfice</span>, <span class="ra-neg">rouge = perte</span>.</li>
+        </ul>
+        <p style="margin-top:8px">La barre de droite compare visuellement les résultats. Les lignes saisies sans section apparaissent sous « <strong>Non ventilé</strong> ».</p>
+        <p style="margin-top:8px;font-size:12.5px;color:var(--text-muted)">Le rapport est vide tant qu'aucune charge ou produit n'a été affecté à une section. Affectez vos sections dans la colonne « Section » lors de la <a href="<?= APP_URL ?>/dossier/nouvelle-ecriture?id=<?= $entreprise['id'] ?>">saisie d'écriture</a>, ou gérez-les dans <a href="<?= APP_URL ?>/dossier/sections-analytiques?id=<?= $entreprise['id'] ?>">Sections analytiques</a>.</p>
+    </div>
+</details>
+<style>
+.ra-help { background:#fff; border:1px solid var(--border); border-left:4px solid var(--green); border-radius:12px; padding:14px 18px; margin-bottom:20px; }
+.ra-help summary { cursor:pointer; font-weight:700; font-size:14px; color:var(--navy-dark); list-style:none; }
+.ra-help summary::-webkit-details-marker { display:none; }
+.ra-help-body { margin-top:12px; font-size:13.5px; color:var(--text); line-height:1.6; }
+.ra-help-body a { color:#1f6e4e; font-weight:600; }
+.ra-help-list { margin:6px 0 0 20px; } .ra-help-list li { margin-bottom:4px; }
+</style>
+
 <?php if (empty($sections)): ?>
 <div class="ra-card">
     <div class="ra-empty">
