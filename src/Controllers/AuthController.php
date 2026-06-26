@@ -193,11 +193,14 @@ class AuthController {
 
         // On redirige toujours vers "envoyé" pour ne pas révéler si l'email existe
         if ($user) {
-            $token = bin2hex(random_bytes(32));
+            $token = bin2hex(random_bytes(32));          // envoyé dans l'email (clair)
+            $tokenHash = hash('sha256', $token);          // stocké en base (jamais le token clair)
             $expires = date('Y-m-d H:i:s', time() + 3600);
             try {
+                // Invalider les anciennes demandes en cours pour cet utilisateur
+                $db->prepare("UPDATE password_resets SET used_at=NOW() WHERE user_id=? AND used_at IS NULL")->execute([$user['id']]);
                 $ins = $db->prepare("INSERT INTO password_resets (user_id, token, expires_at) VALUES (?,?,?)");
-                $ins->execute([$user['id'], $token, $expires]);
+                $ins->execute([$user['id'], $tokenHash, $expires]);
             } catch (Exception $e) {
                 error_log('forgotPost insert token: '.$e->getMessage());
                 redirect('/mot-de-passe-oublie?sent=1');
@@ -248,6 +251,9 @@ class AuthController {
         // Invalider le token (et tous les autres de cet utilisateur)
         $db->prepare("UPDATE password_resets SET used_at=NOW() WHERE user_id=? AND used_at IS NULL")->execute([$userId]);
 
+        // Invalider toute session active (un attaquant éventuellement connecté est déconnecté)
+        $_SESSION = [];
+        session_regenerate_id(true);
         $_SESSION['inscription_success'] = "Mot de passe réinitialisé. Vous pouvez vous connecter.";
         redirect('/login');
     }
@@ -257,8 +263,9 @@ class AuthController {
         if ($token === '') return null;
         try {
             $db = getDB();
+            $tokenHash = hash('sha256', $token);
             $stmt = $db->prepare("SELECT user_id FROM password_resets WHERE token=? AND used_at IS NULL AND expires_at > NOW() LIMIT 1");
-            $stmt->execute([$token]);
+            $stmt->execute([$tokenHash]);
             $id = $stmt->fetchColumn();
             return $id !== false ? (int)$id : null;
         } catch (\Throwable $e) {
