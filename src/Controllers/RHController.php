@@ -53,11 +53,11 @@ class RHController {
         $stmt = $db->prepare("INSERT INTO employes
             (entreprise_id, matricule, nom, prenom, date_naissance, lieu_naissance, sexe, nationalite,
              num_cni, situation_familiale, nombre_enfants, telephone, email, adresse, lieu_travail,
-             poste, departement, categorie, date_embauche, date_fin_contrat, periode_essai_mois, type_contrat, statut,
+             poste, departement, categorie, statut_cadre, date_embauche, date_fin_contrat, periode_essai_mois, type_contrat, statut,
              regime_fiscal, nombre_parts,
              salaire_base, sursalaire, autres_indemnites, indemnite_logement, indemnite_transport, indemnite_representation,
              num_ipres, num_css, num_ipm, mode_paiement, banque, iban)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $stmt->execute([
             $id,
             $_POST['matricule'] ?? '',
@@ -77,6 +77,7 @@ class RHController {
             $_POST['poste'] ?? '',
             $_POST['departement'] ?? '',
             $_POST['categorie'] ?? '',
+            ($_POST['statut_cadre'] ?? 'non_cadre') === 'cadre' ? 'cadre' : 'non_cadre',
             $_POST['date_embauche'] ?: null,
             $_POST['date_fin_contrat'] ?: null,
             (int)($_POST['periode_essai_mois'] ?? 0),
@@ -129,7 +130,7 @@ class RHController {
         $stmt = $db->prepare("UPDATE employes SET
             matricule=?, nom=?, prenom=?, date_naissance=?, lieu_naissance=?, sexe=?, nationalite=?,
             num_cni=?, situation_familiale=?, nombre_enfants=?, telephone=?, email=?, adresse=?, lieu_travail=?,
-            poste=?, departement=?, categorie=?, date_embauche=?, date_fin_contrat=?, periode_essai_mois=?, type_contrat=?, statut=?,
+            poste=?, departement=?, categorie=?, statut_cadre=?, date_embauche=?, date_fin_contrat=?, periode_essai_mois=?, type_contrat=?, statut=?,
             regime_fiscal=?, nombre_parts=?,
             salaire_base=?, sursalaire=?, autres_indemnites=?, indemnite_logement=?, indemnite_transport=?, indemnite_representation=?,
             num_ipres=?, num_css=?, num_ipm=?, mode_paiement=?, banque=?, iban=?
@@ -152,6 +153,7 @@ class RHController {
             $_POST['poste'] ?? '',
             $_POST['departement'] ?? '',
             $_POST['categorie'] ?? '',
+            ($_POST['statut_cadre'] ?? 'non_cadre') === 'cadre' ? 'cadre' : 'non_cadre',
             $_POST['date_embauche'] ?: null,
             $_POST['date_fin_contrat'] ?: null,
             (int)($_POST['periode_essai_mois'] ?? 0),

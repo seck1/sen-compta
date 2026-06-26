@@ -111,7 +111,15 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
             </div>
             <div class="form-field">
                 <label>Catégorie professionnelle</label>
-                <input type="text" name="categorie" value="<?= $v('categorie') ?>" placeholder="Cadre, Agent de maîtrise...">
+                <input type="text" name="categorie" value="<?= $v('categorie') ?>" placeholder="Agent de maîtrise, Employé...">
+            </div>
+            <div class="form-field">
+                <label>Statut</label>
+                <select name="statut_cadre">
+                    <option value="non_cadre" <?= $sel('statut_cadre','non_cadre') ?: ($edit ? '' : 'selected') ?>>Non cadre</option>
+                    <option value="cadre" <?= $sel('statut_cadre','cadre') ?>>Cadre</option>
+                </select>
+                <div style="font-size:13px;color:#888;margin-top:3px">Cadre → IPRES tranche B (RC) en plus du régime général.</div>
             </div>
             <div class="form-field">
                 <label>Type de contrat</label>

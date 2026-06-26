@@ -160,13 +160,17 @@ class PaieService {
         $taux_css_at      = (float)($params['css_accidents_travail']  ?? self::CSS_ACCIDENTS_TRAVAIL);
         $plafond_ipres_a  = (float)($params['plafond_ipres_a']        ?? self::PLAFOND_IPRES_A);
 
+        // Statut cadre : la tranche B (régime complémentaire cadres) ne s'applique
+        // qu'aux employés déclarés "cadre". Pour les non-cadres, seule la tranche A joue.
+        $est_cadre = ($employe['statut_cadre'] ?? 'non_cadre') === 'cadre';
+
         // IPRES salarié — Tranche A (plafonné)
         $base_ipres_a  = min($salaire_brut, $plafond_ipres_a);
         $ipres_salarie = round($base_ipres_a * $taux_ipres_sal_a);
 
-        // IPRES cadre salarié — Tranche B (si salaire > plafond A)
+        // IPRES cadre salarié — Tranche B (cadre uniquement, si salaire > plafond A)
         $ipres_cadre_salarie = 0;
-        if ($salaire_brut > $plafond_ipres_a) {
+        if ($est_cadre && $salaire_brut > $plafond_ipres_a) {
             $base_ipres_b        = min($salaire_brut - $plafond_ipres_a, self::PLAFOND_IPRES_B - $plafond_ipres_a);
             $ipres_cadre_salarie = round($base_ipres_b * self::IPRES_SALARIE_B);
         }
@@ -197,9 +201,9 @@ class PaieService {
         // IPRES patronal — Tranche A
         $ipres_patronal_a = round($base_ipres_a * $taux_ipres_pat_a);
 
-        // IPRES cadre patronal — Tranche B
+        // IPRES cadre patronal — Tranche B (cadre uniquement)
         $ipres_cadre_patronal = 0;
-        if ($salaire_brut > $plafond_ipres_a) {
+        if ($est_cadre && $salaire_brut > $plafond_ipres_a) {
             $base_ipres_b_pat     = min($salaire_brut - $plafond_ipres_a, self::PLAFOND_IPRES_B - $plafond_ipres_a);
             $ipres_cadre_patronal = round($base_ipres_b_pat * self::IPRES_PATRONAL_B);
         }
