@@ -16,6 +16,7 @@ class ProfilController {
         // Config SMTP (réservée au super-admin) + flash
         $isSuperAdmin = (($user['role_saas'] ?? '') === 'super_admin');
         $smtp = $this->getSmtpSettings();
+        $verifActive = $this->getSetting('email_verification_active') === '1';
         $smtpFlash = $_SESSION['smtp_flash'] ?? null;
         unset($_SESSION['smtp_flash']);
 
@@ -150,6 +151,29 @@ class ProfilController {
         requireAuth();
         $u = auth();
         if (($u['role_saas'] ?? '') !== 'super_admin') redirect('/profil');
+    }
+
+    /** Lit une valeur unique de app_settings (null si absente). */
+    private function getSetting(string $cle): ?string {
+        try {
+            $st = getDB()->prepare("SELECT valeur FROM app_settings WHERE cle=?");
+            $st->execute([$cle]);
+            $v = $st->fetchColumn();
+            return $v === false ? null : $v;
+        } catch (\Throwable $e) { return null; }
+    }
+
+    /** Active/désactive la vérification email à l'inscription (interrupteur global). */
+    public function toggleVerifEmail(): void {
+        $this->requireSuperAdmin();
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $on = (($_POST['etat'] ?? '') === '1') ? '1' : '0';
+        getDB()->prepare("INSERT INTO app_settings (cle, valeur) VALUES ('email_verification_active', ?)
+                          ON DUPLICATE KEY UPDATE valeur=VALUES(valeur)")->execute([$on]);
+        $_SESSION['smtp_flash'] = ['ok'=>true,'msg'=> $on==='1'
+            ? "Vérification email ACTIVÉE : les nouveaux clients devront saisir un code reçu par email."
+            : "Vérification email DÉSACTIVÉE : les nouveaux clients accèdent directement à leur compte."];
+        redirect('/profil#email');
     }
 
     /** Lit la config SMTP depuis app_settings (valeurs vides si non définies). */

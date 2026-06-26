@@ -112,6 +112,25 @@
     <div style="padding:11px 15px;border-radius:9px;margin-bottom:16px;font-size:13.5px;font-weight:600;<?= $smtpFlash['ok']?'background:rgba(31,110,78,.1);color:#1f6e4e;border:1px solid rgba(31,110,78,.25)':'background:rgba(192,57,43,.08);color:#c0392b;border:1px solid rgba(192,57,43,.25)' ?>"><?= e($smtpFlash['msg']) ?></div>
     <?php endif; ?>
 
+    <!-- Interrupteur : vérification email à l'inscription -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border-radius:11px;background:<?= !empty($verifActive)?'rgba(31,110,78,.07)':'rgba(184,146,63,.08)' ?>;border:1px solid <?= !empty($verifActive)?'rgba(31,110,78,.2)':'rgba(184,146,63,.25)' ?>;margin-bottom:18px">
+        <div>
+            <div style="font-size:14px;font-weight:700;color:var(--navy)">Vérification email à l'inscription</div>
+            <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px">
+                <?= !empty($verifActive)
+                    ? 'ACTIVÉE — les nouveaux clients reçoivent un code à 4 chiffres et doivent le saisir.'
+                    : "DÉSACTIVÉE — les nouveaux clients accèdent directement à leur compte (activez-la quand l'email fonctionne)." ?>
+            </div>
+        </div>
+        <form method="post" action="<?= APP_URL ?>/profil/verif-email" style="flex-shrink:0">
+            <?= csrfField() ?>
+            <input type="hidden" name="etat" value="<?= !empty($verifActive)?'0':'1' ?>">
+            <button type="submit" style="font-size:13px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;border:none;color:#fff;background:<?= !empty($verifActive)?'#c0392b':'#1f6e4e' ?>">
+                <?= !empty($verifActive) ? 'Désactiver' : 'Activer' ?>
+            </button>
+        </form>
+    </div>
+
     <form method="post" action="<?= APP_URL ?>/profil/smtp">
         <?= csrfField() ?>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">

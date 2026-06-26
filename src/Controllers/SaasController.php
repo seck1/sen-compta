@@ -83,31 +83,54 @@ class SaasController {
         $ins->execute([$nom, $slug, $email, $telephone, $responsable, $plan['id'], 'essai', $essaiFin]);
         $cabinetId = $db->lastInsertId();
 
-        // Créer le user admin du cabinet — INACTIF tant que l'email n'est pas vérifié
+        // La vérification email est-elle activée ? (interrupteur global app_settings)
+        // OFF par défaut tant que l'envoi d'emails n'est pas configuré -> inscription directe.
+        $verifActive = $this->verificationEmailActive();
+
+        // Créer le user admin du cabinet
         $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+        $actif = $verifActive ? 0 : 1;      // actif direct si la vérif est désactivée
+        $emailVerifie = $verifActive ? 0 : 1;
         $userIns = $db->prepare("INSERT INTO users (cabinet_id, nom, prenom, email, password, role, role_saas, actif, email_verifie)
-                                 VALUES (?,?,?,?,?,'admin','admin_cabinet',0,0)");
+                                 VALUES (?,?,?,?,?,'admin','admin_cabinet',?,?)");
         $parts = explode(' ', $responsable, 2);
         $prenom = $parts[0];
         $nomUser = $parts[1] ?? '';
-        $userIns->execute([$cabinetId, $nomUser, $prenom, $email, $hash]);
+        $userIns->execute([$cabinetId, $nomUser, $prenom, $email, $hash, $actif, $emailVerifie]);
         $userId = (int)$db->lastInsertId();
 
-        // Générer un code à 4 chiffres + l'enregistrer (valable 30 min)
+        require_once APP_ROOT . '/config/mail.php';
+        // Notifier le super-admin dans tous les cas
+        $this->notifierAdminInscription($nom, $email, $responsable, $plan['nom'] ?? '');
+
+        if (!$verifActive) {
+            // Pas de vérification : connexion directe, le compte est déjà actif
+            $_SESSION['user_id'] = $userId;
+            $_SESSION['flash_success'] = "Bienvenue ! Votre compte a été créé avec succès.";
+            redirect('/dashboard');
+        }
+
+        // Vérification active : générer un code à 4 chiffres (valable 30 min) + l'envoyer
         $code = str_pad((string)random_int(0, 9999), 4, '0', STR_PAD_LEFT);
         $expires = date('Y-m-d H:i:s', time() + 1800);
         $db->prepare("INSERT INTO email_verifications (user_id, cabinet_id, email, code, expires_at) VALUES (?,?,?,?,?)")
            ->execute([$userId, $cabinetId, $email, $code, $expires]);
-
-        // Envoyer l'email de bienvenue avec le code + notifier le super-admin
-        require_once APP_ROOT . '/config/mail.php';
         @mailVerificationCode($email, $nom, $code);
-        $this->notifierAdminInscription($nom, $email, $responsable, $plan['nom'] ?? '');
 
         // Page de saisie du code
         $_SESSION['verif_user_id'] = $userId;
         $_SESSION['verif_email']   = $email;
         redirect('/inscription/verifier');
+    }
+
+    /** La vérification email à l'inscription est-elle activée ? (réglage app_settings, OFF par défaut) */
+    private function verificationEmailActive(): bool {
+        try {
+            $v = getDB()->query("SELECT valeur FROM app_settings WHERE cle='email_verification_active'")->fetchColumn();
+            return $v === '1';
+        } catch (\Throwable $e) {
+            return false; // table absente ou non configurée -> vérif désactivée
+        }
     }
 
     /** Envoie une notification email à tous les super-admins lors d'une inscription. */
