@@ -63,19 +63,6 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
                 <input type="text" name="num_cni" value="<?= $v('num_cni') ?>" placeholder="1234567890123">
             </div>
             <div class="form-field">
-                <label>Situation familiale</label>
-                <select name="situation_familiale">
-                    <option value="celibataire" <?= $sel('situation_familiale','celibataire') ?>>Célibataire</option>
-                    <option value="marie" <?= $sel('situation_familiale','marie') ?>>Marié(e)</option>
-                    <option value="divorce" <?= $sel('situation_familiale','divorce') ?>>Divorcé(e)</option>
-                    <option value="veuf" <?= $sel('situation_familiale','veuf') ?>>Veuf / Veuve</option>
-                </select>
-            </div>
-            <div class="form-field">
-                <label>Nombre d'enfants à charge</label>
-                <input type="number" name="nombre_enfants" value="<?= $v('nombre_enfants','0') ?>" min="0" max="20">
-            </div>
-            <div class="form-field">
                 <label>Téléphone</label>
                 <input type="tel" name="telephone" value="<?= $v('telephone') ?>" placeholder="+221 77 000 00 00">
             </div>
@@ -197,10 +184,45 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
         </div>
     </div>
 
+    <!-- SITUATION FAMILIALE & PARTS FISCALES IR -->
+    <div class="card" style="margin-bottom:20px;padding:24px">
+        <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
+            <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">4</span>
+            Situation familiale &amp; Parts fiscales IR
+        </div>
+        <p style="font-size:13px;color:#667;line-height:1.6;margin:0 0 18px">
+            Les parts déterminent le quotient familial IR (<strong>CGI Sénégal, Art. 165</strong>). Plus de parts = IR plus faible = net plus élevé.<br>
+            Célibataire = <strong>1 part</strong> · Marié = <strong>1,5 part</strong> · <strong>+0,5 par enfant</strong> · maximum <strong>5 parts</strong>.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+            <div class="form-field">
+                <label>Situation familiale</label>
+                <select name="situation_familiale" id="sf_situation" onchange="calcParts()">
+                    <option value="celibataire" <?= $sel('situation_familiale','celibataire') ?>>Célibataire</option>
+                    <option value="marie" <?= $sel('situation_familiale','marie') ?>>Marié(e)</option>
+                    <option value="divorce" <?= $sel('situation_familiale','divorce') ?>>Divorcé(e)</option>
+                    <option value="veuf" <?= $sel('situation_familiale','veuf') ?>>Veuf / Veuve</option>
+                </select>
+                <div style="font-size:13px;color:#888;margin-top:3px">Impacte le nombre de parts de base.</div>
+            </div>
+            <div class="form-field">
+                <label>Nombre d'enfants à charge</label>
+                <input type="number" name="nombre_enfants" id="sf_enfants" value="<?= $v('nombre_enfants','0') ?>" min="0" max="20" oninput="calcParts()">
+                <div style="font-size:13px;color:#888;margin-top:3px">+0,5 part par enfant (plafond 5 parts).</div>
+            </div>
+            <div class="form-field">
+                <label>Nombre de parts fiscales</label>
+                <input type="number" name="nombre_parts" id="sf_parts" value="<?= $v('nombre_parts','1.0') ?>" step="0.5" min="1" max="5" placeholder="1.0">
+                <div style="font-size:13px;color:#888;margin-top:3px">Calculé automatiquement ou ajustable.</div>
+            </div>
+        </div>
+        <div id="sf_calc" style="background:#f3f6f4;border:1px solid #d9e3dd;border-radius:8px;padding:10px 14px;font-size:13px;color:#1f6e4e;line-height:1.6;margin-top:14px"></div>
+    </div>
+
     <!-- FISCAL & SOCIAL -->
     <div class="card" style="margin-bottom:20px;padding:24px">
         <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">4</span>
+            <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">5</span>
             Fiscal & Organismes sociaux
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
@@ -210,11 +232,6 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
                     <option value="imposable" <?= $sel('regime_fiscal','imposable') ?: ($edit ? '' : 'selected') ?>>Imposable (IR)</option>
                     <option value="exonere"   <?= $sel('regime_fiscal','exonere') ?>>Exonéré</option>
                 </select>
-            </div>
-            <div class="form-field">
-                <label>Nombre de parts fiscales</label>
-                <input type="number" name="nombre_parts" value="<?= $v('nombre_parts','1.0') ?>" step="0.5" min="1" max="10" placeholder="1.0">
-                <div style="font-size:14px;color:#888;margin-top:3px">Célibataire=1 / Marié=2 / +0.5 par enfant</div>
             </div>
             <div class="form-field">
                 <label>N° IPRES</label>
@@ -234,7 +251,7 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
     <!-- PAIEMENT -->
     <div class="card" style="margin-bottom:24px;padding:24px">
         <div style="font-size:14px;font-weight:800;color:var(--navy-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #1e3a5f22;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">5</span>
+            <span style="width:24px;height:24px;background:#1e3a5f;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px">6</span>
             Paiement du salaire
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
@@ -290,4 +307,25 @@ function updateBrut() {
     document.getElementById('brut_estime').textContent = fmt + ' F CFA';
 }
 updateBrut();
+
+// Calcul automatique des parts fiscales IR (CGI Sénégal Art. 165)
+var partsBase = { celibataire: 1, marie: 1.5, divorce: 1, veuf: 1 };
+function fmtPart(n){ return (n % 1 === 0 ? n.toFixed(0) : n.toFixed(1).replace('.', ',')); }
+function calcParts() {
+    var sit = (document.getElementById('sf_situation') || {}).value || 'celibataire';
+    var enf = parseInt((document.getElementById('sf_enfants') || {}).value) || 0;
+    var base = partsBase[sit] != null ? partsBase[sit] : 1;
+    var parts = Math.min(5, base + enf * 0.5);
+    var champ = document.getElementById('sf_parts');
+    if (champ) champ.value = fmtPart(parts);
+    var labels = { celibataire:'Célibataire', marie:'Marié(e)', divorce:'Divorcé(e)', veuf:'Veuf / Veuve' };
+    var info = document.getElementById('sf_calc');
+    if (info) {
+        info.innerHTML = 'Base <b>' + (labels[sit]||sit) + '</b> : <b>' + fmtPart(base) + ' part(s)</b>'
+            + ' &nbsp;+&nbsp; ' + enf + ' enfant(s) × 0,5 = <b>' + fmtPart(enf*0.5) + '</b>'
+            + ' &nbsp;→&nbsp; <b style="color:#1f6e4e">Total : ' + fmtPart(parts) + ' part(s)</b>'
+            + (parts >= 5 ? ' &nbsp;⚠️ plafond 5 parts atteint' : '');
+    }
+}
+calcParts();
 </script>
