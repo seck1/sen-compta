@@ -185,18 +185,17 @@ a{color:inherit;text-decoration:none}
   padding:13px 20px;border-radius:11px;justify-content:center;width:100%}
 .plan .btn-outline-w:hover{border-color:var(--gold-light);color:var(--gold-light)}
 
-/* ===== CTA FINAL ===== */
-.final{padding:108px 0;text-align:center;position:relative;z-index:2;overflow:hidden}
-.final::before{content:"";position:absolute;top:-120px;left:-100px;width:480px;height:480px;border-radius:50%;
-  background:radial-gradient(circle,rgba(31,110,78,.10),transparent 65%);animation:drift-a 13s ease-in-out infinite;z-index:0}
-.final::after{content:"";position:absolute;bottom:-110px;right:-80px;width:420px;height:420px;border-radius:50%;
-  background:radial-gradient(circle,rgba(184,146,63,.11),transparent 65%);animation:drift-b 16s ease-in-out infinite;z-index:0}
-.final .wrap{position:relative;z-index:2}
-.final h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5vw,54px);line-height:1.05;
-  letter-spacing:-1px;color:var(--navy-deep);max-width:16ch;margin:0 auto 22px}
-.final p{font-size:18px;color:var(--muted);max-width:52ch;margin:0 auto 34px}
-@keyframes drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(42px,30px)}}
-@keyframes drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-32px,-22px)}}
+/* ===== CTA FINAL — constellation ===== */
+.final{padding:120px 0;text-align:center;position:relative;z-index:2;overflow:hidden}
+.final-constel{background:radial-gradient(120% 130% at 50% 0%,#1e3a5f 0%,var(--navy-deep) 45%,#0e1d2e 100%)}
+.final-constel #constel-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.final-constel .constel-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 55%,rgba(14,29,46,.0) 0%,rgba(14,29,46,.55) 100%)}
+.final .wrap{position:relative;z-index:2;pointer-events:none}
+.final .wrap .btn{pointer-events:auto}
+.final h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.05;
+  letter-spacing:-1px;max-width:18ch;margin:0 auto 22px}
+.final p{font-size:18px;max-width:54ch;margin:0 auto 34px}
 /* Glow doré pulsant sur la carte tarif Populaire */
 @keyframes glow-gold{0%,100%{box-shadow:0 30px 70px -30px rgba(184,146,63,.5),0 0 0 0 rgba(184,146,63,0)}
   50%{box-shadow:0 30px 70px -30px rgba(184,146,63,.65),0 0 30px -4px rgba(184,146,63,.3)}}
@@ -436,12 +435,14 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="final">
+<!-- CTA FINAL — constellation interactive -->
+<section class="final final-constel">
+  <canvas id="constel-canvas"></canvas>
+  <div class="constel-veil"></div>
   <div class="wrap">
-    <div class="sec-num reveal" style="color:var(--gold)">03 — Commencez</div>
-    <h2 class="reveal">Votre comptabilité, juste et conforme.</h2>
-    <p class="reveal">Ouvrez votre espace cabinet en quelques minutes et tenez vos premiers dossiers dès aujourd'hui.</p>
+    <div class="sec-num reveal" style="color:var(--gold-light)">03 — Un écosystème connecté</div>
+    <h2 class="reveal" style="color:#fff">Toutes vos données,<br>reliées entre elles.</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.66)">Écritures, tiers, fiscalité, paie : chaque saisie alimente automatiquement vos états, vos déclarations et vos rapports. Ouvrez votre espace en quelques minutes.</p>
     <a href="<?= APP_URL ?>/inscription" class="btn btn-green btn-lg reveal">Créer un compte gratuit
       <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
@@ -528,6 +529,75 @@ a{color:inherit;text-decoration:none}
       if (es[0].isIntersecting){ setTimeout(function(){ ctaBtn.classList.add('shimmer-run'); }, 400); ob.disconnect(); }
     },{threshold:.8});
     ob.observe(ctaBtn);
+  }
+})();
+
+// ===== Constellation interactive (CTA final) =====
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv = document.getElementById('constel-canvas');
+  if (!cv) return;
+  var ctx = cv.getContext('2d'), W=0, H=0, dpr = Math.min(window.devicePixelRatio||1, 2);
+  var pts = [], mouse = {x:-9999, y:-9999};
+  var GOLD = '184,146,63', GREEN='42,138,99', LIGHT='255,255,255';
+
+  function resize(){
+    var r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n = Math.round(Math.min(72, (W*H)/16000));
+    pts = [];
+    for (var i=0;i<n;i++){
+      pts.push({x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22,
+        r:Math.random()*1.6+1, g:Math.random()<.22});
+    }
+  }
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for (var i=0;i<pts.length;i++){
+      var p=pts[i];
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+      // attraction douce vers la souris
+      var dxm=mouse.x-p.x, dym=mouse.y-p.y, dm=Math.hypot(dxm,dym);
+      var near = dm<140;
+      if(near){ p.x+=dxm*0.0015; p.y+=dym*0.0015; }
+      // liaisons
+      for (var j=i+1;j<pts.length;j++){
+        var q=pts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy);
+        if (d<118){
+          var a=(1-d/118)*0.16;
+          var col = (near||Math.hypot(mouse.x-q.x,mouse.y-q.y)<140) ? GOLD : LIGHT;
+          ctx.strokeStyle='rgba('+col+','+a+')'; ctx.lineWidth=.6;
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
+      // point
+      var base = p.g?GREEN:LIGHT;
+      var pa = near? .9 : .42;
+      ctx.fillStyle='rgba('+(near?GOLD:base)+','+pa+')';
+      ctx.beginPath(); ctx.arc(p.x,p.y,near?p.r+.7:p.r,0,Math.PI*2); ctx.fill();
+      if(near){ ctx.fillStyle='rgba('+GOLD+',.14)'; ctx.beginPath(); ctx.arc(p.x,p.y,p.r+6,0,Math.PI*2); ctx.fill(); }
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  var raf;
+  function start(){ if(!raf) tick(); }
+  function stop(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+
+  cv.parentElement.addEventListener('pointermove', function(e){
+    var r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;
+  });
+  cv.parentElement.addEventListener('pointerleave', function(){ mouse.x=-9999; mouse.y=-9999; });
+
+  window.addEventListener('resize', resize);
+  resize();
+  if (reduce){ tick(); stop(); } // dessine une frame statique
+  else {
+    // n'anime que lorsque visible (perf)
+    var vo=new IntersectionObserver(function(es){ es[0].isIntersecting?start():stop(); },{threshold:.05});
+    vo.observe(cv);
   }
 })();
 </script>
