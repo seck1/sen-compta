@@ -175,10 +175,10 @@ class PaieService {
         // TRIMF
         $trimf = self::calculerTRIMF($salaire_brut);
 
-        // IR — conjoint = 1 part (CGI Art. 165), enfant = 0.5 part
-        $nb_parts = 1.0
-            + ($employe['nombre_enfants'] ?? 0) * 0.5
-            + ($employe['situation_familiale'] === 'marie' ? 1.0 : 0.0);
+        // IR — quotient familial CGI Sénégal Art. 165 :
+        // célibataire/divorcé/veuf = 1 part ; marié = 1,5 part ; +0,5 par enfant à charge ; plafond 5 parts.
+        $nb_parts = ($employe['situation_familiale'] === 'marie' ? 1.5 : 1.0)
+            + ($employe['nombre_enfants'] ?? 0) * 0.5;
         $nb_parts = max(1.0, min((float)$nb_parts, 5.0));
         // IPM salarié — calculé avant IR (cotisation déductible du revenu imposable)
         $ipm_salarie = round($salaire_brut * $taux_ipm_sal);
