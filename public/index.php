@@ -350,6 +350,11 @@ $routes = [
     'commercial/factures/edit'            => ['CommercialController', 'factureForm'],
     'commercial/factures/paiement'        => ['CommercialController', 'enregistrerPaiement'],
     'commercial/factures/pdf'             => ['CommercialController', 'factureExport'],
+    // Avoirs (notes de crédit)
+    'commercial/avoirs'                   => ['AvoirController', 'index'],
+    'commercial/avoirs/creer'             => ['AvoirController', 'form'],
+    'commercial/avoirs/store'             => ['AvoirController', 'store'],
+    'commercial/avoirs/voir'              => ['AvoirController', 'voir'],
 
     // Honoraires
     'honoraires'               => ['HonorairesController', 'index'],

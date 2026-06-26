@@ -93,6 +93,12 @@ $pct = $facture['montant_ttc'] > 0 ? min(100, round($facture['montant_paye'] / $
             Modifier
         </a>
         <?php endif; ?>
+        <?php if (!in_array($st, ['brouillon','annulee'])): ?>
+        <a href="<?= APP_URL ?>/commercial/avoirs/creer?facture_id=<?= $facture['id'] ?>" class="btn btn-outline" style="color:#a8443f;border-color:rgba(168,68,63,.3)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 14l6-6M9 8h.01M15 14h.01M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>
+            Créer un avoir
+        </a>
+        <?php endif; ?>
         <a href="<?= APP_URL ?>/commercial/factures" class="btn btn-outline">← Retour</a>
     </div>
 
