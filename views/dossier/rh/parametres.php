@@ -266,9 +266,43 @@ function pct(float $val): string { return number_format($val * 100, 2); }
                     <span class="param-unit">h</span>
                 </div>
             </div>
+
+            <div class="param-row" style="border-bottom:none;border-right:1px solid var(--border);border-top:1px solid var(--border);padding:18px 22px 0 0;margin:0">
+                <div>
+                    <div class="param-label">Heures de nuit</div>
+                    <div class="param-sub">Heures supp effectuées la nuit (jour ouvrable)</div>
+                    <span class="official-badge">Légal : 160 %</span>
+                </div>
+                <div class="param-input-wrap">
+                    <input type="number" name="heures_supp_taux_nuit" class="param-input" step="0.5" min="100" max="300" value="<?= number_format(($params['heures_supp_taux_nuit'] ?? 1.60) * 100, 2) ?>">
+                    <span class="param-unit">%</span>
+                </div>
+            </div>
+            <div class="param-row" style="border-bottom:none;border-right:1px solid var(--border);border-top:1px solid var(--border);padding:18px 22px 0;margin:0">
+                <div>
+                    <div class="param-label">Dimanche / férié — jour</div>
+                    <div class="param-sub">Heures supp de jour un dimanche ou jour férié</div>
+                    <span class="official-badge">Légal : 160 %</span>
+                </div>
+                <div class="param-input-wrap">
+                    <input type="number" name="heures_supp_taux_dim" class="param-input" step="0.5" min="100" max="300" value="<?= number_format(($params['heures_supp_taux_dim'] ?? 1.60) * 100, 2) ?>">
+                    <span class="param-unit">%</span>
+                </div>
+            </div>
+            <div class="param-row" style="border-bottom:none;border-top:1px solid var(--border);padding:18px 0 0 22px;margin:0">
+                <div>
+                    <div class="param-label">Dimanche / férié — nuit</div>
+                    <div class="param-sub">Heures supp de nuit un dimanche ou jour férié</div>
+                    <span class="official-badge">Légal : 200 %</span>
+                </div>
+                <div class="param-input-wrap">
+                    <input type="number" name="heures_supp_taux_dim_nuit" class="param-input" step="0.5" min="100" max="400" value="<?= number_format(($params['heures_supp_taux_dim_nuit'] ?? 2.00) * 100, 2) ?>">
+                    <span class="param-unit">%</span>
+                </div>
+            </div>
         </div>
         <div style="margin:0 22px 16px;padding:12px 14px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;font-size:13px;color:#92400e">
-            <strong>Calcul :</strong> Taux horaire = Salaire brut ÷ (Jours/mois × 8h). Tranche 1 = taux horaire × 115% × heures. Tranche 2 = taux horaire × 140% × heures restantes.
+            <strong>Calcul (Art. L.198) :</strong> Taux horaire = Salaire base ÷ 173h. Jour : +15% (1-8h) puis +40%. Nuit : +60%. Dimanche/férié : +60% (jour) / +100% (nuit). Chaque type d'heures se saisit séparément sur le bulletin.
         </div>
     </div>
 

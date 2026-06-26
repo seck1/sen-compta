@@ -76,9 +76,24 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
             </div>
             <div class="form-grid">
                 <div class="form-field">
-                    <label>Heures supplémentaires</label>
+                    <label>Heures supp — jour</label>
                     <input type="number" name="heures_supp" value="0" step="0.5" min="0">
-                    <small style="color:var(--text-muted);font-size:14px">Calculées au taux légal (150% pour les 8 premières, 200% au-delà)</small>
+                    <small style="color:var(--text-muted);font-size:14px">+15% (8 premières), puis +40% (Art. L.198)</small>
+                </div>
+                <div class="form-field">
+                    <label>Heures supp — nuit</label>
+                    <input type="number" name="heures_supp_nuit" value="0" step="0.5" min="0">
+                    <small style="color:var(--text-muted);font-size:14px">+60% (nuit, jour ouvrable)</small>
+                </div>
+                <div class="form-field">
+                    <label>Heures supp — dimanche/férié (jour)</label>
+                    <input type="number" name="heures_supp_dim" value="0" step="0.5" min="0">
+                    <small style="color:var(--text-muted);font-size:14px">+60%</small>
+                </div>
+                <div class="form-field">
+                    <label>Heures supp — dimanche/férié (nuit)</label>
+                    <input type="number" name="heures_supp_dim_nuit" value="0" step="0.5" min="0">
+                    <small style="color:var(--text-muted);font-size:14px">+100%</small>
                 </div>
                 <div class="form-field">
                     <label>Prime exceptionnelle (FCFA)</label>

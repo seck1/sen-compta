@@ -301,17 +301,32 @@ class RHController {
             // paie_parametres table may not exist — ignore
         }
 
-        // Convertir les heures supplémentaires en montant FCFA (Fix P: $params chargé avant)
-        $nb_heures_supp = (float)($_POST['heures_supp'] ?? 0);
+        // Convertir les heures supplémentaires en montant FCFA (Code du travail SN, Art. L.198).
+        // Heures de jour (champ historique heures_supp) : +15% jusqu'au seuil puis +40%.
+        // Heures de nuit, dimanche/férié jour, dimanche/férié nuit : taux dédiés.
         $heures_supp_montant = 0;
-        if ($nb_heures_supp > 0 && $employe['salaire_base'] > 0) {
+        if ($employe['salaire_base'] > 0) {
             $taux_horaire = $employe['salaire_base'] / 173; // 173h légales/mois
-            $seuil = (int)($params['heures_supp_seuil'] ?? 8);
-            $taux1 = (float)($params['heures_supp_taux1'] ?? 1.15);
-            $taux2 = (float)($params['heures_supp_taux2'] ?? 1.40);
-            $h1 = min($nb_heures_supp, $seuil);
-            $h2 = max(0, $nb_heures_supp - $seuil);
-            $heures_supp_montant = round($h1 * $taux_horaire * $taux1 + $h2 * $taux_horaire * $taux2);
+            $seuil    = (int)($params['heures_supp_seuil'] ?? 8);
+            $taux1    = (float)($params['heures_supp_taux1'] ?? 1.15);
+            $taux2    = (float)($params['heures_supp_taux2'] ?? 1.40);
+            $tNuit    = (float)($params['heures_supp_taux_nuit'] ?? 1.60);
+            $tDim     = (float)($params['heures_supp_taux_dim'] ?? 1.60);
+            $tDimNuit = (float)($params['heures_supp_taux_dim_nuit'] ?? 2.00);
+
+            // Heures de jour ouvrable : barème à seuil (+15% / +40%)
+            $hJour = (float)($_POST['heures_supp'] ?? 0);
+            $h1 = min($hJour, $seuil);
+            $h2 = max(0, $hJour - $seuil);
+            $heures_supp_montant += round($h1 * $taux_horaire * $taux1 + $h2 * $taux_horaire * $taux2);
+
+            // Heures nuit / dimanche-férié jour / dimanche-férié nuit : taux unique chacune
+            $hNuit    = (float)($_POST['heures_supp_nuit'] ?? 0);
+            $hDim     = (float)($_POST['heures_supp_dim'] ?? 0);
+            $hDimNuit = (float)($_POST['heures_supp_dim_nuit'] ?? 0);
+            $heures_supp_montant += round($hNuit * $taux_horaire * $tNuit);
+            $heures_supp_montant += round($hDim * $taux_horaire * $tDim);
+            $heures_supp_montant += round($hDimNuit * $taux_horaire * $tDimNuit);
         }
 
         $elements = [
@@ -690,6 +705,9 @@ class RHController {
             'num_ipm_entreprise'   => '',
             'heures_supp_taux1'    => 1.15,
             'heures_supp_taux2'    => 1.40,
+            'heures_supp_taux_nuit'     => 1.60,
+            'heures_supp_taux_dim'      => 1.60,
+            'heures_supp_taux_dim_nuit' => 2.00,
             'heures_supp_seuil'    => 8,
         ];
     }
@@ -721,8 +739,10 @@ class RHController {
              plafond_ipres_a, css_accidents_travail, css_prestations_fam, css_plafond_pf,
              cfce_taux, ipm_salarie, ipm_patronal,
              num_ipres_entreprise, num_css_entreprise, num_ipm_entreprise,
-             heures_supp_taux1, heures_supp_taux2, heures_supp_seuil)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+             heures_supp_taux1, heures_supp_taux2,
+             heures_supp_taux_nuit, heures_supp_taux_dim, heures_supp_taux_dim_nuit,
+             heures_supp_seuil)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
              ipres_salarie_a=VALUES(ipres_salarie_a), ipres_patronal_a=VALUES(ipres_patronal_a),
              ipres_salarie_b=VALUES(ipres_salarie_b), ipres_patronal_b=VALUES(ipres_patronal_b),
@@ -735,6 +755,9 @@ class RHController {
              num_ipm_entreprise=VALUES(num_ipm_entreprise),
              heures_supp_taux1=VALUES(heures_supp_taux1),
              heures_supp_taux2=VALUES(heures_supp_taux2),
+             heures_supp_taux_nuit=VALUES(heures_supp_taux_nuit),
+             heures_supp_taux_dim=VALUES(heures_supp_taux_dim),
+             heures_supp_taux_dim_nuit=VALUES(heures_supp_taux_dim_nuit),
              heures_supp_seuil=VALUES(heures_supp_seuil)");
         $stmt->execute([
             $id,
@@ -754,6 +777,9 @@ class RHController {
             trim($_POST['num_ipm_entreprise'] ?? ''),
             (float)$_POST['heures_supp_taux1'],
             (float)$_POST['heures_supp_taux2'],
+            (float)($_POST['heures_supp_taux_nuit'] ?? 1.60),
+            (float)($_POST['heures_supp_taux_dim'] ?? 1.60),
+            (float)($_POST['heures_supp_taux_dim_nuit'] ?? 2.00),
             (int)$_POST['heures_supp_seuil'],
         ]);
 
