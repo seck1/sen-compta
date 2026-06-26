@@ -26,7 +26,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .sidebar {
     position: fixed; top: 0; left: 0; bottom: 0;
     width: var(--sidebar-w);
-    background: var(--navy-dark);
+    background: linear-gradient(180deg, #14402f 0%, #0c2c20 100%);
     display: flex; flex-direction: column;
     z-index: 100;
     border-right: 1px solid rgba(201,169,110,0.1);
@@ -142,19 +142,20 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
     width: 6px; height: 6px; border-radius: 50%;
     flex-shrink: 0;
 }
-.label-overview  { color: #93c5fd; }
-.label-overview::before  { background: #93c5fd; box-shadow: 0 0 6px #93c5fd88; }
-.label-compta    { color: #6ee7b7; }
-.label-compta::before    { background: #6ee7b7; box-shadow: 0 0 6px #6ee7b788; }
-.label-etats     { color: #c4b5fd; }
-.label-etats::before     { background: #c4b5fd; box-shadow: 0 0 6px #c4b5fd88; }
-.label-fiscalite { color: #fca5a5; }
-.label-fiscalite::before { background: #fca5a5; box-shadow: 0 0 6px #fca5a588; }
-.label-rh        { color: #fdba74; }
-.label-rh::before        { background: #fdba74; box-shadow: 0 0 6px #fdba7488; }
-.label-tiers     { color: #f9a8d4; }
-.label-tiers::before     { background: #f9a8d4; box-shadow: 0 0 6px #f9a8d488; }
-.label-outils    { color: var(--gold); }
+/* Titres de sections unifies : or doux + points dores (harmonise avec la marque) */
+.label-overview,
+.label-compta,
+.label-etats,
+.label-fiscalite,
+.label-rh,
+.label-tiers,
+.label-outils    { color: rgba(216,184,118,0.65); }
+.label-overview::before,
+.label-compta::before,
+.label-etats::before,
+.label-fiscalite::before,
+.label-rh::before,
+.label-tiers::before,
 .label-outils::before    { background: var(--gold); box-shadow: 0 0 6px rgba(201,169,110,.7); }
 .nav-item {
     display: flex; align-items: center; gap: 12px;
@@ -164,11 +165,11 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
     transition: all 0.2s; margin-bottom: 3px; position: relative;
 }
 .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
-.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
-.nav-item.active { background: rgba(42,138,99,0.16); color: #5fc89a; font-weight: 500; }
+.nav-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); }
+.nav-item.active { background: rgba(216,184,118,0.18); color: #e8cd8f; font-weight: 600; }
 .nav-item.active::before {
     content: ''; position: absolute; left: 0; top: 25%; bottom: 25%;
-    width: 3px; background: var(--green-light); border-radius: 0 3px 3px 0;
+    width: 3px; background: var(--gold-light); border-radius: 0 3px 3px 0;
 }
 
 /* Footer sidebar */
