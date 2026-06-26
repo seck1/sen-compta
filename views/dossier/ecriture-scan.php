@@ -67,16 +67,31 @@ $journauxJson = json_encode(array_map(fn($j) => [
 
 /* ── Bouton analyser ── */
 .btn-scan {
-    width:100%; padding:16px; margin-top:16px;
-    background:linear-gradient(135deg,#0f6fba,#0891b2);
-    color:#fff; border:none; border-radius:12px;
-    font-size:13px; font-weight:700; font-family:'DM Sans',sans-serif;
-    cursor:pointer; transition:all .2s;
+    position:relative; overflow:hidden;
+    width:100%; padding:17px; margin-top:16px;
+    background:linear-gradient(135deg,#0f6fba 0%,#0891b2 50%,#1f6e4e 100%);
+    background-size:200% 100%;
+    color:#fff; border:none; border-radius:14px;
+    font-size:15px; font-weight:700; font-family:'DM Sans',sans-serif; letter-spacing:.3px;
+    cursor:pointer; transition:all .25s cubic-bezier(.4,0,.2,1);
     display:flex; align-items:center; justify-content:center; gap:10px;
-    box-shadow:0 4px 15px rgba(15,111,186,.3);
+    box-shadow:0 6px 20px rgba(15,111,186,.35), inset 0 1px 0 rgba(255,255,255,.18);
+    animation:btnScanGradient 5s ease infinite;
 }
-.btn-scan:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 8px 25px rgba(15,111,186,.4); }
-.btn-scan:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+@keyframes btnScanGradient { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+/* Brillance qui traverse le bouton au survol */
+.btn-scan::before {
+    content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+    transition:left .6s ease;
+}
+.btn-scan:hover:not(:disabled)::before { left:140%; }
+.btn-scan svg { animation:btnScanSpark 2.2s ease-in-out infinite; }
+@keyframes btnScanSpark { 0%,100%{transform:scale(1) rotate(0)} 50%{transform:scale(1.18) rotate(8deg)} }
+.btn-scan:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 12px 32px rgba(15,111,186,.5), inset 0 1px 0 rgba(255,255,255,.25); }
+.btn-scan:disabled { opacity:.45; cursor:not-allowed; transform:none; animation:none; }
+.btn-scan:disabled::before { display:none; }
+.btn-scan:disabled svg { animation:none; }
 
 /* ── Résultat IA ── */
 #result-section { display:none; }

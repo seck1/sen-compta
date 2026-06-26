@@ -1,4 +1,33 @@
 <style>
+/* Bouton Scan IA — look IA premium (dégradé animé, brillance, étincelle) */
+.btn-scan-ia {
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; gap:9px;
+    padding:10px 20px; border:none; border-radius:12px;
+    background:linear-gradient(135deg,#0f6fba 0%,#0891b2 50%,#1f6e4e 100%);
+    background-size:200% 100%;
+    color:#fff; font-size:14px; font-weight:700; letter-spacing:.3px;
+    text-decoration:none; cursor:pointer;
+    box-shadow:0 6px 18px rgba(15,111,186,.4), inset 0 1px 0 rgba(255,255,255,.2);
+    transition:all .25s cubic-bezier(.4,0,.2,1);
+    animation:scanIaGrad 5s ease infinite;
+}
+@keyframes scanIaGrad { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.btn-scan-ia::before {
+    content:''; position:absolute; top:0; left:-100%; width:55%; height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+    transition:left .6s ease;
+}
+.btn-scan-ia:hover::before { left:160%; }
+.btn-scan-ia:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(15,111,186,.55), inset 0 1px 0 rgba(255,255,255,.3); }
+.btn-scan-ia svg { animation:scanIaSpark 2.2s ease-in-out infinite; }
+@keyframes scanIaSpark { 0%,100%{transform:scale(1) rotate(0)} 50%{transform:scale(1.2) rotate(10deg)} }
+.btn-scan-ia-badge {
+    background:rgba(255,255,255,0.25); padding:1px 8px; border-radius:20px;
+    font-size:13px; font-weight:800; letter-spacing:.5px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);
+}
+
 /* Tableau des écritures : compact pour tenir sur toute la largeur sans scroll horizontal */
 .ecr-table { width: 100%; table-layout: fixed; }
 .ecr-table thead th { padding: 9px 7px; font-size: 8.5pt; letter-spacing: .3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -35,9 +64,9 @@
             <?php endforeach; ?>
         </select>
         <?php endif; ?>
-        <a href="<?= APP_URL ?>/dossier/ecriture-scan?id=<?= $entreprise['id'] ?>" style="display:flex;align-items:center;gap:9px;padding:10px 20px;background:linear-gradient(135deg,#0f6fba,#0891b2);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(15,111,186,0.35);letter-spacing:.3px;transition:all .2s;text-decoration:none" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 25px rgba(15,111,186,0.45)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(15,111,186,0.35)'">
+        <a href="<?= APP_URL ?>/dossier/ecriture-scan?id=<?= $entreprise['id'] ?>" class="btn-scan-ia">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
-            <span>Scan <span style="background:rgba(255,255,255,0.2);padding:1px 7px;border-radius:20px;font-size:14px;letter-spacing:.5px">IA</span></span>
+            <span>Scan <span class="btn-scan-ia-badge">IA</span></span>
         </a>
         <a href="<?= APP_URL ?>/export/ecritures?id=<?= $entreprise['id'] ?>&exercice=<?= $exercice ?>" class="btn btn-outline btn-sm" title="Exporter en Excel/CSV">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
