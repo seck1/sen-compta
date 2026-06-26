@@ -70,7 +70,36 @@ a{color:inherit;text-decoration:none}
   background:radial-gradient(circle,rgba(31,110,78,.10),transparent 65%);z-index:0}
 .hero::before{content:"";position:absolute;bottom:-200px;left:-140px;width:460px;height:460px;border-radius:50%;
   background:radial-gradient(circle,rgba(184,146,63,.12),transparent 65%);z-index:0}
-.hero .wrap{position:relative;z-index:2;max-width:840px}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero-text{max-width:600px}
+/* Visuel hero */
+.hero-visual{position:relative;height:420px}
+.hv-glow{position:absolute;inset:-40px;background:radial-gradient(circle at 60% 40%,rgba(31,110,78,.16),transparent 60%);filter:blur(20px)}
+.hv-card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 60px -28px rgba(21,41,63,.45)}
+.hv-main{position:absolute;top:30px;right:0;width:90%;padding:22px;z-index:2;animation:float 6s ease-in-out infinite}
+.hv-head{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:18px}
+.hv-head b{margin-left:6px}
+.hv-dot{width:9px;height:9px;border-radius:50%;background:#e3ddd0}
+.hv-dot:first-child{background:#e88}.hv-head .hv-dot:nth-child(2){background:#e9c46a}.hv-head .hv-dot:nth-child(3){background:#8bc7a3}
+.hv-kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.hv-kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.hv-kpi small{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.hv-kpi strong{display:block;font-family:var(--serif);font-size:24px;color:var(--navy-deep);margin-top:3px}
+.hv-kpi .up{font-size:12px;font-weight:700;color:var(--green)}
+.hv-bars{display:flex;align-items:flex-end;gap:9px;height:90px;padding-top:6px}
+.hv-bar{flex:1;background:linear-gradient(180deg,#cfe0d6,#a9cbb8);border-radius:5px 5px 0 0;min-height:8px}
+.hv-bar.g{background:linear-gradient(180deg,var(--green-light),var(--green))}
+.hv-float{position:absolute;display:flex;align-items:center;gap:11px;padding:13px 16px;z-index:3;border-radius:14px}
+.hv-float b{display:block;font-size:13.5px;color:var(--navy-deep);font-weight:700}
+.hv-float span{font-size:12px;color:var(--muted)}
+.hv-float-1{bottom:46px;left:-14px;animation:float 5s ease-in-out infinite .4s}
+.hv-float-2{bottom:-12px;right:24px;animation:float 5.5s ease-in-out infinite .8s}
+.hv-mini-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(31,110,78,.12);color:var(--green);flex-shrink:0}
+.hv-mini-ic svg{width:19px;height:19px}
+.hv-mini-ic.gold{background:rgba(184,146,63,.14);color:var(--gold)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--green);background:rgba(31,110,78,.08);
   border:1px solid rgba(31,110,78,.18);padding:7px 15px;border-radius:30px;margin-bottom:26px}
@@ -175,12 +204,17 @@ a{color:inherit;text-decoration:none}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{display:none}
+}
 @media(max-width:900px){
   .mods{grid-template-columns:1fr}
   .mods .mod{border-right:none}
   .plans{grid-template-columns:1fr;max-width:440px;margin:0 auto}
   .plan.feat{order:-1}
   .nav-links .nav-link[href="#modules"],.nav-links .nav-link[href="#tarifs"]{display:none}
+  .stats-band{grid-template-columns:repeat(2,1fr)!important}
 }
 @media(max-width:560px){
   .wrap{padding:0 20px}.nav-in{padding:12px 20px}
@@ -195,7 +229,7 @@ a{color:inherit;text-decoration:none}
 <nav class="nav">
   <div class="nav-in">
     <a href="<?= APP_URL ?>/login" class="brand">
-      <img src="/logo/logo.png" alt="SenCompta">
+      <img src="/logo/sencompta-icon.svg" alt="SenCompta">
       <span style="line-height:1.05"><b>SenCompta</b><span>Comptable du Sénégal</span></span>
     </a>
     <div class="nav-links">
@@ -209,19 +243,46 @@ a{color:inherit;text-decoration:none}
 
 <!-- HERO -->
 <header class="hero">
-  <div class="wrap">
-    <span class="kicker reveal"><span class="dot"></span>SYSCOHADA · DGID · IPRES / CSS</span>
-    <h1 class="reveal">Le SaaS comptable<br>du <em>Sénégal</em></h1>
-    <p class="lead reveal">SenCompta réunit en un seul espace la comptabilité SYSCOHADA, la fiscalité DGID, la paie sénégalaise et la gestion commerciale. Pensé pour les cabinets d'expertise et les PME qui veulent tenir une comptabilité juste, conforme et rapide.</p>
-    <div class="hero-cta reveal">
-      <a href="<?= APP_URL ?>/inscription" class="btn btn-green btn-lg">Créer un compte gratuit
-        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a href="#modules" class="btn btn-ghost btn-lg">Voir les fonctionnalités</a>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="kicker reveal"><span class="dot"></span>SYSCOHADA · DGID · IPRES / CSS</span>
+      <h1 class="reveal">Le SaaS comptable<br>du <em>Sénégal</em></h1>
+      <p class="lead reveal">SenCompta réunit en un seul espace la comptabilité SYSCOHADA, la fiscalité DGID, la paie sénégalaise et la gestion commerciale. Pensé pour les cabinets d'expertise et les PME qui veulent tenir une comptabilité juste, conforme et rapide.</p>
+      <div class="hero-cta reveal">
+        <a href="<?= APP_URL ?>/inscription" class="btn btn-green btn-lg">Créer un compte gratuit
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#modules" class="btn btn-ghost btn-lg">Voir les fonctionnalités</a>
+      </div>
+      <div class="hero-trust reveal">
+        <div><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Conforme SYSCOHADA révisé</div>
+        <div><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>Données chiffrées · 2FA</div>
+      </div>
     </div>
-    <div class="hero-trust reveal">
-      <div><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Conforme SYSCOHADA révisé</div>
-      <div><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>Données chiffrées · 2FA</div>
-      <div><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>Scan IA des pièces</div>
+
+    <!-- Visuel : carte tableau de bord flottante -->
+    <div class="hero-visual reveal">
+      <div class="hv-glow"></div>
+      <div class="hv-card hv-main">
+        <div class="hv-head"><span class="hv-dot"></span><span class="hv-dot"></span><span class="hv-dot"></span><b>Tableau de bord — Cabinet</b></div>
+        <div class="hv-kpis">
+          <div class="hv-kpi"><small>Résultat exercice</small><strong>+ 4,2 M</strong><span class="up">▲ 12%</span></div>
+          <div class="hv-kpi"><small>Trésorerie</small><strong>8,7 M</strong><span class="up">FCFA</span></div>
+        </div>
+        <div class="hv-bars">
+          <div class="hv-bar" style="height:38%"></div><div class="hv-bar" style="height:62%"></div>
+          <div class="hv-bar g" style="height:88%"></div><div class="hv-bar" style="height:54%"></div>
+          <div class="hv-bar" style="height:71%"></div><div class="hv-bar g" style="height:46%"></div>
+          <div class="hv-bar" style="height:80%"></div>
+        </div>
+      </div>
+      <div class="hv-card hv-float hv-float-1">
+        <div class="hv-mini-ic"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div><b>Écriture équilibrée</b><span>Débit = Crédit · validée</span></div>
+      </div>
+      <div class="hv-card hv-float hv-float-2">
+        <div class="hv-mini-ic gold"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg></div>
+        <div><b>Scan IA</b><span>Facture lue en 2 s</span></div>
+      </div>
     </div>
   </div>
 </header>
@@ -233,6 +294,22 @@ a{color:inherit;text-decoration:none}
     <span>Bilan<span>Compte de résultat</span><span>TAFIRE</span><span>Liasse DGID</span><span>Déclaration TVA</span><span>Bulletins de paie</span><span>Rapprochement bancaire</span><span>Analytique</span></span>
   </div>
 </div>
+
+<!-- STATS BAND -->
+<section style="padding:64px 0 0">
+  <div class="wrap">
+    <div class="stats-band reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper-2)">
+      <?php
+      $stats = [['16','modules intégrés'],['3','référentiels (SYSCOHADA, DGID, IPRES)'],['2 s','pour lire une facture au scan IA'],['100%','en ligne · multi-utilisateurs']];
+      foreach ($stats as $k=>$s): ?>
+      <div style="padding:30px 26px;<?= $k<3?'border-right:1px solid var(--line)':'' ?>">
+        <div style="font-family:var(--serif);font-size:40px;font-weight:600;color:var(--green);line-height:1;letter-spacing:-1px"><?= $s[0] ?></div>
+        <div style="font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.4"><?= $s[1] ?></div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
 
 <!-- MODULES -->
 <section class="sec" id="modules">
@@ -350,7 +427,7 @@ a{color:inherit;text-decoration:none}
 <footer class="foot">
   <div class="foot-in">
     <a href="<?= APP_URL ?>/login" class="brand">
-      <img src="/logo/logo.png" alt="SenCompta">
+      <img src="/logo/sencompta-icon.svg" alt="SenCompta">
       <span style="line-height:1.05"><b>SenCompta</b><span>Comptable du Sénégal</span></span>
     </a>
     <div class="foot-links">
