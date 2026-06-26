@@ -324,6 +324,7 @@ $modules = [
     ['bg'=>'rgba(8,145,178,0.1)','stroke'=>'#0891b2','svg'=>'<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>','title'=>'Import de Données','desc'=>'Clients, plan comptable, balance N-1'],
     ['bg'=>'rgba(31,110,78,0.1)','stroke'=>'#1f6e4e','svg'=>'<path d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>','title'=>'Lettrage & Relances','desc'=>'Pointage clients/fournisseurs'],
     ['bg'=>'rgba(180,131,9,0.1)','stroke'=>'#b48309','svg'=>'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>','title'=>'Immobilisations','desc'=>'Amortissements linéaire / dégressif'],
+    ['bg'=>'rgba(15,111,186,0.1)','stroke'=>'#0f6fba','svg'=>'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>','title'=>'États Financiers DGID','desc'=>'Liasse fiscale & DSF au format officiel'],
 ];
 foreach ($modules as $m): ?>
             <div class="mod-card">
