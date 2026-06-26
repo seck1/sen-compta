@@ -5,6 +5,14 @@
 .ecr-table tbody td { padding: 9px 7px; font-size: 10pt; overflow: hidden; text-overflow: ellipsis; }
 /* Le libellé absorbe l'espace restant et tronque proprement */
 .ecr-table td:nth-child(6) > div { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Colonne Actions : boutons compacts empilés, non tronqués */
+.ecr-table td:last-child { overflow: visible; padding: 6px; }
+.ecr-table td:last-child > div { flex-direction: column; gap: 4px !important; align-items: stretch !important; }
+.ecr-table td:last-child a,
+.ecr-table td:last-child button {
+    padding: 4px 8px !important; font-size: 12px !important; white-space: nowrap;
+    justify-content: center; width: 100%;
+}
 @media (min-width: 1100px) {
     /* Sur grand écran, plus de scroll : tout rentre */
     .table-wrap:has(.ecr-table) { overflow-x: visible; }
@@ -131,10 +139,10 @@ $filtreStatut = $_GET['statut'] ?? '';
     <table class="ecr-table">
         <thead>
             <tr>
-                <th style="width:28px"></th>
-                <th style="width:84px">Date</th><th style="width:92px">N° pièce</th><th style="width:78px">N° Facture</th><th style="width:74px">Journal</th><th>Libellé</th><th style="width:88px">Tiers</th>
-                <th style="text-align:right;width:80px">Débit</th><th style="text-align:right;width:80px">Crédit</th>
-                <th style="width:52px;text-align:center">Lignes</th><th style="text-align:center;width:74px">Justificatif</th><th style="width:78px">Statut</th><th style="width:70px">Saisie par</th><th style="width:88px">Actions</th>
+                <th style="width:26px"></th>
+                <th style="width:80px">Date</th><th style="width:86px">N° pièce</th><th style="width:70px">N° Facture</th><th style="width:70px">Journal</th><th>Libellé</th><th style="width:78px">Tiers</th>
+                <th style="text-align:right;width:76px">Débit</th><th style="text-align:right;width:76px">Crédit</th>
+                <th style="width:46px;text-align:center">Lignes</th><th style="text-align:center;width:64px">Justif.</th><th style="width:72px">Statut</th><th style="width:62px">Saisie</th><th style="width:124px">Actions</th>
             </tr>
         </thead>
         <tbody>
