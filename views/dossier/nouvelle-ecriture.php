@@ -716,6 +716,10 @@ function creerLigne() {
     const inpCre = tdCre.querySelector('input');
     inpDeb.addEventListener('input', () => { autoBalance(tr, 'debit'); calculerTotaux(); });
     inpCre.addEventListener('input', () => { autoBalance(tr, 'credit'); calculerTotaux(); });
+    // Au blur (sortie du champ), tente de solder la dernière cellule vide même si
+    // l'utilisateur n'a pas tapé sur la ligne incomplète.
+    inpDeb.addEventListener('blur', () => { autoBalanceGlobal(); calculerTotaux(); });
+    inpCre.addEventListener('blur', () => { autoBalanceGlobal(); calculerTotaux(); });
 
     btnDel.addEventListener('click', () => {
         if (document.querySelectorAll('.ligne-ecriture').length > 2) {
@@ -747,10 +751,14 @@ function autoBalance(tr, side) {
             otDeb.value = myCre.value;
         return;
     }
-    // Cas N>2 lignes : si UNE seule cellule montant est vide dans tout le tableau,
-    // la remplir avec l'écart d'équilibre (ex. achat avec TVA = 3 lignes).
+    autoBalanceGlobal();
+}
+
+/* Solde la dernière cellule vide (cas N>2 lignes ou appel sur blur). */
+function autoBalanceGlobal() {
     const debs = Array.prototype.slice.call(document.querySelectorAll('[name="debit[]"]'));
     const cres = Array.prototype.slice.call(document.querySelectorAll('[name="credit[]"]'));
+    if (debs.length < 3) return; // le cas 2 lignes est géré par autoBalance()
     let totD = 0, totC = 0, vides = [];
     debs.forEach(function(d, i){
         const vd = parseNum(d.value), vc = parseNum(cres[i].value);
