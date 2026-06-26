@@ -82,18 +82,29 @@ class ReglementController {
             // Pour fournisseur: solde = credit; pour client: solde = debit (on le détermine après)
             $montantFacture += $lt['credit'] + $lt['debit'];
         }
-        // Vérifier les règlements existants liés à cette facture (même numero_facture, même tiers, journaux BNQ/CAI)
+        // Déjà réglé : règlements (BNQ/CAI/MOB) rattachés à cette facture par lettrage
+        // commun, ou à défaut par n° facture (non vide). Couvre les paiements partiels.
         $stmtDeja = $db->prepare("
-            SELECT COALESCE(SUM(l.debit), 0) as total_regle
+            SELECT COALESCE(SUM(ABS(l.debit - l.credit)), 0) as total_regle
             FROM lignes_ecritures l
             JOIN ecritures e ON e.id = l.ecriture_id
             JOIN journaux j ON j.id = e.journal_id
             JOIN comptes c ON c.id = l.compte_id
-            WHERE e.entreprise_id = ? AND e.numero_facture = ? AND e.id != ?
+            WHERE e.entreprise_id = ? AND e.id != ?
             AND j.code IN ('BNQ','CAI','MOB')
             AND (c.numero LIKE '40%' OR c.numero LIKE '41%')
+            AND (
+                (l.code_lettrage IS NOT NULL AND l.code_lettrage <> '' AND l.code_lettrage IN (
+                    SELECT l3.code_lettrage FROM lignes_ecritures l3
+                    JOIN comptes c3 ON c3.id=l3.compte_id
+                    WHERE l3.ecriture_id=? AND l3.code_lettrage IS NOT NULL AND l3.code_lettrage <> ''
+                      AND (c3.numero LIKE '40%' OR c3.numero LIKE '41%')
+                ))
+                OR (? <> '' AND e.numero_facture = ?)
+            )
         ");
-        $stmtDeja->execute([$entId, $ecriture['numero_facture'], $ecritureId]);
+        $numFac = (string)($ecriture['numero_facture'] ?? '');
+        $stmtDeja->execute([$entId, $ecritureId, $ecritureId, $numFac, $numFac]);
         $dejaRegle = (float)$stmtDeja->fetchColumn();
         $soldeRestant = $montantFacture - $dejaRegle;
 

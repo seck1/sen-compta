@@ -789,17 +789,28 @@ class DossierController {
                 (SELECT SUM(l.credit) FROM lignes_ecritures l JOIN comptes c ON c.id=l.compte_id WHERE l.ecriture_id=e.id AND c.numero LIKE '40%'),
                 0
             )) as montant_tiers,
-            /* Déjà réglé : somme des lignes 41x/40x dans les écritures BNQ/CAI liées à ce n° facture */
+            /* Déjà réglé : règlements (BNQ/CAI/MOB) sur les lignes 40x/41x rattachées
+               à cette facture — par lettrage commun, ou à défaut par n° facture. */
             (SELECT COALESCE(SUM(ABS(l2.debit - l2.credit)),0)
              FROM lignes_ecritures l2
              JOIN ecritures e2 ON e2.id=l2.ecriture_id
              JOIN journaux j2 ON j2.id=e2.journal_id
              JOIN comptes c2 ON c2.id=l2.compte_id
              WHERE e2.entreprise_id=e.entreprise_id
-               AND e2.numero_facture=e.numero_facture
                AND e2.id != e.id
-               AND j2.code IN ('BNQ','CAI')
+               AND j2.code IN ('BNQ','CAI','MOB')
                AND (c2.numero LIKE '40%' OR c2.numero LIKE '41%')
+               AND (
+                    /* rattachement par lettrage (le lien comptable fiable) */
+                    (l2.code_lettrage IS NOT NULL AND l2.code_lettrage <> '' AND l2.code_lettrage IN (
+                        SELECT l3.code_lettrage FROM lignes_ecritures l3
+                        JOIN comptes c3 ON c3.id=l3.compte_id
+                        WHERE l3.ecriture_id=e.id AND l3.code_lettrage IS NOT NULL AND l3.code_lettrage <> ''
+                          AND (c3.numero LIKE '40%' OR c3.numero LIKE '41%')
+                    ))
+                    /* ou, à défaut, par n° facture commun (non vide) */
+                    OR (e.numero_facture IS NOT NULL AND e.numero_facture <> '' AND e2.numero_facture=e.numero_facture)
+               )
             ) as deja_regle
             FROM ecritures e
             JOIN journaux j ON j.id = e.journal_id
