@@ -637,18 +637,29 @@ class EtatsFinanciersController {
         $filename = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entreprise['raison_sociale']) . '_' . $exercice . '.xlsx';
 
         // Archive obligatoire : OHADA 10 ans / CGI Art. 750 6 ans
+        // Non bloquant : un échec d'archivage ne doit jamais empêcher le téléchargement.
         $archiveDir = APP_ROOT . '/archives/dgid/';
         if (!is_dir($archiveDir)) {
-            mkdir($archiveDir, 0755, true);
+            @mkdir($archiveDir, 0775, true);
         }
-        $archiveFile = $archiveDir . date('Y-m-d_His') . '_' . $filename;
-        // Fix W — Vérifier que la copie d'archive a réussi
-        $copied = copy($tmpFile, $archiveFile);
-        if (!$copied) {
-            error_log("DGID archive failed for: $archiveFile");
+        if (is_dir($archiveDir) && is_writable($archiveDir)) {
+            $archiveFile = $archiveDir . date('Y-m-d_His') . '_' . $filename;
+            if (!@copy($tmpFile, $archiveFile)) {
+                error_log("DGID archive failed for: $archiveFile");
+            }
+        } else {
+            error_log("DGID archive dir non inscriptible: $archiveDir");
         }
         require_once APP_ROOT . '/src/Services/NotificationService.php';
-        NotificationService::log(auth()['id'], 'EXPORT_DGID', "Export DGID $exercice — " . $entreprise['raison_sociale'], 'entreprises', $id);
+        // log(userId, action, entrepriseId, table, recordId, details)
+        NotificationService::log(
+            (int)(auth()['id']),
+            'EXPORT_DGID',
+            (int)$id,
+            'entreprises',
+            (int)$id,
+            "Export DGID $exercice — " . $entreprise['raison_sociale']
+        );
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
