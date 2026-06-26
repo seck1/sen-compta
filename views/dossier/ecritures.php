@@ -143,9 +143,9 @@ $filtreStatut = $_GET['statut'] ?? '';
         <thead>
             <tr>
                 <th style="width:26px"></th>
-                <th style="width:80px">Date</th><th style="width:86px">N° pièce</th><th style="width:70px">N° Facture</th><th style="width:70px">Journal</th><th>Libellé</th><th style="width:78px">Tiers</th>
-                <th style="text-align:right;width:76px">Débit</th><th style="text-align:right;width:76px">Crédit</th>
-                <th style="width:46px;text-align:center">Lignes</th><th style="text-align:center;width:64px">Justif.</th><th style="width:72px">Statut</th><th style="width:62px">Saisie</th><th style="width:124px">Actions</th>
+                <th style="width:88px">Date</th><th style="width:96px">N° pièce</th><th style="width:80px">N° Facture</th><th style="width:78px">Journal</th><th style="width:230px">Libellé</th><th style="width:96px">Tiers</th>
+                <th style="text-align:right;width:84px">Débit</th><th style="text-align:right;width:84px">Crédit</th>
+                <th style="width:50px;text-align:center">Lignes</th><th style="text-align:center;width:72px">Justif.</th><th style="width:80px">Statut</th><th style="width:70px">Saisie</th><th style="width:124px">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -171,8 +171,8 @@ $filtreStatut = $_GET['statut'] ?? '';
                 <span style="display:inline-block;margin-top:3px;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;background:<?= $mpColor ?>18;color:<?= $mpColor ?>;border:1px solid <?= $mpColor ?>33;letter-spacing:.3px;text-transform:uppercase"><?= $mpLabel ?></span>
                 <?php endif; ?>
             </td>
-            <td style="max-width:200px">
-                <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= e($ec['libelle']) ?></div>
+            <td>
+                <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($ec['libelle']) ?>"><?= e($ec['libelle']) ?></div>
                 <?php if ($ec['statut']==='rejetee' && !empty($ec['motif_rejet'])): ?>
                 <div style="margin-top:2px;font-size:13px;color:#dc2626;font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($ec['motif_rejet']) ?>">✗ <?= e($ec['motif_rejet']) ?></div>
                 <?php endif; ?>
