@@ -888,6 +888,14 @@ class DossierController {
         $comptes = $comptes->fetchAll();
         $comptesJson = json_encode(array_map(fn($c) => ['id'=>(int)$c['id'],'numero'=>$c['numero'],'intitule'=>$c['intitule']], $comptes), JSON_UNESCAPED_UNICODE);
 
+        // Sections analytiques (pour ventiler les lignes — optionnel)
+        $sectionsJson = '[]';
+        try {
+            $sa = $db->prepare("SELECT id, code, libelle FROM sections_analytiques WHERE entreprise_id = ? AND actif = 1 ORDER BY code");
+            $sa->execute([$id]);
+            $sectionsJson = json_encode($sa->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $e) { /* table absente : pas d'analytique */ }
+
         $error = $_SESSION['form_error'] ?? null;
         unset($_SESSION['form_error']);
 
@@ -919,6 +927,7 @@ class DossierController {
         $credits   = $_POST['credit']         ?? [];
         $libelles  = $_POST['ligne_libelle']  ?? [];
         $tiers_ids = $_POST['tiers_id']       ?? [];
+        $sections  = $_POST['section_analytique_id'] ?? [];
 
         if (!$libelle || !$journalId || empty($comptes)) {
             $_SESSION['form_error'] = 'Veuillez remplir tous les champs obligatoires.';
@@ -957,10 +966,11 @@ class DossierController {
             $stmt->execute([$entId, $journalId, auth()['id'], $date, $libelle, $pieceJointe, $exercice, $periode, $numeroPiece, $numeroFacture ?: null, $moyenPaiement]);
             $ecritureId = $db->lastInsertId();
 
-            $stmtL = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit, tiers_id) VALUES (?,?,?,?,?,?)");
+            $stmtL = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit, tiers_id, section_analytique_id) VALUES (?,?,?,?,?,?,?)");
             foreach ($comptes as $i => $compteId) {
                 if (!$compteId) continue;
-                $tiersId = !empty($tiers_ids[$i]) ? (int)$tiers_ids[$i] : null;
+                $tiersId   = !empty($tiers_ids[$i]) ? (int)$tiers_ids[$i] : null;
+                $sectionId = !empty($sections[$i])  ? (int)$sections[$i]  : null;
                 $stmtL->execute([
                     $ecritureId,
                     (int)$compteId,
@@ -968,6 +978,7 @@ class DossierController {
                     floatval(str_replace(',','.',$debits[$i] ?? 0)),
                     floatval(str_replace(',','.',$credits[$i] ?? 0)),
                     $tiersId,
+                    $sectionId,
                 ]);
             }
             $db->commit();
@@ -1043,6 +1054,7 @@ class DossierController {
         $credits   = $_POST['credit']        ?? [];
         $libelles  = $_POST['ligne_libelle'] ?? [];
         $tiers_ids = $_POST['tiers_id']      ?? [];
+        $sections  = $_POST['section_analytique_id'] ?? [];
 
         if (!$libelle || !$journalId || empty($comptes)) {
             $_SESSION['form_error'] = 'Veuillez remplir tous les champs obligatoires.';
@@ -1086,10 +1098,11 @@ class DossierController {
             // Supprimer les anciennes lignes et recréer
             $db->prepare("DELETE FROM lignes_ecritures WHERE ecriture_id = ?")->execute([$ecritureId]);
 
-            $stmtL = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit, tiers_id) VALUES (?,?,?,?,?,?)");
+            $stmtL = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit, tiers_id, section_analytique_id) VALUES (?,?,?,?,?,?,?)");
             foreach ($comptes as $i => $compteId) {
                 if (!$compteId) continue;
-                $tiersId = !empty($tiers_ids[$i]) ? (int)$tiers_ids[$i] : null;
+                $tiersId   = !empty($tiers_ids[$i]) ? (int)$tiers_ids[$i] : null;
+                $sectionId = !empty($sections[$i])  ? (int)$sections[$i]  : null;
                 $stmtL->execute([
                     $ecritureId,
                     (int)$compteId,
@@ -1097,6 +1110,7 @@ class DossierController {
                     floatval(str_replace(',','.',$debits[$i] ?? 0)),
                     floatval(str_replace(',','.',$credits[$i] ?? 0)),
                     $tiersId,
+                    $sectionId,
                 ]);
             }
             $db->commit();

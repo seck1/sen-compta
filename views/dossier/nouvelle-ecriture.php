@@ -6,6 +6,7 @@ $comptesJson = json_encode(array_map(fn($c) => [
 ], $comptes), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <script id="comptes-data" type="application/json"><?= $comptesJson ?></script>
+<script id="sections-data" type="application/json"><?= $sectionsJson ?? '[]' ?></script>
 
 <style>
 #form-ecriture { padding-bottom: 80px; }
@@ -344,6 +345,9 @@ input[type=number] { -moz-appearance: textfield; }
                             <th style="width:130px">Débit</th>
                             <th style="width:130px">Crédit</th>
                             <th>Libellé ligne</th>
+                            <?php if (!empty($sectionsJson) && $sectionsJson !== '[]'): ?>
+                            <th style="width:150px">Section</th>
+                            <?php endif; ?>
                             <th style="width:44px"></th>
                         </tr>
                     </thead>
@@ -383,6 +387,8 @@ input[type=number] { -moz-appearance: textfield; }
 'use strict';
 
 const COMPTES  = JSON.parse(document.getElementById('comptes-data').textContent);
+const SECTIONS = JSON.parse((document.getElementById('sections-data')||{}).textContent || '[]');
+const HAS_SECTIONS = SECTIONS.length > 0;
 const ENT_ID   = <?= (int)$entreprise['id'] ?>;
 const APP_URL  = '<?= APP_URL ?>';
 const fmt = v => new Intl.NumberFormat('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(v);
@@ -521,6 +527,20 @@ function makeCellText(name, placeholder) {
     return td;
 }
 
+/* ── Cellule section analytique (optionnelle) ── */
+function makeCellSection() {
+    const td  = mkEl('td', null, {padding:'5px 8px'});
+    const sel = mkEl('select', {name:'section_analytique_id[]', 'class':'ec-field'});
+    sel.appendChild(mkEl('option', {value:''}, null)).textContent = '—';
+    SECTIONS.forEach(function(s){
+        const opt = mkEl('option', {value:String(s.id)});
+        opt.textContent = s.code + ' · ' + s.libelle;
+        sel.appendChild(opt);
+    });
+    td.appendChild(sel);
+    return td;
+}
+
 /* ── Détecter type tiers depuis numéro compte ── */
 function tiersTypeFromCompte(numero) {
     if (!numero) return null;
@@ -656,7 +676,7 @@ function creerTiersRow(ncols, tiersId, tiersNom) {
 
 /* ── Création ligne ── */
 function creerLigne() {
-    const NCOLS = 5; // N°Compte | Débit | Crédit | Libellé | ✕
+    const NCOLS = HAS_SECTIONS ? 6 : 5; // +1 colonne si sections analytiques
     const tr = mkEl('tr', {'class':'ligne-ecriture'});
 
     const tdCompte = makeCellCompte('Ex: 401 ou 411…', function(numeroCompte) {
@@ -680,6 +700,7 @@ function creerLigne() {
     tr.appendChild(tdDeb);
     tr.appendChild(tdCre);
     tr.appendChild(tdLib);
+    if (HAS_SECTIONS) tr.appendChild(makeCellSection());
     tr.appendChild(tdBtn);
 
     const trTiers = creerTiersRow(NCOLS);
