@@ -96,6 +96,12 @@ $routes = [
     'dossier/ecritures/supprimer' => ['DossierController', 'supprimerEcriture'],
     'dossier/ecritures/scan'      => ['DossierController', 'ecritureScan'],
     'dossier/import-csv'          => ['DossierController', 'importCSV'],
+    // Import de données (clients/fournisseurs, plan comptable, balance d'ouverture N-1)
+    'dossier/import'                  => ['ImportDonneesController', 'index'],
+    'dossier/import/modele'           => ['ImportDonneesController', 'modele'],
+    'dossier/import/tiers'            => ['ImportDonneesController', 'importTiers'],
+    'dossier/import/plan-comptable'   => ['ImportDonneesController', 'importPlanComptable'],
+    'dossier/import/balance'          => ['ImportDonneesController', 'importBalance'],
     // Alias kebab-case utilisés dans les vues
     'dossier/nouvelle-ecriture'   => ['DossierController', 'nouvelleEcriture'],
     'dossier/store-ecriture'      => ['DossierController', 'storeEcriture'],
