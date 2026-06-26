@@ -153,7 +153,7 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;color:var(--gold);background:rgba(184,146,63,.1);padding:3px 9px;border-radius:6px}
 
 /* ===== TARIFS ===== */
-.tarifs{background:linear-gradient(180deg,var(--navy-deep),#0f2031);color:#fff;position:relative;z-index:2}
+.tarifs{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect x='29' y='0' width='2' height='2' fill='%23b8923f' opacity='.09'/%3E%3Crect x='0' y='29' width='2' height='2' fill='%23b8923f' opacity='.09'/%3E%3C/svg%3E"),linear-gradient(180deg,var(--navy-deep),#0f2031);color:#fff;position:relative;z-index:2}
 .tarifs .sec-head h2{color:#fff}
 .tarifs .sec-head p{color:rgba(255,255,255,.62)}
 .tarifs .sec-num{color:var(--gold-light)}
@@ -162,7 +162,8 @@ a{color:inherit;text-decoration:none}
   display:flex;flex-direction:column;transition:.25s;position:relative}
 .plan:hover{transform:translateY(-6px);background:rgba(255,255,255,.07)}
 .plan.feat{background:linear-gradient(170deg,rgba(184,146,63,.16),rgba(255,255,255,.05));
-  border:1.5px solid var(--gold);box-shadow:0 30px 70px -30px rgba(184,146,63,.5)}
+  border:1.5px solid var(--gold);box-shadow:0 30px 70px -30px rgba(184,146,63,.5);
+  animation:glow-gold 3.4s ease-in-out infinite}
 .plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
   background:var(--gold);color:var(--navy-deep);font-size:11.5px;font-weight:700;letter-spacing:1px;
   text-transform:uppercase;padding:6px 16px;border-radius:30px;box-shadow:0 8px 20px -8px rgba(184,146,63,.7)}
@@ -185,10 +186,26 @@ a{color:inherit;text-decoration:none}
 .plan .btn-outline-w:hover{border-color:var(--gold-light);color:var(--gold-light)}
 
 /* ===== CTA FINAL ===== */
-.final{padding:96px 0;text-align:center;position:relative;z-index:2}
+.final{padding:108px 0;text-align:center;position:relative;z-index:2;overflow:hidden}
+.final::before{content:"";position:absolute;top:-120px;left:-100px;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(31,110,78,.10),transparent 65%);animation:drift-a 13s ease-in-out infinite;z-index:0}
+.final::after{content:"";position:absolute;bottom:-110px;right:-80px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,146,63,.11),transparent 65%);animation:drift-b 16s ease-in-out infinite;z-index:0}
+.final .wrap{position:relative;z-index:2}
 .final h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5vw,54px);line-height:1.05;
   letter-spacing:-1px;color:var(--navy-deep);max-width:16ch;margin:0 auto 22px}
 .final p{font-size:18px;color:var(--muted);max-width:52ch;margin:0 auto 34px}
+@keyframes drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(42px,30px)}}
+@keyframes drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-32px,-22px)}}
+/* Glow doré pulsant sur la carte tarif Populaire */
+@keyframes glow-gold{0%,100%{box-shadow:0 30px 70px -30px rgba(184,146,63,.5),0 0 0 0 rgba(184,146,63,0)}
+  50%{box-shadow:0 30px 70px -30px rgba(184,146,63,.65),0 0 30px -4px rgba(184,146,63,.3)}}
+/* Shimmer one-shot sur les boutons verts */
+.btn-green{position:relative;overflow:hidden}
+.btn-green::after{content:"";position:absolute;top:0;left:-110%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-20deg)}
+.btn-green.shimmer-run::after{animation:shimmer-pass .6s ease forwards}
+@keyframes shimmer-pass{from{left:-110%}to{left:170%}}
 
 /* ===== FOOTER ===== */
 .foot{border-top:1px solid var(--line);background:var(--paper-2);position:relative;z-index:2}
@@ -201,7 +218,8 @@ a{color:inherit;text-decoration:none}
 .foot-copy{font-size:13px;color:var(--muted);width:100%;border-top:1px solid var(--line);padding-top:18px;margin-top:6px}
 
 /* reveal on scroll */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal{opacity:0;transform:translateY(32px) scale(.97);transition:opacity .65s cubic-bezier(.22,.68,0,1.15),transform .65s cubic-bezier(.22,.68,0,1.15)}
+.mod{will-change:transform}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:980px){
@@ -300,10 +318,16 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <div class="stats-band reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper-2)">
       <?php
-      $stats = [['16','modules intégrés'],['3','référentiels (SYSCOHADA, DGID, IPRES)'],['2 s','pour lire une facture au scan IA'],['100%','en ligne · multi-utilisateurs']];
+      // [valeur affichée, label, data-count (num), data-suffix]
+      $stats = [
+        ['16','modules intégrés','16',''],
+        ['3','référentiels (SYSCOHADA, DGID, IPRES)','3',''],
+        ['2 s','pour lire une facture au scan IA',null,''],
+        ['100%','en ligne · multi-utilisateurs','100','%'],
+      ];
       foreach ($stats as $k=>$s): ?>
       <div style="padding:30px 26px;<?= $k<3?'border-right:1px solid var(--line)':'' ?>">
-        <div style="font-family:var(--serif);font-size:40px;font-weight:600;color:var(--green);line-height:1;letter-spacing:-1px"><?= $s[0] ?></div>
+        <div style="font-family:var(--serif);font-size:40px;font-weight:600;color:var(--green);line-height:1;letter-spacing:-1px"<?= $s[2]!==null?' data-count="'.$s[2].'" data-suffix="'.$s[3].'"':'' ?>><?= $s[0] ?></div>
         <div style="font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.4"><?= $s[1] ?></div>
       </div>
       <?php endforeach; ?>
@@ -443,16 +467,68 @@ a{color:inherit;text-decoration:none}
 </footer>
 
 <script>
-// Reveal au scroll
 (function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Cascade dédiée aux modules (par rangée)
+  document.querySelectorAll('.mod').forEach(function(el,i){
+    var row = Math.floor(i/2), col = i%2;
+    el.style.transitionDelay = (row*70 + col*55) + 'ms';
+  });
+
+  // Reveal au scroll
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
   },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el,i){
-    // léger stagger pour les groupes
-    el.style.transitionDelay = (Math.min(i%4,3)*60)+'ms';
+  document.querySelectorAll('.reveal').forEach(function(el){
+    if (!el.style.transitionDelay) el.style.transitionDelay = '0ms';
     io.observe(el);
   });
+
+  // Compteurs animés sur les stats
+  function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduce){ el.textContent = target + suffix; return; }
+    var dur = 1400, start = null;
+    function step(ts){
+      if (!start) start = ts;
+      var t = Math.min((ts-start)/dur, 1);
+      el.textContent = Math.round(easeOutCubic(t)*target) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var statObs = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); statObs.unobserve(e.target); }});
+  },{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){ statObs.observe(el); });
+
+  // Hover 3D subtil sur les cartes modules (desktop uniquement)
+  if (!reduce && window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.mod').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX-r.left)/r.width - .5, y = (e.clientY-r.top)/r.height - .5;
+        card.style.transition = 'transform .08s ease';
+        card.style.transform = 'perspective(700px) rotateY('+(x*5)+'deg) rotateX('+(-y*5)+'deg) translateZ(4px)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transition = 'transform .45s cubic-bezier(.2,.7,.2,1)';
+        card.style.transform = 'perspective(700px) rotateY(0) rotateX(0) translateZ(0)';
+      });
+    });
+  }
+
+  // Shimmer one-shot sur le CTA final quand il entre dans le viewport
+  var ctaBtn = document.querySelector('.final .btn-green');
+  if (ctaBtn && !reduce){
+    var ob = new IntersectionObserver(function(es){
+      if (es[0].isIntersecting){ setTimeout(function(){ ctaBtn.classList.add('shimmer-run'); }, 400); ob.disconnect(); }
+    },{threshold:.8});
+    ob.observe(ctaBtn);
+  }
 })();
 </script>
 </body>
