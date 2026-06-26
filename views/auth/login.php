@@ -216,6 +216,22 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 </head>
 <body>
 
+<div class="login-topbar">
+  <a href="<?= APP_URL ?>/fonctionnalites" class="lt-link">Fonctionnalités</a>
+  <a href="<?= APP_URL ?>/inscription" class="lt-cta">Créer un compte gratuit</a>
+</div>
+<style>
+.login-topbar{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;justify-content:flex-end;
+  align-items:center;gap:10px;padding:16px 28px}
+.login-topbar .lt-link{font-size:14px;font-weight:600;color:var(--navy);padding:9px 14px;border-radius:9px;
+  text-decoration:none;transition:.18s}
+.login-topbar .lt-link:hover{background:rgba(30,58,95,.07)}
+.login-topbar .lt-cta{font-size:14px;font-weight:700;color:#fff;background:var(--green);padding:10px 18px;
+  border-radius:10px;text-decoration:none;transition:.2s;box-shadow:0 8px 18px -10px rgba(31,110,78,.7)}
+.login-topbar .lt-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
+@media(max-width:560px){.login-topbar{padding:12px 16px}.login-topbar .lt-link{display:none}}
+</style>
+
 <div class="shell">
 
   <!-- ── Colonne gauche : carte de connexion ── -->

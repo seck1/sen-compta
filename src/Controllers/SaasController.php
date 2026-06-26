@@ -3,6 +3,11 @@ require_once APP_ROOT . '/config/app.php';
 
 class SaasController {
 
+    // ── Page publique « Fonctionnalités » (vitrine) ───────────────────
+    public function fonctionnalites(): void {
+        require_once APP_ROOT . '/views/saas/fonctionnalites.php';
+    }
+
     // ── Page inscription cabinet ──────────────────────────────────────
     public function inscriptionPage(): void {
         if (auth()) redirect('/dashboard');
