@@ -2,17 +2,20 @@
 /* Tableau des écritures : compact pour tenir sur toute la largeur sans scroll horizontal */
 .ecr-table { width: 100%; table-layout: fixed; }
 .ecr-table thead th { padding: 9px 7px; font-size: 8.5pt; letter-spacing: .3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ecr-table tbody td { padding: 9px 7px; font-size: 10pt; overflow: hidden; text-overflow: ellipsis; }
+/* Compacte uniquement les lignes principales (pas la ligne de détail dépliée) */
+.ecr-table > tbody > tr:not([id^="detail-"]) > td { padding: 9px 7px; font-size: 10pt; overflow: hidden; text-overflow: ellipsis; }
 /* Le libellé absorbe l'espace restant et tronque proprement */
 .ecr-table td:nth-child(6) > div { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Colonne Actions : boutons compacts empilés, non tronqués */
-.ecr-table td:last-child { overflow: visible; padding: 6px; }
-.ecr-table td:last-child > div { flex-direction: column; gap: 4px !important; align-items: stretch !important; }
-.ecr-table td:last-child a,
-.ecr-table td:last-child button {
+.ecr-table > tbody > tr:not([id^="detail-"]) > td:last-child { overflow: visible; padding: 6px; }
+.ecr-table > tbody > tr:not([id^="detail-"]) > td:last-child > div { flex-direction: column; gap: 4px !important; align-items: stretch !important; }
+.ecr-table > tbody > tr:not([id^="detail-"]) > td:last-child a,
+.ecr-table > tbody > tr:not([id^="detail-"]) > td:last-child button {
     padding: 4px 8px !important; font-size: 12px !important; white-space: nowrap;
     justify-content: center; width: 100%;
 }
+/* La ligne de détail dépliée s'affiche normalement, pleine largeur */
+.ecr-table tr[id^="detail-"] > td { padding: 0; overflow: visible; }
 @media (min-width: 1100px) {
     /* Sur grand écran, plus de scroll : tout rentre */
     .table-wrap:has(.ecr-table) { overflow-x: visible; }
