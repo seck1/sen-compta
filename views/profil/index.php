@@ -91,7 +91,22 @@
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" style="color:var(--gold)"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
         Paramétrage email (SMTP)
     </h2>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Configurez l'envoi des emails (codes de vérification, notifications). Pour Gmail : hôte <code>smtp.gmail.com</code>, port <code>587</code>, et un <strong>mot de passe d'application</strong> Google.</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Configurez l'envoi automatique des emails (codes de vérification, notifications). Une fois enregistré, tout part automatiquement à chaque inscription.</p>
+    <div style="margin-bottom:16px">
+        <button type="button" onclick="prefillResend()" style="font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#6366f1,#4f46e5);border:none;padding:8px 16px;border-radius:8px;cursor:pointer">⚡ Pré-remplir avec Resend</button>
+        <span style="font-size:12px;color:var(--text-muted);margin-left:8px">(remplit tout sauf la clé — colle juste ta clé <code>re_…</code>)</span>
+    </div>
+    <script>
+    function prefillResend(){
+        document.getElementById('f_host').value = 'smtp.resend.com';
+        document.getElementById('f_port').value = '587';
+        document.getElementById('f_user').value = 'resend';
+        document.getElementById('f_from').value = 'onboarding@resend.dev';
+        document.getElementById('f_fromname').value = 'SenCompta';
+        document.getElementById('f_pass').focus();
+        document.getElementById('f_pass').placeholder = 'Collez votre clé re_… ici';
+    }
+    </script>
 
     <?php if (!empty($smtpFlash)): ?>
     <div style="padding:11px 15px;border-radius:9px;margin-bottom:16px;font-size:13.5px;font-weight:600;<?= $smtpFlash['ok']?'background:rgba(31,110,78,.1);color:#1f6e4e;border:1px solid rgba(31,110,78,.25)':'background:rgba(192,57,43,.08);color:#c0392b;border:1px solid rgba(192,57,43,.25)' ?>"><?= e($smtpFlash['msg']) ?></div>
@@ -102,27 +117,27 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
             <div>
                 <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Serveur SMTP</label>
-                <input type="text" name="smtp_host" value="<?= e($smtp['smtp_host']) ?>" placeholder="smtp.gmail.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+                <input type="text" id="f_host" name="smtp_host" value="<?= e($smtp['smtp_host']) ?>" placeholder="smtp.resend.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
             </div>
             <div>
                 <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Port</label>
-                <input type="number" name="smtp_port" value="<?= e($smtp['smtp_port']) ?>" placeholder="587" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+                <input type="number" id="f_port" name="smtp_port" value="<?= e($smtp['smtp_port']) ?>" placeholder="587" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
             </div>
             <div>
-                <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Utilisateur (email)</label>
-                <input type="email" name="smtp_user" value="<?= e($smtp['smtp_user']) ?>" placeholder="sencompta1@gmail.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+                <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Utilisateur</label>
+                <input type="text" id="f_user" name="smtp_user" value="<?= e($smtp['smtp_user']) ?>" placeholder="resend" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
             </div>
             <div>
-                <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Mot de passe d'application</label>
-                <input type="password" name="smtp_pass" value="" placeholder="<?= $smtp['smtp_pass']!==''?'•••••••• (inchangé)':'16 lettres Google' ?>" autocomplete="new-password" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+                <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Mot de passe / clé API</label>
+                <input type="password" id="f_pass" name="smtp_pass" value="" placeholder="<?= $smtp['smtp_pass']!==''?'•••••••• (inchangé)':'clé re_… (Resend)' ?>" autocomplete="new-password" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
             </div>
             <div>
                 <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Expéditeur (From)</label>
-                <input type="email" name="mail_from" value="<?= e($smtp['mail_from']) ?>" placeholder="sencompta1@gmail.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+                <input type="email" id="f_from" name="mail_from" value="<?= e($smtp['mail_from']) ?>" placeholder="onboarding@resend.dev" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
             </div>
             <div>
                 <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Nom expéditeur</label>
-                <input type="text" name="mail_from_name" value="<?= e($smtp['mail_from_name'] ?: 'SenCompta') ?>" placeholder="SenCompta" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+                <input type="text" id="f_fromname" name="mail_from_name" value="<?= e($smtp['mail_from_name'] ?: 'SenCompta') ?>" placeholder="SenCompta" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
             </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
