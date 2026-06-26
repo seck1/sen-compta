@@ -31,6 +31,13 @@ ob_start();
         <a href="<?= APP_URL ?>/superadmin" class="action-btn btn-plan" style="text-decoration:none;padding:8px 16px">← Dashboard</a>
     </div>
 
+    <?php if (!empty($_SESSION['flash_success'])): ?>
+    <div style="padding:12px 16px;border-radius:9px;background:rgba(31,110,78,.1);color:#1f6e4e;border:1px solid rgba(31,110,78,.25);font-weight:600;margin-bottom:16px;font-size:.9rem"><?= htmlspecialchars($_SESSION['flash_success']) ?></div>
+    <?php unset($_SESSION['flash_success']); endif; ?>
+    <?php if (!empty($_SESSION['flash_error'])): ?>
+    <div style="padding:12px 16px;border-radius:9px;background:rgba(192,57,43,.08);color:#c0392b;border:1px solid rgba(192,57,43,.25);font-weight:600;margin-bottom:16px;font-size:.9rem"><?= htmlspecialchars($_SESSION['flash_error']) ?></div>
+    <?php unset($_SESSION['flash_error']); endif; ?>
+
     <form method="GET" class="filter-bar">
         <input type="text" name="q" placeholder="Rechercher..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
         <select name="statut">
@@ -90,6 +97,11 @@ ob_start();
                             <?php endforeach; ?>
                         </select>
                         <input type="hidden" name="action" value="">
+                    </form>
+                    <form method="POST" action="<?= APP_URL ?>/superadmin/cabinets/renvoyer-code" style="display:inline" title="Renvoyer le code de vérification email">
+                        <?= csrfField() ?>
+                        <input type="hidden" name="cabinet_id" value="<?= $c['id'] ?>">
+                        <button type="submit" class="action-btn" style="background:#b8923f;color:#fff">Renvoyer code</button>
                     </form>
                 </td>
             </tr>

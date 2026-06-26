@@ -21,6 +21,10 @@ $routes = [
     // SaaS — Inscription
     'fonctionnalites'  => ['SaasController', 'fonctionnalites'],
     'inscription'      => ['SaasController', 'inscriptionPage'],
+    'inscription/verifier'        => ['SaasController', 'verificationPage'],
+    'inscription/verifier/post'   => ['SaasController', 'verificationPost'],
+    'inscription/renvoyer-code'   => ['SaasController', 'renvoyerCodeInscription'],
+    'superadmin/cabinets/renvoyer-code' => ['SaasController', 'adminRenvoyerCode'],
     'inscription/post' => ['SaasController', 'inscriptionPost'],
 
     // Pages legales (publiques — RGPD / CDP Senegal)

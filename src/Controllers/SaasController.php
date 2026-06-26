@@ -83,17 +83,131 @@ class SaasController {
         $ins->execute([$nom, $slug, $email, $telephone, $responsable, $plan['id'], 'essai', $essaiFin]);
         $cabinetId = $db->lastInsertId();
 
-        // Créer le user admin du cabinet
+        // Créer le user admin du cabinet — INACTIF tant que l'email n'est pas vérifié
         $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-        $userIns = $db->prepare("INSERT INTO users (cabinet_id, nom, prenom, email, password, role, role_saas, actif)
-                                 VALUES (?,?,?,?,?,'admin','admin_cabinet',1)");
+        $userIns = $db->prepare("INSERT INTO users (cabinet_id, nom, prenom, email, password, role, role_saas, actif, email_verifie)
+                                 VALUES (?,?,?,?,?,'admin','admin_cabinet',0,0)");
         $parts = explode(' ', $responsable, 2);
         $prenom = $parts[0];
         $nomUser = $parts[1] ?? '';
         $userIns->execute([$cabinetId, $nomUser, $prenom, $email, $hash]);
+        $userId = (int)$db->lastInsertId();
 
-        $_SESSION['inscription_success'] = "Compte créé ! Vous avez 14 jours d'essai gratuit. Connectez-vous maintenant.";
+        // Générer un code à 4 chiffres + l'enregistrer (valable 30 min)
+        $code = str_pad((string)random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+        $expires = date('Y-m-d H:i:s', time() + 1800);
+        $db->prepare("INSERT INTO email_verifications (user_id, cabinet_id, email, code, expires_at) VALUES (?,?,?,?,?)")
+           ->execute([$userId, $cabinetId, $email, $code, $expires]);
+
+        // Envoyer l'email de bienvenue avec le code + notifier le super-admin
+        require_once APP_ROOT . '/config/mail.php';
+        @mailVerificationCode($email, $nom, $code);
+        $this->notifierAdminInscription($nom, $email, $responsable, $plan['nom'] ?? '');
+
+        // Page de saisie du code
+        $_SESSION['verif_user_id'] = $userId;
+        $_SESSION['verif_email']   = $email;
+        redirect('/inscription/verifier');
+    }
+
+    /** Envoie une notification email à tous les super-admins lors d'une inscription. */
+    private function notifierAdminInscription(string $cabinetNom, string $email, string $responsable, string $planNom): void {
+        try {
+            $db = getDB();
+            $admins = $db->query("SELECT email FROM users WHERE role_saas='super_admin' AND email IS NOT NULL AND email<>''")->fetchAll(PDO::FETCH_COLUMN);
+            if (empty($admins)) $admins = ['sencompta1@gmail.com']; // fallback
+            require_once APP_ROOT . '/config/mail.php';
+            foreach (array_unique($admins) as $a) {
+                @mailNouvelleInscriptionAdmin($a, $cabinetNom, $email, $responsable, $planNom);
+            }
+        } catch (\Throwable $e) { error_log('notif admin inscription: '.$e->getMessage()); }
+    }
+
+    // ── Page de vérification du code (4 chiffres) ─────────────────────
+    public function verificationPage(): void {
+        if (empty($_SESSION['verif_user_id'])) redirect('/inscription');
+        $email = $_SESSION['verif_email'] ?? '';
+        $error = $_SESSION['verif_error'] ?? null;
+        $info  = $_SESSION['verif_info'] ?? null;
+        unset($_SESSION['verif_error'], $_SESSION['verif_info']);
+        require_once APP_ROOT . '/views/saas/inscription-verifier.php';
+    }
+
+    public function verificationPost(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/inscription/verifier');
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $userId = (int)($_SESSION['verif_user_id'] ?? 0);
+        if (!$userId) redirect('/inscription');
+        $code = preg_replace('/\D/', '', $_POST['code'] ?? '');
+        $db = getDB();
+
+        $stmt = $db->prepare("SELECT * FROM email_verifications WHERE user_id=? AND verified_at IS NULL ORDER BY id DESC LIMIT 1");
+        $stmt->execute([$userId]);
+        $verif = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$verif) { $_SESSION['verif_error'] = "Aucun code en attente. Demandez-en un nouveau."; redirect('/inscription/verifier'); }
+        if ((int)$verif['tentatives'] >= 6) { $_SESSION['verif_error'] = "Trop de tentatives. Demandez un nouveau code."; redirect('/inscription/verifier'); }
+        if (strtotime($verif['expires_at']) < time()) { $_SESSION['verif_error'] = "Code expiré. Demandez un nouveau code."; redirect('/inscription/verifier'); }
+
+        if ($code !== $verif['code']) {
+            $db->prepare("UPDATE email_verifications SET tentatives=tentatives+1 WHERE id=?")->execute([$verif['id']]);
+            $_SESSION['verif_error'] = "Code incorrect. Réessayez.";
+            redirect('/inscription/verifier');
+        }
+
+        // Code OK → activer le compte
+        $db->prepare("UPDATE email_verifications SET verified_at=NOW() WHERE id=?")->execute([$verif['id']]);
+        $db->prepare("UPDATE users SET actif=1, email_verifie=1 WHERE id=?")->execute([$userId]);
+        if (!empty($verif['cabinet_id'])) {
+            $db->prepare("UPDATE cabinets SET statut='essai' WHERE id=?")->execute([$verif['cabinet_id']]);
+        }
+        unset($_SESSION['verif_user_id'], $_SESSION['verif_email']);
+        $_SESSION['inscription_success'] = "Email vérifié ! Votre compte est activé. Connectez-vous pour démarrer vos 14 jours d'essai.";
         redirect('/login');
+    }
+
+    /** L'utilisateur redemande un code depuis la page de vérification. */
+    public function renvoyerCodeInscription(): void {
+        $userId = (int)($_SESSION['verif_user_id'] ?? 0);
+        if (!$userId) redirect('/inscription');
+        $this->genererEtEnvoyerCode($userId);
+        $_SESSION['verif_info'] = "Un nouveau code vous a été envoyé par email.";
+        redirect('/inscription/verifier');
+    }
+
+    /** Génère un nouveau code pour un user et l'envoie par email (réutilisé par l'admin). */
+    private function genererEtEnvoyerCode(int $userId): bool {
+        $db = getDB();
+        $u = $db->prepare("SELECT u.email, c.nom AS cabinet_nom, u.cabinet_id FROM users u LEFT JOIN cabinets c ON c.id=u.cabinet_id WHERE u.id=?");
+        $u->execute([$userId]);
+        $row = $u->fetch(PDO::FETCH_ASSOC);
+        if (!$row) return false;
+        $code = str_pad((string)random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+        $expires = date('Y-m-d H:i:s', time() + 1800);
+        // invalider les anciens codes non utilisés
+        $db->prepare("UPDATE email_verifications SET verified_at=NOW() WHERE user_id=? AND verified_at IS NULL")->execute([$userId]);
+        $db->prepare("INSERT INTO email_verifications (user_id, cabinet_id, email, code, expires_at) VALUES (?,?,?,?,?)")
+           ->execute([$userId, $row['cabinet_id'], $row['email'], $code, $expires]);
+        require_once APP_ROOT . '/config/mail.php';
+        return (bool)@mailVerificationCode($row['email'], $row['cabinet_nom'] ?? 'votre cabinet', $code);
+    }
+
+    /** Admin : renvoyer le code de vérification à un cabinet non encore activé. */
+    public function adminRenvoyerCode(): void {
+        $this->requireSuperAdmin();
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/superadmin/cabinets');
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $cabinetId = (int)($_POST['cabinet_id'] ?? 0);
+        $db = getDB();
+        $u = $db->prepare("SELECT id FROM users WHERE cabinet_id=? AND role_saas='admin_cabinet' ORDER BY id LIMIT 1");
+        $u->execute([$cabinetId]);
+        $userId = (int)$u->fetchColumn();
+        if ($userId && $this->genererEtEnvoyerCode($userId)) {
+            $_SESSION['flash_success'] = "Code de vérification renvoyé.";
+        } else {
+            $_SESSION['flash_error'] = "Impossible de renvoyer le code.";
+        }
+        redirect('/superadmin/cabinets');
     }
 
     // ── SUPER ADMIN ───────────────────────────────────────────────────
