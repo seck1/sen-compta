@@ -119,7 +119,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 .label-principal,
 .label-admin,
 .label-commercial,
-.label-compta        { color: rgba(255,255,255,0.40); }
+.label-compta        { color: rgba(216,184,118,0.65); }
 .label-principal::before,
 .label-admin::before,
 .label-commercial::before,
