@@ -141,6 +141,14 @@ class SaasController {
         $code = preg_replace('/\D/', '', $_POST['code'] ?? '');
         $db = getDB();
 
+        // Anti-brute-force global : plafond de tentatives par session (contournement
+        // du compteur par code via renvois répétés). 12 max -> ~0,12% de chance sur 10000.
+        $_SESSION['verif_attempts'] = ($_SESSION['verif_attempts'] ?? 0) + 1;
+        if ($_SESSION['verif_attempts'] > 12) {
+            $_SESSION['verif_error'] = "Trop de tentatives. Réessayez plus tard ou contactez le support.";
+            redirect('/inscription/verifier');
+        }
+
         $stmt = $db->prepare("SELECT * FROM email_verifications WHERE user_id=? AND verified_at IS NULL ORDER BY id DESC LIMIT 1");
         $stmt->execute([$userId]);
         $verif = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -149,7 +157,7 @@ class SaasController {
         if ((int)$verif['tentatives'] >= 6) { $_SESSION['verif_error'] = "Trop de tentatives. Demandez un nouveau code."; redirect('/inscription/verifier'); }
         if (strtotime($verif['expires_at']) < time()) { $_SESSION['verif_error'] = "Code expiré. Demandez un nouveau code."; redirect('/inscription/verifier'); }
 
-        if ($code !== $verif['code']) {
+        if (!hash_equals($verif['code'], $code)) {
             $db->prepare("UPDATE email_verifications SET tentatives=tentatives+1 WHERE id=?")->execute([$verif['id']]);
             $_SESSION['verif_error'] = "Code incorrect. Réessayez.";
             redirect('/inscription/verifier');
@@ -161,15 +169,26 @@ class SaasController {
         if (!empty($verif['cabinet_id'])) {
             $db->prepare("UPDATE cabinets SET statut='essai' WHERE id=?")->execute([$verif['cabinet_id']]);
         }
-        unset($_SESSION['verif_user_id'], $_SESSION['verif_email']);
+        unset($_SESSION['verif_user_id'], $_SESSION['verif_email'], $_SESSION['verif_attempts'], $_SESSION['verif_last_resend']);
         $_SESSION['inscription_success'] = "Email vérifié ! Votre compte est activé. Connectez-vous pour démarrer vos 14 jours d'essai.";
         redirect('/login');
     }
 
     /** L'utilisateur redemande un code depuis la page de vérification. */
     public function renvoyerCodeInscription(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/inscription/verifier');
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
         $userId = (int)($_SESSION['verif_user_id'] ?? 0);
         if (!$userId) redirect('/inscription');
+
+        // Anti-spam : un renvoi toutes les 60 s max par session
+        $last = $_SESSION['verif_last_resend'] ?? 0;
+        if (time() - $last < 60) {
+            $_SESSION['verif_error'] = "Veuillez patienter une minute avant de redemander un code.";
+            redirect('/inscription/verifier');
+        }
+        $_SESSION['verif_last_resend'] = time();
+
         $this->genererEtEnvoyerCode($userId);
         $_SESSION['verif_info'] = "Un nouveau code vous a été envoyé par email.";
         redirect('/inscription/verifier');
