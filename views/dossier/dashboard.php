@@ -109,7 +109,16 @@
                 <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#b8923f;display:inline-block"></span>Charges</span>
             </div>
         </div>
-        <canvas id="chartDossierCA" height="110"></canvas>
+        <?php $hasChartData = !empty(array_filter($chartCA ?? [])) || !empty(array_filter($chartCharges ?? [])); ?>
+        <?php if ($hasChartData): ?>
+        <div style="position:relative;height:300px"><canvas id="chartDossierCA"></canvas></div>
+        <?php else: ?>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:var(--text-muted)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.4;margin-bottom:12px"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="13" y="8" width="3" height="10"/></svg>
+            <div style="font-size:14px;font-weight:600">Aucune donnée pour cet exercice</div>
+            <div style="font-size:13px;margin-top:4px">Les écritures saisies s'afficheront ici</div>
+        </div>
+        <?php endif; ?>
     </div>
     <!-- Top charges -->
     <div class="card" style="padding:22px">
@@ -134,6 +143,7 @@
     </div>
 </div>
 
+<?php if ($hasChartData): ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 new Chart(document.getElementById('chartDossierCA'), {
@@ -147,14 +157,16 @@ new Chart(document.getElementById('chartDossierCA'), {
     },
     options: {
         responsive:true,
+        maintainAspectRatio:false,
         plugins:{ legend:{ display:false } },
         scales:{
-            y:{ ticks:{ callback: v => v>=1e6?(v/1e6).toFixed(1)+'M':v>=1e3?(v/1e3).toFixed(0)+'k':v, font:{size:10} }, grid:{color:'rgba(0,0,0,0.04)'} },
+            y:{ ticks:{ callback: v => v>=1e6?(v/1e6).toFixed(1)+'M':v>=1e3?(v/1e3).toFixed(0)+'k':v, font:{size:10} }, grid:{color:'rgba(0,0,0,0.06)'} },
             x:{ grid:{display:false}, ticks:{font:{size:10}} }
         }
     }
 });
 </script>
+<?php endif; ?>
 
 <!-- Bottom section: écritures + échéances + journaux -->
 <div class="dash-side">

@@ -67,8 +67,8 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 
 .dossier-header {
     padding: 12px 20px 12px;
-    border-bottom: 3px solid rgba(201,169,110,0.5);
-    background: linear-gradient(145deg, var(--ent-color), color-mix(in srgb, var(--ent-color) 55%, #000));
+    border-bottom: 3px solid var(--ent-color);
+    background: linear-gradient(180deg, #16462f 0%, #0f3324 100%);
     position: relative;
     overflow: hidden;
 }
