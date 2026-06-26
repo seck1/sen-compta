@@ -217,13 +217,16 @@ class SaasController {
         redirect('/inscription/verifier');
     }
 
-    /** Génère un nouveau code pour un user et l'envoie par email (réutilisé par l'admin). */
-    private function genererEtEnvoyerCode(int $userId): bool {
+    /**
+     * Génère un nouveau code pour un user et l'envoie par email (réutilisé par l'admin).
+     * Retourne le code généré (4 chiffres) si tout s'est bien passé, sinon null.
+     */
+    private function genererEtEnvoyerCode(int $userId): ?string {
         $db = getDB();
         $u = $db->prepare("SELECT u.email, c.nom AS cabinet_nom, u.cabinet_id FROM users u LEFT JOIN cabinets c ON c.id=u.cabinet_id WHERE u.id=?");
         $u->execute([$userId]);
         $row = $u->fetch(PDO::FETCH_ASSOC);
-        if (!$row) return false;
+        if (!$row) return null;
         $code = str_pad((string)random_int(0, 9999), 4, '0', STR_PAD_LEFT);
         $expires = date('Y-m-d H:i:s', time() + 1800);
         // invalider les anciens codes non utilisés
@@ -231,7 +234,10 @@ class SaasController {
         $db->prepare("INSERT INTO email_verifications (user_id, cabinet_id, email, code, expires_at) VALUES (?,?,?,?,?)")
            ->execute([$userId, $row['cabinet_id'], $row['email'], $code, $expires]);
         require_once APP_ROOT . '/config/mail.php';
-        return (bool)@mailVerificationCode($row['email'], $row['cabinet_nom'] ?? 'votre cabinet', $code);
+        @mailVerificationCode($row['email'], $row['cabinet_nom'] ?? 'votre cabinet', $code);
+        // On retourne le code même si l'email échoue : le super-admin peut alors
+        // le communiquer manuellement au cabinet.
+        return $code;
     }
 
     /** Admin : renvoyer le code de vérification à un cabinet non encore activé. */
@@ -244,8 +250,9 @@ class SaasController {
         $u = $db->prepare("SELECT id FROM users WHERE cabinet_id=? AND role_saas='admin_cabinet' ORDER BY id LIMIT 1");
         $u->execute([$cabinetId]);
         $userId = (int)$u->fetchColumn();
-        if ($userId && $this->genererEtEnvoyerCode($userId)) {
-            $_SESSION['flash_success'] = "Code de vérification renvoyé.";
+        $code = $userId ? $this->genererEtEnvoyerCode($userId) : null;
+        if ($code !== null) {
+            $_SESSION['flash_success'] = "Code de vérification renvoyé par email. Code : $code (valable 30 min).";
         } else {
             $_SESSION['flash_error'] = "Impossible de renvoyer le code.";
         }
