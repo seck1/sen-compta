@@ -202,7 +202,7 @@ function mailNotificationTVA(string $to, string $userName, string $entrepriseNom
  */
 function mailVerificationCode(string $to, string $cabinetNom, string $code): bool {
     $appUrl = defined('APP_URL') ? APP_URL : 'https://sen-compta.com';
-    $logo   = $appUrl . '/logo/logo.png';
+    $logo   = $appUrl . '/logo/sencompta-email.png';
     $subject = "Bienvenue sur SenCompta — Votre code : $code";
     $codeSpaced = implode(' ', str_split($code));
     $bodyHtml = '
@@ -213,7 +213,7 @@ function mailVerificationCode(string $to, string $cabinetNom, string $code): boo
   <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px -12px rgba(30,58,95,.25)">
     <!-- header -->
     <tr><td style="background:linear-gradient(135deg,#1e3a5f,#15293f);padding:34px 36px;text-align:center">
-      <img src="'.$logo.'" alt="SenCompta" width="64" height="64" style="display:inline-block;border-radius:14px;background:#fff;padding:8px">
+      <img src="'.$logo.'" alt="SenCompta" width="72" height="72" style="display:inline-block;border-radius:16px">
       <div style="color:#fff;font-size:23px;font-weight:700;margin-top:14px;letter-spacing:-.3px">Bienvenue sur SenCompta</div>
       <div style="color:#d9b876;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-top:5px">Le SaaS comptable du Sénégal</div>
     </td></tr>
