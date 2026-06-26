@@ -139,14 +139,56 @@ a:focus-visible, button:focus-visible, input:focus-visible{ outline:3px solid rg
     .col-left{ position:static; }
 }
 @media(max-width:520px){
-    .shell{ padding:28px 14px; }
+    .shell{ padding:84px 14px 28px; }   /* espace pour la navbar fixe */
     .card{ padding:30px 20px 26px; border-radius:16px; }
     .form-row{ grid-template-columns:1fr; }
     .intro h1{ font-size:28px; }
 }
+
+/* ── Navbar publique ── */
+.top-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:13px 28px;background:rgba(238,241,240,.85);backdrop-filter:blur(12px) saturate(1.3);
+  border-bottom:1px solid var(--line)}
+.tn-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.tn-brand img{width:42px;height:42px;border-radius:11px;object-fit:contain;
+  background:linear-gradient(160deg,#fff,#f0ebe0);box-shadow:inset 0 0 0 1px rgba(31,110,78,.14)}
+.tn-brand span{line-height:1.08}
+.tn-brand b{display:block;font-size:19px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+.tn-brand i{display:block;font-size:9.5px;letter-spacing:1.8px;color:var(--gold);font-weight:700;
+  text-transform:uppercase;font-style:normal;margin-top:1px}
+.tn-links{display:flex;align-items:center;gap:8px}
+.tn-link{padding:9px 15px;font-size:14px;font-weight:700;border-radius:10px;text-decoration:none;
+  color:var(--navy);transition:.18s;white-space:nowrap}
+.tn-link:hover{background:rgba(30,58,95,.07)}
+.tn-feat{color:var(--gold);border:1.5px solid var(--gold);background:rgba(184,146,63,.06)}
+.tn-feat:hover{background:var(--gold);color:#fff;box-shadow:0 8px 18px -10px rgba(184,146,63,.8)}
+@media(max-width:560px){
+  .top-nav{padding:10px 14px;gap:8px}
+  .tn-brand img{width:36px;height:36px;border-radius:9px}
+  .tn-brand b{font-size:16px}
+  .tn-brand i{display:none}
+  .tn-links{gap:5px}
+  .tn-link{padding:8px 11px;font-size:12.5px}
+}
+@media(max-width:380px){
+  .tn-brand b{font-size:14px}
+  .tn-link{padding:7px 9px;font-size:11.5px}
+}
 </style>
 </head>
 <body>
+
+<!-- NAVBAR publique -->
+<nav class="top-nav">
+  <a href="<?= APP_URL ?>/login" class="tn-brand">
+    <img src="<?= APP_URL ?>/logo/sencompta-icon.svg" alt="SenCompta">
+    <span><b>SenCompta</b><i>Comptable du Sénégal</i></span>
+  </a>
+  <div class="tn-links">
+    <a href="<?= APP_URL ?>/fonctionnalites" class="tn-link tn-feat">Fonctionnalités</a>
+    <a href="<?= APP_URL ?>/login" class="tn-link">Se connecter</a>
+  </div>
+</nav>
 
 <div class="shell">
 

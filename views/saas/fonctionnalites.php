@@ -235,9 +235,24 @@ a{color:inherit;text-decoration:none}
   .stats-band{grid-template-columns:repeat(2,1fr)!important}
 }
 @media(max-width:560px){
-  .wrap{padding:0 20px}.nav-in{padding:12px 20px}
+  .wrap{padding:0 20px}
   .hero{padding:56px 0 48px}
   .hero-cta .btn{width:100%;justify-content:center}
+  /* Navbar compacte : logo + nom réduits, CTA toujours visible */
+  .nav-in{padding:10px 14px;gap:8px}
+  .brand img{width:38px;height:38px;border-radius:10px}
+  .brand b{font-size:17px}
+  .brand span{display:none}            /* masque "Comptable du Sénégal" */
+  .nav-links{gap:4px}
+  .nav-links .nav-link{padding:8px 8px;font-size:13px}
+  .nav-links .btn-green{padding:9px 13px;font-size:13px;border-radius:9px;box-shadow:none}
+  .nav-links .cta-extra{display:none}   /* "Créer un compte" suffit sur mobile */
+}
+@media(max-width:400px){
+  .nav-in{gap:6px}
+  .brand b{font-size:15px}
+  .nav-links .nav-link{padding:7px 6px;font-size:12px}
+  .btn-green{padding:8px 11px;font-size:12px}
 }
 </style>
 </head>
@@ -254,7 +269,7 @@ a{color:inherit;text-decoration:none}
       <a href="#modules" class="nav-link">Fonctionnalités</a>
       <a href="#tarifs" class="nav-link">Tarifs</a>
       <a href="<?= APP_URL ?>/login" class="nav-link">Se connecter</a>
-      <a href="<?= APP_URL ?>/inscription" class="btn btn-green">Créer un compte gratuit</a>
+      <a href="<?= APP_URL ?>/inscription" class="btn btn-green">Créer un compte<span class="cta-extra">&nbsp;gratuit</span></a>
     </div>
   </div>
 </nav>
