@@ -233,15 +233,21 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 <body>
 
 <div class="login-topbar">
-  <a href="<?= APP_URL ?>/fonctionnalites" class="lt-link">Fonctionnalités</a>
+  <a href="<?= APP_URL ?>/fonctionnalites" class="lt-link">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+    Fonctionnalités
+  </a>
   <a href="<?= APP_URL ?>/inscription" class="lt-cta">Créer un compte gratuit</a>
 </div>
 <style>
 .login-topbar{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;justify-content:flex-end;
   align-items:center;gap:10px;padding:16px 28px;flex-wrap:nowrap}
-.login-topbar .lt-link{font-size:14px;font-weight:600;color:var(--navy);padding:9px 14px;border-radius:9px;
-  text-decoration:none;transition:.18s;white-space:nowrap}
-.login-topbar .lt-link:hover{background:rgba(30,58,95,.07)}
+.login-topbar .lt-link{font-size:14px;font-weight:700;color:var(--gold);padding:9px 16px;border-radius:10px;
+  text-decoration:none;transition:.2s;white-space:nowrap;border:1.5px solid var(--gold);
+  background:rgba(184,146,63,.06);display:inline-flex;align-items:center;gap:7px}
+.login-topbar .lt-link svg{width:16px;height:16px;flex-shrink:0}
+.login-topbar .lt-link:hover{background:var(--gold);color:#fff;transform:translateY(-1px);
+  box-shadow:0 8px 18px -10px rgba(184,146,63,.8)}
 .login-topbar .lt-cta{font-size:14px;font-weight:700;color:#fff;background:var(--green);padding:10px 18px;
   border-radius:10px;text-decoration:none;transition:.2s;box-shadow:0 8px 18px -10px rgba(31,110,78,.7);white-space:nowrap}
 .login-topbar .lt-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
@@ -252,7 +258,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .login-topbar .lt-cta{font-size:13px;padding:9px 14px}
 }
 @media(max-width:360px){
-  .login-topbar .lt-link{font-size:12px;padding:7px 8px}
+  .login-topbar .lt-link{font-size:12px;padding:7px 10px}
+  .login-topbar .lt-link svg{display:none}
   .login-topbar .lt-cta{font-size:12px;padding:8px 11px}
 }
 </style>
