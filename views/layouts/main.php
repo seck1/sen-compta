@@ -48,7 +48,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     position: fixed;
     top: 0; left: 0; bottom: 0;
     width: var(--sidebar-w);
-    background: var(--navy-dark);
+    background: linear-gradient(180deg, #162035 0%, #0e1a2b 100%);
     display: flex;
     flex-direction: column;
     z-index: 100;
@@ -114,16 +114,18 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     width: 6px; height: 6px; border-radius: 50%;
     flex-shrink: 0;
 }
-.label-principal     { color: #93c5fd; }
-.label-principal::before     { background: #93c5fd; box-shadow: 0 0 6px #93c5fd88; }
-.label-admin         { color: #fca5a5; }
-.label-admin::before         { background: #fca5a5; box-shadow: 0 0 6px #fca5a588; }
-.label-commercial    { color: #6ee7b7; }
-.label-commercial::before    { background: #6ee7b7; box-shadow: 0 0 6px #6ee7b788; }
-.label-compte        { color: var(--gold); }
+/* Titres de sections unifiés : neutre discret pour la navigation,
+   or signature pour les sections "compte". */
+.label-principal,
+.label-admin,
+.label-commercial,
+.label-compta        { color: rgba(255,255,255,0.40); }
+.label-principal::before,
+.label-admin::before,
+.label-commercial::before,
+.label-compta::before        { background: var(--gold); box-shadow: 0 0 6px rgba(184,146,63,0.45); }
+.label-compte        { color: var(--gold-light); }
 .label-compte::before        { background: var(--gold); box-shadow: 0 0 6px rgba(201,169,110,.7); }
-.label-compta        { color: #c4b5fd; }
-.label-compta::before        { background: #c4b5fd; box-shadow: 0 0 6px #c4b5fd88; }
 
 .nav-item {
     display: flex;
@@ -143,14 +145,14 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
 
 .nav-item:hover {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.08);
     color: rgba(255,255,255,0.9);
 }
 
 .nav-item.active {
-    background: rgba(42,138,99,0.16);
-    color: #5fc89a;
-    font-weight: 500;
+    background: rgba(42,138,99,0.30);
+    color: #6fd6a8;
+    font-weight: 600;
 }
 
 .nav-item.active::before {
