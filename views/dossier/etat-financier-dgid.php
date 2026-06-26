@@ -6,11 +6,11 @@ $nomFichier = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entre
 <style>
 .dgid-hero {
     background: linear-gradient(135deg, #1e3a5f 0%, #2a5080 50%, #1e3a5f 100%);
-    border-radius: 16px;
-    padding: 26px 34px;
+    border-radius: 14px;
+    padding: 18px 28px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     box-shadow: 0 8px 40px rgba(30,58,95,0.25);
 }
 .dgid-hero::before {
@@ -35,30 +35,30 @@ $nomFichier = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entre
     border: 1px solid rgba(201,169,110,0.4);
     border-radius: 30px;
     padding: 6px 16px;
-    font-size: 14px; font-weight: 700;
+    font-size: 12px; font-weight: 700;
     color: #c9a96e;
     letter-spacing: .8px;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 .dgid-title {
-    font-size: 24px; font-weight: 800;
+    font-size: 20px; font-weight: 800;
     color: white;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     line-height: 1.2;
 }
 .dgid-subtitle {
-    font-size: 16px;
+    font-size: 14px;
     color: rgba(255,255,255,0.65);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 .dgid-download-btn {
     display: inline-flex; align-items: center; gap: 10px;
     background: linear-gradient(135deg, #c9a96e, #a8843f);
     color: white;
-    padding: 14px 28px;
-    border-radius: 12px;
-    font-size: 18px; font-weight: 700;
+    padding: 11px 22px;
+    border-radius: 10px;
+    font-size: 16px; font-weight: 700;
     text-decoration: none;
     box-shadow: 0 4px 20px rgba(201,169,110,0.35);
     transition: all .2s;
