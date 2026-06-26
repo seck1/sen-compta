@@ -987,20 +987,20 @@ tickTimer = setInterval(tick, 1000);
 #notes-toggle:hover { transform: scale(1.05); }
 #notes-badge { background: #ef4444; color: #fff; border-radius: 10px; font-size: 11px; font-weight: 700; padding: 1px 6px; display: none; }
 .notes-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--navy-dark); color: #fff; }
-.notes-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #f8fafc; }
-.note-item { background: #fff; border-radius: 10px; padding: 12px 14px; border: 1px solid var(--border); border-left: 4px solid #e4e9f0; }
+.notes-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; background: #f8fafc; }
+.note-item { background: #fff; border-radius: 9px; padding: 8px 12px; border: 1px solid var(--border); border-left: 3px solid #e4e9f0; }
 .note-item[data-type="alerte"] { border-left-color: #ef4444; }
 .note-item[data-type="tache"]  { border-left-color: #f59e0b; }
 .note-item[data-type="info"]   { border-left-color: #1f6e4e; }
 .note-item[data-type="note"]   { border-left-color: #8b5cf6; }
 .note-item.resolu { opacity: .5; }
-.note-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-.note-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--navy-dark); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.note-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; flex-wrap: wrap; }
+.note-avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--navy-dark); color: #fff; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .note-author { font-size: 12px; font-weight: 600; }
-.note-time   { font-size: 11px; color: var(--text-muted); margin-left: auto; }
-.note-type-badge { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 10px; text-transform: uppercase; }
-.note-message { font-size: 13px; color: var(--text); line-height: 1.5; word-break: break-word; }
-.note-actions { display: flex; gap: 8px; margin-top: 8px; }
+.note-time   { font-size: 10.5px; color: var(--text-muted); margin-left: auto; }
+.note-type-badge { font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 10px; text-transform: uppercase; }
+.note-message { font-size: 13px; color: var(--text); line-height: 1.4; word-break: break-word; }
+.note-actions { display: flex; gap: 8px; margin-top: 5px; }
 .note-action-btn { font-size: 11px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 2px 0; }
 .note-action-btn:hover { color: var(--navy-dark); }
 .notes-form { padding: 14px 16px; border-top: 1px solid var(--border); background: #fff; }
