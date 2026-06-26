@@ -109,6 +109,10 @@ $routes = [
     'dossier/sections-analytiques/supprimer' => ['SectionAnalytiqueController', 'supprimer'],
     'dossier/sections-analytiques/json'      => ['SectionAnalytiqueController', 'json'],
     'dossier/rapport-analytique'             => ['DossierController', 'rapportAnalytique'],
+    // Avoirs de vente (dossier entreprise)
+    'dossier/avoirs'                         => ['AvoirDossierController', 'index'],
+    'dossier/avoirs/creer'                   => ['AvoirDossierController', 'form'],
+    'dossier/avoirs/store'                   => ['AvoirDossierController', 'store'],
     // Alias kebab-case utilisés dans les vues
     'dossier/nouvelle-ecriture'   => ['DossierController', 'nouvelleEcriture'],
     'dossier/store-ecriture'      => ['DossierController', 'storeEcriture'],
