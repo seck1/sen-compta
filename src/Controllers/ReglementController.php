@@ -101,10 +101,15 @@ class ReglementController {
                       AND (c3.numero LIKE '40%' OR c3.numero LIKE '41%')
                 ))
                 OR (? <> '' AND e.numero_facture = ?)
+                OR (l.tiers_id IS NOT NULL AND l.tiers_id IN (
+                    SELECT l4.tiers_id FROM lignes_ecritures l4
+                    WHERE l4.ecriture_id=? AND l4.tiers_id IS NOT NULL
+                ) AND e.libelle LIKE ?)
             )
         ");
         $numFac = (string)($ecriture['numero_facture'] ?? '');
-        $stmtDeja->execute([$entId, $ecritureId, $ecritureId, $numFac, $numFac]);
+        $libFac = '%' . ($ecriture['libelle'] ?? '') . '%';
+        $stmtDeja->execute([$entId, $ecritureId, $ecritureId, $numFac, $numFac, $ecritureId, $libFac]);
         $dejaRegle = (float)$stmtDeja->fetchColumn();
         $soldeRestant = $montantFacture - $dejaRegle;
 
