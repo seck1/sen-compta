@@ -61,6 +61,14 @@ $journauxJson = json_encode(array_map(fn($j) => [
 .upload-sub   { font-size:14px; color:var(--text-muted); }
 .upload-preview { display:none; align-items:center; gap:16px; padding:16px; background:rgba(31,110,78,.05); border-radius:12px; border:1px solid rgba(31,110,78,.2); }
 .upload-preview img { width:80px; height:80px; object-fit:cover; border-radius:8px; border:1px solid var(--border); }
+.upload-preview-icon {
+    width:80px; height:80px; border-radius:8px; flex-shrink:0;
+    display:none; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+    background:linear-gradient(135deg,#fff1f0,#ffe2e0);
+    border:1px solid rgba(192,57,43,.25); color:#c0392b;
+}
+.upload-preview-icon svg { width:34px; height:34px; }
+.upload-preview-icon span { font-size:11px; font-weight:800; letter-spacing:1px; }
 .upload-preview-info { flex:1; text-align:left; }
 .upload-preview-name { font-size:14px; font-weight:600; color:var(--navy-dark); }
 .upload-preview-size { font-size:13px; color:var(--text-muted); margin-top:2px; }
@@ -236,6 +244,10 @@ input[type=number] { -moz-appearance:textfield; }
                 </div>
                 <div class="upload-preview" id="upload-preview">
                     <img id="preview-img" src="" alt="">
+                    <div id="preview-icon" class="upload-preview-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                        <span>PDF</span>
+                    </div>
                     <div class="upload-preview-info">
                         <div class="upload-preview-name" id="preview-name"></div>
                         <div class="upload-preview-size" id="preview-size"></div>
@@ -454,13 +466,27 @@ window.onFileSelect = onFileSelect;
 function showPreview(file) {
     const preview = document.getElementById('upload-preview');
     const zone    = document.getElementById('upload-zone');
+    const img     = document.getElementById('preview-img');
+    const icon    = document.getElementById('preview-icon');
     preview.style.display = 'flex';
     zone.style.display = 'none';
     document.getElementById('preview-name').textContent = file.name;
     document.getElementById('preview-size').textContent = (file.size/1024).toFixed(0) + ' Ko';
-    const reader = new FileReader();
-    reader.onload = e => { document.getElementById('preview-img').src = e.target.result; };
-    reader.readAsDataURL(file);
+
+    const isImage = file.type && file.type.indexOf('image/') === 0;
+    if (isImage) {
+        // Vraie miniature pour les images
+        img.style.display = '';
+        if (icon) icon.style.display = 'none';
+        const reader = new FileReader();
+        reader.onload = e => { img.src = e.target.result; };
+        reader.readAsDataURL(file);
+    } else {
+        // PDF (ou autre) : icône au lieu d'une miniature cassée
+        img.style.display = 'none';
+        img.removeAttribute('src');
+        if (icon) icon.style.display = 'flex';
+    }
     document.getElementById('btn-analyser').disabled = false;
 }
 
