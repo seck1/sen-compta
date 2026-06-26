@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="/logo/logo.png">
 <link rel="apple-touch-icon" href="/logo/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -80,7 +80,7 @@ html, body {
 .card-logo .name { font-size: 20px; font-weight: 700; color: var(--navy); margin-top: 12px; letter-spacing: -0.2px; }
 .card-logo .sub  { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-top: 4px; font-weight: 700; }
 
-.card h1 { font-size: 30px; font-weight: 800; line-height: 1.18; color: var(--ink); letter-spacing: -0.8px; max-width: 22ch; text-wrap: balance; }
+.card h1 { font-family: 'Fraunces', Georgia, serif; font-size: 33px; font-weight: 600; line-height: 1.1; color: var(--navy); letter-spacing: -0.6px; max-width: 22ch; text-wrap: balance; }
 .card .lead { font-size: 15px; color: var(--muted); margin-top: 10px; margin-bottom: 28px; }
 
 .field { margin-bottom: 18px; }
@@ -154,6 +154,22 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     transition: all .15s; background: #fff;
 }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: #fdfaf3; }
+
+/* Bouton accès client — secondaire mais visible (bordure navy + accent or) */
+.btn-portail {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    margin-top: 16px; padding: 14px; border-radius: 12px;
+    background: rgba(30,58,95,0.05);
+    border: 1.5px solid var(--navy); border-left: 3px solid var(--gold);
+    color: var(--navy); font-weight: 700; font-size: 14px; text-decoration: none;
+    box-shadow: 0 2px 9px -4px rgba(30,58,95,0.25);
+    transition: all .18s;
+}
+.btn-portail:hover {
+    background: rgba(30,58,95,0.10);
+    box-shadow: 0 6px 16px -6px rgba(30,58,95,0.4);
+    transform: translateY(-1px);
+}
 
 .alert-error {
     display: flex; align-items: center; gap: 10px;
@@ -295,7 +311,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
         <div class="divider">Pas encore de compte ?</div>
         <a href="<?= APP_URL ?>/inscription" class="btn-outline">Créer un espace cabinet</a>
 
-        <a href="<?= APP_URL ?>/portail" style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:16px;padding:14px;border-radius:12px;background:rgba(30,58,95,0.06);border:1.5px solid rgba(30,58,95,0.18);color:var(--navy);font-weight:700;font-size:14px;text-decoration:none;transition:all .15s" onmouseover="this.style.background='rgba(30,58,95,0.12)';this.style.borderColor='rgba(30,58,95,0.35)'" onmouseout="this.style.background='rgba(30,58,95,0.06)';this.style.borderColor='rgba(30,58,95,0.18)'">
+        <a href="<?= APP_URL ?>/portail" class="btn-portail">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:19px;height:19px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3M9 9v.01M9 12v.01M9 15v.01M9 18v.01" /></svg>
             Vous êtes client ? Accéder à votre espace
         </a>
