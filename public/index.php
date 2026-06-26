@@ -17,6 +17,8 @@ $routes = [
     // Mot de passe oublie
     'mot-de-passe-oublie'      => ['AuthController', 'forgotPage'],
     'mot-de-passe-oublie/post' => ['AuthController', 'forgotPost'],
+    'reset-password'           => ['AuthController', 'resetPasswordPage'],
+    'reset-password/post'      => ['AuthController', 'resetPasswordPost'],
 
     // SaaS — Inscription
     'fonctionnalites'  => ['SaasController', 'fonctionnalites'],

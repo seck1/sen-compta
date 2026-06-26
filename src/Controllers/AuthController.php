@@ -195,19 +195,74 @@ class AuthController {
         if ($user) {
             $token = bin2hex(random_bytes(32));
             $expires = date('Y-m-d H:i:s', time() + 3600);
-            // Stocker le token (table password_resets si elle existe, sinon en session)
             try {
-                $ins = $db->prepare("INSERT INTO password_resets (user_id, token, expires_at) VALUES (?,?,?) ON DUPLICATE KEY UPDATE token=?, expires_at=?");
-                $ins->execute([$user['id'], $token, $expires, $token, $expires]);
+                $ins = $db->prepare("INSERT INTO password_resets (user_id, token, expires_at) VALUES (?,?,?)");
+                $ins->execute([$user['id'], $token, $expires]);
             } catch (Exception $e) {
-                // Table inexistante : stocker en session pour démo
-                $_SESSION['reset_token'] = $token;
-                $_SESSION['reset_user_id'] = $user['id'];
+                error_log('forgotPost insert token: '.$e->getMessage());
+                redirect('/mot-de-passe-oublie?sent=1');
             }
-            // En production : envoyer un email avec le lien
-            // mail($email, 'Réinitialisation mot de passe', APP_URL.'/reset-password?token='.$token);
+            // Envoyer le lien de réinitialisation par email
+            $lien = APP_URL . '/reset-password?token=' . $token;
+            require_once APP_ROOT . '/config/mail.php';
+            @mailResetPassword($email, $user['prenom'] ?? '', $lien);
         }
 
         redirect('/mot-de-passe-oublie?sent=1');
+    }
+
+    /** Page de saisie du nouveau mot de passe (depuis le lien email). */
+    public function resetPasswordPage(): void {
+        $token = trim($_GET['token'] ?? '');
+        $valid = $this->tokenResetValide($token) !== null;
+        $error = $_SESSION['reset_error'] ?? null;
+        unset($_SESSION['reset_error']);
+        require APP_ROOT . '/views/auth/reset-password.php';
+    }
+
+    /** Enregistre le nouveau mot de passe après vérification du token. */
+    public function resetPasswordPost(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/login');
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $token = trim($_POST['token'] ?? '');
+        $pass  = $_POST['password'] ?? '';
+        $pass2 = $_POST['password_confirm'] ?? '';
+
+        $userId = $this->tokenResetValide($token);
+        if ($userId === null) {
+            $_SESSION['reset_error'] = "Lien invalide ou expiré. Veuillez refaire une demande.";
+            redirect('/reset-password?token=' . urlencode($token));
+        }
+        if (strlen($pass) < 8) {
+            $_SESSION['reset_error'] = "Le mot de passe doit contenir au moins 8 caractères.";
+            redirect('/reset-password?token=' . urlencode($token));
+        }
+        if ($pass !== $pass2) {
+            $_SESSION['reset_error'] = "Les deux mots de passe ne correspondent pas.";
+            redirect('/reset-password?token=' . urlencode($token));
+        }
+
+        $db = getDB();
+        $hash = password_hash($pass, PASSWORD_BCRYPT, ['cost' => 12]);
+        $db->prepare("UPDATE users SET password=? WHERE id=?")->execute([$hash, $userId]);
+        // Invalider le token (et tous les autres de cet utilisateur)
+        $db->prepare("UPDATE password_resets SET used_at=NOW() WHERE user_id=? AND used_at IS NULL")->execute([$userId]);
+
+        $_SESSION['inscription_success'] = "Mot de passe réinitialisé. Vous pouvez vous connecter.";
+        redirect('/login');
+    }
+
+    /** Retourne l'user_id si le token est valide (existe, non utilisé, non expiré), sinon null. */
+    private function tokenResetValide(string $token): ?int {
+        if ($token === '') return null;
+        try {
+            $db = getDB();
+            $stmt = $db->prepare("SELECT user_id FROM password_resets WHERE token=? AND used_at IS NULL AND expires_at > NOW() LIMIT 1");
+            $stmt->execute([$token]);
+            $id = $stmt->fetchColumn();
+            return $id !== false ? (int)$id : null;
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 }

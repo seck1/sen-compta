@@ -274,3 +274,55 @@ function mailNouvelleInscriptionAdmin(string $adminEmail, string $cabinetNom, st
 </body></html>';
     return sendMail($adminEmail, 'Admin SenCompta', $subject, $bodyHtml);
 }
+
+/**
+ * Email de réinitialisation de mot de passe avec lien sécurisé (token).
+ */
+function mailResetPassword(string $to, string $prenom, string $lien): bool {
+    $appUrl = defined('APP_URL') ? APP_URL : 'https://sen-compta.com';
+    $logo   = $appUrl . '/logo/sencompta-email-v2.png';
+    $subject = "Réinitialisation de votre mot de passe — SenCompta";
+    $prenomSafe = htmlspecialchars($prenom !== '' ? $prenom : '');
+    $bonjour = $prenomSafe !== '' ? 'Bonjour '.$prenomSafe.',' : 'Bonjour,';
+    $bodyHtml = '
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#eef1f0;font-family:Arial,Helvetica,sans-serif">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f0;padding:32px 12px">
+<tr><td align="center">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px -12px rgba(30,58,95,.25)">
+    <!-- header -->
+    <tr><td style="background:linear-gradient(135deg,#1e3a5f,#15293f);padding:34px 36px;text-align:center">
+      <img src="'.$logo.'" alt="SenCompta" width="72" height="72" style="display:inline-block;border-radius:16px">
+      <div style="color:#fff;font-size:23px;font-weight:700;margin-top:14px;letter-spacing:-.3px">Réinitialisation du mot de passe</div>
+      <div style="color:#d9b876;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-top:5px">Le SaaS comptable du Sénégal</div>
+    </td></tr>
+    <!-- body -->
+    <tr><td style="padding:36px 40px">
+      <p style="font-size:16px;color:#1e3a5f;margin:0 0 16px;font-weight:600">'.$bonjour.'</p>
+      <p style="font-size:15px;color:#3a4750;line-height:1.65;margin:0 0 26px">
+        Vous avez demandé à réinitialiser le mot de passe de votre compte SenCompta.
+        Cliquez sur le bouton ci-dessous pour en choisir un nouveau.
+      </p>
+      <!-- bouton -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr><td align="center" style="padding:6px 0 8px">
+        <a href="'.$lien.'" style="display:inline-block;background:linear-gradient(180deg,#2a8a63,#1f6e4e);color:#fff;text-decoration:none;font-size:15px;font-weight:700;padding:15px 38px;border-radius:11px;box-shadow:0 8px 22px -10px rgba(31,110,78,.7)">Réinitialiser mon mot de passe →</a>
+      </td></tr>
+      </table>
+      <p style="font-size:13px;color:#5e6b62;line-height:1.6;margin:26px 0 0">
+        Ce lien est valable <strong>1 heure</strong>. Si le bouton ne fonctionne pas, copiez-collez ce lien dans votre navigateur :
+      </p>
+      <p style="font-size:12.5px;color:#1f6e4e;word-break:break-all;margin:8px 0 0">'.htmlspecialchars($lien).'</p>
+      <p style="font-size:13.5px;color:#5e6b62;line-height:1.6;margin:24px 0 0">
+        Vous n\'êtes pas à l\'origine de cette demande ? Ignorez simplement cet email, votre mot de passe restera inchangé.
+      </p>
+    </td></tr>
+    <!-- footer -->
+    <tr><td style="background:#f6f8f7;padding:18px 36px;text-align:center;border-top:1px solid #e3e7e5">
+      <div style="font-size:12px;color:#8a948c">© '.date('Y').' SenCompta · Comptabilité SYSCOHADA · DGID · IPRES</div>
+    </td></tr>
+  </table>
+</td></tr></table>
+</body></html>';
+    return sendMail($to, $prenom ?: 'Utilisateur', $subject, $bodyHtml);
+}
