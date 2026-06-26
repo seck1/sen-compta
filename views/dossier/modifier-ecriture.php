@@ -14,10 +14,12 @@ $lignesJson = json_encode(array_map(fn($l) => [
     'libelle'   => $l['libelle'],
     'tiers_id'  => $l['tiers_id'] ? (int)$l['tiers_id'] : null,
     'tiers_nom' => $l['tiers'] ?? '',
+    'section_analytique_id' => isset($l['section_analytique_id']) && $l['section_analytique_id'] ? (int)$l['section_analytique_id'] : null,
 ], $lignes), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <script id="comptes-data" type="application/json"><?= $comptesJson ?></script>
 <script id="lignes-data"  type="application/json"><?= $lignesJson ?></script>
+<script id="sections-data" type="application/json"><?= $sectionsJson ?? '[]' ?></script>
 
 <style>
 #form-ecriture { padding-bottom: 80px; }
@@ -221,6 +223,9 @@ $lignesJson = json_encode(array_map(fn($l) => [
                             <th style="width:130px">Débit</th>
                             <th style="width:130px">Crédit</th>
                             <th>Libellé ligne</th>
+                            <?php if (!empty($sectionsJson) && $sectionsJson !== '[]'): ?>
+                            <th style="width:150px">Section</th>
+                            <?php endif; ?>
                             <th style="width:44px"></th>
                         </tr>
                     </thead>
@@ -262,6 +267,8 @@ $lignesJson = json_encode(array_map(fn($l) => [
 
 const COMPTES  = JSON.parse(document.getElementById('comptes-data').textContent);
 const LIGNES   = JSON.parse(document.getElementById('lignes-data').textContent);
+const SECTIONS = JSON.parse((document.getElementById('sections-data')||{}).textContent || '[]');
+const HAS_SECTIONS = SECTIONS.length > 0;
 const ENT_ID   = <?= (int)$entreprise['id'] ?>;
 const APP_URL  = '<?= APP_URL ?>';
 const fmt      = v => new Intl.NumberFormat('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}).format(v);
@@ -472,9 +479,24 @@ function makeCellText(name, placeholder) {
     td.appendChild(inp); return td;
 }
 
+/* ── Cellule section analytique (optionnelle) ── */
+function makeCellSection(selectedId) {
+    const td  = mkEl('td', null, {padding:'5px 8px'});
+    const sel = mkEl('select', {name:'section_analytique_id[]', 'class':'ec-field'});
+    sel.appendChild(mkEl('option', {value:''}, null)).textContent = '—';
+    SECTIONS.forEach(function(s){
+        const opt = mkEl('option', {value:String(s.id)});
+        opt.textContent = s.code + ' · ' + s.libelle;
+        if (selectedId && Number(selectedId) === Number(s.id)) opt.selected = true;
+        sel.appendChild(opt);
+    });
+    td.appendChild(sel);
+    return td;
+}
+
 /* ── Créer une ligne ── */
 function creerLigne(data) {
-    const NCOLS = 5;
+    const NCOLS = HAS_SECTIONS ? 6 : 5;
     const tr = mkEl('tr', {'class':'ligne-ecriture'});
     const trTiers = creerTiersRow(NCOLS);
 
@@ -491,7 +513,9 @@ function creerLigne(data) {
     const btnDel = mkEl('button', {type:'button', 'class':'btn-ico btn-ico-del', title:'Supprimer'}); btnDel.textContent='✕';
     tdBtn.appendChild(btnDel);
 
-    tr.appendChild(tdCompte); tr.appendChild(tdDeb); tr.appendChild(tdCre); tr.appendChild(tdLib); tr.appendChild(tdBtn);
+    tr.appendChild(tdCompte); tr.appendChild(tdDeb); tr.appendChild(tdCre); tr.appendChild(tdLib);
+    if (HAS_SECTIONS) tr.appendChild(makeCellSection(data ? data.section_analytique_id : null));
+    tr.appendChild(tdBtn);
 
     const inpDeb = tdDeb.querySelector('input');
     const inpCre = tdCre.querySelector('input');

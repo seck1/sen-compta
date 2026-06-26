@@ -1030,6 +1030,14 @@ class DossierController {
         $comptes = $comptes->fetchAll();
         $comptesJson = json_encode(array_map(fn($c) => ['id'=>(int)$c['id'],'numero'=>$c['numero'],'intitule'=>$c['intitule']], $comptes), JSON_UNESCAPED_UNICODE);
 
+        // Sections analytiques (pour ventiler les lignes — optionnel)
+        $sectionsJson = '[]';
+        try {
+            $sa = $db->prepare("SELECT id, code, libelle FROM sections_analytiques WHERE entreprise_id = ? AND actif = 1 ORDER BY code");
+            $sa->execute([$entId]);
+            $sectionsJson = json_encode($sa->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $e) { /* table absente */ }
+
         $error = $_SESSION['form_error'] ?? null;
         unset($_SESSION['form_error']);
 
