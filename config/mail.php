@@ -66,10 +66,12 @@ function sendMailSmtp(string $to, string $toName, string $subject, string $bodyH
     $headers .= "Content-Type: text/html; charset=UTF-8".$crlf;
     $headers .= "Content-Transfer-Encoding: base64".$crlf;
     $data = $headers . $crlf . chunk_split(base64_encode($bodyHtml));
-    // protéger les lignes commençant par un point
+    // protéger les lignes commençant par un point (transparence SMTP)
     $data = preg_replace('/^\./m', '..', $data);
     fwrite($fp, $data . $crlf . "." . $crlf);
-    $ok = ($code($read()) === 250);
+    $final = $read();
+    $ok = ($code($final) === 250);
+    if (!$ok) $err = 'Refus à l\'envoi : ' . trim($final);
     $cmd("QUIT");
     fclose($fp);
     return $ok;
