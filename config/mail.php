@@ -202,7 +202,7 @@ function mailNotificationTVA(string $to, string $userName, string $entrepriseNom
  */
 function mailVerificationCode(string $to, string $cabinetNom, string $code): bool {
     $appUrl = defined('APP_URL') ? APP_URL : 'https://sen-compta.com';
-    $logo   = $appUrl . '/logo/sencompta-email.png';
+    $logo   = $appUrl . '/logo/sencompta-email-v2.png';
     $subject = "Bienvenue sur SenCompta — Votre code : $code";
     $codeSpaced = implode(' ', str_split($code));
     $bodyHtml = '
