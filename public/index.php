@@ -302,6 +302,13 @@ $routes = [
     'dossier/notes-frais/store'  => ['NoteFraisController', 'store'],
     'dossier/notes-frais/statut' => ['NoteFraisController', 'updateStatut'],
 
+    // Notes & suivi du dossier (panneau latéral)
+    'dossier/commentaires'           => ['CommentaireController', 'liste'],
+    'dossier/commentaires/store'     => ['CommentaireController', 'store'],
+    'dossier/commentaires/resoudre'  => ['CommentaireController', 'resoudre'],
+    'dossier/commentaires/supprimer' => ['CommentaireController', 'supprimer'],
+    'dossier/commentaires/nb'        => ['CommentaireController', 'nb_non_lus'],
+
     // Règlement rapide
     'dossier/regler' => ['ReglementController', 'regler'],
 

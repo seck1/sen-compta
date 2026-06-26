@@ -1075,7 +1075,10 @@ function mk(tag, cls, txt) {
 
 function chargerNotes() {
     fetch(APP + '/dossier/commentaires?id=' + ENT_ID)
-        .then(function(r) { return r.json(); })
+        .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        })
         .then(function(data) {
             var list = document.getElementById('notes-list');
             while (list.firstChild) list.removeChild(list.firstChild);
@@ -1133,6 +1136,11 @@ function chargerNotes() {
                 if (actions.children.length) item.appendChild(actions);
                 list.appendChild(item);
             });
+        })
+        .catch(function(err) {
+            var list = document.getElementById('notes-list');
+            while (list.firstChild) list.removeChild(list.firstChild);
+            list.appendChild(mk('p', 'notes-empty', 'Impossible de charger les notes. Réessayez.'));
         });
 }
 
