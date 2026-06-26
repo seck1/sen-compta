@@ -103,6 +103,11 @@ $routes = [
     'dossier/import/fournisseurs'     => ['ImportDonneesController', 'importFournisseurs'],
     'dossier/import/plan-comptable'   => ['ImportDonneesController', 'importPlanComptable'],
     'dossier/import/balance'          => ['ImportDonneesController', 'importBalance'],
+    // Comptabilité analytique
+    'dossier/sections-analytiques'           => ['SectionAnalytiqueController', 'index'],
+    'dossier/sections-analytiques/store'     => ['SectionAnalytiqueController', 'store'],
+    'dossier/sections-analytiques/supprimer' => ['SectionAnalytiqueController', 'supprimer'],
+    'dossier/sections-analytiques/json'      => ['SectionAnalytiqueController', 'json'],
     // Alias kebab-case utilisés dans les vues
     'dossier/nouvelle-ecriture'   => ['DossierController', 'nouvelleEcriture'],
     'dossier/store-ecriture'      => ['DossierController', 'storeEcriture'],
