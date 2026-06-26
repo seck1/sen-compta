@@ -394,6 +394,21 @@ $filtreStatut = $_GET['statut'] ?? '';
 
             <!-- Panneau Informations -->
             <div id="regl-panel-infos">
+            <!-- Récap montants de la facture -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
+                <div style="text-align:center;padding:10px 8px;background:#f1f5f9;border:1px solid var(--border);border-radius:9px">
+                    <div style="font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);font-weight:700">Montant total</div>
+                    <div style="font-size:16px;font-weight:700;color:var(--navy-dark);margin-top:3px;font-family:monospace"><span id="regl-recap-total">0</span></div>
+                </div>
+                <div style="text-align:center;padding:10px 8px;background:rgba(31,110,78,0.06);border:1px solid rgba(31,110,78,0.2);border-radius:9px">
+                    <div style="font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);font-weight:700">Déjà réglé</div>
+                    <div style="font-size:16px;font-weight:700;color:#1f6e4e;margin-top:3px;font-family:monospace"><span id="regl-recap-regle">0</span></div>
+                </div>
+                <div style="text-align:center;padding:10px 8px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:9px">
+                    <div style="font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);font-weight:700">Reste à régler</div>
+                    <div style="font-size:16px;font-weight:700;color:#b45309;margin-top:3px;font-family:monospace"><span id="regl-recap-reste">0</span></div>
+                </div>
+            </div>
             <div id="regl-solde-banner" style="display:none;margin-bottom:12px;padding:10px 14px;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px;font-size:13px;color:#92400e">
                 ⚠️ Règlement partiel — Solde restant dû : <strong id="regl-solde-val"></strong> FCFA
             </div>
@@ -789,7 +804,12 @@ document.getElementById('scanIAModal').addEventListener('click',function(e){if(e
 let reglMontantMax = 0;
 function ouvrirRegler(ecritureId, libelle, montantTtc, soldeRestant) {
     const solde = (soldeRestant !== undefined) ? soldeRestant : montantTtc;
+    const dejaRegle = Math.max(0, Math.round((montantTtc - solde) * 100) / 100);
     reglMontantMax = solde;
+    // Récap montants
+    document.getElementById('regl-recap-total').textContent = Number(montantTtc).toLocaleString('fr-FR');
+    document.getElementById('regl-recap-regle').textContent = dejaRegle.toLocaleString('fr-FR');
+    document.getElementById('regl-recap-reste').textContent = Number(solde).toLocaleString('fr-FR');
     document.getElementById('regl-ecriture-id').value  = ecritureId;
     document.getElementById('regl-montant').value      = solde;
     document.getElementById('regl-montant').max        = solde;
