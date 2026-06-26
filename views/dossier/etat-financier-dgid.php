@@ -7,10 +7,15 @@ $nomFichier = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entre
 .dgid-hero {
     background: linear-gradient(135deg, #1e3a5f 0%, #2a5080 50%, #1e3a5f 100%);
     border-radius: 14px;
-    padding: 18px 28px;
+    padding: 16px 26px;
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
     box-shadow: 0 8px 40px rgba(30,58,95,0.25);
 }
 .dgid-hero::before {
@@ -35,22 +40,28 @@ $nomFichier = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entre
     border: 1px solid rgba(201,169,110,0.4);
     border-radius: 30px;
     padding: 6px 16px;
-    font-size: 12px; font-weight: 700;
+    font-size: 11px; font-weight: 700;
     color: #c9a96e;
     letter-spacing: .8px;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 .dgid-title {
-    font-size: 20px; font-weight: 800;
+    font-size: 18px; font-weight: 800;
     color: white;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     line-height: 1.2;
 }
 .dgid-subtitle {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255,255,255,0.65);
-    margin-bottom: 14px;
+    margin-bottom: 0;
+}
+.dgid-hero-text { position: relative; z-index: 1; }
+.dgid-hero-actions {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+    flex-shrink: 0;
 }
 .dgid-download-btn {
     display: inline-flex; align-items: center; gap: 10px;
@@ -131,16 +142,17 @@ $nomFichier = 'EtatFinancier_DGID_' . preg_replace('/[^A-Za-z0-9]/', '_', $entre
 
 <!-- Hero section -->
 <div class="dgid-hero">
+  <div class="dgid-hero-text">
     <div class="dgid-badge">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
         DGID · Direction Générale des Impôts et Domaines
     </div>
     <div class="dgid-title">États Financiers SYSCOHADA</div>
     <div class="dgid-subtitle">
-        <?= e($entreprise['raison_sociale']) ?> · Exercice <?= $exerciceActuel ?><br>
-        Fichier Excel conforme au modèle DGID — prêt à déposer
+        <?= e($entreprise['raison_sociale']) ?> · Exercice <?= $exerciceActuel ?> · Fichier Excel conforme au modèle DGID — prêt à déposer
     </div>
-    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;position:relative;z-index:1">
+  </div>
+    <div class="dgid-hero-actions">
         <a href="<?= APP_URL ?>/dossier/etat-financier-dgid/telecharger?id=<?= $id ?>&exercice=<?= $exerciceActuel ?>"
            class="dgid-download-btn">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
