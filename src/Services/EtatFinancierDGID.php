@@ -15,7 +15,9 @@ class EtatFinancierDGID {
     private $soldes   = [];
     private $soldesN1 = [];
 
-    private static $MODELE = '/Applications/XAMPP/xamppfiles/htdocs/cabinet-smc/etat financier/modele_etats_financiers_DGID (Nouveau).xlsx';
+    private static function modelePath(): string {
+        return APP_ROOT . '/etat financier/modele_etats_financiers_DGID (Nouveau).xlsx';
+    }
 
     public function __construct($db, $entreprise, $exercice) {
         $this->db         = $db;
@@ -262,9 +264,13 @@ class EtatFinancierDGID {
         $ex   = $this->exercice;
 
         // Charger le modèle DGID sans recalculer les formules
+        $modele = self::modelePath();
+        if (!is_file($modele)) {
+            throw new \RuntimeException("Modèle États Financiers DGID introuvable : $modele");
+        }
         $reader = IOFactory::createReader('Xlsx');
         $reader->setReadDataOnly(false);
-        $ss = $reader->load(self::$MODELE);
+        $ss = $reader->load($modele);
 
         $aN  = $this->calcActif(false);
         $aN1 = $this->calcActif(true);
