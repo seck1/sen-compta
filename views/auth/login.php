@@ -319,6 +319,11 @@ $modules = [
     ['bg'=>'rgba(220,38,38,0.09)','stroke'=>'#dc2626','svg'=>'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>','title'=>'Déclarations Fiscales','desc'=>'TVA, IS, retenues à la source'],
     ['bg'=>'rgba(13,148,136,0.1)','stroke'=>'#0d9488','svg'=>'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M6 15h.01M10 15h4"/>','title'=>'Gestion de Paie','desc'=>'Bulletins, IPRES/CSS, salaires'],
     ['bg'=>'rgba(30,58,95,0.1)','stroke'=>'#1e3a5f','svg'=>'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/>','title'=>'Portail Client','desc'=>'Consultent leur dossier, envoient leurs pièces'],
+    ['bg'=>'rgba(124,58,237,0.1)','stroke'=>'#7c3aed','svg'=>'<line x1="6" y1="20" x2="6" y2="14"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="10"/>','title'=>'Comptabilité Analytique','desc'=>'Sections, rentabilité par activité'],
+    ['bg'=>'rgba(168,68,63,0.1)','stroke'=>'#a8443f','svg'=>'<path d="M9 14l6-6M9 8h.01M15 14h.01M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/>','title'=>'Avoirs & Notes de crédit','desc'=>'Extournes et avoirs commerciaux'],
+    ['bg'=>'rgba(8,145,178,0.1)','stroke'=>'#0891b2','svg'=>'<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>','title'=>'Import de Données','desc'=>'Clients, plan comptable, balance N-1'],
+    ['bg'=>'rgba(31,110,78,0.1)','stroke'=>'#1f6e4e','svg'=>'<path d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>','title'=>'Lettrage & Relances','desc'=>'Pointage clients/fournisseurs'],
+    ['bg'=>'rgba(180,131,9,0.1)','stroke'=>'#b48309','svg'=>'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>','title'=>'Immobilisations','desc'=>'Amortissements linéaire / dégressif'],
 ];
 foreach ($modules as $m): ?>
             <div class="mod-card">
