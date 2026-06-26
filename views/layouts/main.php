@@ -48,7 +48,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     position: fixed;
     top: 0; left: 0; bottom: 0;
     width: var(--sidebar-w);
-    background: linear-gradient(180deg, #162035 0%, #0e1a2b 100%);
+    background: linear-gradient(180deg, #14402f 0%, #0c2c20 100%);
     display: flex;
     flex-direction: column;
     z-index: 100;
@@ -150,8 +150,8 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
 }
 
 .nav-item.active {
-    background: rgba(42,138,99,0.30);
-    color: #6fd6a8;
+    background: rgba(216,184,118,0.18);
+    color: #e8cd8f;
     font-weight: 600;
 }
 
@@ -160,7 +160,7 @@ body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); 
     position: absolute;
     left: 0; top: 25%; bottom: 25%;
     width: 3px;
-    background: var(--green-light);
+    background: var(--gold-light);
     border-radius: 0 3px 3px 0;
 }
 
