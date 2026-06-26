@@ -1,3 +1,16 @@
+<style>
+/* Tableau des écritures : compact pour tenir sur toute la largeur sans scroll horizontal */
+.ecr-table { width: 100%; table-layout: fixed; }
+.ecr-table thead th { padding: 9px 7px; font-size: 8.5pt; letter-spacing: .3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ecr-table tbody td { padding: 9px 7px; font-size: 10pt; overflow: hidden; text-overflow: ellipsis; }
+/* Le libellé absorbe l'espace restant et tronque proprement */
+.ecr-table td:nth-child(6) > div { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (min-width: 1100px) {
+    /* Sur grand écran, plus de scroll : tout rentre */
+    .table-wrap:has(.ecr-table) { overflow-x: visible; }
+}
+</style>
+
 <div class="page-header">
     <div class="page-header-left">
         <h1 class="page-title">Écritures comptables</h1>
@@ -115,13 +128,13 @@ $filtreStatut = $_GET['statut'] ?? '';
         <p>Commencez la saisie comptable</p>
     </div>
     <?php else: ?>
-    <table>
+    <table class="ecr-table">
         <thead>
             <tr>
-                <th style="width:32px"></th>
-                <th style="white-space:nowrap">Date</th><th style="white-space:nowrap">N° pièce</th><th style="white-space:nowrap">N° Facture</th><th>Journal</th><th>Libellé</th><th>Tiers</th>
-                <th style="text-align:right;white-space:nowrap;min-width:90px">Débit</th><th style="text-align:right;white-space:nowrap;min-width:90px">Crédit</th>
-                <th>Lignes</th><th style="text-align:center;white-space:nowrap">Justificatif</th><th>Statut</th><th style="white-space:nowrap">Saisie par</th><th style="white-space:nowrap">Actions</th>
+                <th style="width:28px"></th>
+                <th style="width:84px">Date</th><th style="width:92px">N° pièce</th><th style="width:78px">N° Facture</th><th style="width:74px">Journal</th><th>Libellé</th><th style="width:88px">Tiers</th>
+                <th style="text-align:right;width:80px">Débit</th><th style="text-align:right;width:80px">Crédit</th>
+                <th style="width:52px;text-align:center">Lignes</th><th style="text-align:center;width:74px">Justificatif</th><th style="width:78px">Statut</th><th style="width:70px">Saisie par</th><th style="width:88px">Actions</th>
             </tr>
         </thead>
         <tbody>
