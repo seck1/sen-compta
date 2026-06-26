@@ -2147,4 +2147,74 @@ class DossierController {
 
         redirect("/dossier/ecritures?id=$id&exercice=$exercice");
     }
+
+    /**
+     * Rapport de comptabilité analytique : rentabilité par section.
+     * Pour chaque section (+ "Non ventilé") : Produits (classe 7), Charges
+     * (classe 6), Résultat = Produits - Charges. Filtre par exercice.
+     */
+    public function rapportAnalytique(): void {
+        requireAuth();
+        $id         = (int)($_GET['id'] ?? 0);
+        $entreprise = $this->getEntreprise($id);
+        $db         = getDB();
+
+        $exercice = (int)($_GET['exercice'] ?? $entreprise['exercice_courant']);
+
+        // Exercices disponibles (pour le sélecteur)
+        $stmtEx = $db->prepare("SELECT DISTINCT exercice FROM ecritures WHERE entreprise_id=? ORDER BY exercice DESC");
+        $stmtEx->execute([$id]);
+        $exercicesDispos = array_column($stmtEx->fetchAll(), 'exercice');
+        if (!in_array($entreprise['exercice_courant'], $exercicesDispos)) {
+            array_unshift($exercicesDispos, $entreprise['exercice_courant']);
+        }
+
+        // Agrégation par section analytique sur les comptes de gestion (classes 6 et 7).
+        // Produits (cl.7) = crédit - débit ; Charges (cl.6) = débit - crédit.
+        $stmt = $db->prepare("
+            SELECT
+                s.id   AS section_id,
+                s.code AS code,
+                s.libelle AS libelle,
+                SUM(CASE WHEN c.classe = 7 THEN (l.credit - l.debit) ELSE 0 END) AS produits,
+                SUM(CASE WHEN c.classe = 6 THEN (l.debit - l.credit) ELSE 0 END) AS charges
+            FROM lignes_ecritures l
+            JOIN ecritures e ON e.id = l.ecriture_id
+            JOIN comptes   c ON c.id = l.compte_id
+            LEFT JOIN sections_analytiques s ON s.id = l.section_analytique_id
+            WHERE e.entreprise_id = ?
+              AND e.exercice = ?
+              AND e.statut IN ('brouillon','validee','cloturee')
+              AND c.classe IN (6,7)
+            GROUP BY s.id, s.code, s.libelle
+            ORDER BY (s.code IS NULL), s.code
+        ");
+        $stmt->execute([$id, $exercice]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $sections = [];
+        $totProduits = 0.0; $totCharges = 0.0;
+        foreach ($rows as $r) {
+            $produits = (float)$r['produits'];
+            $charges  = (float)$r['charges'];
+            if (abs($produits) < 0.01 && abs($charges) < 0.01) continue; // ignorer les sections sans gestion
+            $sections[] = [
+                'code'      => $r['code'] ?? null,
+                'libelle'   => $r['libelle'] ?? 'Non ventilé',
+                'produits'  => $produits,
+                'charges'   => $charges,
+                'resultat'  => $produits - $charges,
+            ];
+            $totProduits += $produits;
+            $totCharges  += $charges;
+        }
+        $totaux = ['produits' => $totProduits, 'charges' => $totCharges, 'resultat' => $totProduits - $totCharges];
+
+        $activeTab = 'rapport-analytique';
+        $pageTitle = 'Rapport analytique';
+        ob_start();
+        require APP_ROOT . '/views/dossier/rapport-analytique.php';
+        $content = ob_get_clean();
+        require APP_ROOT . '/views/layouts/dossier.php';
+    }
 }
