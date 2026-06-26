@@ -32,8 +32,13 @@ class ScanIAController {
             $tmpDir    = '/tmp';
             $tmpPrefix = $tmpDir . '/' . $uniqId . '_%02d.png';
             $globPat   = $tmpDir . '/' . $uniqId . '_*.png';
-            // Ghostscript convertit toutes les pages en PNG
-            $cmd = '/opt/homebrew/bin/gs -dNOPAUSE -dBATCH -dSAFER -sDEVICE=png16m -r150 '
+            // Ghostscript convertit toutes les pages en PNG.
+            // Binaire résolu de façon portable (Linux/Docker, macOS Homebrew, etc.)
+            $gs = $this->trouverGhostscript();
+            if (!$gs) {
+                echo json_encode(['error' => "Ghostscript (gs) introuvable sur le serveur. Installez-le pour scanner des PDF."]); exit;
+            }
+            $cmd = escapeshellarg($gs) . ' -dNOPAUSE -dBATCH -dSAFER -sDEVICE=png16m -r150 '
                  . '-sOutputFile=' . escapeshellarg($tmpPrefix) . ' '
                  . escapeshellarg($tmpPdf) . ' 2>&1';
             exec($cmd, $out, $ret);
@@ -276,5 +281,28 @@ PROMPT;
         }
 
         echo json_encode(['success' => true, 'ecriture_id' => $ecriture_id]);
+    }
+
+    /** Localise le binaire Ghostscript de façon portable (Docker/Linux, macOS, Windows). */
+    private function trouverGhostscript(): ?string {
+        // 1) Variable d'environnement explicite si définie
+        $env = getenv('GHOSTSCRIPT_BIN');
+        if ($env && is_executable($env)) return $env;
+
+        // 2) Emplacements courants
+        $candidats = [
+            '/usr/bin/gs', '/usr/local/bin/gs', '/bin/gs',
+            '/opt/homebrew/bin/gs',            // macOS Apple Silicon
+            '/usr/local/Cellar/ghostscript/bin/gs',
+        ];
+        foreach ($candidats as $c) {
+            if (is_executable($c)) return $c;
+        }
+
+        // 3) Recherche dans le PATH via `command -v`
+        $found = trim((string)@shell_exec('command -v gs 2>/dev/null'));
+        if ($found !== '' && is_executable($found)) return $found;
+
+        return null;
     }
 }

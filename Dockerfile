@@ -1,8 +1,10 @@
 FROM php:8.2-apache
 
 # Extensions PHP requises (pdo_mysql pour la base, gd/zip pour PhpSpreadsheet & uploads)
+# ghostscript : conversion PDF -> PNG pour le scan IA des pièces comptables.
 RUN apt-get update && apt-get install -y \
         libzip-dev libpng-dev libjpeg-dev libfreetype6-dev unzip git \
+        ghostscript \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql zip gd \
     && rm -rf /var/lib/apt/lists/*
