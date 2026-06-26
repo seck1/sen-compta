@@ -52,6 +52,8 @@ $routes = [
     'superadmin/paiements'    => ['SaasController', 'adminPaiements'],
     'superadmin/paiements/valider' => ['SaasController', 'adminValiderPaiement'],
     'superadmin/demandes'     => ['SaasController', 'adminDemandes'],
+    'superadmin/online'       => ['SaasController', 'adminUsersOnline'],
+    'superadmin/online/data'  => ['SaasController', 'adminUsersOnlineData'],
 
     // Dashboard admin
     'dashboard' => ['DashboardController', 'index'],

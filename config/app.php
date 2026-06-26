@@ -154,6 +154,23 @@ function requireAuth(): void {
         header('Location: ' . APP_URL . '/login');
         exit;
     }
+    touchActivite();
+}
+
+/**
+ * Heartbeat : met à jour users.derniere_activite à chaque requête authentifiée.
+ * Throttlé à 60s via la session pour limiter les écritures DB.
+ */
+function touchActivite(): void {
+    $uid = $_SESSION['user']['id'] ?? null;
+    if (!$uid) return;
+    $now = time();
+    $last = $_SESSION['_last_activite_ping'] ?? 0;
+    if ($now - $last < 60) return;          // au plus une écriture par minute
+    $_SESSION['_last_activite_ping'] = $now;
+    try {
+        getDB()->prepare("UPDATE users SET derniere_activite = NOW() WHERE id = ?")->execute([$uid]);
+    } catch (\Throwable $e) { /* colonne absente avant migration : on ignore */ }
 }
 
 function requireAdmin(): void {

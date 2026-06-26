@@ -457,4 +457,139 @@ class SaasController {
     private function requireCabinet(): void {
         if (!auth()) redirect('/login');
     }
+
+    // ═══════════════ UTILISATEURS EN LIGNE (supervision temps réel) ═══════════════
+
+    /** Seuils (secondes) : en ligne ≤5min, inactif ≤15min, sinon hors-ligne. */
+    private const SEUIL_ONLINE = 300;
+    private const SEUIL_IDLE    = 900;
+
+    /** Page de supervision des sessions utilisateurs (tous cabinets). */
+    public function adminUsersOnline(): void {
+        $this->requireSuperAdmin();
+        $periode = in_array($_GET['p'] ?? '24h', ['24h','7j','30j','tout']) ? ($_GET['p'] ?? '24h') : '24h';
+        $search  = trim($_GET['q'] ?? '');
+
+        $data = $this->getUsersActivite($periode, $search);
+        $users   = $data['users'];
+        $stats   = $data['stats'];
+
+        $pageTitle  = 'Utilisateurs en ligne';
+        $activePage = 'superadmin-online';
+        require_once APP_ROOT . '/views/saas/admin-users-online.php';
+    }
+
+    /** Endpoint JSON pour l'auto-refresh (mêmes données, sans le layout). */
+    public function adminUsersOnlineData(): void {
+        $this->requireSuperAdmin();
+        $periode = in_array($_GET['p'] ?? '24h', ['24h','7j','30j','tout']) ? ($_GET['p'] ?? '24h') : '24h';
+        $search  = trim($_GET['q'] ?? '');
+        header('Content-Type: application/json');
+        echo json_encode($this->getUsersActivite($periode, $search));
+        exit;
+    }
+
+    /** Calcule la liste des users avec statut + sparkline + stats agrégées. */
+    private function getUsersActivite(string $periode, string $search): array {
+        $db = getDB();
+
+        // Fenêtre de la période pour le filtrage des sessions/actions
+        $since = match ($periode) {
+            '7j'   => date('Y-m-d H:i:s', time() - 7*86400),
+            '30j'  => date('Y-m-d H:i:s', time() - 30*86400),
+            'tout' => '1970-01-01 00:00:00',
+            default => date('Y-m-d H:i:s', time() - 86400),  // 24h
+        };
+
+        $where = "WHERE u.id IS NOT NULL";
+        $params = [':since' => $since];
+        if ($search !== '') {
+            $where .= " AND (u.nom LIKE :s OR u.prenom LIKE :s OR u.email LIKE :s OR c.nom LIKE :s)";
+            $params[':s'] = "%$search%";
+        }
+
+        // Activité de référence = la plus récente entre derniere_activite et derniere_connexion
+        $sql = "
+            SELECT u.id, u.nom, u.prenom, u.email, u.role, u.role_saas, u.actif,
+                   u.derniere_connexion, u.derniere_activite,
+                   c.nom AS cabinet_nom,
+                   GREATEST(COALESCE(u.derniere_activite,'1970-01-01'),
+                            COALESCE(u.derniere_connexion,'1970-01-01')) AS last_seen,
+                   (SELECT COUNT(*) FROM audit_logs a
+                      WHERE a.user_id = u.id AND a.created_at >= :since) AS nb_actions
+            FROM users u
+            LEFT JOIN cabinets c ON c.id = u.cabinet_id
+            $where
+            ORDER BY last_seen DESC
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $now = time();
+        $count = ['online'=>0,'idle'=>0,'offline'=>0];
+        $users = [];
+        foreach ($rows as $r) {
+            $ls = ($r['last_seen'] && $r['last_seen'] !== '1970-01-01 00:00:00')
+                  ? strtotime($r['last_seen']) : 0;
+            $delta = $ls ? $now - $ls : PHP_INT_MAX;
+            if ($delta <= self::SEUIL_ONLINE)      { $statut = 'online';  $count['online']++; }
+            elseif ($delta <= self::SEUIL_IDLE)    { $statut = 'idle';    $count['idle']++; }
+            else                                   { $statut = 'offline'; $count['offline']++; }
+
+            $users[] = [
+                'id'         => (int)$r['id'],
+                'nom'        => trim(($r['prenom'] ?? '').' '.($r['nom'] ?? '')) ?: 'Utilisateur',
+                'email'      => $r['email'],
+                'role'       => $r['role_saas'] === 'super_admin' ? 'Super-admin' : ucfirst($r['role'] ?? ''),
+                'cabinet'    => $r['cabinet_nom'] ?? '—',
+                'statut'     => $statut,
+                'nb_actions' => (int)$r['nb_actions'],
+                'last_seen'  => $ls ? $r['last_seen'] : null,
+                'last_human' => $ls ? $this->tempsRelatif($delta) : 'jamais',
+                'spark'      => $this->sparkline14j($db, (int)$r['id']),
+            ];
+        }
+
+        $total = count($users);
+        $stats = [
+            'online'  => $count['online'],
+            'idle'    => $count['idle'],
+            'offline' => $count['offline'],
+            'total'   => $total,
+            'pct_online'  => $total ? round($count['online']*100/$total) : 0,
+            'pct_idle'    => $total ? round($count['idle']*100/$total) : 0,
+            'pct_offline' => $total ? round($count['offline']*100/$total) : 0,
+        ];
+        return ['users'=>$users, 'stats'=>$stats, 'periode'=>$periode];
+    }
+
+    /** Renvoie 14 entiers : nb d'actions par jour sur les 14 derniers jours. */
+    private function sparkline14j(PDO $db, int $userId): array {
+        static $stmt = null;
+        if ($stmt === null) {
+            $stmt = $db->prepare("
+                SELECT DATE(created_at) d, COUNT(*) n
+                FROM audit_logs
+                WHERE user_id = ? AND created_at >= (CURDATE() - INTERVAL 13 DAY)
+                GROUP BY DATE(created_at)
+            ");
+        }
+        $stmt->execute([$userId]);
+        $byDay = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $r) $byDay[$r['d']] = (int)$r['n'];
+        $out = [];
+        for ($i = 13; $i >= 0; $i--) {
+            $day = date('Y-m-d', time() - $i*86400);
+            $out[] = $byDay[$day] ?? 0;
+        }
+        return $out;
+    }
+
+    private function tempsRelatif(int $sec): string {
+        if ($sec < 60)    return "à l'instant";
+        if ($sec < 3600)  return floor($sec/60).'min';
+        if ($sec < 86400) return floor($sec/3600).'h';
+        return floor($sec/86400).'j';
+    }
 }
