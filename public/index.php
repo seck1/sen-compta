@@ -234,6 +234,7 @@ $routes = [
     'dossier/tiers/voir'      => ['TiersController', 'voir'],
     'dossier/tiers/supprimer' => ['TiersController', 'supprimer'],
     'dossier/tiers/json'      => ['TiersController', 'json'],
+    'dossier/tiers/quick-create' => ['TiersController', 'quickCreate'],
 
     // Immobilisations
     'dossier/immo'                => ['ImmoController', 'index'],

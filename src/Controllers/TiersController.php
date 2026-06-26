@@ -179,4 +179,28 @@ class TiersController {
         header('Content-Type: application/json');
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
+
+    /** Création rapide d'un tiers en AJAX (depuis la saisie d'écriture / le scan IA). */
+    public function quickCreate(): void {
+        requireAuth();
+        header('Content-Type: application/json');
+        $id  = (int)($_POST['entreprise_id'] ?? 0);
+        if (!userHasAccess($id)) { echo json_encode(['error' => 'Accès refusé']); exit; }
+        $nom  = trim($_POST['nom'] ?? '');
+        $type = $_POST['type'] ?? 'client';
+        if (!in_array($type, ['client','fournisseur','les_deux'], true)) $type = 'client';
+        if ($nom === '') { echo json_encode(['error' => 'Nom requis']); exit; }
+
+        $db = getDB();
+        // Réutiliser un tiers existant du même nom/type au lieu de dupliquer
+        $chk = $db->prepare("SELECT id, nom, type FROM tiers WHERE entreprise_id=? AND nom=? AND actif=1 LIMIT 1");
+        $chk->execute([$id, $nom]);
+        if ($t = $chk->fetch(PDO::FETCH_ASSOC)) {
+            echo json_encode(['ok' => true, 'id' => (int)$t['id'], 'nom' => $t['nom'], 'type' => $t['type'], 'existant' => true]);
+            exit;
+        }
+        $ins = $db->prepare("INSERT INTO tiers (entreprise_id, nom, type) VALUES (?,?,?)");
+        $ins->execute([$id, $nom, $type]);
+        echo json_encode(['ok' => true, 'id' => (int)$db->lastInsertId(), 'nom' => $nom, 'type' => $type]);
+    }
 }

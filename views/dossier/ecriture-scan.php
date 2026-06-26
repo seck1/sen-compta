@@ -588,8 +588,33 @@ function afficherResultat(ec) {
                 }
                 tiersSel.appendChild(o);
             });
-            btnCreer.href = APP_URL + '/dossier/tiers/form?id=' + ENT_ID + '&type=' + tierType
-                + (ec.fournisseur_client ? '&nom=' + encodeURIComponent(ec.fournisseur_client) : '');
+            // Création directe en AJAX avec le nom détecté par l'IA
+            btnCreer.onclick = function(e) {
+                e.preventDefault();
+                const nom = (ec.fournisseur_client || '').trim();
+                if (!nom) { alert('Aucun nom de tiers détecté.'); return; }
+                btnCreer.style.pointerEvents = 'none';
+                const fd = new FormData();
+                fd.append('entreprise_id', ENT_ID);
+                fd.append('nom', nom);
+                fd.append('type', tierType === 'fournisseur' ? 'fournisseur' : 'client');
+                fetch(APP_URL + '/dossier/tiers/quick-create', {method:'POST', body:fd})
+                    .then(r => r.json())
+                    .then(d => {
+                        btnCreer.style.pointerEvents = '';
+                        if (d && d.ok) {
+                            let opt = Array.prototype.find.call(tiersSel.options, o => o.value === String(d.id));
+                            if (!opt) { opt = document.createElement('option'); opt.value = d.id; opt.textContent = d.nom; tiersSel.appendChild(opt); }
+                            tiersSel.value = String(d.id);
+                            window._selectedTiersId = d.id;
+                            linkedBadge.style.display = 'inline-flex';
+                        } else {
+                            alert(d && d.error ? d.error : 'Création impossible');
+                        }
+                    })
+                    .catch(() => { btnCreer.style.pointerEvents = ''; alert('Erreur réseau'); });
+            };
+            btnCreer.removeAttribute('href'); btnCreer.removeAttribute('target'); btnCreer.style.cursor = 'pointer';
             tiersLink.style.display = 'flex';
         })
         .catch(() => { /* silently skip if no tiers */ });

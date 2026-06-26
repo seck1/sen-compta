@@ -168,6 +168,11 @@ input[type=number] { -moz-appearance: textfield; }
 .ac-item .ac-num { font-weight: 700; font-family: monospace; font-size: 16px; }
 .ac-item .ac-int { color: var(--text-muted); font-size: 15px; }
 .ac-wrapper.ac-selected .ec-field { border-color: #1f6e4e; background: rgba(31,110,78,.04); }
+/* Réserve la place du bouton ✕ pour qu'il ne chevauche pas le texte du compte */
+.ac-wrapper .ac-input { padding-right: 30px; text-overflow: ellipsis; }
+.ac-clear { width: 22px; height: 22px; display: none; align-items: center; justify-content: center; border-radius: 5px; }
+.ac-clear.visible { display: flex; }
+.ac-clear:hover { background: rgba(0,0,0,.06); color: var(--danger); }
 
 /* ── Boutons icône ── */
 .btn-ico {
@@ -615,16 +620,75 @@ function creerTiersRow(ncols, tiersId, tiersNom) {
     svgCheck.appendChild(pathCheck); badge.appendChild(svgCheck);
     badge.appendChild(document.createTextNode('Lié'));
 
+    // Zone de création inline (cachée par défaut)
+    const createZone = mkEl('span');
+    createZone.style.cssText = 'display:none;align-items:center;gap:6px';
+    const createInp = mkEl('input', {type:'text', placeholder:'Nom du tiers…'});
+    createInp.style.cssText = 'padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-size:13px;width:180px;font-family:inherit';
+    const createBtn = mkEl('button', {type:'button'});
+    createBtn.textContent = 'Créer';
+    createBtn.style.cssText = 'padding:6px 12px;border:none;border-radius:7px;background:#1f6e4e;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit';
+    const createCancel = mkEl('button', {type:'button'});
+    createCancel.textContent = '✕';
+    createCancel.style.cssText = 'background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px';
+    createZone.appendChild(createInp); createZone.appendChild(createBtn); createZone.appendChild(createCancel);
+
+    // Le type courant de la ligne (client/fournisseur), mis à jour par _activate
+    tr._tiersType = 'client';
+
+    lienCreer.addEventListener('click', function(e){
+        e.preventDefault();
+        ou.style.display = 'none'; lienCreer.style.display = 'none'; sel.style.display = 'none';
+        createZone.style.display = 'inline-flex';
+        createInp.focus();
+    });
+    function annulerCreate(){
+        createZone.style.display = 'none';
+        ou.style.display = ''; lienCreer.style.display = ''; sel.style.display = '';
+        createInp.value = '';
+    }
+    createCancel.addEventListener('click', annulerCreate);
+    createInp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); createBtn.click(); } if (e.key === 'Escape'){ annulerCreate(); } });
+    createBtn.addEventListener('click', function(){
+        const nom = createInp.value.trim();
+        if (!nom){ createInp.focus(); return; }
+        createBtn.disabled = true; createBtn.textContent = '…';
+        const fd = new FormData();
+        fd.append('entreprise_id', ENT_ID);
+        fd.append('nom', nom);
+        fd.append('type', tr._tiersType || 'client');
+        fetch(APP_URL + '/dossier/tiers/quick-create', {method:'POST', body:fd})
+            .then(r => r.json())
+            .then(d => {
+                createBtn.disabled = false; createBtn.textContent = 'Créer';
+                if (d && d.ok) {
+                    // Ajouter au select + sélectionner + marquer lié
+                    const opt = mkEl('option', {value:String(d.id)});
+                    opt.textContent = d.nom;
+                    sel.appendChild(opt);
+                    sel.value = String(d.id);
+                    hiddenId.value = String(d.id);
+                    badge.style.display = 'inline-flex';
+                    annulerCreate();
+                } else {
+                    alert(d && d.error ? d.error : 'Création impossible');
+                }
+            })
+            .catch(() => { createBtn.disabled = false; createBtn.textContent = 'Créer'; alert('Erreur réseau'); });
+    });
+
     bloc.appendChild(nomDetecte);
     bloc.appendChild(sel);
     bloc.appendChild(ou);
     bloc.appendChild(lienCreer);
+    bloc.appendChild(createZone);
     bloc.appendChild(badge);
     td.appendChild(bloc);
     tr.appendChild(td);
 
     // Méthode pour activer la ligne tiers avec un type
     tr._activate = function(type, nom) {
+        tr._tiersType = type;
         const col  = type === 'fournisseur' ? '#d97706' : '#2563eb';
         const label = type === 'fournisseur' ? 'Fournisseur' : 'Client';
         labelType.textContent = label;
