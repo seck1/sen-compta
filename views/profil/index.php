@@ -145,10 +145,15 @@
         </div>
     </form>
 
-    <form method="post" action="<?= APP_URL ?>/profil/smtp/test" style="margin-top:12px;padding-top:14px;border-top:1px solid var(--border)">
+    <form method="post" action="<?= APP_URL ?>/profil/smtp/test" style="margin-top:12px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
         <?= csrfField() ?>
-        <button type="submit" class="btn btn-outline">✉ Envoyer un email de test (à <?= e($user['email']) ?>)</button>
+        <div style="flex:1;min-width:240px">
+            <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Adresse de test</label>
+            <input type="email" name="test_email" value="mor.seck86@gmail.com" placeholder="votre@email.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+        </div>
+        <button type="submit" class="btn btn-outline">✉ Envoyer un email de test</button>
     </form>
+    <p style="font-size:12px;color:#a8843f;margin-top:8px">⚠ Avec Resend en mode gratuit (expéditeur onboarding@resend.dev), l'email de test ne part QU'À l'adresse de votre compte Resend. Pour envoyer à n'importe qui, vérifiez votre domaine sen-compta.com dans Resend.</p>
 </div>
 <?php endif; ?>
 

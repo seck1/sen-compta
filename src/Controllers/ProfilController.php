@@ -192,13 +192,20 @@ class ProfilController {
         verifyCsrfToken($_POST['csrf_token'] ?? '');
         $u = auth();
         require_once APP_ROOT . '/config/mail.php';
-        $to = $u['email'] ?? trim($_POST['test_email'] ?? '');
+        // Priorité à l'adresse saisie dans le champ ; fallback sur l'email du compte
+        $to = trim($_POST['test_email'] ?? '') ?: ($u['email'] ?? '');
         if (!$to) { $_SESSION['smtp_flash']=['ok'=>false,'msg'=>'Aucune adresse de test.']; redirect('/profil#email'); }
         $html = '<div style="font-family:Arial;padding:20px"><h2 style="color:#1e3a5f">Test SMTP SenCompta</h2><p>Si vous recevez cet email, votre configuration SMTP fonctionne correctement.</p></div>';
-        $ok = @sendMail($to, $u['prenom'] ?? 'Admin', 'Test SMTP — SenCompta', $html);
-        $_SESSION['smtp_flash'] = $ok
-            ? ['ok'=>true,'msg'=>"Email de test envoyé à $to. Vérifiez votre boîte (et les spams)."]
-            : ['ok'=>false,'msg'=>"Échec de l'envoi. Vérifiez l'hôte, le port, l'utilisateur et le mot de passe d'application."];
+
+        // Capture l'erreur SMTP precise pour aider au diagnostic
+        $err = '';
+        $ok = sendMailSmtp($to, $u['prenom'] ?? 'Admin', 'Test SMTP — SenCompta', $html, $err);
+        if ($ok) {
+            $_SESSION['smtp_flash'] = ['ok'=>true,'msg'=>"Email de test envoyé à $to. Vérifiez votre boîte (et les spams)."];
+        } else {
+            $detail = $err ? " Détail : $err" : '';
+            $_SESSION['smtp_flash'] = ['ok'=>false,'msg'=>"Échec de l'envoi à $to.$detail"];
+        }
         redirect('/profil#email');
     }
 }

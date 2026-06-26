@@ -33,29 +33,30 @@ define('SMTP_PASS', mailSetting('smtp_pass', 'SMTP_PASS', ''));
  * Envoi via SMTP (Gmail) en STARTTLS, sans dépendance externe.
  * Retourne true si l'email est accepté par le serveur SMTP.
  */
-function sendMailSmtp(string $to, string $toName, string $subject, string $bodyHtml): bool {
-    if (SMTP_HOST === '' || SMTP_USER === '' || SMTP_PASS === '') return false;
+function sendMailSmtp(string $to, string $toName, string $subject, string $bodyHtml, string &$err = ''): bool {
+    if (SMTP_HOST === '' || SMTP_USER === '' || SMTP_PASS === '') { $err = 'Config SMTP incomplète (hôte/user/clé manquant).'; return false; }
     $crlf = "\r\n";
     $errno = 0; $errstr = '';
     $fp = @stream_socket_client('tcp://' . SMTP_HOST . ':' . SMTP_PORT, $errno, $errstr, 15);
-    if (!$fp) { error_log("SMTP connect failed: $errstr"); return false; }
+    if (!$fp) { $err = "Connexion impossible à ".SMTP_HOST.":".SMTP_PORT." ($errstr)"; error_log("SMTP connect failed: $errstr"); return false; }
     stream_set_timeout($fp, 15);
     $read = function() use ($fp) { $d=''; while($line=fgets($fp,515)){ $d.=$line; if(isset($line[3]) && $line[3]===' ') break; } return $d; };
     $cmd  = function($c) use ($fp,$read){ if($c!==null) fwrite($fp,$c."\r\n"); return $read(); };
     $code = function($r){ return (int)substr(trim($r),0,3); };
+    $fail = function($r) use (&$err,$fp){ $err = trim($r); fclose($fp); return false; };
 
     $read(); // greeting
     $host = parse_url(APP_URL ?? 'https://sen-compta.com', PHP_URL_HOST) ?: 'sen-compta.com';
-    if ($code($cmd("EHLO $host")) !== 250) { fclose($fp); return false; }
-    if ($code($cmd("STARTTLS")) !== 220) { fclose($fp); return false; }
-    if (!@stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) { fclose($fp); return false; }
+    $r=$cmd("EHLO $host"); if ($code($r)!==250) return $fail($r);
+    $r=$cmd("STARTTLS"); if ($code($r)!==220) return $fail($r);
+    if (!@stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) { $err='Échec TLS (STARTTLS)'; fclose($fp); return false; }
     $cmd("EHLO $host");
     $cmd("AUTH LOGIN");
-    if ($code($cmd(base64_encode(SMTP_USER))) !== 334) { fclose($fp); return false; }
-    if ($code($cmd(base64_encode(SMTP_PASS))) !== 235) { error_log("SMTP auth failed"); fclose($fp); return false; }
-    if ($code($cmd("MAIL FROM:<" . MAIL_FROM . ">")) !== 250) { fclose($fp); return false; }
-    if (!in_array($code($cmd("RCPT TO:<$to>")), [250,251])) { fclose($fp); return false; }
-    if ($code($cmd("DATA")) !== 354) { fclose($fp); return false; }
+    $r=$cmd(base64_encode(SMTP_USER)); if ($code($r)!==334) return $fail($r);
+    $r=$cmd(base64_encode(SMTP_PASS)); if ($code($r)!==235) { $err='Authentification refusée (clé/utilisateur incorrect)'; fclose($fp); return false; }
+    $r=$cmd("MAIL FROM:<" . MAIL_FROM . ">"); if ($code($r)!==250) return $fail($r);
+    $r=$cmd("RCPT TO:<$to>"); if (!in_array($code($r),[250,251])) return $fail($r);
+    $r=$cmd("DATA"); if ($code($r)!==354) return $fail($r);
 
     $headers  = "From: =?UTF-8?B?".base64_encode(MAIL_FROM_NAME)."?= <".MAIL_FROM.">".$crlf;
     $headers .= "To: =?UTF-8?B?".base64_encode($toName)."?= <$to>".$crlf;
