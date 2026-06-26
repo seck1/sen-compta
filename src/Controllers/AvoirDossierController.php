@@ -50,8 +50,13 @@ class AvoirDossierController {
             FROM ecritures e
             JOIN journaux j ON j.id=e.journal_id
             WHERE e.entreprise_id=? AND e.exercice=? AND j.code='VTE'
+              AND (e.numero_facture IS NULL OR e.numero_facture NOT LIKE 'AV-%')  -- exclure les avoirs eux-mêmes
+              AND e.libelle NOT LIKE 'Avoir %'
               AND EXISTS (SELECT 1 FROM lignes_ecritures l JOIN comptes c ON c.id=l.compte_id
                           WHERE l.ecriture_id=e.id AND c.numero LIKE '411%')
+              -- exclure les factures déjà entièrement extournées (un avoir 100% existe)
+              AND NOT EXISTS (SELECT 1 FROM avoirs_dossier ad
+                              WHERE ad.ecriture_origine_id=e.id AND ad.taux >= 100 AND ad.statut='emis')
             ORDER BY e.date_ecriture DESC, e.id DESC");
         $stmtF->execute([$id, $exercice]);
         $factures = $stmtF->fetchAll(PDO::FETCH_ASSOC);
@@ -133,8 +138,11 @@ class AvoirDossierController {
                 if (abs($debit) < 0.005 && abs($credit) < 0.005) continue;
                 $insL->execute([$avoirEcrId, (int)$l['compte_id'], 'Avoir — ' . $l['libelle'], $debit, $credit,
                                 $l['tiers_id'] ? (int)$l['tiers_id'] : null]);
-                // Le montant TTC extourné = ce qu'on crédite au client (411)
-                if (strpos((string)$l['numero'], '411') === 0) $montantTtc += $debit;
+                // Montant TTC extourné = montant client (411) de la facture d'origine (au débit dans la facture),
+                // ramené au % extourné.
+                if (strpos((string)$l['numero'], '411') === 0) {
+                    $montantTtc += round((float)$l['debit'] * $coef, 2);
+                }
             }
 
             // Traçabilité
