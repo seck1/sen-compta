@@ -72,8 +72,8 @@ html, body {
 
 .card-logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
 .card-logo img {
-    width: 58px; height: 58px; object-fit: contain;
-    padding: 8px; border-radius: 16px;
+    width: 76px; height: 76px; object-fit: contain;
+    padding: 10px; border-radius: 18px;
     background: linear-gradient(160deg, #f2f7f4, #e9f1ec);
     box-shadow: inset 0 0 0 1px rgba(31,110,78,0.12);
 }
