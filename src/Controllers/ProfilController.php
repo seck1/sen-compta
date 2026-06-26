@@ -13,6 +13,12 @@ class ProfilController {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         $saved = isset($_GET['saved']);
 
+        // Config SMTP (réservée au super-admin) + flash
+        $isSuperAdmin = (($user['role_saas'] ?? '') === 'super_admin');
+        $smtp = $this->getSmtpSettings();
+        $smtpFlash = $_SESSION['smtp_flash'] ?? null;
+        unset($_SESSION['smtp_flash']);
+
         ob_start();
         require APP_ROOT . '/views/profil/index.php';
         $content = ob_get_clean();
@@ -137,5 +143,62 @@ class ProfilController {
                           VALUES (?,?,?,?,?,?)")
             ->execute([$userId, $clientId, $email, $type, $message,
                        $_SERVER['REMOTE_ADDR'] ?? null]);
+    }
+
+    // ── Paramétrage SMTP (super-admin uniquement) ─────────────────────
+    private function requireSuperAdmin(): void {
+        requireAuth();
+        $u = auth();
+        if (($u['role_saas'] ?? '') !== 'super_admin') redirect('/profil');
+    }
+
+    /** Lit la config SMTP depuis app_settings (valeurs vides si non définies). */
+    private function getSmtpSettings(): array {
+        $keys = ['smtp_host','smtp_port','smtp_user','smtp_pass','mail_from','mail_from_name'];
+        $out = array_fill_keys($keys, '');
+        try {
+            $db = getDB();
+            $rows = $db->query("SELECT cle, valeur FROM app_settings WHERE cle IN ('".implode("','",$keys)."')")->fetchAll(PDO::FETCH_KEY_PAIR);
+            foreach ($rows as $k=>$v) $out[$k] = $v;
+        } catch (\Throwable $e) { /* table absente */ }
+        if ($out['smtp_port']==='') $out['smtp_port']='587';
+        return $out;
+    }
+
+    public function sauverSmtp(): void {
+        $this->requireSuperAdmin();
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $db = getDB();
+        $map = [
+            'smtp_host'      => trim($_POST['smtp_host'] ?? ''),
+            'smtp_port'      => trim($_POST['smtp_port'] ?? '587'),
+            'smtp_user'      => trim($_POST['smtp_user'] ?? ''),
+            'mail_from'      => trim($_POST['mail_from'] ?? ''),
+            'mail_from_name' => trim($_POST['mail_from_name'] ?? 'SenCompta'),
+        ];
+        // Le mot de passe n'est mis à jour que s'il est fourni (on ne l'écrase pas par vide)
+        $pass = $_POST['smtp_pass'] ?? '';
+        if ($pass !== '') $map['smtp_pass'] = $pass;
+
+        $st = $db->prepare("INSERT INTO app_settings (cle, valeur) VALUES (?,?) ON DUPLICATE KEY UPDATE valeur=VALUES(valeur)");
+        foreach ($map as $k=>$v) $st->execute([$k, $v]);
+
+        $_SESSION['smtp_flash'] = ['ok'=>true,'msg'=>'Configuration SMTP enregistrée.'];
+        redirect('/profil#email');
+    }
+
+    public function testerSmtp(): void {
+        $this->requireSuperAdmin();
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $u = auth();
+        require_once APP_ROOT . '/config/mail.php';
+        $to = $u['email'] ?? trim($_POST['test_email'] ?? '');
+        if (!$to) { $_SESSION['smtp_flash']=['ok'=>false,'msg'=>'Aucune adresse de test.']; redirect('/profil#email'); }
+        $html = '<div style="font-family:Arial;padding:20px"><h2 style="color:#1e3a5f">Test SMTP SenCompta</h2><p>Si vous recevez cet email, votre configuration SMTP fonctionne correctement.</p></div>';
+        $ok = @sendMail($to, $u['prenom'] ?? 'Admin', 'Test SMTP — SenCompta', $html);
+        $_SESSION['smtp_flash'] = $ok
+            ? ['ok'=>true,'msg'=>"Email de test envoyé à $to. Vérifiez votre boîte (et les spams)."]
+            : ['ok'=>false,'msg'=>"Échec de l'envoi. Vérifiez l'hôte, le port, l'utilisateur et le mot de passe d'application."];
+        redirect('/profil#email');
     }
 }

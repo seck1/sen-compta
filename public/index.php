@@ -75,6 +75,8 @@ $routes = [
 
     // Profil utilisateur connecté
     'profil'          => ['ProfilController', 'index'],
+    'profil/smtp'      => ['ProfilController', 'sauverSmtp'],
+    'profil/smtp/test' => ['ProfilController', 'testerSmtp'],
     'profil/update'   => ['ProfilController', 'update'],
     'profil/2fa'      => ['ProfilController', 'setup2fa'],
     'profil/2fa/confirm'  => ['ProfilController', 'confirm2fa'],

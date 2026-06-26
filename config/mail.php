@@ -2,14 +2,32 @@
 // Configuration email SenCompta
 // Les valeurs SMTP viennent du .env (SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_PORT, MAIL_FROM)
 
-define('MAIL_FROM',     getenv('MAIL_FROM') ?: 'sencompta1@gmail.com');
-define('MAIL_FROM_NAME', getenv('MAIL_FROM_NAME') ?: 'SenCompta');
-define('MAIL_REPLY_TO',  getenv('MAIL_REPLY_TO') ?: (getenv('MAIL_FROM') ?: 'sencompta1@gmail.com'));
+/** Lit un paramètre SMTP : base de données (app_settings) en priorité, sinon .env. */
+function mailSetting(string $key, string $envKey, string $default = ''): string {
+    static $cache = null;
+    if ($cache === null) {
+        $cache = [];
+        try {
+            $db = function_exists('getDB') ? getDB() : null;
+            if ($db) {
+                $rows = $db->query("SELECT cle, valeur FROM app_settings WHERE cle LIKE 'smtp_%' OR cle LIKE 'mail_%'")->fetchAll(PDO::FETCH_KEY_PAIR);
+                $cache = $rows ?: [];
+            }
+        } catch (\Throwable $e) { $cache = []; }
+    }
+    if (!empty($cache[$key])) return (string)$cache[$key];
+    $env = getenv($envKey);
+    return ($env !== false && $env !== '') ? $env : $default;
+}
+
+define('MAIL_FROM',      mailSetting('mail_from', 'MAIL_FROM', 'sencompta1@gmail.com'));
+define('MAIL_FROM_NAME', mailSetting('mail_from_name', 'MAIL_FROM_NAME', 'SenCompta'));
+define('MAIL_REPLY_TO',  mailSetting('mail_reply_to', 'MAIL_REPLY_TO', MAIL_FROM));
 // SMTP (Gmail : host smtp.gmail.com, port 587, user = sencompta1@gmail.com, pass = mot de passe d'application)
-define('SMTP_HOST', getenv('SMTP_HOST') ?: '');
-define('SMTP_PORT', (int)(getenv('SMTP_PORT') ?: 587));
-define('SMTP_USER', getenv('SMTP_USER') ?: '');
-define('SMTP_PASS', getenv('SMTP_PASS') ?: '');
+define('SMTP_HOST', mailSetting('smtp_host', 'SMTP_HOST', ''));
+define('SMTP_PORT', (int)mailSetting('smtp_port', 'SMTP_PORT', '587'));
+define('SMTP_USER', mailSetting('smtp_user', 'SMTP_USER', ''));
+define('SMTP_PASS', mailSetting('smtp_pass', 'SMTP_PASS', ''));
 
 /**
  * Envoi via SMTP (Gmail) en STARTTLS, sans dépendance externe.
