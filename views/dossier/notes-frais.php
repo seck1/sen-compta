@@ -97,7 +97,7 @@ $statut_cfg = [
             <td style="padding:11px 16px;text-align:right;font-family:monospace;font-weight:700;color:#dc2626"><?= formatMontant($n['montant']) ?></td>
             <td style="padding:11px 16px;text-align:center">
                 <?php if($n['justificatif']): ?>
-                <a href="<?= APP_URL ?>/public/uploads/justificatifs/<?= e($n['justificatif']) ?>" target="_blank"
+                <a href="<?= APP_URL ?>/uploads/justificatifs/<?= e($n['justificatif']) ?>" target="_blank"
                    style="font-size:13px;color:#2563eb;text-decoration:none;font-weight:600">📎 Voir</a>
                 <?php else: ?>
                 <span style="color:var(--text-muted);font-size:13px">—</span>

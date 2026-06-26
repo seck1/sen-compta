@@ -219,7 +219,7 @@ $filtreStatut = $_GET['statut'] ?? '';
             <td style="text-align:center">
                 <?php if (!empty($ec['piece_jointe'])): ?>
                 <?php
-                    $pjUrl  = APP_URL . '/public/uploads/justificatifs/' . $ec['piece_jointe'];
+                    $pjUrl  = APP_URL . '/uploads/justificatifs/' . $ec['piece_jointe'];
                     $pjExt  = strtolower(pathinfo($ec['piece_jointe'], PATHINFO_EXTENSION));
                     $isPdf  = $pjExt === 'pdf';
                     $isImg  = in_array($pjExt, ['jpg','jpeg','png','webp']);

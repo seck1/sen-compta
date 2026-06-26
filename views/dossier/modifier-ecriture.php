@@ -183,7 +183,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
         <div class="ec-card-body" style="padding:14px 20px">
             <?php if (!empty($ecriture['piece_jointe'])): ?>
             <?php
-                $pjUrl = APP_URL . '/public/uploads/justificatifs/' . $ecriture['piece_jointe'];
+                $pjUrl = APP_URL . '/uploads/justificatifs/' . $ecriture['piece_jointe'];
                 $pjExt = strtolower(pathinfo($ecriture['piece_jointe'], PATHINFO_EXTENSION));
             ?>
             <div class="pj-existant">
