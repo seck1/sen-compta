@@ -99,7 +99,8 @@ $routes = [
     // Import de données (clients/fournisseurs, plan comptable, balance d'ouverture N-1)
     'dossier/import'                  => ['ImportDonneesController', 'index'],
     'dossier/import/modele'           => ['ImportDonneesController', 'modele'],
-    'dossier/import/tiers'            => ['ImportDonneesController', 'importTiers'],
+    'dossier/import/clients'          => ['ImportDonneesController', 'importClients'],
+    'dossier/import/fournisseurs'     => ['ImportDonneesController', 'importFournisseurs'],
     'dossier/import/plan-comptable'   => ['ImportDonneesController', 'importPlanComptable'],
     'dossier/import/balance'          => ['ImportDonneesController', 'importBalance'],
     // Alias kebab-case utilisés dans les vues

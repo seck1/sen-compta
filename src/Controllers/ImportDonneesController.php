@@ -65,27 +65,42 @@ class ImportDonneesController {
         exit;
     }
 
-    // ── Import Tiers (clients / fournisseurs) ─────────────────────────────────
-    public function importTiers(): void {
+    // ── Import Clients ────────────────────────────────────────────────────────
+    public function importClients(): void {
+        $this->importTiersType('client', 'IMPORT_CLIENTS', 'clients');
+    }
+
+    // ── Import Fournisseurs ───────────────────────────────────────────────────
+    public function importFournisseurs(): void {
+        $this->importTiersType('fournisseur', 'IMPORT_FOURNISSEURS', 'fournisseurs');
+    }
+
+    /** Logique commune d'import de tiers pour un type donné (client|fournisseur). */
+    private function importTiersType(string $type, string $action, string $libelle): void {
         $id         = (int)($_POST['entreprise_id'] ?? 0);
         $entreprise = $this->getEntreprise($id);
         verifyCsrfToken($_POST['csrf_token'] ?? '');
         $db = getDB();
 
-        $typeForce = $_POST['type_force'] ?? ''; // 'client', 'fournisseur' ou '' (déduit du fichier)
+        $mode = ($_POST['mode'] ?? 'fusion') === 'remplacement' ? 'remplacement' : 'fusion';
         $rows = $this->lireFichier('fichier', "/dossier/import?id=$id");
         if ($rows === null) redirect("/dossier/import?id=$id");
 
-        $ok = 0; $ignore = 0; $erreurs = [];
+        $ok = 0; $ignore = 0; $archives = 0;
         $db->beginTransaction();
         try {
-            $stmt = $db->prepare("INSERT INTO tiers (entreprise_id, nom, type, ninea, telephone, email, adresse) VALUES (?,?,?,?,?,?,?)");
-            foreach ($rows as $n => $r) {
-                $nom = trim($this->col($r, ['nom','raison_sociale','raison sociale','client','fournisseur']) ?? '');
-                if ($nom === '') { $ignore++; continue; }
+            // Remplacement : soft-delete (actif=0) des tiers existants du même type.
+            // On ne supprime pas en dur car les tiers peuvent être référencés par des écritures.
+            if ($mode === 'remplacement') {
+                $del = $db->prepare("UPDATE tiers SET actif=0 WHERE entreprise_id=? AND type IN (?, 'les_deux') AND actif=1");
+                $del->execute([$id, $type]);
+                $archives = $del->rowCount();
+            }
 
-                $type = $typeForce ?: strtolower(trim($this->col($r, ['type']) ?? 'client'));
-                if (!in_array($type, ['client','fournisseur','les_deux'], true)) $type = 'client';
+            $stmt = $db->prepare("INSERT INTO tiers (entreprise_id, nom, type, ninea, telephone, email, adresse) VALUES (?,?,?,?,?,?,?)");
+            foreach ($rows as $r) {
+                $nom = trim($this->col($r, ['nom','raison_sociale','raison sociale','client','fournisseur','denomination']) ?? '');
+                if ($nom === '') { $ignore++; continue; }
 
                 $ninea = trim($this->col($r, ['ninea','nina']) ?? '');
                 $tel   = trim($this->col($r, ['telephone','téléphone','tel','tél','phone']) ?? '');
@@ -98,12 +113,14 @@ class ImportDonneesController {
             $db->commit();
         } catch (\Throwable $e) {
             $db->rollBack();
-            $_SESSION['flash_error'] = "Erreur import tiers : " . $e->getMessage();
+            $_SESSION['flash_error'] = "Erreur import $libelle : " . $e->getMessage();
             redirect("/dossier/import?id=$id");
         }
 
-        $this->logImport($id, 'IMPORT_TIERS', "$ok tiers importés");
-        $_SESSION['flash_success'] = "$ok tiers importés." . ($ignore ? " $ignore ligne(s) ignorée(s) (nom vide)." : "");
+        $this->logImport($id, $action, "$ok $libelle importés (mode $mode)");
+        $_SESSION['flash_success'] = ucfirst($libelle) . " : $ok importé(s)."
+            . ($mode === 'remplacement' && $archives ? " $archives ancien(s) archivé(s)." : "")
+            . ($ignore ? " $ignore ligne(s) ignorée(s) (nom vide)." : "");
         redirect("/dossier/import?id=$id");
     }
 
@@ -114,18 +131,36 @@ class ImportDonneesController {
         verifyCsrfToken($_POST['csrf_token'] ?? '');
         $db = getDB();
 
+        $mode = ($_POST['mode'] ?? 'fusion') === 'remplacement' ? 'remplacement' : 'fusion';
         $rows = $this->lireFichier('fichier', "/dossier/import?id=$id");
         if ($rows === null) redirect("/dossier/import?id=$id");
 
-        // Comptes déjà existants pour éviter les doublons (contrainte UNIQUE)
-        $existants = [];
-        $q = $db->prepare("SELECT numero FROM comptes WHERE entreprise_id=?");
-        $q->execute([$id]);
-        foreach ($q->fetchAll(PDO::FETCH_COLUMN) as $num) $existants[(string)$num] = true;
-
-        $ok = 0; $ignore = 0;
+        $ok = 0; $ignore = 0; $supprimes = 0; $proteges = 0;
         $db->beginTransaction();
         try {
+            // Remplacement : supprimer les comptes NON utilisés dans des écritures
+            // (ceux utilisés sont protégés par la FK lignes_ecritures -> on les garde).
+            if ($mode === 'remplacement') {
+                $utilises = $db->prepare(
+                    "SELECT COUNT(*) FROM comptes c WHERE c.entreprise_id=?
+                     AND EXISTS (SELECT 1 FROM lignes_ecritures l WHERE l.compte_id=c.id)");
+                $utilises->execute([$id]);
+                $proteges = (int)$utilises->fetchColumn();
+
+                $delC = $db->prepare(
+                    "DELETE FROM comptes WHERE entreprise_id=?
+                     AND id NOT IN (SELECT DISTINCT compte_id FROM lignes_ecritures
+                                    WHERE compte_id IS NOT NULL)");
+                $delC->execute([$id]);
+                $supprimes = $delC->rowCount();
+            }
+
+            // Comptes restants pour éviter les doublons (contrainte UNIQUE)
+            $existants = [];
+            $q = $db->prepare("SELECT numero FROM comptes WHERE entreprise_id=?");
+            $q->execute([$id]);
+            foreach ($q->fetchAll(PDO::FETCH_COLUMN) as $num) $existants[(string)$num] = true;
+
             $stmt = $db->prepare("INSERT INTO comptes (entreprise_id, numero, intitule, type_compte, classe) VALUES (?,?,?,?,?)");
             foreach ($rows as $r) {
                 $numero   = strtoupper(trim($this->col($r, ['numero','numéro','compte','n°','code']) ?? ''));
@@ -153,8 +188,14 @@ class ImportDonneesController {
             redirect("/dossier/import?id=$id");
         }
 
-        $this->logImport($id, 'IMPORT_PLAN', "$ok comptes importés");
-        $_SESSION['flash_success'] = "$ok comptes importés." . ($ignore ? " $ignore ligne(s) ignorée(s) (vide ou déjà existant)." : "");
+        $this->logImport($id, 'IMPORT_PLAN', "$ok comptes importés (mode $mode)");
+        $msg = "$ok compte(s) importé(s).";
+        if ($mode === 'remplacement') {
+            $msg .= " $supprimes ancien(s) supprimé(s).";
+            if ($proteges) $msg .= " $proteges compte(s) utilisé(s) conservé(s) (présents dans des écritures).";
+        }
+        if ($ignore) $msg .= " $ignore ligne(s) ignorée(s) (vide ou déjà existant).";
+        $_SESSION['flash_success'] = $msg;
         redirect("/dossier/import?id=$id");
     }
 
@@ -165,18 +206,26 @@ class ImportDonneesController {
         verifyCsrfToken($_POST['csrf_token'] ?? '');
         $db = getDB();
 
+        $mode     = ($_POST['mode'] ?? 'fusion') === 'remplacement' ? 'remplacement' : 'fusion';
         $exercice = (int)($_POST['exercice'] ?? $this->exerciceCourant($entreprise));
         if ($exercice < 2000) { $_SESSION['flash_error'] = "Exercice invalide."; redirect("/dossier/import?id=$id"); }
 
         $rows = $this->lireFichier('fichier', "/dossier/import?id=$id");
         if ($rows === null) redirect("/dossier/import?id=$id");
 
-        // Refuser si un report à nouveau existe déjà pour cet exercice
-        $check = $db->prepare("SELECT COUNT(*) FROM ecritures WHERE entreprise_id=? AND exercice=? AND libelle LIKE 'Report à nouveau%'");
+        // Report à nouveau déjà présent ?
+        $check = $db->prepare("SELECT id FROM ecritures WHERE entreprise_id=? AND exercice=? AND libelle LIKE 'Report à nouveau%'");
         $check->execute([$id, $exercice]);
-        if ($check->fetchColumn() > 0) {
-            $_SESSION['flash_error'] = "Un report à nouveau existe déjà pour l'exercice $exercice. Supprimez-le avant de réimporter.";
-            redirect("/dossier/import?id=$id");
+        $anciensAN = $check->fetchAll(PDO::FETCH_COLUMN);
+        if (!empty($anciensAN)) {
+            if ($mode === 'fusion') {
+                $_SESSION['flash_error'] = "Un report à nouveau existe déjà pour l'exercice $exercice. Utilisez le mode « Remplacement » pour l'écraser.";
+                redirect("/dossier/import?id=$id");
+            }
+            // Remplacement : supprimer l'ancienne écriture AN + ses lignes
+            $in = implode(',', array_fill(0, count($anciensAN), '?'));
+            $db->prepare("DELETE FROM lignes_ecritures WHERE ecriture_id IN ($in)")->execute($anciensAN);
+            $db->prepare("DELETE FROM ecritures WHERE id IN ($in)")->execute($anciensAN);
         }
 
         // Journal OD
