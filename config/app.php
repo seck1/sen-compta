@@ -88,12 +88,17 @@ if (!defined('BACKUP_TOKEN')) {
 // Démarrage session sécurisé
 if (session_status() === PHP_SESSION_NONE) {
     session_name('sencompta_sess');
+    // Derrière le reverse proxy Caddy, $_SERVER['HTTPS'] n'est pas toujours renseigné :
+    // on détecte aussi l'en-tête X-Forwarded-Proto pour activer le flag secure en prod.
+    $estHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
+        || (($_SERVER['SERVER_PORT'] ?? '') == 443);
     session_set_cookie_params([
         'lifetime' => SESSION_LIFETIME,
         'path'     => '/',
-        'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+        'secure'   => $estHttps,
         'httponly' => true,
-        'samesite' => 'Lax',
+        'samesite' => 'Lax', // Lax (et non Strict) pour préserver les liens email (reset password)
     ]);
     session_start();
 }
