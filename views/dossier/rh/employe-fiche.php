@@ -22,9 +22,9 @@ $hue = crc32($employe['nom'].$employe['prenom']) % 360;
         </div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a href="<?= APP_URL ?>/dossier/rh/employe/bulletins?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" class="btn btn-outline btn-sm">📄 Bulletins</a>
-        <a href="<?= APP_URL ?>/dossier/rh/employe/attestation?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" target="_blank" class="btn btn-outline btn-sm">🖨 Attestation</a>
-        <a href="<?= APP_URL ?>/dossier/rh/employe/solde-tout-compte?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" target="_blank" class="btn btn-outline btn-sm">📋 Solde de tout compte</a>
+        <a href="<?= APP_URL ?>/dossier/rh/historique?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" class="btn btn-outline btn-sm">📄 Bulletins</a>
+        <a href="<?= APP_URL ?>/dossier/rh/attestation?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" target="_blank" class="btn btn-outline btn-sm">🖨 Attestation</a>
+        <a href="<?= APP_URL ?>/dossier/rh/solde-tout-compte?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" target="_blank" class="btn btn-outline btn-sm">📋 Solde de tout compte</a>
         <a href="<?= APP_URL ?>/dossier/rh/edit?id=<?= $entreprise['id'] ?>&employe_id=<?= $employe['id'] ?>" class="btn btn-primary btn-sm">✏️ Modifier</a>
     </div>
 </div>
