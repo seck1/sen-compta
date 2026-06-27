@@ -445,62 +445,87 @@ class RHController {
                 return $r ? (int)$r['id'] : null;
             };
 
+            $nom        = "{$employe['prenom']} {$employe['nom']}";
             $brut       = (float)$bulletin['salaire_brut'];
-            $net        = (float)$bulletin['net_a_payer'];
             $ipres_sal  = (float)$bulletin['ipres_salarie'];
             $ir         = (float)$bulletin['ir_salarie'];
-            $autres_ret = (float)$bulletin['total_retenues'] - $ipres_sal - $ir;
+            $trimf      = (float)($bulletin['trimf'] ?? 0);
+            $ipm_sal    = (float)($bulletin['ipm_salarie'] ?? 0);
+            $acompte    = (float)($bulletin['acompte'] ?? 0);
+            $ret_div    = (float)($bulletin['retenues_diverses'] ?? 0);
+            // Net versé = brut - cotisations/impôts salariaux - acompte - retenues diverses.
+            $net_avant  = (float)($bulletin['net_avant_retenues'] ?? ($brut - $ipres_sal - $ir - $trimf - $ipm_sal));
+            $net_verse  = max(0, $net_avant - $acompte - $ret_div);
+
             $ipres_pat  = (float)$bulletin['ipres_patronal'];
             $css_pat    = (float)($bulletin['css_accident'] + $bulletin['css_prestation']);
+            $cfce       = (float)($bulletin['cfce'] ?? 0);
+            $ipm_pat    = (float)($bulletin['ipm_patronal'] ?? 0);
 
-            // Écriture 1 : Charge de personnel (salaire brut)
+            // Premier compte existant parmi une liste de candidats SYSCOHADA.
+            $compte = function(array $nums) use ($getCompte) {
+                foreach ($nums as $n) { if ($c = $getCompte($n)) return $c; }
+                return null;
+            };
+            // Vérifie l'équilibre d'une écriture (somme débits == somme crédits) avant commit.
+            $verifierEquilibre = function(int $eid) use ($db): bool {
+                $s = $db->prepare("SELECT ROUND(SUM(debit),0) d, ROUND(SUM(credit),0) c FROM lignes_ecritures WHERE ecriture_id=?");
+                $s->execute([$eid]);
+                $r = $s->fetch(PDO::FETCH_ASSOC);
+                return $r && (float)$r['d'] === (float)$r['c'] && (float)$r['d'] > 0;
+            };
+
             $eStmt = $db->prepare("INSERT INTO ecritures
                 (entreprise_id, journal_id, user_id, numero_piece, date_ecriture, libelle, exercice, periode, statut)
                 VALUES (?,?,?,?,?,?,?,?,'brouillon')");
+            $lStmt = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)");
+
+            // ── Écriture 1 : rémunération du personnel ──
             $eStmt->execute([$entreprise_id, $journal_id, $user_id, $num_piece, $date_ecriture, $libelle_base, $annee, $mois]);
             $ecriture_id = (int)$db->lastInsertId();
 
-            $lStmt = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)");
+            // Débit : salaire brut (6611)
+            if ($c = $compte(['6611','661'])) $lStmt->execute([$ecriture_id, $c, "Salaire brut — $nom", $brut, 0]);
+            // Crédits : retenues salariales par nature
+            if ($ipres_sal > 0 && $c = $compte(['4311','431'])) $lStmt->execute([$ecriture_id, $c, "IPRES salarié — $nom", 0, $ipres_sal]);
+            if ($ipm_sal   > 0 && $c = $compte(['4313','438','431'])) $lStmt->execute([$ecriture_id, $c, "IPM salarié — $nom", 0, $ipm_sal]);
+            if ($ir        > 0 && $c = $compte(['4471','447'])) $lStmt->execute([$ecriture_id, $c, "IR retenu — $nom", 0, $ir]);
+            if ($trimf     > 0 && $c = $compte(['4473','447'])) $lStmt->execute([$ecriture_id, $c, "TRIMF — $nom", 0, $trimf]);
+            if ($acompte   > 0 && $c = $compte(['425','421'])) $lStmt->execute([$ecriture_id, $c, "Acompte/avance — $nom", 0, $acompte]);
+            if ($ret_div   > 0 && $c = $compte(['427','428','422'])) $lStmt->execute([$ecriture_id, $c, "Retenues diverses — $nom", 0, $ret_div]);
+            if ($net_verse > 0 && $c = $compte(['422','421'])) $lStmt->execute([$ecriture_id, $c, "Net à payer — $nom", 0, $net_verse]);
 
-            // 6611 Salaires bruts — débit
-            if ($c = $getCompte('6611')) {
-                $lStmt->execute([$ecriture_id, $c, "Salaire brut — {$employe['prenom']} {$employe['nom']}", $brut, 0]);
-            }
-            // 4311 IPRES salarié — crédit
-            if ($ipres_sal > 0 && $c = $getCompte('4311')) {
-                $lStmt->execute([$ecriture_id, $c, "IPRES salarié — {$employe['prenom']} {$employe['nom']}", 0, $ipres_sal]);
-            }
-            // 4471 IR/IRPP retenu — crédit
-            if ($ir > 0 && $c = $getCompte('4471')) {
-                $lStmt->execute([$ecriture_id, $c, "IR retenu — {$employe['prenom']} {$employe['nom']}", 0, $ir]);
-            }
-            // Autres retenues → 422
-            if ($autres_ret > 0.01 && $c = $getCompte('422')) {
-                $lStmt->execute([$ecriture_id, $c, "Autres retenues — {$employe['prenom']} {$employe['nom']}", 0, $autres_ret]);
-            }
-            // 422 Net à payer — crédit
-            if ($c = $getCompte('422')) {
-                $lStmt->execute([$ecriture_id, $c, "Net à payer — {$employe['prenom']} {$employe['nom']}", 0, $net]);
+            if (!$verifierEquilibre($ecriture_id)) {
+                // Déséquilibre (compte manquant) → on annule cette écriture plutôt que de polluer la compta.
+                $db->prepare("DELETE FROM ecritures WHERE id=?")->execute([$ecriture_id]);
+                error_log("Paie: écriture salaire déséquilibrée annulée — bulletin $bulletin_id");
             }
 
-            // Écriture 2 : Charges patronales
-            if ($ipres_pat > 0 || $css_pat > 0) {
+            // ── Écriture 2 : charges patronales ──
+            $total_pat = $ipres_pat + $css_pat + $cfce + $ipm_pat;
+            if ($total_pat > 0) {
                 $eStmt->execute([$entreprise_id, $journal_id, $user_id, $num_piece.'-PAT', $date_ecriture, "Charges patronales $libelle_base", $annee, $mois]);
                 $ecriture_pat_id = (int)$db->lastInsertId();
 
-                if ($ipres_pat > 0 && $c = $getCompte('6641')) {
-                    $lStmt->execute([$ecriture_pat_id, $c, "IPRES patronal — {$employe['prenom']} {$employe['nom']}", $ipres_pat, 0]);
-                }
-                if ($css_pat > 0 && $c = $getCompte('6642')) {
-                    $lStmt->execute([$ecriture_pat_id, $c, "CSS patronale — {$employe['prenom']} {$employe['nom']}", $css_pat, 0]);
-                }
-                $total_pat = $ipres_pat + $css_pat;
-                if ($total_pat > 0 && $c = $getCompte('4312')) {
-                    $lStmt->execute([$ecriture_pat_id, $c, "Cotisations patronales à payer", 0, $total_pat]);
+                // Débits : charges patronales par nature
+                if ($ipres_pat > 0 && $c = $compte(['6641','664'])) $lStmt->execute([$ecriture_pat_id, $c, "IPRES patronal — $nom", $ipres_pat, 0]);
+                if ($css_pat   > 0 && $c = $compte(['6642','664'])) $lStmt->execute([$ecriture_pat_id, $c, "CSS patronale — $nom", $css_pat, 0]);
+                if ($cfce      > 0 && $c = $compte(['6413','641','64'])) $lStmt->execute([$ecriture_pat_id, $c, "CFCE — $nom", $cfce, 0]);
+                if ($ipm_pat   > 0 && $c = $compte(['6644','664'])) $lStmt->execute([$ecriture_pat_id, $c, "IPM patronal — $nom", $ipm_pat, 0]);
+
+                // Crédits : dettes par organisme
+                if (($ipres_pat) > 0 && $c = $compte(['4312','431'])) $lStmt->execute([$ecriture_pat_id, $c, "IPRES patronal à payer", 0, $ipres_pat]);
+                if ($css_pat   > 0 && $c = $compte(['432','438','43'])) $lStmt->execute([$ecriture_pat_id, $c, "CSS à payer", 0, $css_pat]);
+                if ($ipm_pat   > 0 && $c = $compte(['4313','438','43'])) $lStmt->execute([$ecriture_pat_id, $c, "IPM patronal à payer", 0, $ipm_pat]);
+                if ($cfce      > 0 && $c = $compte(['447','44'])) $lStmt->execute([$ecriture_pat_id, $c, "CFCE à payer", 0, $cfce]);
+
+                if (!$verifierEquilibre($ecriture_pat_id)) {
+                    $db->prepare("DELETE FROM ecritures WHERE id=?")->execute([$ecriture_pat_id]);
+                    error_log("Paie: écriture charges patronales déséquilibrée annulée — bulletin $bulletin_id");
                 }
             }
-        } catch (\Exception $e) {
-            // Ne pas bloquer la création du bulletin si les écritures échouent
+        } catch (\Throwable $e) {
+            error_log("genererEcrituresPaie: ".$e->getMessage());
         }
     }
 
