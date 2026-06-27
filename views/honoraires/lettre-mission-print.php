@@ -131,7 +131,7 @@ table.info td:first-child{font-weight:700;color:#555;background:#f8f9fb;width:20
     $type_label = $types[$mission['type']] ?? ucfirst($mission['type'] ?? 'Comptabilité');
     ?>
     <table class="info" style="margin-bottom:4mm">
-        <tr><td>Type de mission</td><td><?= $type_label ?></td></tr>
+        <tr><td>Type de mission</td><td><?= e($type_label) ?></td></tr>
         <tr><td>Référence mission</td><td><strong><?= e($mission['reference']) ?></strong></td></tr>
         <tr><td>Date de début</td><td><?= $mission['date_debut'] ? date('d/m/Y', strtotime($mission['date_debut'])) : '—' ?></td></tr>
         <tr><td>Date de fin prévue</td><td><?= $mission['date_fin_prevue'] ? date('d/m/Y', strtotime($mission['date_fin_prevue'])) : 'Indéterminée (mission permanente)' ?></td></tr>

@@ -108,7 +108,7 @@ $id = $entreprise['id'];
                 </td>
                 <td style="padding:11px 16px">
                     <span style="background:#f0f3f8;color:var(--navy-dark);font-size:14px;font-weight:600;padding:2px 8px;border-radius:4px">
-                        <?= $type_labels[$c['type_conge']] ?? $c['type_conge'] ?>
+                        <?= $type_labels[$c['type_conge']] ?? e($c['type_conge']) ?>
                     </span>
                 </td>
                 <td style="padding:11px 16px;font-size:13px">
