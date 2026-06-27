@@ -194,8 +194,8 @@ function redirect(string $path): void {
     exit;
 }
 
-function e(string $str): string {
-    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+function e(?string $str): string {
+    return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
 }
 
 function formatMontant(float $montant): string {
