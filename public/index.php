@@ -231,6 +231,10 @@ $routes = [
     'dossier/export/ecritures'   => ['ExportController', 'ecritures'],
     'dossier/export/balance'     => ['ExportController', 'balance'],
     'dossier/export/grand-livre' => ['ExportController', 'grandLivre'],
+    // Alias sans prefixe dossier/ (corrige les liens de vues) — audit 404
+    'export/ecritures'   => ['ExportController', 'ecritures'],
+    'export/balance'     => ['ExportController', 'balance'],
+    'export/grand-livre' => ['ExportController', 'grandLivre'],
 
     // Lettrage
     'dossier/lettrage'          => ['LettrerController', 'index'],
@@ -384,7 +388,20 @@ $routes = [
     'honoraires/missions/creer'=> ['HonorairesController', 'creerMission'],
     'honoraires/missions/store'=> ['HonorairesController', 'storeMission'],
     'honoraires/missions/payer'=> ['HonorairesController', 'marquerPaye'],
+    'honoraires/missions/lettre-mission' => ['HonorairesController', 'lettreMission'],
     'honoraires/tableau'       => ['HonorairesController', 'tableau'],
+    // Alias (corrige les liens de vues au singulier / anciens noms) — audit 404
+    'honoraires/mission/creer'        => ['HonorairesController', 'creerMission'],
+    'honoraires/mission/store'        => ['HonorairesController', 'storeMission'],
+    'honoraires/mission/lettre-mission' => ['HonorairesController', 'lettreMission'],
+    'honoraires/marquer-paye'         => ['HonorairesController', 'marquerPaye'],
+    'dossier/tva/payer'               => ['EtatsFinanciersController', 'payerTVA'],
+    'dossier/rapprochement/import-csv'   => ['RapprochementController', 'importCsv'],
+    'dossier/rapprochement/lettrer-auto' => ['RapprochementController', 'lettrerAuto'],
+    'dossier/fiscalite/calendrier/generer' => ['EtatsFinanciersController', 'genererEcheances'],
+    'dossier/profil/activites'        => ['DossierController', 'storeActivitesR2'],
+    'dossier/temps/facturer'          => ['TempsDossierController', 'marquerFacture'],
+    'planning/statut'                 => ['PlanningController', 'updateStatut'],
 
     // Planning
     'planning'               => ['PlanningController', 'index'],
