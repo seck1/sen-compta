@@ -431,11 +431,11 @@ class RHController {
             $libelle_base = "Paie {$mois_labels[$mois]} $annee — {$employe['prenom']} {$employe['nom']}";
             $num_piece = "PAI-" . sprintf('%02d', $mois) . "-$annee-" . $employe['matricule'];
 
-            // Supprimer les écritures existantes pour ce bulletin (recalcul)
-            $db->prepare("DELETE e FROM ecritures e
-                JOIN lignes_ecritures l ON l.ecriture_id = e.id
-                WHERE e.entreprise_id=? AND e.numero_piece=?"
-            )->execute([$entreprise_id, $num_piece]);
+            // Supprimer les écritures existantes pour ce bulletin (recalcul) :
+            // l'écriture principale ($num_piece) ET celle des charges patronales ($num_piece."-PAT").
+            $db->prepare("DELETE FROM ecritures
+                WHERE entreprise_id=? AND numero_piece IN (?, ?)"
+            )->execute([$entreprise_id, $num_piece, $num_piece . '-PAT']);
 
             // Helper: récupérer compte_id
             $getCompte = function($numero) use ($db, $entreprise_id) {
