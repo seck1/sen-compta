@@ -22,6 +22,7 @@
     <!-- Formulaire principal -->
     <div class="card" style="flex:1;min-width:0">
         <form method="POST" action="<?= APP_URL ?>/users/<?= $editMode ? 'update' : 'store' ?>">
+            <?= csrfField() ?>
             <?php if ($editMode): ?>
             <input type="hidden" name="id" value="<?= $user['id'] ?>">
             <?php endif; ?>
@@ -257,6 +258,7 @@
 
         <!-- Ajouter un dossier -->
         <form method="POST" action="<?= APP_URL ?>/users/assign">
+            <?= csrfField() ?>
             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
             <div class="form-field" style="margin-bottom:12px">
                 <label>Assigner un dossier</label>

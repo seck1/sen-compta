@@ -118,6 +118,7 @@ $derniere = !empty($fichiers) ? $fichiers[0] : null;
                         ⬇ Télécharger
                     </a>
                     <form method="POST" action="<?= APP_URL ?>/admin/backups/supprimer" onsubmit="return confirm('Supprimer cette sauvegarde ?')">
+                        <?= csrfField() ?>
                         <input type="hidden" name="fichier" value="<?= e($f['nom']) ?>">
                         <button type="submit" class="btn btn-sm" style="background:#fef2f2;color:#b91c1c;border:1px solid #fca5a5">🗑</button>
                     </form>

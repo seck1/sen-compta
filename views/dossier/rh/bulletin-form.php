@@ -15,6 +15,7 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
         var inp = document.getElementById('prime_anciennete');
         document.getElementById('prime_anciennete_override').value = (inp.dataset.auto == '0') ? '1' : '0';
     ">
+        <?= csrfField() ?>
         <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 
         <div class="card" style="margin-bottom:20px">

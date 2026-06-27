@@ -218,7 +218,7 @@ class CongeController {
         $stmt->execute([$statut, auth()['id'], $commentaire, $conge_id, $id]);
 
         // Mettre à jour solde si congé payé approuvé
-        if ($statut === 'approuve' && $conge['type_conge'] === 'conge_paye') {
+        if ($statut === 'approuve' && $conge['statut'] !== 'approuve' && $conge['type_conge'] === 'conge_paye') {
             $annee = date('Y', strtotime($conge['date_debut']));
             // Upsert solde
             $stmt = $db->prepare("INSERT INTO soldes_conges (entreprise_id,employe_id,annee,jours_acquis,jours_pris)

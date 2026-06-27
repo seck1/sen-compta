@@ -16,6 +16,7 @@ function pct(float $val): string { return number_format($val * 100, 2); }
 <?php endif; ?>
 
 <form method="POST" action="<?= APP_URL ?>/dossier/rh/parametres/store">
+<?= csrfField() ?>
 <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 
 <style>

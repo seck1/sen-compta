@@ -251,6 +251,11 @@ PROMPT;
         $entreprise  = getEntreprise($entreprise_id);
         $exercice    = $entreprise['exercice_courant'];
         $date        = $data['date'] ?: date('Y-m-d');
+        // Sécuriser la date : si invalide (strtotime échoue), retomber sur la date du jour
+        // pour éviter une période/année "1970" via date('m'|'Y', false).
+        if (strtotime($date) === false) {
+            $date = date('Y-m-d');
+        }
         $mois        = (int)date('m', strtotime($date));
 
         $pieceJointe   = !empty($data['piece_jointe']) ? $data['piece_jointe'] : null;

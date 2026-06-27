@@ -15,6 +15,7 @@ $sel = fn($k, $val) => ($employe[$k] ?? '') === $val ? 'selected' : '';
 </div>
 
 <form method="POST" action="<?= $action ?>" enctype="multipart/form-data" style="max-width:960px">
+    <?= csrfField() ?>
     <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
     <?php if($edit): ?>
     <input type="hidden" name="employe_id" value="<?= $employe['id'] ?>">

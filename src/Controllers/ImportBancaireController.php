@@ -98,7 +98,16 @@ class ImportBancaireController {
             }
 
             // Mapping auto des colonnes
-            $row = array_combine(array_slice($headers, 0, count($cols)), $cols) ?: [];
+            // Normaliser le nombre de colonnes pour eviter ValueError sur array_combine
+            $nbHeaders = count($headers);
+            if (count($cols) !== $nbHeaders) {
+                if (count($cols) > $nbHeaders) {
+                    $cols = array_slice($cols, 0, $nbHeaders);
+                } else {
+                    $cols = array_pad($cols, $nbHeaders, '');
+                }
+            }
+            $row = array_combine($headers, $cols) ?: [];
 
             // Chercher date
             $date_val = $row['date'] ?? $row['date operation'] ?? $row['date_operation'] ?? $row['date valeur'] ?? null;

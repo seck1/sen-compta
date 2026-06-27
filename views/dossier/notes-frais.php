@@ -128,6 +128,7 @@ $statut_cfg = [
     <div style="background:#fff;border-radius:16px;padding:28px;width:520px;max-width:95vw;max-height:90vh;overflow-y:auto">
         <div style="font-size:14px;font-weight:700;margin-bottom:20px">Nouvelle note de frais</div>
         <form method="POST" action="<?= APP_URL ?>/dossier/notes-frais/store" enctype="multipart/form-data">
+            <?= csrfField() ?>
             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
                 <div>

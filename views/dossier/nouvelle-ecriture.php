@@ -251,6 +251,7 @@ input[type=number] { -moz-appearance: textfield; }
 <?php endif; ?>
 
 <form method="POST" action="<?= APP_URL ?>/dossier/store-ecriture" id="form-ecriture" enctype="multipart/form-data">
+    <?= csrfField() ?>
     <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 
     <!-- ── Section En-tête ── -->

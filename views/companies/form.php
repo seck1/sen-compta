@@ -19,6 +19,7 @@
 
 <div class="card">
     <form method="POST" action="<?= APP_URL ?>/entreprises/<?= $editMode ? 'update' : 'store' ?>" enctype="multipart/form-data">
+        <?= csrfField() ?>
         <?php if ($editMode): ?>
         <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
         <?php endif; ?>

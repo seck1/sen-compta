@@ -99,6 +99,7 @@ foreach ($comptes as $c) $grouped[$c['classe']][] = $c;
     <div class="card" style="position:sticky;top:80px">
         <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:16px">Ajouter un compte</div>
         <form method="POST" action="<?= APP_URL ?>/dossier/plan-comptable/store">
+            <?= csrfField() ?>
             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
             <div style="display:flex;flex-direction:column;gap:14px">
                 <div class="form-field">

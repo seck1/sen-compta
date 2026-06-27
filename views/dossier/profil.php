@@ -140,6 +140,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 </div>
 
 <form method="POST" action="<?= APP_URL ?>/dossier/profil/store" enctype="multipart/form-data" id="profil-form">
+<?= csrfField() ?>
 <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 <input type="file" id="logo-upload-input" name="logo" accept="image/png,image/jpeg,image/svg+xml,image/webp" style="display:none" onchange="document.getElementById('profil-form').submit()">
 
@@ -565,6 +566,7 @@ $score_color = $score >= 80 ? '#1f6e4e' : ($score >= 50 ? '#f59e0b' : '#ef4444')
 
 <!-- Form activités R2 — hors du form principal pour éviter les forms imbriqués -->
 <form id="form-activites-r2" method="POST" action="<?= APP_URL ?>/dossier/profil/activites">
+    <?= csrfField() ?>
     <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 </form>
 

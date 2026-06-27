@@ -88,6 +88,7 @@
         <h3 style="margin:0 0 16px;font-size:13px;color:var(--navy-dark)">Générer les reports à nouveau</h3>
         <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Reporte les soldes de clôture de l'exercice précédent en début d'exercice.</p>
         <form method="POST" action="<?= APP_URL ?>/dossier/report-an">
+            <?= csrfField() ?>
             <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
             <div style="margin-bottom:14px">
                 <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text-muted)">EXERCICE À OUVRIR</label>

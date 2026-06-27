@@ -29,6 +29,12 @@ class ReglementController {
             $moyenPaiement = trim($data['mode']               ?? '') ?: null;
         }
 
+        // Sécuriser la date : si invalide (strtotime échoue), retomber sur la date du jour
+        // pour éviter une période "janvier 1970" via date('m', false).
+        if (empty($date) || strtotime($date) === false) {
+            $date = date('Y-m-d');
+        }
+
         // Gérer l'upload du justificatif
         $pieceJointe = null;
         if (!empty($_FILES['justificatif']['tmp_name'])) {

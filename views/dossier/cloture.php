@@ -76,6 +76,7 @@ $error_msgs = [
             </div>
             <form method="POST" action="<?= APP_URL ?>/dossier/cloture/store"
                   onsubmit="return confirm('Confirmez-vous la clôture définitive de l\'exercice <?= e($exercice) ?> ?')">
+                <?= csrfField() ?>
                 <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
                 <input type="hidden" name="exercice" value="<?= e($exercice) ?>">
                 <button type="submit" class="btn" style="background:var(--danger);color:white;box-shadow:0 4px 12px rgba(239,68,68,0.25)">

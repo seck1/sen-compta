@@ -125,6 +125,7 @@ $color = $isCGU ? '#b8923f' : '#18583f';
 <div class="card">
     <div style="font-size:14px;font-weight:600;color:var(--navy-dark);margin-bottom:18px">Enregistrer la déclaration</div>
     <form method="POST" action="<?= APP_URL ?>/dossier/fiscalite/cgu/store">
+        <?= csrfField() ?>
         <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
         <input type="hidden" name="annee" value="<?= $annee ?>">
         <input type="hidden" name="ca_ttc" value="<?= $caTtc ?>">

@@ -113,6 +113,7 @@ $lignesJson = json_encode(array_map(fn($l) => [
 <?php endif; ?>
 
 <form method="POST" action="<?= APP_URL ?>/dossier/update-ecriture" id="form-ecriture" enctype="multipart/form-data">
+    <?= csrfField() ?>
     <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
     <input type="hidden" name="ecriture_id"   value="<?= $ecriture['id'] ?>">
 

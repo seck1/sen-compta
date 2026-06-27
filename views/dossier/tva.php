@@ -212,6 +212,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
 
     <!-- Bouton enregistrement -->
     <form method="POST" action="<?= APP_URL ?>/dossier/tva/store">
+        <?= csrfField() ?>
         <input type="hidden" name="entreprise_id"   value="<?= $entreprise['id'] ?>">
         <input type="hidden" name="mois"             value="<?= $mois ?>">
         <input type="hidden" name="annee"            value="<?= $annee ?>">
@@ -322,6 +323,7 @@ function tva_row(string $label, float $montant, string $note = '', bool $bold = 
                                 <strong style="color:#dc2626"><?= formatMontant($decl['tva_a_payer']) ?></strong>
                             </div>
                             <form method="POST" action="<?= APP_URL ?>/dossier/tva/payer">
+                                <?= csrfField() ?>
                                 <input type="hidden" name="entreprise_id"  value="<?= $entreprise['id'] ?>">
                                 <input type="hidden" name="declaration_id" value="<?= $decl['id'] ?>">
                                 <input type="hidden" name="mois"           value="<?= $mois ?>">

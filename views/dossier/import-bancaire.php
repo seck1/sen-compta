@@ -116,6 +116,7 @@ $soldeClr  = $soldeImp >= 0 ? '#1f6e4e' : '#dc2626';
     </div>
 
     <form method="POST" action="<?= APP_URL ?>/dossier/import-bancaire/csv" enctype="multipart/form-data" id="import-form">
+        <?= csrfField() ?>
         <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
 
         <!-- Drop zone -->

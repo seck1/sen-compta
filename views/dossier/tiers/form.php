@@ -30,6 +30,7 @@ $titre   = $isEdit ? 'Modifier ' . $tc['label'] : 'Nouveau ' . $tc['label'];
 
 <div class="card" style="max-width:700px">
     <form method="POST" action="<?= APP_URL ?>/dossier/tiers/store">
+        <?= csrfField() ?>
         <input type="hidden" name="entreprise_id" value="<?= $entreprise['id'] ?>">
         <input type="hidden" name="tiers_id"      value="<?= $tiers['id'] ?? 0 ?>">
 

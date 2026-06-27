@@ -24,6 +24,7 @@ unset($_SESSION['flash_success'], $_SESSION['flash_warning']);
 <div class="card" style="padding:24px">
     <h3 style="margin:0 0 20px;font-size:13px;color:var(--navy-dark)">Paramètres d'import</h3>
     <form method="POST" action="<?= APP_URL ?>/dossier/import-csv?id=<?= $entreprise['id'] ?>" enctype="multipart/form-data">
+        <?= csrfField() ?>
         <input type="hidden" name="id" value="<?= $entreprise['id'] ?>">
 
         <div style="margin-bottom:16px">

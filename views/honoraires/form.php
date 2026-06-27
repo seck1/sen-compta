@@ -7,6 +7,7 @@
 
 <div style="max-width:900px">
     <form method="POST" action="<?= APP_URL ?>/honoraires/store">
+        <?= csrfField() ?>
 
         <div class="card" style="margin-bottom:20px">
             <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;color:var(--navy-dark);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">

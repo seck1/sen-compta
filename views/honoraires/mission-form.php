@@ -7,6 +7,7 @@
 
 <div style="max-width:700px">
     <form method="POST" action="<?= APP_URL ?>/honoraires/mission/store">
+        <?= csrfField() ?>
         <div class="card" style="margin-bottom:24px">
             <div class="form-grid">
                 <div class="form-field">
