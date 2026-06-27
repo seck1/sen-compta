@@ -569,6 +569,20 @@ table.renum tbody td:not(:first-child) {
                 <td class="td-gain"><?= number_format($bulletin['primes'],0,',',' ') ?></td>
             </tr>
             <?php endif; ?>
+            <?php if(($bulletin['avantages_nature'] ?? 0) > 0): ?>
+            <tr>
+                <td>Avantages en nature <span style="font-size:11px;color:#888">(imposable, non versé)</span></td>
+                <td>—</td><td>—</td>
+                <td class="td-gain"><?= number_format($bulletin['avantages_nature'],0,',',' ') ?></td>
+            </tr>
+            <?php endif; ?>
+            <?php if(($bulletin['transport_exonere'] ?? 0) > 0): ?>
+            <tr>
+                <td style="color:#15803d">dont transport exonéré d'IR</td>
+                <td>—</td><td>—</td>
+                <td style="color:#15803d">(<?= number_format($bulletin['transport_exonere'],0,',',' ') ?>)</td>
+            </tr>
+            <?php endif; ?>
             <tr class="tr-subtotal">
                 <td colspan="3">Salaire brut</td>
                 <td><?= number_format($salaire_brut,0,',',' ') ?></td>
@@ -615,6 +629,20 @@ table.renum tbody td:not(:first-child) {
                 <td colspan="3">Total retenues salariales</td>
                 <td class="td-retenue" style="color:#b91c1c !important">- <?= number_format($total_retenues,0,',',' ') ?></td>
             </tr>
+            <?php if(($bulletin['acompte'] ?? 0) > 0): ?>
+            <tr>
+                <td>Acompte / avance</td>
+                <td>—</td><td>—</td>
+                <td class="td-retenue">- <?= number_format($bulletin['acompte'],0,',',' ') ?></td>
+            </tr>
+            <?php endif; ?>
+            <?php if(($bulletin['retenues_diverses'] ?? 0) > 0): ?>
+            <tr>
+                <td>Retenues diverses</td>
+                <td>—</td><td>—</td>
+                <td class="td-retenue">- <?= number_format($bulletin['retenues_diverses'],0,',',' ') ?></td>
+            </tr>
+            <?php endif; ?>
         </tbody>
     </table>
 
