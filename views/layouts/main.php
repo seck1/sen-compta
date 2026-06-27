@@ -1107,6 +1107,26 @@ document.getElementById('notif-dropdown')?.addEventListener('click', e => e.stop
 
 // Token CSRF global disponible pour tous les fetch() POST
 const CSRF_TOKEN = '<?= generateCsrfToken() ?>';
+// Patch global : injecter le token CSRF dans tous les fetch POST même-domaine.
+(function(){
+    if (window.__csrfPatched) return; window.__csrfPatched = true;
+    var _fetch = window.fetch;
+    window.fetch = function(input, init){
+        init = init || {};
+        var method = (init.method || (typeof input === 'object' && input.method) || 'GET').toUpperCase();
+        var url = (typeof input === 'string') ? input : (input && input.url) || '';
+        var sameOrigin = url.indexOf('http') !== 0 || url.indexOf(window.location.origin) === 0;
+        if (method === 'POST' && sameOrigin) {
+            if (init.body instanceof FormData || init.body instanceof URLSearchParams) {
+                if (!init.body.has('csrf_token')) init.body.append('csrf_token', CSRF_TOKEN);
+            } else {
+                init.headers = init.headers || {};
+                if (!init.headers['X-CSRF-Token']) init.headers['X-CSRF-Token'] = CSRF_TOKEN;
+            }
+        }
+        return _fetch.call(this, input, init);
+    };
+})();
 
 // Intercepter tous les formulaires pour injecter le token CSRF automatiquement
 document.addEventListener('DOMContentLoaded', () => {

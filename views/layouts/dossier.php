@@ -1158,6 +1158,30 @@ function chargerNotes() {
 
 var CSRF_TOKEN = '<?= generateCsrfToken() ?>';
 
+// Patch global : injecter automatiquement le token CSRF dans tous les fetch POST
+// vers le même domaine (couvre les appels AJAX sans avoir à les modifier un par un).
+(function(){
+    if (window.__csrfPatched) return; window.__csrfPatched = true;
+    var _fetch = window.fetch;
+    window.fetch = function(input, init){
+        init = init || {};
+        var method = (init.method || (typeof input === 'object' && input.method) || 'GET').toUpperCase();
+        var url = (typeof input === 'string') ? input : (input && input.url) || '';
+        var sameOrigin = url.indexOf('http') !== 0 || url.indexOf(window.location.origin) === 0;
+        if (method === 'POST' && sameOrigin) {
+            if (init.body instanceof FormData) {
+                if (!init.body.has('csrf_token')) init.body.append('csrf_token', CSRF_TOKEN);
+            } else if (init.body instanceof URLSearchParams) {
+                if (!init.body.has('csrf_token')) init.body.append('csrf_token', CSRF_TOKEN);
+            } else {
+                init.headers = init.headers || {};
+                if (!init.headers['X-CSRF-Token']) init.headers['X-CSRF-Token'] = CSRF_TOKEN;
+            }
+        }
+        return _fetch.call(this, input, init);
+    };
+})();
+
 // Injecter le token CSRF dans tous les formulaires POST
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('form[method="post"], form[method="POST"]').forEach(function(form) {

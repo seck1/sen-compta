@@ -438,30 +438,21 @@ $routes = [
 //  - les endpoints AJAX (fetch) pas encore migrés vers l'envoi du token —
 //    listés explicitement pour être sécurisés dans un second temps.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Les fetch AJAX envoient désormais le token automatiquement (patch global window.fetch
+    // dans les layouts), donc plus besoin de les exempter. Seules restent exemptées :
+    //  - les routes publiques (pas de session CSRF avant connexion),
+    //  - les endpoints machine/automatisés.
     $csrfExempt = [
-        // Public (pas de session CSRF avant connexion)
         'login/post', 'mot-de-passe-oublie/post', 'reset-password/post',
         'inscription/post', 'inscription/verifier/post', 'inscription/renvoyer-code',
         'portail/auth',
-        // Machine / automatisé
         'admin/backups/auto',
-        // AJAX fetch — à migrer (envoi du token) avant retrait de cette liste
-        'dossier/notes-frais/statut', 'dossier/relances/envoyer', 'dossier/relances/creer',
-        'dossier/temps/facturer', 'dossier/temps/marquer-facture', 'dossier/temps/total-non-facture',
-        'dossier/budget/store', 'dossier/budget/update',
-        'dossier/scan-ia/analyser', 'dossier/scan-ia/valider', 'dossier/ecriture-scan/analyser',
-        'dossier/tiers/quick-create', 'dossier/regler-ecriture', 'dossier/valider-ecriture',
-        'dossier/supprimer-ecriture', 'dossier/import-bancaire/auto', 'dossier/import-bancaire/rapprocher',
-        'dossier/import-bancaire/supprimer', 'dossier/rapprochement/marquer',
-        'dossier/rh/conges/traiter', 'dossier/rh/bulletin/statut', 'dossier/rh/bulletins/supprimer',
-        'dossier/rh/bulletin/supprimer',
-        'planning/statut', 'planning/update-statut',
-        'honoraires/marquer-paye', 'honoraires/missions/payer',
-        'notifications-email/envoyer', 'modeles-ecritures/appliquer',
     ];
     if (!in_array($uri, $csrfExempt, true)) {
         if (function_exists('verifyCsrfToken')) {
-            verifyCsrfToken($_POST['csrf_token'] ?? '');
+            // Accepte le token via le champ POST ou l'en-tête X-CSRF-Token (fetch JSON).
+            $csrfTok = $_POST['csrf_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
+            verifyCsrfToken($csrfTok);
         }
     }
 }
