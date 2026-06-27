@@ -42,6 +42,20 @@ table.calc tr.total td:last-child{color:#c9a96e}
 <body>
 <div class="no-print">
     <button class="btn-print" onclick="window.print()">🖨 Imprimer</button>
+    <?php if (function_exists('isAdmin') && isAdmin()): ?>
+    <form method="POST" action="<?= APP_URL ?>/dossier/rh/solde-tout-compte/payer" style="display:inline"
+          onsubmit="return confirm('Enregistrer ce solde de tout compte, le comptabiliser et marquer l\'employé comme parti ?');">
+        <?= csrfField() ?>
+        <input type="hidden" name="entreprise_id" value="<?= (int)$entreprise['id'] ?>">
+        <input type="hidden" name="employe_id" value="<?= (int)$employe['id'] ?>">
+        <input type="hidden" name="date_depart" value="<?= e($date_depart) ?>">
+        <input type="hidden" name="motif" value="licenciement">
+        <input type="hidden" name="dernier_net" value="<?= (int)($dernier_bulletin['net_a_payer'] ?? 0) ?>">
+        <input type="hidden" name="indemnite_licenciement" value="<?= (int)$indemnite_licenciement ?>">
+        <input type="hidden" name="indemnite_conges" value="<?= (int)$indemnite_conges ?>">
+        <button type="submit" class="btn-print" style="background:#1f6e4e">💵 Payer &amp; Comptabiliser</button>
+    </form>
+    <?php endif; ?>
     <button class="btn-close" onclick="window.close()">✕ Fermer</button>
 </div>
 <div class="watermark">SOLDE TOUT COMPTE</div>

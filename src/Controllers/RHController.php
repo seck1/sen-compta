@@ -1030,6 +1030,96 @@ class RHController {
         exit;
     }
 
+    /**
+     * Enregistre le solde de tout compte, le marque payé et génère l'écriture comptable
+     * (indemnités de licenciement + congés payés + dernier net → 422 net à payer).
+     */
+    public function payerSoldeToutCompte(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('/dossier/rh');
+        verifyCsrfToken($_POST['csrf_token'] ?? '');
+        $id         = (int)($_POST['entreprise_id'] ?? 0);
+        $employe_id = (int)($_POST['employe_id'] ?? 0);
+        $this->getEntrepriseAccess($id);
+        if (!isAdmin()) { redirect("/dossier/rh/employe?id=$id&employe_id=$employe_id&error=forbidden"); return; }
+
+        $db = getDB();
+        $employe = $this->getEmploye($employe_id, $id);
+        $date_depart   = $_POST['date_depart'] ?: date('Y-m-d');
+        $motif         = $_POST['motif'] ?? 'licenciement';
+        $dernier_net   = (int)($_POST['dernier_net'] ?? 0);
+        $ind_licenc    = (int)($_POST['indemnite_licenciement'] ?? 0);
+        $ind_conges    = (int)($_POST['indemnite_conges'] ?? 0);
+        $total_du      = $dernier_net + $ind_licenc + $ind_conges;
+
+        // Enregistrer le STC
+        $db->prepare("INSERT INTO soldes_tout_compte
+            (entreprise_id, employe_id, date_depart, motif, dernier_net, indemnite_licenciement, indemnite_conges, total_du, statut)
+            VALUES (?,?,?,?,?,?,?,?,'paye')")
+           ->execute([$id, $employe_id, $date_depart, $motif, $dernier_net, $ind_licenc, $ind_conges, $total_du]);
+        $stc_id = (int)$db->lastInsertId();
+
+        // Générer l'écriture comptable
+        $ecriture_id = $this->genererEcritureSTC($db, $id, $employe, $date_depart, $ind_licenc, $ind_conges, $dernier_net, $total_du);
+        if ($ecriture_id) {
+            $db->prepare("UPDATE soldes_tout_compte SET ecriture_id=? WHERE id=?")->execute([$ecriture_id, $stc_id]);
+        }
+        // Marquer l'employé comme parti
+        $db->prepare("UPDATE employes SET statut='licencie', date_fin_contrat=? WHERE id=? AND entreprise_id=?")
+           ->execute([$date_depart, $employe_id, $id]);
+
+        $_SESSION['flash_success'] = "Solde de tout compte enregistré et comptabilisé (total : " . number_format($total_du,0,',',' ') . " FCFA).";
+        redirect("/dossier/rh/employe?id=$id&employe_id=$employe_id");
+    }
+
+    /** Écriture comptable du solde de tout compte (journal de paie). */
+    private function genererEcritureSTC($db, int $entreprise_id, array $employe, string $date_depart, int $ind_licenc, int $ind_conges, int $net, int $total): ?int {
+        try {
+            $jStmt = $db->prepare("SELECT id FROM journaux WHERE entreprise_id=? AND code='PAI' LIMIT 1");
+            $jStmt->execute([$entreprise_id]);
+            $journal_id = (int)$jStmt->fetchColumn();
+            if (!$journal_id) return null;
+
+            $getCompte = function($numero) use ($db, $entreprise_id) {
+                $s = $db->prepare("SELECT id FROM comptes WHERE entreprise_id=? AND numero=? LIMIT 1");
+                $s->execute([$entreprise_id, $numero]);
+                return ($r = $s->fetchColumn()) ? (int)$r : null;
+            };
+
+            $nom = "{$employe['prenom']} {$employe['nom']}";
+            $num_piece = "STC-" . date('Ymd', strtotime($date_depart)) . "-" . ($employe['matricule'] ?? $employe['id']);
+            $annee = (int)date('Y', strtotime($date_depart));
+            $mois  = (int)date('n', strtotime($date_depart));
+
+            // Éviter les doublons
+            $db->prepare("DELETE FROM ecritures WHERE entreprise_id=? AND numero_piece=?")->execute([$entreprise_id, $num_piece]);
+
+            $db->prepare("INSERT INTO ecritures (entreprise_id, journal_id, user_id, numero_piece, date_ecriture, libelle, exercice, periode, statut)
+                VALUES (?,?,?,?,?,?,?,?,'brouillon')")
+               ->execute([$entreprise_id, $journal_id, auth()['id'], $num_piece, $date_depart, "Solde de tout compte — $nom", $annee, $mois]);
+            $ecriture_id = (int)$db->lastInsertId();
+
+            $lStmt = $db->prepare("INSERT INTO lignes_ecritures (ecriture_id, compte_id, libelle, debit, credit) VALUES (?,?,?,?,?)");
+            // Débit : indemnité de licenciement (6311) + congés payés (6413) + rappel net (661)
+            if ($ind_licenc > 0 && $c = ($getCompte('6311') ?: $getCompte('6611'))) {
+                $lStmt->execute([$ecriture_id, $c, "Indemnité de licenciement — $nom", $ind_licenc, 0]);
+            }
+            if ($ind_conges > 0 && $c = ($getCompte('6413') ?: $getCompte('6611'))) {
+                $lStmt->execute([$ecriture_id, $c, "Indemnité compensatrice de congés — $nom", $ind_conges, 0]);
+            }
+            if ($net > 0 && $c = $getCompte('6611')) {
+                $lStmt->execute([$ecriture_id, $c, "Dernier salaire dû — $nom", $net, 0]);
+            }
+            // Crédit : total à payer (422)
+            if ($total > 0 && $c = $getCompte('422')) {
+                $lStmt->execute([$ecriture_id, $c, "Solde de tout compte à payer — $nom", 0, $total]);
+            }
+            return $ecriture_id;
+        } catch (\Throwable $e) {
+            error_log('genererEcritureSTC: '.$e->getMessage());
+            return null;
+        }
+    }
+
     public function registre(): void {
         $id = (int)($_GET['id'] ?? 0);
         $entreprise = $this->getEntrepriseAccess($id);

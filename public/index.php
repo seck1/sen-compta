@@ -306,6 +306,7 @@ $routes = [
     'dossier/rh/historique'            => ['RHController', 'historiqueEmploye'],
     'dossier/rh/attestation'           => ['RHController', 'attestation'],
     'dossier/rh/solde-tout-compte'     => ['RHController', 'soldeToutCompte'],
+    'dossier/rh/solde-tout-compte/payer' => ['RHController', 'payerSoldeToutCompte'],
     'dossier/rh/registre'              => ['RHController', 'registre'],
     'dossier/rh/declarations-sociales' => ['RHController', 'declarationsSociales'],
     'dossier/rh/organigramme'          => ['RHController', 'organigramme'],
