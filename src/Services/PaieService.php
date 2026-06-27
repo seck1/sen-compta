@@ -70,66 +70,97 @@ class PaieService {
             }
             return 0;
         }
-        // Barème par défaut (mensuel) — DGID Sénégal
-        if ($salaireBrut <= 25000)    return 900;
-        if ($salaireBrut <= 50000)    return 1800;
-        if ($salaireBrut <= 75000)    return 2700;
-        if ($salaireBrut <= 100000)   return 3600;
-        if ($salaireBrut <= 125000)   return 4500;
-        if ($salaireBrut <= 150000)   return 5400;
-        if ($salaireBrut <= 200000)   return 7200;
-        if ($salaireBrut <= 250000)   return 9000;
-        if ($salaireBrut <= 300000)   return 10800;
-        if ($salaireBrut <= 400000)   return 14400;
-        if ($salaireBrut <= 500000)   return 18000;
-        return round($salaireBrut * 0.04); // >500k : 4%
+        // Barème forfaitaire ANNUEL par défaut — DGID Sénégal, mensualisé (/12).
+        // Montants annuels fixes {900, 3600, 4800, 12000, 18000, 36000}, max 36 000 F/an = 3 000 F/mois.
+        // Le TRIMF n'est JAMAIS un pourcentage du salaire (consensus 5 experts).
+        // ⚠️ Bornes de tranches (sur brut ANNUEL) à confirmer au CGI ; montants forfaitaires sûrs.
+        $brutAnnuel = $salaireBrut * 12;
+        if ($brutAnnuel <= 600000)     return round(900 / 12);    // 75 F/mois
+        if ($brutAnnuel <= 1000000)    return round(3600 / 12);   // 300 F/mois
+        if ($brutAnnuel <= 2000000)    return round(4800 / 12);   // 400 F/mois
+        if ($brutAnnuel <= 7000000)    return round(12000 / 12);  // 1 000 F/mois
+        if ($brutAnnuel <= 12000000)   return round(18000 / 12);  // 1 500 F/mois
+        return round(36000 / 12);                                 // 3 000 F/mois (plafond)
     }
 
     /**
-     * Calcule l'IR (Impôt sur le Revenu) mensuel
-     * Barème CGI Sénégal — Article 163
-     * Appliqué sur revenu net imposable annualisé puis divisé par 12
+     * Table de réduction d'impôt pour charges de famille (CGI Sénégal, Art. 174).
+     * Pour chaque nombre de parts : [taux de réduction, plancher annuel, plafond annuel].
+     * ⚠️ Valeurs à confirmer sur le CGI en vigueur (consensus experts mais montants à valider).
      */
-    public static function calculerIR(float $salaireBrut, float $nbParts = 1.0, float $cotisationsDeductibles = 0.0, ?array $bareme = null): float {
-        // Abattement forfaitaire 30% (minimum 900 000 / maximum 3 600 000 F/an)
-        // Assiette nette = brut annuel - cotisations déductibles annualisées (IPRES salarié + IPM salarié)
-        // CGI Sénégal Art. 163
-        $brutAnnuel      = $salaireBrut * 12;
-        $cotisAnnuelles  = $cotisationsDeductibles * 12;
-        $baseAbattement  = max(0, $brutAnnuel - $cotisAnnuelles);
-        $abattement      = min(3600000, max(900000, $baseAbattement * 0.30));
-        $revenuImposable = max(0, $baseAbattement - $abattement);
+    public static function reductionChargesFamille(): array {
+        return [
+            // parts => [taux, min, max]
+            '1.5' => [0.10, 100000, 300000],
+            '2'   => [0.15, 200000, 650000],
+            '2.5' => [0.20, 300000, 1100000],
+            '3'   => [0.25, 400000, 1650000],
+            '3.5' => [0.30, 500000, 2030000],
+            '4'   => [0.35, 600000, 2490000],
+            '4.5' => [0.40, 700000, 2755000],
+            '5'   => [0.45, 800000, 3180000],
+        ];
+    }
 
-        // Quotient familial CGI Sénégal Art. 165 :
-        // Diviser le revenu imposable par le nombre de parts, appliquer le barème, multiplier par les parts
-        if ($nbParts <= 0) $nbParts = 1.0;
-        $revenuParPart = $revenuImposable / $nbParts;
-
-        // Barème progressif annuel appliqué sur le revenu par part.
+    /** Applique un barème progressif annuel (tranches marginales) à un revenu. */
+    private static function appliquerBareme(float $revenu, ?array $bareme): float {
         if (is_array($bareme) && !empty($bareme)) {
-            // Barème personnalisé (depuis paie_parametres.bareme_ir) : tranches marginales.
-            $irParPart = 0;
+            $ir = 0;
             foreach ($bareme as $t) {
                 $min  = (float)($t['min'] ?? 0);
                 $max  = (float)($t['max'] ?? PHP_INT_MAX);
                 $taux = (float)($t['taux'] ?? 0) / 100;
-                if ($revenuParPart > $min) {
-                    $assiette = min($revenuParPart, $max) - $min;
-                    if ($assiette > 0) $irParPart += $assiette * $taux;
+                if ($revenu > $min) {
+                    $assiette = min($revenu, $max) - $min;
+                    if ($assiette > 0) $ir += $assiette * $taux;
                 }
             }
+            return $ir;
+        }
+        // Barème progressif annuel par défaut — CGI Sénégal (montants à valider).
+        if ($revenu <= 630000)        return 0;
+        if ($revenu <= 1500000)       return ($revenu - 630000) * 0.20;
+        if ($revenu <= 4000000)       return 174000 + ($revenu - 1500000) * 0.30;
+        if ($revenu <= 8000000)       return 924000 + ($revenu - 4000000) * 0.35;
+        if ($revenu <= 13500000)      return 2324000 + ($revenu - 8000000) * 0.37;
+        return 4359000 + ($revenu - 13500000) * 0.40;
+    }
+
+    /**
+     * Calcule l'IR (Impôt sur le Revenu) mensuel — méthode CGI Sénégal Art. 173/174.
+     * 1) Barème progressif sur le revenu imposable ENTIER (1 part) = droit simple.
+     * 2) Réduction d'impôt pour charges de famille = clamp(droit × taux, min, max) selon les parts.
+     * 3) IR = droit simple − réduction, mensualisé.
+     * (Et NON la méthode du quotient « diviser/multiplier par les parts ».)
+     */
+    public static function calculerIR(float $salaireBrut, float $nbParts = 1.0, float $cotisationsDeductibles = 0.0, ?array $bareme = null): float {
+        // Abattement forfaitaire 30% (plafond 900 000 F/an — à valider).
+        $brutAnnuel      = $salaireBrut * 12;
+        $cotisAnnuelles  = $cotisationsDeductibles * 12;
+        $baseAbattement  = max(0, $brutAnnuel - $cotisAnnuelles);
+        $abattement      = min(900000, $baseAbattement * 0.30);
+        $revenuImposable = max(0, $baseAbattement - $abattement);
+
+        // 1) Droit simple : barème sur le revenu entier (sans division par les parts).
+        $droitSimple = self::appliquerBareme($revenuImposable, $bareme);
+
+        // 2) Réduction pour charges de famille selon les parts.
+        if ($nbParts <= 1.0) {
+            $reduction = 0; // célibataire/divorcé/veuf sans enfant : pas de réduction
         } else {
-            // Barème par défaut — CGI Art. 163 Sénégal.
-            if ($revenuParPart <= 630000)         $irParPart = 0;
-            elseif ($revenuParPart <= 1500000)    $irParPart = ($revenuParPart - 630000) * 0.20;
-            elseif ($revenuParPart <= 4000000)    $irParPart = 174000 + ($revenuParPart - 1500000) * 0.30;
-            elseif ($revenuParPart <= 8000000)    $irParPart = 924000 + ($revenuParPart - 4000000) * 0.35;
-            elseif ($revenuParPart <= 13500000)   $irParPart = 2324000 + ($revenuParPart - 8000000) * 0.37;
-            else                                  $irParPart = 4359000 + ($revenuParPart - 13500000) * 0.40;
+            $cle   = rtrim(rtrim(number_format($nbParts, 1, '.', ''), '0'), '.');
+            $table = self::reductionChargesFamille();
+            if (isset($table[$cle])) {
+                [$taux, $min, $max] = $table[$cle];
+                $reduction = min($max, max($min, $droitSimple * $taux));
+                $reduction = min($reduction, $droitSimple); // jamais plus que l'impôt dû
+            } else {
+                $reduction = 0;
+            }
         }
 
-        $irNet = max(0, $irParPart * $nbParts);
-        return round($irNet / 12); // Mensualisation
+        $irAnnuel = max(0, $droitSimple - $reduction);
+        return round($irAnnuel / 12); // Mensualisation
     }
 
     /**
@@ -197,6 +228,11 @@ class PaieService {
         // (Les avantages en nature sont imposables mais ne sont pas versés en espèces.)
         $brut_imposable = max(0, $salaire_brut - $transport_exonere + $avantages_nature);
 
+        // Assiette de COTISATION sociale (IPRES/CSS) = brut - transport exonéré.
+        // Le transport exonéré (frais professionnels) est exclu des cotisations comme de l'IR
+        // (consensus experts-comptables SN). Les avantages en nature n'entrent pas dans l'espèces cotisable.
+        $assiette_cotisable = max(0, $salaire_brut - $transport_exonere);
+
         // =============================================
         // 2. COTISATIONS SALARIALES
         // =============================================
@@ -213,14 +249,14 @@ class PaieService {
         // qu'aux employés déclarés "cadre". Pour les non-cadres, seule la tranche A joue.
         $est_cadre = ($employe['statut_cadre'] ?? 'non_cadre') === 'cadre';
 
-        // IPRES salarié — Tranche A (plafonné)
-        $base_ipres_a  = min($salaire_brut, $plafond_ipres_a);
+        // IPRES salarié — Tranche A (plafonné), sur l'assiette cotisable (transport exonéré exclu)
+        $base_ipres_a  = min($assiette_cotisable, $plafond_ipres_a);
         $ipres_salarie = round($base_ipres_a * $taux_ipres_sal_a);
 
-        // IPRES cadre salarié — Tranche B (cadre uniquement, si salaire > plafond A)
+        // IPRES cadre salarié — Tranche B (cadre uniquement, si assiette > plafond A)
         $ipres_cadre_salarie = 0;
-        if ($est_cadre && $salaire_brut > $plafond_ipres_a) {
-            $base_ipres_b        = min($salaire_brut - $plafond_ipres_a, self::PLAFOND_IPRES_B - $plafond_ipres_a);
+        if ($est_cadre && $assiette_cotisable > $plafond_ipres_a) {
+            $base_ipres_b        = min($assiette_cotisable - $plafond_ipres_a, self::PLAFOND_IPRES_B - $plafond_ipres_a);
             $ipres_cadre_salarie = round($base_ipres_b * self::IPRES_SALARIE_B);
         }
         $ipres_salarie_total = $ipres_salarie + $ipres_cadre_salarie;
@@ -229,13 +265,13 @@ class PaieService {
         $bareme_trimf = self::decoderBareme($params['bareme_trimf'] ?? null);
         $trimf = self::calculerTRIMF($brut_imposable, $bareme_trimf);
 
-        // IR — quotient familial CGI Sénégal Art. 165 :
-        // célibataire/divorcé/veuf = 1 part ; marié = 1,5 part ; +0,5 par enfant à charge ; plafond 5 parts.
+        // Parts (CGI Sénégal Art. 169) : célibataire/divorcé/veuf = 1 ; marié = 1,5 ;
+        // +0,5 par enfant à charge ; plafond 5 parts. (La réduction d'impôt liée se calcule dans calculerIR.)
         $nb_parts = ($employe['situation_familiale'] === 'marie' ? 1.5 : 1.0)
             + ($employe['nombre_enfants'] ?? 0) * 0.5;
         $nb_parts = max(1.0, min((float)$nb_parts, 5.0));
         // IPM salarié — calculé avant IR (cotisation déductible du revenu imposable)
-        $ipm_salarie = round($salaire_brut * $taux_ipm_sal);
+        $ipm_salarie = round($assiette_cotisable * $taux_ipm_sal);
         $bareme_ir = self::decoderBareme($params['bareme_ir'] ?? null);
         $ir       = self::calculerIR($brut_imposable, $nb_parts, $ipres_salarie_total + $ipm_salarie, $bareme_ir);
 
@@ -257,26 +293,26 @@ class PaieService {
 
         // IPRES cadre patronal — Tranche B (cadre uniquement)
         $ipres_cadre_patronal = 0;
-        if ($est_cadre && $salaire_brut > $plafond_ipres_a) {
-            $base_ipres_b_pat     = min($salaire_brut - $plafond_ipres_a, self::PLAFOND_IPRES_B - $plafond_ipres_a);
+        if ($est_cadre && $assiette_cotisable > $plafond_ipres_a) {
+            $base_ipres_b_pat     = min($assiette_cotisable - $plafond_ipres_a, self::PLAFOND_IPRES_B - $plafond_ipres_a);
             $ipres_cadre_patronal = round($base_ipres_b_pat * self::IPRES_PATRONAL_B);
         }
         $ipres_patronal_total = $ipres_patronal_a + $ipres_cadre_patronal;
 
-        // CSS — Prestations familiales (7% sur assiette plafonnée à 900 000 F, max cotisation = 63 000 F)
-        $base_css_pf    = min($salaire_brut, self::CSS_PLAFOND_ASSIETTE_PF);
+        // CSS — Prestations familiales (7% sur assiette plafonnée, max cotisation = 63 000 F)
+        $base_css_pf    = min($assiette_cotisable, self::CSS_PLAFOND_ASSIETTE_PF);
         $css_prestations = round($base_css_pf * self::CSS_PRESTATIONS_FAMILIALES);
 
         // CSS — Accidents du travail (taux paramétrable, défaut 3%)
-        $css_accidents  = round($salaire_brut * $taux_css_at);
+        $css_accidents  = round($assiette_cotisable * $taux_css_at);
 
         $css_total      = $css_prestations + $css_accidents;
 
-        // CFCE (3% salaire brut) — 0% si régime CGU, MICRO ou RNS (absorbé ou non applicable)
-        $cfce           = round($salaire_brut * $cfce_taux);
+        // CFCE (3% assiette cotisable) — 0% si régime CGU, MICRO ou RNS (absorbé ou non applicable)
+        $cfce           = round($assiette_cotisable * $cfce_taux);
 
         // IPM patronal
-        $ipm_patronal   = round($salaire_brut * $taux_ipm_pat);
+        $ipm_patronal   = round($assiette_cotisable * $taux_ipm_pat);
 
         $total_charges_patronales = $ipres_patronal_total + $css_total + $cfce + $ipm_patronal;
         $cout_total_employeur     = $salaire_brut + $total_charges_patronales;
