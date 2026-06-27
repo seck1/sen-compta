@@ -374,16 +374,19 @@ table.renum tbody td:not(:first-child) {
 
     /* Compacter pour tenir sur 1 page A4 */
     .bulletin { padding-bottom: 0 !important; }
-    .renum td { padding-top: 5px !important; padding-bottom: 5px !important; }
-    .emp-band { padding-top: 12px !important; padding-bottom: 10px !important; }
-    .net-block { padding-top: 12px !important; padding-bottom: 12px !important; }
-    .pat-band { padding-top: 8px !important; padding-bottom: 8px !important; }
-    .section-header { padding-top: 6px !important; padding-bottom: 6px !important; }
+    .renum td { padding-top: 3.5px !important; padding-bottom: 3.5px !important; }
+    .emp-band { padding-top: 9px !important; padding-bottom: 8px !important; }
+    .net-block { padding-top: 10px !important; padding-bottom: 10px !important; }
+    .pat-band { padding-top: 6px !important; padding-bottom: 6px !important; }
+    .section-header { padding-top: 5px !important; padding-bottom: 5px !important; }
     /* Le footer suit le flux (pas fixe) pour ne pas reserver d'espace ni creer de page vide */
-    .bul-footer { position: static !important; }
+    .bul-footer { position: static !important; padding: 6px 28px 4px !important; }
     .bottom-bar { position: static !important; }
+    /* Eviter qu'un saut isole le footer sur une page vide */
+    .pat-band, .conges-band, .bul-footer, .bottom-bar { page-break-inside: avoid; break-inside: avoid; }
+    .bul-footer, .bottom-bar { page-break-before: avoid; break-before: avoid; }
 
-    @page { size: A4 portrait; margin: 7mm; }
+    @page { size: A4 portrait; margin: 6mm; }
 }
 </style>
 </head>
