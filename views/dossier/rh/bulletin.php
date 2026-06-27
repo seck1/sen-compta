@@ -412,15 +412,6 @@ table.renum tbody td:not(:first-child) {
     <!-- EN-TÊTE -->
     <div class="entete">
         <div>
-            <?php
-            $logoPath = APP_ROOT . '/public/logos/' . ($entreprise['logo'] ?? '');
-            if (!empty($entreprise['logo']) && file_exists($logoPath)):
-                $logoMime = mime_content_type($logoPath) ?: 'image/png';
-                $logoB64  = base64_encode(file_get_contents($logoPath));
-            ?>
-            <img src="data:<?= $logoMime ?>;base64,<?= $logoB64 ?>" alt="Logo"
-                 style="height:50px;width:auto;max-width:120px;object-fit:contain;display:block;margin-bottom:8px">
-            <?php endif; ?>
             <div class="entete-societe-nom"><?= e($entreprise['raison_sociale']) ?></div>
             <div class="entete-societe-meta">
                 <?= e($entreprise['forme_juridique'] ?? '') ?>
