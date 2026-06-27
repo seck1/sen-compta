@@ -79,7 +79,6 @@ body {
     box-shadow: 0 4px 24px rgba(0,0,0,.12);
     display: flex;
     flex-direction: column;
-    min-height: 270mm;
 }
 .bulletin-body { flex: 1; }
 
@@ -373,7 +372,18 @@ table.renum tbody td:not(:first-child) {
     .entete { page-break-after: avoid; break-after: avoid; }
     .net-block { page-break-before: avoid; break-before: avoid; }
 
-    @page { size: A4 portrait; margin: 8mm; }
+    /* Compacter pour tenir sur 1 page A4 */
+    .bulletin { padding-bottom: 0 !important; }
+    .renum td { padding-top: 5px !important; padding-bottom: 5px !important; }
+    .emp-band { padding-top: 12px !important; padding-bottom: 10px !important; }
+    .net-block { padding-top: 12px !important; padding-bottom: 12px !important; }
+    .pat-band { padding-top: 8px !important; padding-bottom: 8px !important; }
+    .section-header { padding-top: 6px !important; padding-bottom: 6px !important; }
+    /* Le footer suit le flux (pas fixe) pour ne pas reserver d'espace ni creer de page vide */
+    .bul-footer { position: static !important; }
+    .bottom-bar { position: static !important; }
+
+    @page { size: A4 portrait; margin: 7mm; }
 }
 </style>
 </head>
