@@ -105,6 +105,21 @@ $preselect_employe = (int)($_GET['employe_id'] ?? 0);
                     <input type="hidden" name="prime_anciennete_override" id="prime_anciennete_override" value="0">
                     <small style="color:var(--text-muted);font-size:14px" id="anciennete_info">Calculée automatiquement (3%/an dès 2 ans) — modifiable</small>
                 </div>
+                <div class="form-field">
+                    <label>Avantages en nature (FCFA)</label>
+                    <input type="number" name="avantages_nature" value="0" step="1" min="0">
+                    <small style="color:var(--text-muted);font-size:14px">Logement, véhicule… imposables mais non versés en espèces</small>
+                </div>
+                <div class="form-field">
+                    <label>Acompte / avance (FCFA)</label>
+                    <input type="number" name="acompte" value="0" step="1" min="0">
+                    <small style="color:var(--text-muted);font-size:14px">Déduit du net à payer</small>
+                </div>
+                <div class="form-field">
+                    <label>Retenues diverses (FCFA)</label>
+                    <input type="number" name="retenues_diverses" value="0" step="1" min="0">
+                    <small style="color:var(--text-muted);font-size:14px">Saisie-arrêt, opposition, retenue syndicale…</small>
+                </div>
             </div>
         </div>
 

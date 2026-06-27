@@ -331,9 +331,12 @@ class RHController {
 
         $elements = [
             'heures_supp'       => $heures_supp_montant,
-            'prime_saisie'      => (float)($_POST['prime_saisie'] ?? 0),
+            'primes'            => (float)($_POST['prime_saisie'] ?? 0),
             'deduction_absence' => $deduction_absence,
             'prime_anciennete'  => !empty($_POST['prime_anciennete_override']) ? (float)($_POST['prime_anciennete'] ?? 0) : null,
+            'avantages_nature'  => (float)($_POST['avantages_nature'] ?? 0),
+            'acompte'           => (float)($_POST['acompte'] ?? 0),
+            'retenues_diverses' => (float)($_POST['retenues_diverses'] ?? 0),
         ];
 
         $bulletin = PaieService::calculerBulletin($employe, $elements, $params);
@@ -716,6 +719,7 @@ class RHController {
             'brs_mode'              => 'desactive',
             'bareme_trimf'          => null,
             'bareme_ir'             => null,
+            'transport_exonere_plafond' => 26000,
         ];
     }
 
@@ -817,8 +821,8 @@ class RHController {
              heures_supp_taux_nuit, heures_supp_taux_dim, heures_supp_taux_dim_nuit,
              heures_supp_seuil,
              smig_mensuel, conges_base_jours, conges_taux_maladie, conges_droits_annuels, brs_mode,
-             bareme_trimf, bareme_ir)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+             bareme_trimf, bareme_ir, transport_exonere_plafond)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
              ipres_salarie_a=VALUES(ipres_salarie_a), ipres_patronal_a=VALUES(ipres_patronal_a),
              ipres_salarie_b=VALUES(ipres_salarie_b), ipres_patronal_b=VALUES(ipres_patronal_b),
@@ -841,7 +845,8 @@ class RHController {
              conges_droits_annuels=VALUES(conges_droits_annuels),
              brs_mode=VALUES(brs_mode),
              bareme_trimf=VALUES(bareme_trimf),
-             bareme_ir=VALUES(bareme_ir)");
+             bareme_ir=VALUES(bareme_ir),
+             transport_exonere_plafond=VALUES(transport_exonere_plafond)");
         $stmt->execute([
             $id,
             (float)$_POST['ipres_salarie_a'] / 100,
@@ -871,6 +876,7 @@ class RHController {
             in_array($_POST['brs_mode'] ?? 'desactive', ['desactive','auto'], true) ? $_POST['brs_mode'] : 'desactive',
             $this->construireBaremeTrimf(),
             $this->construireBaremeIr(),
+            (int)($_POST['transport_exonere_plafond'] ?? 26000),
         ]);
 
         // Fix M — Audit de la modification des taux de paie

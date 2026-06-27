@@ -171,6 +171,11 @@ class PaieService {
         $heures_supp           = (float)($elements['heures_supp']            ?? 0);
         $primes                = (float)($elements['primes']                 ?? 0);
         $deduction_absence     = (float)($elements['deduction_absence']      ?? 0);
+        // Avantages en nature (logement, véhicule…) : réintégrés dans l'assiette IR uniquement.
+        $avantages_nature      = (float)($elements['avantages_nature']       ?? 0);
+        // Retenues diverses sur le net : acomptes, saisie-arrêt, retenues syndicales…
+        $acompte               = (float)($elements['acompte']                ?? 0);
+        $retenues_diverses     = (float)($elements['retenues_diverses']      ?? 0);
 
         // Prime d'ancienneté — calculée auto si non forcée manuellement
         $prime_anciennete = (isset($elements['prime_anciennete']) && $elements['prime_anciennete'] !== null)
@@ -183,6 +188,14 @@ class PaieService {
             + $indemnite_represent + $autres_indemnites
             + $heures_supp + $primes + $prime_anciennete
             - $deduction_absence;
+
+        // Indemnité de transport exonérée d'IR dans la limite d'un plafond mensuel (SN).
+        $plafond_transport_exo = (float)($params['transport_exonere_plafond'] ?? 26000);
+        $transport_exonere = min($indemnite_transport, $plafond_transport_exo);
+
+        // Assiette IR = brut - transport exonéré + avantages en nature.
+        // (Les avantages en nature sont imposables mais ne sont pas versés en espèces.)
+        $brut_imposable = max(0, $salaire_brut - $transport_exonere + $avantages_nature);
 
         // =============================================
         // 2. COTISATIONS SALARIALES
@@ -212,9 +225,9 @@ class PaieService {
         }
         $ipres_salarie_total = $ipres_salarie + $ipres_cadre_salarie;
 
-        // TRIMF — barème personnalisé si défini dans les paramètres entreprise
+        // TRIMF — calculé sur le brut imposable (transport exonéré déduit)
         $bareme_trimf = self::decoderBareme($params['bareme_trimf'] ?? null);
-        $trimf = self::calculerTRIMF($salaire_brut, $bareme_trimf);
+        $trimf = self::calculerTRIMF($brut_imposable, $bareme_trimf);
 
         // IR — quotient familial CGI Sénégal Art. 165 :
         // célibataire/divorcé/veuf = 1 part ; marié = 1,5 part ; +0,5 par enfant à charge ; plafond 5 parts.
@@ -224,13 +237,16 @@ class PaieService {
         // IPM salarié — calculé avant IR (cotisation déductible du revenu imposable)
         $ipm_salarie = round($salaire_brut * $taux_ipm_sal);
         $bareme_ir = self::decoderBareme($params['bareme_ir'] ?? null);
-        $ir       = self::calculerIR($salaire_brut, $nb_parts, $ipres_salarie_total + $ipm_salarie, $bareme_ir);
+        $ir       = self::calculerIR($brut_imposable, $nb_parts, $ipres_salarie_total + $ipm_salarie, $bareme_ir);
 
-        // Total retenues salariales
+        // Total retenues salariales (cotisations + impôts)
         $total_retenues = $ipres_salarie_total + $trimf + $ir + $ipm_salarie;
 
-        // Net à payer
-        $net_a_payer = max(0, $salaire_brut - $total_retenues);
+        // Net imposable / net à payer.
+        // Les avantages en nature entrent dans l'assiette mais ne sont pas versés en espèces :
+        // ils ne font donc pas partie du net à payer. On déduit aussi acomptes et retenues diverses.
+        $net_avant_retenues = max(0, $salaire_brut - $total_retenues);
+        $net_a_payer        = max(0, $net_avant_retenues - $acompte - $retenues_diverses);
 
         // =============================================
         // 3. CHARGES PATRONALES
@@ -277,7 +293,10 @@ class PaieService {
             'primes'                 => $primes,
             'prime_anciennete'       => $prime_anciennete,
             'deduction_absence'      => $deduction_absence,
+            'avantages_nature'       => $avantages_nature,
             'salaire_brut'           => $salaire_brut,
+            'transport_exonere'      => $transport_exonere,
+            'brut_imposable'         => $brut_imposable,
 
             // Retenues salariales
             'ipres_salarie'          => $ipres_salarie_total,
@@ -285,6 +304,9 @@ class PaieService {
             'ir_salarie'             => $ir,
             'ipm_salarie'            => $ipm_salarie,
             'total_retenues'         => $total_retenues,
+            'net_avant_retenues'     => $net_avant_retenues,
+            'acompte'                => $acompte,
+            'retenues_diverses'      => $retenues_diverses,
             'net_a_payer'            => $net_a_payer,
 
             // Charges patronales

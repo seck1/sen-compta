@@ -356,10 +356,21 @@ function pct(float $val): string { return number_format($val * 100, 2); }
                 <span class="param-unit">%</span>
             </div>
         </div>
-        <div class="param-row" style="border-bottom:none;border-top:1px solid var(--border);padding:18px 22px 0;grid-column:span 2">
+        <div class="param-row" style="border-bottom:none;border-top:1px solid var(--border);border-right:1px solid var(--border);padding:18px 22px 0 0">
+            <div>
+                <div class="param-label">Transport exonéré (plafond)</div>
+                <div class="param-sub">Indemnité transport exonérée d'IR jusqu'à ce plafond/mois</div>
+                <span class="official-badge">Exonéré : 26 000 F</span>
+            </div>
+            <div class="param-input-wrap">
+                <input type="number" name="transport_exonere_plafond" class="param-input" style="width:110px" step="1" min="0" value="<?= (int)($params['transport_exonere_plafond'] ?? 26000) ?>">
+                <span class="param-unit">F</span>
+            </div>
+        </div>
+        <div class="param-row" style="border-bottom:none;border-top:1px solid var(--border);padding:18px 0 0 22px">
             <div>
                 <div class="param-label">Mode de calcul BRS</div>
-                <div class="param-sub">Contribution Représentative — barème par tranches de brut imposable</div>
+                <div class="param-sub">Contribution Représentative</div>
             </div>
             <div class="param-input-wrap">
                 <?php $brs = $params['brs_mode'] ?? 'desactive'; ?>
