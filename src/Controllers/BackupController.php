@@ -12,7 +12,9 @@ class BackupController {
 
     private function requireAdmin(): void {
         requireAuth();
-        if (!isAdmin()) { redirect('/dashboard'); }
+        // Les backups concernent toute la plateforme : réservés au super-admin
+        // (un admin_cabinet ne doit pas y accéder).
+        if (!isSuperAdmin()) { redirect('/dashboard'); }
     }
 
     public function index(): void {
