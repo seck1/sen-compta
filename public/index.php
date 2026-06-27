@@ -431,6 +431,41 @@ $routes = [
     'rapport-gestion/export' => ['RapportGestionController', 'export'],
 ];
 
+// ── Middleware CSRF global ──────────────────────────────────────────────────
+// Toute requête POST doit présenter un token CSRF valide, SAUF :
+//  - les routes publiques (avant connexion) qui n'ont pas de session établie,
+//  - les endpoints machine/automatisés,
+//  - les endpoints AJAX (fetch) pas encore migrés vers l'envoi du token —
+//    listés explicitement pour être sécurisés dans un second temps.
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $csrfExempt = [
+        // Public (pas de session CSRF avant connexion)
+        'login/post', 'mot-de-passe-oublie/post', 'reset-password/post',
+        'inscription/post', 'inscription/verifier/post', 'inscription/renvoyer-code',
+        'portail/auth',
+        // Machine / automatisé
+        'admin/backups/auto',
+        // AJAX fetch — à migrer (envoi du token) avant retrait de cette liste
+        'dossier/notes-frais/statut', 'dossier/relances/envoyer', 'dossier/relances/creer',
+        'dossier/temps/facturer', 'dossier/temps/marquer-facture', 'dossier/temps/total-non-facture',
+        'dossier/budget/store', 'dossier/budget/update',
+        'dossier/scan-ia/analyser', 'dossier/scan-ia/valider', 'dossier/ecriture-scan/analyser',
+        'dossier/tiers/quick-create', 'dossier/regler-ecriture', 'dossier/valider-ecriture',
+        'dossier/supprimer-ecriture', 'dossier/import-bancaire/auto', 'dossier/import-bancaire/rapprocher',
+        'dossier/import-bancaire/supprimer', 'dossier/rapprochement/marquer',
+        'dossier/rh/conges/traiter', 'dossier/rh/bulletin/statut', 'dossier/rh/bulletins/supprimer',
+        'dossier/rh/bulletin/supprimer',
+        'planning/statut', 'planning/update-statut',
+        'honoraires/marquer-paye', 'honoraires/missions/payer',
+        'notifications-email/envoyer', 'modeles-ecritures/appliquer',
+    ];
+    if (!in_array($uri, $csrfExempt, true)) {
+        if (function_exists('verifyCsrfToken')) {
+            verifyCsrfToken($_POST['csrf_token'] ?? '');
+        }
+    }
+}
+
 if (isset($routes[$uri])) {
     [$controllerName, $method] = $routes[$uri];
     $controllerFile = APP_ROOT . '/src/Controllers/' . $controllerName . '.php';
