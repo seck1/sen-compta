@@ -45,10 +45,32 @@ class PaieService {
      * Calcule le TRIMF (Taxe Représentative de l'Impôt du Minimum Fiscal)
      * Barème progressif mensuel Sénégal
      */
-    public static function calculerTRIMF(float $salaireBrut): float {
-        // TRIMF = 3% du salaire brut plafonné (simplifié DGI)
-        // Barème officiel DGI Sénégal 2024
-        if ($salaireBrut <= 0)        return 0;
+    /** Décode un barème stocké en base (JSON string ou array) ; retourne null si vide/invalide. */
+    public static function decoderBareme($valeur): ?array {
+        if (is_array($valeur)) return !empty($valeur) ? $valeur : null;
+        if (is_string($valeur) && $valeur !== '') {
+            $d = json_decode($valeur, true);
+            return (is_array($d) && !empty($d)) ? $d : null;
+        }
+        return null;
+    }
+
+    public static function calculerTRIMF(float $salaireBrut, ?array $bareme = null): float {
+        if ($salaireBrut <= 0) return 0;
+        // Barème personnalisé (depuis paie_parametres.bareme_trimf) : tranches sur le brut
+        // ANNUEL ; le montant stocké est la retenue annuelle, mensualisée ici (/12).
+        if (is_array($bareme) && !empty($bareme)) {
+            $brutAnnuel = $salaireBrut * 12;
+            foreach ($bareme as $t) {
+                $min = (float)($t['min'] ?? 0);
+                $max = (float)($t['max'] ?? PHP_INT_MAX);
+                if ($brutAnnuel >= $min && $brutAnnuel <= $max) {
+                    return round(((float)($t['montant'] ?? 0)) / 12);
+                }
+            }
+            return 0;
+        }
+        // Barème par défaut (mensuel) — DGID Sénégal
         if ($salaireBrut <= 25000)    return 900;
         if ($salaireBrut <= 50000)    return 1800;
         if ($salaireBrut <= 75000)    return 2700;
@@ -68,7 +90,7 @@ class PaieService {
      * Barème CGI Sénégal — Article 163
      * Appliqué sur revenu net imposable annualisé puis divisé par 12
      */
-    public static function calculerIR(float $salaireBrut, float $nbParts = 1.0, float $cotisationsDeductibles = 0.0): float {
+    public static function calculerIR(float $salaireBrut, float $nbParts = 1.0, float $cotisationsDeductibles = 0.0, ?array $bareme = null): float {
         // Abattement forfaitaire 30% (minimum 900 000 / maximum 3 600 000 F/an)
         // Assiette nette = brut annuel - cotisations déductibles annualisées (IPRES salarié + IPM salarié)
         // CGI Sénégal Art. 163
@@ -83,14 +105,28 @@ class PaieService {
         if ($nbParts <= 0) $nbParts = 1.0;
         $revenuParPart = $revenuImposable / $nbParts;
 
-        // Barème progressif annuel CGI Art 163 appliqué sur revenu par part
-        $irParPart = 0;
-        if ($revenuParPart <= 630000)         $irParPart = 0;
-        elseif ($revenuParPart <= 1500000)    $irParPart = ($revenuParPart - 630000) * 0.20;
-        elseif ($revenuParPart <= 4000000)    $irParPart = 174000 + ($revenuParPart - 1500000) * 0.30;
-        elseif ($revenuParPart <= 8000000)    $irParPart = 924000 + ($revenuParPart - 4000000) * 0.35;
-        elseif ($revenuParPart <= 13500000)   $irParPart = 2324000 + ($revenuParPart - 8000000) * 0.37;
-        else                                  $irParPart = 4359000 + ($revenuParPart - 13500000) * 0.40;
+        // Barème progressif annuel appliqué sur le revenu par part.
+        if (is_array($bareme) && !empty($bareme)) {
+            // Barème personnalisé (depuis paie_parametres.bareme_ir) : tranches marginales.
+            $irParPart = 0;
+            foreach ($bareme as $t) {
+                $min  = (float)($t['min'] ?? 0);
+                $max  = (float)($t['max'] ?? PHP_INT_MAX);
+                $taux = (float)($t['taux'] ?? 0) / 100;
+                if ($revenuParPart > $min) {
+                    $assiette = min($revenuParPart, $max) - $min;
+                    if ($assiette > 0) $irParPart += $assiette * $taux;
+                }
+            }
+        } else {
+            // Barème par défaut — CGI Art. 163 Sénégal.
+            if ($revenuParPart <= 630000)         $irParPart = 0;
+            elseif ($revenuParPart <= 1500000)    $irParPart = ($revenuParPart - 630000) * 0.20;
+            elseif ($revenuParPart <= 4000000)    $irParPart = 174000 + ($revenuParPart - 1500000) * 0.30;
+            elseif ($revenuParPart <= 8000000)    $irParPart = 924000 + ($revenuParPart - 4000000) * 0.35;
+            elseif ($revenuParPart <= 13500000)   $irParPart = 2324000 + ($revenuParPart - 8000000) * 0.37;
+            else                                  $irParPart = 4359000 + ($revenuParPart - 13500000) * 0.40;
+        }
 
         $irNet = max(0, $irParPart * $nbParts);
         return round($irNet / 12); // Mensualisation
@@ -176,8 +212,9 @@ class PaieService {
         }
         $ipres_salarie_total = $ipres_salarie + $ipres_cadre_salarie;
 
-        // TRIMF
-        $trimf = self::calculerTRIMF($salaire_brut);
+        // TRIMF — barème personnalisé si défini dans les paramètres entreprise
+        $bareme_trimf = self::decoderBareme($params['bareme_trimf'] ?? null);
+        $trimf = self::calculerTRIMF($salaire_brut, $bareme_trimf);
 
         // IR — quotient familial CGI Sénégal Art. 165 :
         // célibataire/divorcé/veuf = 1 part ; marié = 1,5 part ; +0,5 par enfant à charge ; plafond 5 parts.
@@ -186,7 +223,8 @@ class PaieService {
         $nb_parts = max(1.0, min((float)$nb_parts, 5.0));
         // IPM salarié — calculé avant IR (cotisation déductible du revenu imposable)
         $ipm_salarie = round($salaire_brut * $taux_ipm_sal);
-        $ir       = self::calculerIR($salaire_brut, $nb_parts, $ipres_salarie_total + $ipm_salarie);
+        $bareme_ir = self::decoderBareme($params['bareme_ir'] ?? null);
+        $ir       = self::calculerIR($salaire_brut, $nb_parts, $ipres_salarie_total + $ipm_salarie, $bareme_ir);
 
         // Total retenues salariales
         $total_retenues = $ipres_salarie_total + $trimf + $ir + $ipm_salarie;

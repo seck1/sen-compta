@@ -709,13 +709,87 @@ class RHController {
             'heures_supp_taux_dim'      => 1.60,
             'heures_supp_taux_dim_nuit' => 2.00,
             'heures_supp_seuil'    => 8,
+            'smig_mensuel'          => 76827,
+            'conges_base_jours'     => 30,
+            'conges_taux_maladie'   => 100.00,
+            'conges_droits_annuels' => 18.0,
+            'brs_mode'              => 'desactive',
+            'bareme_trimf'          => null,
+            'bareme_ir'             => null,
         ];
+    }
+
+    /** Barème TRIMF par défaut (tranches sur brut ANNUEL, montant = retenue annuelle). DGID. */
+    public static function baremeTrimfDefaut(): array {
+        return [
+            ['min'=>0,        'max'=>599999,    'montant'=>900,   'libelle'=>'< 600k/an — 900 FCFA'],
+            ['min'=>600000,   'max'=>999999,    'montant'=>3600,  'libelle'=>'600k–1M/an — 3 600 F'],
+            ['min'=>1000000,  'max'=>1999999,   'montant'=>4800,  'libelle'=>'1M–2M/an — 4 800 F'],
+            ['min'=>2000000,  'max'=>6999999,   'montant'=>12000, 'libelle'=>'2M–7M/an — 12 000 F'],
+            ['min'=>7000000,  'max'=>11999999,  'montant'=>18000, 'libelle'=>'7M–12M/an — 18 000 F'],
+            ['min'=>12000000, 'max'=>999999999, 'montant'=>36000, 'libelle'=>'> 12M/an — 36 000 F'],
+        ];
+    }
+
+    /** Barème IR progressif par défaut (revenu annuel imposable / part). CGI Art. 163. */
+    public static function baremeIrDefaut(): array {
+        return [
+            ['min'=>0,        'max'=>630000,       'taux'=>0,  'libelle'=>'Tranche 0%'],
+            ['min'=>630001,   'max'=>1500000,      'taux'=>20, 'libelle'=>'Tranche 20%'],
+            ['min'=>1500001,  'max'=>4000000,      'taux'=>30, 'libelle'=>'Tranche 30%'],
+            ['min'=>4000001,  'max'=>8000000,      'taux'=>35, 'libelle'=>'Tranche 35%'],
+            ['min'=>8000001,  'max'=>13500000,     'taux'=>37, 'libelle'=>'Tranche 37%'],
+            ['min'=>13500001, 'max'=>999999999999, 'taux'=>40, 'libelle'=>'Tranche 40%'],
+        ];
+    }
+
+    /** Assemble le barème TRIMF depuis les tableaux POST en JSON (ou null si vide). */
+    private function construireBaremeTrimf(): ?string {
+        $mins = $_POST['trimf_min'] ?? [];
+        if (!is_array($mins) || empty($mins)) return null;
+        $maxs = $_POST['trimf_max'] ?? [];
+        $mts  = $_POST['trimf_montant'] ?? [];
+        $libs = $_POST['trimf_libelle'] ?? [];
+        $bareme = [];
+        foreach ($mins as $i => $min) {
+            if ($min === '' && ($maxs[$i] ?? '') === '') continue;
+            $bareme[] = [
+                'min'     => (float)$min,
+                'max'     => (float)($maxs[$i] ?? 0),
+                'montant' => (float)($mts[$i] ?? 0),
+                'libelle' => trim($libs[$i] ?? ''),
+            ];
+        }
+        return empty($bareme) ? null : json_encode($bareme, JSON_UNESCAPED_UNICODE);
+    }
+
+    /** Assemble le barème IR depuis les tableaux POST en JSON (ou null si vide). */
+    private function construireBaremeIr(): ?string {
+        $mins = $_POST['ir_min'] ?? [];
+        if (!is_array($mins) || empty($mins)) return null;
+        $maxs = $_POST['ir_max'] ?? [];
+        $txs  = $_POST['ir_taux'] ?? [];
+        $libs = $_POST['ir_libelle'] ?? [];
+        $bareme = [];
+        foreach ($mins as $i => $min) {
+            if ($min === '' && ($maxs[$i] ?? '') === '') continue;
+            $bareme[] = [
+                'min'     => (float)$min,
+                'max'     => (float)($maxs[$i] ?? 0),
+                'taux'    => (float)($txs[$i] ?? 0),
+                'libelle' => trim($libs[$i] ?? ''),
+            ];
+        }
+        return empty($bareme) ? null : json_encode($bareme, JSON_UNESCAPED_UNICODE);
     }
 
     public function parametres(): void {
         $id = (int)($_GET['id'] ?? 0);
         $entreprise = $this->getEntrepriseAccess($id);
         $params = self::getParametres($id);
+        // Barèmes par défaut pour pré-remplir la vue si l'entreprise n'a rien personnalisé
+        $params['bareme_trimf_rows'] = PaieService::decoderBareme($params['bareme_trimf'] ?? null) ?: self::baremeTrimfDefaut();
+        $params['bareme_ir_rows']    = PaieService::decoderBareme($params['bareme_ir'] ?? null) ?: self::baremeIrDefaut();
         $saved = isset($_GET['saved']);
 
         $pageTitle = 'Paramètres Paie';
@@ -741,8 +815,10 @@ class RHController {
              num_ipres_entreprise, num_css_entreprise, num_ipm_entreprise,
              heures_supp_taux1, heures_supp_taux2,
              heures_supp_taux_nuit, heures_supp_taux_dim, heures_supp_taux_dim_nuit,
-             heures_supp_seuil)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+             heures_supp_seuil,
+             smig_mensuel, conges_base_jours, conges_taux_maladie, conges_droits_annuels, brs_mode,
+             bareme_trimf, bareme_ir)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
              ipres_salarie_a=VALUES(ipres_salarie_a), ipres_patronal_a=VALUES(ipres_patronal_a),
              ipres_salarie_b=VALUES(ipres_salarie_b), ipres_patronal_b=VALUES(ipres_patronal_b),
@@ -758,7 +834,14 @@ class RHController {
              heures_supp_taux_nuit=VALUES(heures_supp_taux_nuit),
              heures_supp_taux_dim=VALUES(heures_supp_taux_dim),
              heures_supp_taux_dim_nuit=VALUES(heures_supp_taux_dim_nuit),
-             heures_supp_seuil=VALUES(heures_supp_seuil)");
+             heures_supp_seuil=VALUES(heures_supp_seuil),
+             smig_mensuel=VALUES(smig_mensuel),
+             conges_base_jours=VALUES(conges_base_jours),
+             conges_taux_maladie=VALUES(conges_taux_maladie),
+             conges_droits_annuels=VALUES(conges_droits_annuels),
+             brs_mode=VALUES(brs_mode),
+             bareme_trimf=VALUES(bareme_trimf),
+             bareme_ir=VALUES(bareme_ir)");
         $stmt->execute([
             $id,
             (float)$_POST['ipres_salarie_a'] / 100,
@@ -781,6 +864,13 @@ class RHController {
             (float)($_POST['heures_supp_taux_dim'] ?? 1.60),
             (float)($_POST['heures_supp_taux_dim_nuit'] ?? 2.00),
             (int)$_POST['heures_supp_seuil'],
+            (int)($_POST['smig_mensuel'] ?? 76827),
+            (int)($_POST['conges_base_jours'] ?? 30),
+            (float)($_POST['conges_taux_maladie'] ?? 100),
+            (float)($_POST['conges_droits_annuels'] ?? 18),
+            in_array($_POST['brs_mode'] ?? 'desactive', ['desactive','auto'], true) ? $_POST['brs_mode'] : 'desactive',
+            $this->construireBaremeTrimf(),
+            $this->construireBaremeIr(),
         ]);
 
         // Fix M — Audit de la modification des taux de paie

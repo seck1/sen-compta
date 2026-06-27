@@ -308,6 +308,126 @@ function pct(float $val): string { return number_format($val * 100, 2); }
 
 </div>
 
+<!-- SMIG, CONGÉS & BRS -->
+<div class="params-card" style="margin-top:18px">
+    <div class="params-card-head">💼 SMIG, congés &amp; BRS</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0">
+        <div class="param-row" style="border-bottom:none;border-right:1px solid var(--border);padding-right:22px">
+            <div>
+                <div class="param-label">SMIG mensuel</div>
+                <div class="param-sub">Salaire minimum légal</div>
+                <span class="official-badge">Décret 2023-1375 : 76 827 F</span>
+            </div>
+            <div class="param-input-wrap">
+                <input type="number" name="smig_mensuel" class="param-input" style="width:110px" step="1" min="0" value="<?= (int)($params['smig_mensuel'] ?? 76827) ?>">
+                <span class="param-unit">F</span>
+            </div>
+        </div>
+        <div class="param-row" style="border-bottom:none;border-right:1px solid var(--border);padding:0 22px">
+            <div>
+                <div class="param-label">Base jours mensuels</div>
+                <div class="param-sub">Pour le salaire journalier</div>
+                <span class="official-badge">Standard : 30 j</span>
+            </div>
+            <div class="param-input-wrap">
+                <input type="number" name="conges_base_jours" class="param-input" step="1" min="1" max="31" value="<?= (int)($params['conges_base_jours'] ?? 30) ?>">
+                <span class="param-unit">j</span>
+            </div>
+        </div>
+        <div class="param-row" style="border-bottom:none;padding-left:22px">
+            <div>
+                <div class="param-label">Droits congés annuels</div>
+                <div class="param-sub">1,5 j/mois (Code du travail SN)</div>
+                <span class="official-badge">Légal : 18 j/an</span>
+            </div>
+            <div class="param-input-wrap">
+                <input type="number" name="conges_droits_annuels" class="param-input" step="0.5" min="0" value="<?= number_format((float)($params['conges_droits_annuels'] ?? 18), 1) ?>">
+                <span class="param-unit">j</span>
+            </div>
+        </div>
+        <div class="param-row" style="border-bottom:none;border-top:1px solid var(--border);border-right:1px solid var(--border);padding:18px 22px 0 0">
+            <div>
+                <div class="param-label">Taux indemnisation maladie</div>
+                <div class="param-sub">100% = maintenu · 50% = moitié</div>
+                <span class="official-badge">Selon convention</span>
+            </div>
+            <div class="param-input-wrap">
+                <input type="number" name="conges_taux_maladie" class="param-input" step="0.5" min="0" max="100" value="<?= number_format((float)($params['conges_taux_maladie'] ?? 100), 2) ?>">
+                <span class="param-unit">%</span>
+            </div>
+        </div>
+        <div class="param-row" style="border-bottom:none;border-top:1px solid var(--border);padding:18px 22px 0;grid-column:span 2">
+            <div>
+                <div class="param-label">Mode de calcul BRS</div>
+                <div class="param-sub">Contribution Représentative — barème par tranches de brut imposable</div>
+            </div>
+            <div class="param-input-wrap">
+                <?php $brs = $params['brs_mode'] ?? 'desactive'; ?>
+                <select name="brs_mode" class="param-input" style="width:140px">
+                    <option value="desactive" <?= $brs==='desactive'?'selected':'' ?>>Désactivé</option>
+                    <option value="auto" <?= $brs==='auto'?'selected':'' ?>>Auto (par tranches)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BARÈME TRIMF ÉDITABLE -->
+<div class="params-card" style="margin-top:18px">
+    <div class="params-card-head">📋 Barème TRIMF — DGID Sénégal (personnalisable)</div>
+    <div style="padding:14px 22px">
+        <p style="font-size:13px;color:#667;margin:0 0 14px">Le TRIMF est calculé par tranches de salaire brut <strong>annuel</strong>. Le montant est la retenue <strong>annuelle</strong> (mensualisée à /12). CGI Art. 282.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+                <tr style="text-align:left;color:#667;border-bottom:1px solid var(--border)">
+                    <th style="padding:8px">Brut annuel min (F)</th>
+                    <th style="padding:8px">Brut annuel max (F)</th>
+                    <th style="padding:8px">Montant TRIMF/an (F)</th>
+                    <th style="padding:8px">Libellé</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach (($params['bareme_trimf_rows'] ?? []) as $t): ?>
+                <tr>
+                    <td style="padding:5px 8px"><input type="number" name="trimf_min[]" value="<?= (int)$t['min'] ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px"></td>
+                    <td style="padding:5px 8px"><input type="number" name="trimf_max[]" value="<?= (int)$t['max'] ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px"></td>
+                    <td style="padding:5px 8px"><input type="number" name="trimf_montant[]" value="<?= (int)$t['montant'] ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px"></td>
+                    <td style="padding:5px 8px"><input type="text" name="trimf_libelle[]" value="<?= e($t['libelle'] ?? '') ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px;color:#888"></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- BARÈME IR ÉDITABLE -->
+<div class="params-card" style="margin-top:18px">
+    <div class="params-card-head">📊 Barème IR progressif — Sénégal (personnalisable)</div>
+    <div style="padding:14px 22px">
+        <p style="font-size:13px;color:#667;margin:0 0 14px">L'IR est calculé sur le revenu <strong>annuel imposable par part</strong> (après abattement 30% et quotient familial). Taux <strong>marginaux</strong> par tranche. CGI Art. 163.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+                <tr style="text-align:left;color:#667;border-bottom:1px solid var(--border)">
+                    <th style="padding:8px">Revenu annuel min (F)</th>
+                    <th style="padding:8px">Revenu annuel max (F)</th>
+                    <th style="padding:8px">Taux (%)</th>
+                    <th style="padding:8px">Libellé</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach (($params['bareme_ir_rows'] ?? []) as $t): ?>
+                <tr>
+                    <td style="padding:5px 8px"><input type="number" name="ir_min[]" value="<?= (int)$t['min'] ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px"></td>
+                    <td style="padding:5px 8px"><input type="number" name="ir_max[]" value="<?= (int)$t['max'] ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px"></td>
+                    <td style="padding:5px 8px"><input type="number" name="ir_taux[]" value="<?= (float)$t['taux'] ?>" step="0.5" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px"></td>
+                    <td style="padding:5px 8px"><input type="text" name="ir_libelle[]" value="<?= e($t['libelle'] ?? '') ?>" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px;color:#888"></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div class="params-footer">
     <a href="<?= APP_URL ?>/dossier/rh?id=<?= $entreprise['id'] ?>" class="btn btn-outline">Annuler</a>
     <button type="submit" class="btn btn-primary">
