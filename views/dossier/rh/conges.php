@@ -236,7 +236,7 @@ $id = $entreprise['id'];
             <select name="employe_id" required style="width:100%;padding:9px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;color:#1a1a1a;background:#fff">
                 <option value="">Sélectionner un employé...</option>
                 <?php foreach($employes as $emp): ?>
-                <option value="<?= $emp['id'] ?>"><?= e($emp['nom'].' '.$emp['prenom']) ?><?= $emp['poste'] ? ' — '.$emp['poste'] : '' ?></option>
+                <option value="<?= $emp['id'] ?>"><?= e($emp['nom'].' '.$emp['prenom']) ?><?= $emp['poste'] ? ' — '.e($emp['poste']) : '' ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
